@@ -38,6 +38,12 @@ public:
 
   // photon ID cuts
   photonidcuts mediumid;
+  photonidcuts looseid;
+
+
+  bool filter2GammaJet;
+  void Filter2GammaJet() { filter2GammaJet = true; }
+  
 
 
 };

@@ -80,6 +80,7 @@ int main(int argc, char* argv[]) {
  
        AnalysisTool tool(chain,OutputFileName);
        tool.SetHFillColor( color );
+       //tool.Filter2GammaJet(); // filter out 2gamma+jets events when running on GJets sample
 
        tool.ReadCutsFromFile(cutfile);
        tool.Loop();

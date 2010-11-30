@@ -32,6 +32,18 @@ AnalysisTool::AnalysisTool(TTree *tree, const TString& outname)
      mediumid.sminmin=             0.30;
      mediumid.sminmin_min=         0.15;
      mediumid.smajmaj=             0.35;
+
+     looseid.hcaliso_rel=         0.10;
+     looseid.hcaliso_abs=         4.;
+     looseid.ecaliso_rel=         0.10;
+     looseid.ecaliso_abs=         4.5;
+     looseid.tracknb=             5.;
+     looseid.trackiso_rel=        0.20;
+     looseid.sminmin=             0.50;
+     looseid.sminmin_min=         0.15;
+     looseid.smajmaj=             0.60; 
+
+    filter2GammaJet = false;
 } 
 
 void AnalysisTool::ReadCutsFromFile(const char* fname) {
@@ -1561,6 +1573,7 @@ void AnalysisTool::Loop() {
      // if (Cut(ientry) < 0) continue;
      /**************************************************************/
 
+     int count_photonsMC=0;
      num_evts++;
 
      if(int(num_evts)%1000 == 0 ) cout << "Evento: " << num_evts << endl;
@@ -1605,6 +1618,7 @@ void AnalysisTool::Loop() {
      for(int i=0; i<nMC;++i) {     /* 3MC */
 
 
+       if(pdgIdMC[i]==22 && statusMC[i]==3) count_photonsMC++; //activate for g+jet only!!
        /***********variables from GammaJetAnalyzer.cc***********/
        //   Int_t nMC
        //   Int_t pdgIdMC 
@@ -1856,6 +1870,8 @@ void AnalysisTool::Loop() {
        h47->Fill(parton[1][2]); 
      }
 
+     if(filter2GammaJet && count_photonsMC>1){continue;} //active only for g+jet sample
+
      /***********************************************************************/
      //                           RECO PHOTONS AND JETS
      /***********************************************************************/            //from here: 21 NOVEMBER
@@ -1893,7 +1909,8 @@ void AnalysisTool::Loop() {
       //RECO PART
         vector<bool> idpass(7);
         //previous PHID
-	if(cutID(i, mediumid, &idpass)==1) photIdentif.push_back(1);  //cutID select gammas with |eta|<2.5, inside detector
+	//if(cutID(i, mediumid, &idpass)==1) photIdentif.push_back(1);  //cutID select gammas with |eta|<2.5, inside detector
+	if(cutID(i, looseid, &idpass)==1) photIdentif.push_back(1);  //cutID select gammas with |eta|<2.5, inside detector
 	else photIdentif.push_back(0);
              
 	//if(pid_isTight[i]) photIdentif.push_back(1);
@@ -2016,7 +2033,7 @@ void AnalysisTool::Loop() {
      // 1CUT     //INSERIRE QUI 1 CUT 
      /*******/ 
     
-     if(reco_gamma1==-9 || reco_gamma2==-9 || ptPhot[reco_gamma1]<30 || ptPhot[reco_gamma2]<30 ){continue;}
+     if(reco_gamma1==-9 || reco_gamma2==-9 || ptPhot[reco_gamma1]<50.0 || ptPhot[reco_gamma2]<30.0 ){continue;}
 
      num_evts_after_C1++;
        
