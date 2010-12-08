@@ -260,9 +260,17 @@ void RedNtpTree::Loop(int isgjet)
    TH1D smaxmaxclusassjet_EE("smaxmaxclusassjet_EE","smaxmaxclusassjet_EE",100,0.,1.);
       
    ana_tree = new TTree ("AnaTree","Reduced tree for final analysis") ;
+   ana_tree->Branch("run",&runRN,"run/I");
+   ana_tree->Branch("event",&eventRN,"event/I");
    ana_tree->Branch("massgg",&massgg,"massgg/F");
    ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
    ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
+   ana_tree->Branch("etaphot1",&etaphot1,"etaphot1/F");
+   ana_tree->Branch("etaphot2",&etaphot2,"etaphot2/F");
+   ana_tree->Branch("E1phot1",&E1phot1,"E1phot1/F");
+   ana_tree->Branch("E1phot2",&E1phot2,"E1phot2/F");
+   ana_tree->Branch("E9phot1",&E9phot1,"E9phot1/F");
+   ana_tree->Branch("E9phot2",&E9phot2,"E9phot2/F");
    ana_tree->Branch("idlooseEGphot1",&idlooseEGphot1,"idlooseEGphot1/I");
    ana_tree->Branch("idlooseEGphot2",&idlooseEGphot2,"idlooseEGphot2/I");
    ana_tree->Branch("idtightEGphot1",&idtightEGphot1,"idtightEGphot1/I");
@@ -328,7 +336,7 @@ void RedNtpTree::Loop(int isgjet)
    double dijetmasscut = 300;
    double deltaphicut = 2.;
 
-   for (Long64_t jentry=0; jentry<nentries;jentry++) {
+   for (Long64_t jentry=0; jentry<nentries&& jentry<100000;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
@@ -723,6 +731,12 @@ void RedNtpTree::Loop(int isgjet)
 	massgg = higgsisomass;
 	ptphot1 = ptPhot[firsttwoisophot.at(0)];
 	ptphot2 = ptPhot[firsttwoisophot.at(1)];  
+	etaphot1 = etaPhot[firsttwoisophot.at(0)];
+	etaphot2 = etaPhot[firsttwoisophot.at(1)];  
+	E1phot1 = E1Phot[firsttwoisophot.at(0)];
+	E1phot2 = E1Phot[firsttwoisophot.at(1)];  
+	E9phot1 = E9Phot[firsttwoisophot.at(0)];
+	E9phot2 = E9Phot[firsttwoisophot.at(1)];  
 	idlooseEGphot1 = pid_isLoose[firsttwoisophot.at(0)];
 	idlooseEGphot2 = pid_isLoose[firsttwoisophot.at(1)];
 	idtightEGphot1 = pid_isTight[firsttwoisophot.at(0)];
@@ -757,6 +771,9 @@ void RedNtpTree::Loop(int isgjet)
 	}
 	met = epfMet;
 	nvtx = nvertex;
+
+        runRN = run;
+        eventRN = event;
 	
 	ana_tree->Fill();
 

@@ -45,6 +45,12 @@ private:
    Float_t massgg;
    Float_t ptphot1;
    Float_t ptphot2;
+   Float_t etaphot1;
+   Float_t etaphot2;
+   Float_t E1phot1;
+   Float_t E1phot2;
+   Float_t E9phot1;
+   Float_t E9phot2;
    Float_t ptjet1;
    Float_t ptjet2;
    Float_t ptcorrjet1;
@@ -64,6 +70,8 @@ private:
    Int_t idloosephot2;
    Int_t idmediumphot1;
    Int_t idmediumphot2;
+   Int_t runRN;
+   Int_t eventRN;
 
 };
 
