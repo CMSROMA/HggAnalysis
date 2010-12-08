@@ -1,8 +1,8 @@
-# $Id: Makefile,v 1.1 2010/11/27 18:04:09 rahatlou Exp $
+# $Id: Makefile,v 1.2 2010/12/08 09:53:53 rahatlou Exp $
 ROOTLIBS      = $(shell $(ROOTSYS)/bin/root-config --libs)
 ROOTGLIBS     = $(shell $(ROOTSYS)/bin/root-config --glibs)
 
-BINFILES =  analysis.cc redntp.cc
+BINFILES =  analysis.cc redntpApp.cc
 
 PROGRAMS = $(patsubst %.cc,%,$(BINFILES))
 
@@ -48,7 +48,7 @@ $(PROGRAMS) : $(OLIST)
 
 default : analysis 
 
-all : default
+all : ${PROGRAMS}
 
 clean:
 	rm -Rf $(WORKDIR)/*
