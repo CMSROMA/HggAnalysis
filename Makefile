@@ -1,8 +1,8 @@
-# $Id: Makefile,v 1.6 2010/06/17 18:22:56 rahatlou Exp $
+# $Id: Makefile,v 1.1 2010/11/27 18:04:09 rahatlou Exp $
 ROOTLIBS      = $(shell $(ROOTSYS)/bin/root-config --libs)
 ROOTGLIBS     = $(shell $(ROOTSYS)/bin/root-config --glibs)
 
-BINFILES =  analysis.cc
+BINFILES =  analysis.cc redntp.cc
 
 PROGRAMS = $(patsubst %.cc,%,$(BINFILES))
 
@@ -26,7 +26,7 @@ ROOFIT_LIBS += $(shell cd $(CMSSW_BASE); scram tool info roofit | grep LIB= | se
 INCLUDES += -I.  -I.. -I$(ROOTSYS)/include  -I$(ROOFIT_INCLUDE)/
 ROOTSYS  ?= ERROR_RootSysIsNotDefined
 
-EXTRALIBS  :=  -L$(ROOTSYS)/lib -L$(ROOFIT_LIBDIR)/ -lHtml -lMathCore -lGenVector -lMinuit -lEG -lRooFitCore -lRooFit
+EXTRALIBS  :=  -L$(ROOTSYS)/lib -L$(ROOFIT_LIBDIR)/ -lHtml -lMathCore -lGenVector -lMinuit -lEG -lRooFitCore -lRooFit -lRIO
 
 # CC files excluding the binaries
 CCFILES=$(filter-out $(BINFILES),$(wildcard *.cc))

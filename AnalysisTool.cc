@@ -15,7 +15,7 @@
 using namespace std;
 
 AnalysisTool::AnalysisTool(TTree *tree, const TString& outname) 
-   : tree_reader_V1(tree) { 
+   : tree_reader_V2(tree) { 
      outname_=outname; 
      ptJet1_cut = ptJet2_cut = 20.;
      detaJets_cut = 3.;
@@ -1328,6 +1328,14 @@ void AnalysisTool::Loop() {
   h925->GetYaxis()->SetTitle("counts");
   h925->SetFillColor(hfillcolor);
 
+  TH1F* h927 = new TH1F ("h927","RECO Massa Inv 2 fotoni",1000,0.,1000.);
+  h927->GetXaxis()->SetTitleOffset(1.2);
+  h927->GetXaxis()->SetTitle("M(#frac{GeV}{c^{2}})");
+  h927->GetYaxis()->SetTitle("counts");
+  h927->SetFillColor(hfillcolor);
+
+
+
   TH1F* h926 = new TH1F ("h926","RECO Massa Inv jets",100,0,1500);
   h926->GetXaxis()->SetTitleOffset(1.2);
   h926->GetXaxis()->SetTitle("M(j1 j2)(#frac{GeV}{c^{2}})");
@@ -1840,7 +1848,7 @@ void AnalysisTool::Loop() {
        if(vect[1]>0){index_parton2=indices_partons[1];}
      }
      
-     if(index_parton1==-9 || index_parton2==-9){cout<<"meno di 2 partoni gen adronizzanti nell'evento"<<endl;}
+     //if(index_parton1==-9 || index_parton2==-9){cout<<"meno di 2 partoni gen adronizzanti nell'evento"<<endl;}
      
      if(index_parton1!=-9){
 
@@ -2300,7 +2308,11 @@ void AnalysisTool::Loop() {
      h923->Fill(Zepp_jet2);
      h924->Fill(Zepp_jet2/fabs(etaJet_pfakt5[idxjet1]-etaJet_pfakt5[idxjet2]));
      //Reco_inv_mass
-     if(Reco_inv_mass>0){ h925->Fill(Reco_inv_mass); }
+     if(Reco_inv_mass>0){ 
+         h925->Fill(Reco_inv_mass); 
+         h927->Fill(Reco_inv_mass); 
+     }
+
      //jets inv mass
      h926->Fill(Jets_inv_mass);
 

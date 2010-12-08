@@ -1,11 +1,12 @@
 #ifndef AnalysisTool_H
 #define AnalysisTool_H
 
-#include "tree_reader_V1.h"
+//#include "tree_reader_V1.h"
+#include "tree_reader_V2.h"
 
 #include "TString.h"
 
-class AnalysisTool : public tree_reader_V1 {
+class AnalysisTool : public tree_reader_V2 {
 
 private:
   TString outname_; // output file
