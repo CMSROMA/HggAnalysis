@@ -81,7 +81,8 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   bool smaj = sMajMajPhot[i] < pid.smajmaj;
   bool smin = sMinMinPhot[i] < pid.sminmin;
   bool smin_min = sMinMinPhot[i] > pid.sminmin_min;
-  bool eta = TMath::Abs(etaPhot[i]) < 2.5; 
+  //bool eta = TMath::Abs(etaPhot[i]) < 2.5; 
+  bool eta = true;
 
 
   if(TMath::Abs(etaPhot[i]) > 1.44) {
@@ -262,6 +263,7 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree = new TTree ("AnaTree","Reduced tree for final analysis") ;
    ana_tree->Branch("run",&runRN,"run/I");
    ana_tree->Branch("event",&eventRN,"event/I");
+   ana_tree->Branch("lumi",&lumi,"lumi/I");
    ana_tree->Branch("massgg",&massgg,"massgg/F");
    ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
    ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
@@ -279,6 +281,21 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("idloosephot2",&idloosephot2,"idloosephot2/I");
    ana_tree->Branch("idmediumphot1",&idmediumphot1,"idmediumphot1/I");
    ana_tree->Branch("idmediumphot2",&idmediumphot2,"idmediumphot2/I");
+   
+   ana_tree->Branch("pid_isEMphot1",&pid_isEMphot1,"pid_isEMphot1/I");
+   ana_tree->Branch("pid_isEMphot2",&pid_isEMphot2,"pid_isEMphot2/I");
+
+   ana_tree->Branch("pid_jurECALphot1",&pid_jurECALphot1,"pid_jurECALphot1/F");
+   ana_tree->Branch("pid_jurECALphot2",&pid_jurECALphot2,"pid_jurECALphot2/F");
+   ana_tree->Branch("pid_twrHCALphot1",&pid_twrHCALphot1,"pid_twrHCALphot1/F");
+   ana_tree->Branch("pid_twrHCALphot2",&pid_twrHCALphot2,"pid_twrHCALphot2/F");
+   ana_tree->Branch("pid_HoverEphot1",&pid_HoverEphot1,"pid_HoverEphot1/F");
+   ana_tree->Branch("pid_HoverEphot2",&pid_HoverEphot2,"pid_HoverEphot2/F");
+   ana_tree->Branch("pid_hlwTrackphot1",&pid_hlwTrackphot1,"pid_hlwTrackphot1/F");
+   ana_tree->Branch("pid_hlwTrackphot2",&pid_hlwTrackphot2,"pid_hlwTrackphot2/F");
+   ana_tree->Branch("pid_etawidphot1",&pid_etawidphot1,"pid_etawidphot1/F");
+   ana_tree->Branch("pid_etawidphot2",&pid_etawidphot2,"pid_etawidphot2/F");
+
    ana_tree->Branch("ptjet1",&ptjet1,"ptjet1/F");
    ana_tree->Branch("ptjet2",&ptjet2,"ptjet2/F");
    ana_tree->Branch("ptcorrjet1",&ptcorrjet1,"ptcorrjet1/F");
@@ -336,7 +353,7 @@ void RedNtpTree::Loop(int isgjet)
    double dijetmasscut = 300;
    double deltaphicut = 2.;
 
-   for (Long64_t jentry=0; jentry<nentries&& jentry<100000;jentry++) {
+   for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
@@ -745,6 +762,20 @@ void RedNtpTree::Loop(int isgjet)
 	idloosephot2 = isophotloose.at(firsttwoisophot.at(1));
 	idmediumphot1 = isophotmedium.at(firsttwoisophot.at(0));
 	idmediumphot2 = isophotmedium.at(firsttwoisophot.at(1));
+
+        pid_isEMphot1 =  pid_isEM[firsttwoisophot.at(0)];
+        pid_isEMphot2 =  pid_isEM[firsttwoisophot.at(1)];
+        pid_jurECALphot1 =  pid_jurECAL[firsttwoisophot.at(0)];
+        pid_jurECALphot2 =  pid_jurECAL[firsttwoisophot.at(1)];
+        pid_twrHCALphot1 =  pid_twrHCAL[firsttwoisophot.at(0)];
+        pid_twrHCALphot2 =  pid_twrHCAL[firsttwoisophot.at(1)];
+        pid_HoverEphot1 =  pid_HoverE[firsttwoisophot.at(0)];
+        pid_HoverEphot2 =  pid_HoverE[firsttwoisophot.at(1)];
+        pid_hlwTrackphot1 =  pid_hlwTrack[firsttwoisophot.at(0)];
+        pid_hlwTrackphot2 =  pid_hlwTrack[firsttwoisophot.at(1)];
+        pid_etawidphot1 =  pid_etawid[firsttwoisophot.at(0)];
+        pid_etawidphot2 =  pid_etawid[firsttwoisophot.at(1)];
+
 	if( firsttwonoisojet.at(0) > -1) {
 	  ptjet1 = ptJet_pfakt5[firsttwonoisojet.at(0)];
 	  ptcorrjet1 = ptCorrJet_pfakt5[firsttwonoisojet.at(0)];	  
@@ -774,6 +805,7 @@ void RedNtpTree::Loop(int isgjet)
 
         runRN = run;
         eventRN = event;
+        lumi = lbn;
 	
 	ana_tree->Fill();
 

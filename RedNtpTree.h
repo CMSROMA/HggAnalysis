@@ -70,8 +70,21 @@ private:
    Int_t idloosephot2;
    Int_t idmediumphot1;
    Int_t idmediumphot2;
+   Int_t     pid_isEMphot1;
+   Int_t     pid_isEMphot2;
+   Float_t   pid_jurECALphot1;
+   Float_t   pid_jurECALphot2;
+   Float_t   pid_twrHCALphot1;
+   Float_t   pid_twrHCALphot2;
+   Float_t   pid_HoverEphot1;
+   Float_t   pid_HoverEphot2;
+   Float_t   pid_hlwTrackphot1;
+   Float_t   pid_hlwTrackphot2;
+   Float_t   pid_etawidphot1;
+   Float_t   pid_etawidphot2;
    Int_t runRN;
    Int_t eventRN;
+   Int_t lumi;
 
 };
 
