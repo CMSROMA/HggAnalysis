@@ -29,6 +29,17 @@ struct photonidcuts {
   float smajmaj;
 };
 
+struct photonidegcuts {
+  float trackiso_rel;
+  float trackiso_abs;
+  float ecaliso_rel;
+  float ecaliso_abs;
+  float hovereiso;
+  float hcaliso_rel;
+  float hcaliso_abs;
+  float setaetaEB;
+  float setaetaEE;
+};
 
 class tree_reader_V2 {
 public :

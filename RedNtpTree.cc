@@ -104,6 +104,31 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   return (ntrkiso && ptiso && hcaliso && ecaliso && smaj && smin && smin_min && eta);
 }
 
+bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass) {
+
+  // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise)
+  bool ptiso = (pid_hlwTrack[i] < ePhot[i] * pid.trackiso_rel + pid.trackiso_abs);
+  bool ecaliso = (pid_jurECAL[i] < ePhot[i] * pid.ecaliso_rel + pid.ecaliso_abs);
+  bool hcaliso = (pid_twrHCAL[i] < ePhot[i] * pid.hcaliso_rel + pid.hcaliso_abs);
+  bool hoveiso = (pid_HoverE[i] < pid.hovereiso);
+  bool setaeta = pid_etawid[i] < pid.setaetaEB;
+  if(TMath::Abs(etaPhot[i]) > 1.44) {
+    setaeta = pid_etawid[i] < pid.setaetaEE;
+  }  
+
+  if (vpass) {
+    //assert((*vpass).size()==7);
+    if((*vpass).size()!=5) { cout << "major failure! (*vpass).size()!=7.. die!" << endl; exit(0) ; }
+    (*vpass)[0] = ptiso;
+    (*vpass)[1] = ecaliso;
+    (*vpass)[2] = hcaliso;
+    (*vpass)[3] = hoveiso;
+    (*vpass)[4] = setaeta;
+  }
+
+  return (ptiso && hcaliso && ecaliso && hoveiso && setaeta);
+}
+
 
 void RedNtpTree::Loop(int isgjet)
 {
@@ -273,6 +298,12 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("E1phot2",&E1phot2,"E1phot2/F");
    ana_tree->Branch("E9phot1",&E9phot1,"E9phot1/F");
    ana_tree->Branch("E9phot2",&E9phot2,"E9phot2/F");
+   ana_tree->Branch("isemEGphot1",&isemEGphot1,"isemEGphot1/I");
+   ana_tree->Branch("isemEGphot2",&isemEGphot2,"isemEGphot2/I");
+   ana_tree->Branch("idloosenewEGphot1",&idloosenewEGphot1,"idloosenewEGphot1/I");
+   ana_tree->Branch("idloosenewEGphot2",&idloosenewEGphot2,"idloosenewEGphot2/I");
+   ana_tree->Branch("idtightnewEGphot1",&idtightnewEGphot1,"idtightnewEGphot1/I");
+   ana_tree->Branch("idtightnewEGphot2",&idtightnewEGphot2,"idtightnewEGphot2/I");
    ana_tree->Branch("idlooseEGphot1",&idlooseEGphot1,"idlooseEGphot1/I");
    ana_tree->Branch("idlooseEGphot2",&idlooseEGphot2,"idlooseEGphot2/I");
    ana_tree->Branch("idtightEGphot1",&idtightEGphot1,"idtightEGphot1/I");
@@ -285,8 +316,10 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("pid_isEMphot1",&pid_isEMphot1,"pid_isEMphot1/I");
    ana_tree->Branch("pid_isEMphot2",&pid_isEMphot2,"pid_isEMphot2/I");
 
-   ana_tree->Branch("pid_jurECALphot1",&pid_jurECALphot1,"pid_jurECALphot1/F");
-   ana_tree->Branch("pid_jurECALphot2",&pid_jurECALphot2,"pid_jurECALphot2/F");
+   ana_tree->Branch("pid_haspixelseedphot1",&pid_haspixelseedphot1,"pid_haspixelseedphot1/I");
+   ana_tree->Branch("pid_haspixelseedphot2",&pid_haspixelseedphot2,"pid_haspixelseedphot2/I");
+   ana_tree->Branch("pid_jurECALphot1",&pid_jurECALphot1,"pid_jurECALphot1/F"); 
+   ana_tree->Branch("pid_jurECALphot2",&pid_jurECALphot2,"pid_jurECALphot2/F"); 
    ana_tree->Branch("pid_twrHCALphot1",&pid_twrHCALphot1,"pid_twrHCALphot1/F");
    ana_tree->Branch("pid_twrHCALphot2",&pid_twrHCALphot2,"pid_twrHCALphot2/F");
    ana_tree->Branch("pid_HoverEphot1",&pid_HoverEphot1,"pid_HoverEphot1/F");
@@ -342,6 +375,39 @@ void RedNtpTree::Loop(int isgjet)
    superlooseid.sminmin_min=         0.15;
    superlooseid.smajmaj=             0.70; 
 
+   photonidegcuts looseegid;
+   looseegid.hovereiso=           0.05;
+   looseegid.hcaliso_rel=         0.0025;
+   looseegid.hcaliso_abs=         2.2;
+   looseegid.ecaliso_rel=         0.006;
+   looseegid.ecaliso_abs=         4.2;
+   looseegid.trackiso_rel=        0.001;
+   looseegid.trackiso_abs=        3.5;
+   looseegid.setaetaEB=           1000.;
+   looseegid.setaetaEE=           1000.;
+
+   photonidegcuts tightegid;
+   tightegid.hovereiso=           0.05;
+   tightegid.hcaliso_rel=         0.0025;
+   tightegid.hcaliso_abs=         2.2;
+   tightegid.ecaliso_rel=         0.006;
+   tightegid.ecaliso_abs=         4.2;
+   tightegid.trackiso_rel=        0.001;
+   tightegid.trackiso_abs=        2.;
+   tightegid.setaetaEB=           0.013;
+   tightegid.setaetaEE=           0.030;
+  
+   photonidegcuts isemid;
+   isemid.hovereiso=           1000.;
+   isemid.hcaliso_rel=         0.0025;
+   isemid.hcaliso_abs=         2.2;
+   isemid.ecaliso_rel=         0.006;
+   isemid.ecaliso_abs=         4.2;
+   isemid.trackiso_rel=        1000.;
+   isemid.trackiso_abs=        1000.;
+   isemid.setaetaEB=             1000.;
+   isemid.setaetaEE=             1000.;
+  
 
    //event based cuts
    double ptphot1cut = 50;
@@ -409,6 +475,9 @@ void RedNtpTree::Loop(int isgjet)
       vector<bool> isophot;
       vector<bool> isophotloose;
       vector<bool> isophotmedium;
+      vector<bool> isophotemeg;
+      vector<bool> isophotlooseeg;
+      vector<bool> isophottighteg;
 
       for(int i=0; i<nPhot; i++){
      
@@ -451,6 +520,7 @@ void RedNtpTree::Loop(int isgjet)
         else jetphot.push_back(0);  
 
 	vector<bool> idpass(7);
+	vector<bool> idpasseg(5);
 	//	if(cutID(i, mediumid, &idpass)) isophot.push_back(1); 
 	//if(cutID(i, looseid, &idpass)) isophot.push_back(1); 
 	// TEMP
@@ -463,6 +533,15 @@ void RedNtpTree::Loop(int isgjet)
 
 	if(cutID(i, mediumid, &idpass)) isophotmedium.push_back(1); 
         else isophotmedium.push_back(0);  
+
+	if(cutIDEG(i, isemid, &idpasseg)) isophotemeg.push_back(1); 
+        else isophotemeg.push_back(0);  
+
+	if(cutIDEG(i, looseegid, &idpasseg)) isophotlooseeg.push_back(1); 
+        else isophotlooseeg.push_back(0);  
+
+	if(cutIDEG(i, tightegid, &idpasseg)) isophottighteg.push_back(1); 
+        else isophottighteg.push_back(0);  
 	
 	if( assp )	{
 	  ptphotassreco.Fill(ptPhot[i]);
@@ -754,6 +833,12 @@ void RedNtpTree::Loop(int isgjet)
 	E1phot2 = E1Phot[firsttwoisophot.at(1)];  
 	E9phot1 = E9Phot[firsttwoisophot.at(0)];
 	E9phot2 = E9Phot[firsttwoisophot.at(1)];  
+	isemEGphot1 = isophotemeg.at(firsttwoisophot.at(0));;
+	isemEGphot2 = isophotemeg.at(firsttwoisophot.at(1));;
+	idloosenewEGphot1 = isophotlooseeg.at(firsttwoisophot.at(0));
+	idloosenewEGphot2 = isophotlooseeg.at(firsttwoisophot.at(1));
+	idtightnewEGphot1 = isophottighteg.at(firsttwoisophot.at(0));
+	idtightnewEGphot2 = isophottighteg.at(firsttwoisophot.at(1));
 	idlooseEGphot1 = pid_isLoose[firsttwoisophot.at(0)];
 	idlooseEGphot2 = pid_isLoose[firsttwoisophot.at(1)];
 	idtightEGphot1 = pid_isTight[firsttwoisophot.at(0)];
@@ -763,6 +848,8 @@ void RedNtpTree::Loop(int isgjet)
 	idmediumphot1 = isophotmedium.at(firsttwoisophot.at(0));
 	idmediumphot2 = isophotmedium.at(firsttwoisophot.at(1));
 
+        pid_haspixelseedphot1 =  hasPixelSeedPhot[firsttwoisophot.at(0)]; 
+        pid_haspixelseedphot2 =  hasPixelSeedPhot[firsttwoisophot.at(1)]; 
         pid_isEMphot1 =  pid_isEM[firsttwoisophot.at(0)];
         pid_isEMphot2 =  pid_isEM[firsttwoisophot.at(1)];
         pid_jurECALphot1 =  pid_jurECAL[firsttwoisophot.at(0)];
