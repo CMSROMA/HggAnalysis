@@ -1,6 +1,7 @@
 #!/bin/tcsh
 
-set queue = cmslong
+#set queue = cmslong
+set queue = 8nh
 
 # submit the job only if the 2nd argument is 1
 set run = 0
@@ -52,34 +53,36 @@ foreach i (`seq -w 0 15 `)
   set datasamples = ( $datasamples  data_Cert_132440-149442_7TeV_StreamExpress_Collisions10_JSON_v3_NOVRERECO_2010B_smaller_new2_${i} )
 end
 
-set samples = ( $higgssamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples  $datasamples )
+set run2010Asamples = ( )
+foreach i (`seq -w 0 42 `)
+  set run2010Asamples = ( $run2010Asamples  run2010A_${i} )
+end
+
+
+
+#set samples = ( $higgssamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples  $datasamples )
 #set samples = ( $datasamples )
+set samples = ( $run2010Asamples )
 
 
-set outdir = redntp.pt1stgam50.looseid.V5
+set outdir = redntp.run2010A
 set logdir = ${outdir}/log
 
 mkdir -p $outdir  $logdir
 
 
-set j1 = 20
-set j2 = 15
-set deta = 2.5
-set zepp = 2.5
-set mjj = 300.0
-
 foreach sample ( $samples )
-   set rootfile = "${outdir}/redntp_${sample}_${j1}_${j2}_${deta}_${zepp}_${mjj}.root"
-   set jobname = "${sample}_${j1}_${j2}_${deta}_${zepp}_${mjj}"
-   set logfile = "${logdir}/${sample}_${j1}_${j2}_${deta}_${zepp}_${mjj}.txt"
+   set rootfile = "${outdir}/redntp_${sample}.root"
+   set jobname = "${sample}"
+   set logfile = "${logdir}/${sample}.txt"
    set listfile = "list/${sample}.list"
    if(! -e $listfile ) then
       echo "skipping non-existent file $listfile"
       continue
    endif
-   set command = "bsub -q ${queue} -o $logfile -J ${jobname} ${app} list/${sample}.list ${rootfile}"
+   set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} list/${sample}.list ${rootfile}"
    echo "submitted job: ${jobname}"
-   #echo "   command: ${command}"
+   echo "   command: ${command}"
    if($run == 1) then
      ${command}
      #sleep 1
