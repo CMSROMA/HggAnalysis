@@ -638,15 +638,15 @@ void RedNtpTree::Loop(int isgjet)
 
 	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)]) + 
 		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)]) ) ;
-	  if( DR < .25 ) assh = 1; 
+	  if( DR < .5 ) assh = 1; 
 	  
 	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoassphot.at(k)]) + 
 		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoassphot.at(k)]) ) ;
-	  if( DR < .25 ) assp = 1; 
+	  if( DR < .5 ) assp = 1; 
 	  
 	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)]) + 
 		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)]) ) ;
-	  if( DR < .25 ) assi = 1; 
+	  if( DR < .5 ) assi = 1; 
 
 	}
 
