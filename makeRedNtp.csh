@@ -1,13 +1,20 @@
 #!/bin/tcsh
 
-#set queue = cmslong
-set queue = 8nh
-
 # submit the job only if the 2nd argument is 1
 set run = 0
 if ($#argv > 0) then
   set run = $1
   echo "run : $run "
+endif 
+
+# roma
+set queue = cmslong
+# cern
+#set queue = 8nh
+
+if ($#argv > 1) then
+  set queue = $2
+  echo "queue : $queue "
 endif 
 
 # app to run
@@ -18,14 +25,8 @@ if(! -e $app ) then
   exit 0
 endif 
 
-#set samples = ( VBF_HToGG_7TeV_powheg_M120_23nov DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6_bis DiPhotonJets_7TeV-madgraph )
-#set samples = ( GJet_Pt-20_doubleEMEnriched_TuneZ2 )
-
-
-#set bkgsamples = ( DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6_bis )
 
 set higgssamples = ( VBF_HToGG_7TeV_powheg_M100_22nov VBF_HToGG_7TeV_powheg_M110_24nov_bis VBF_HToGG_7TeV_powheg_M115_22nov VBF_HToGG_7TeV_powheg_M120_23nov VBF_HToGG_7TeV_powheg_M130_22nov VBF_HToGG_7TeV_powheg_M140_22nov WH_ZH_TTH_HToGG_M-120_7TeV-pythia6_Fall10_8dec )
-
 
 set qcdsamples = ( )
 foreach i (`seq -w 0 58 `)
@@ -48,9 +49,9 @@ foreach i (`seq -w 0 10 `)
   set digammajetsamples = ( $digammajetsamples  DiPhotonJets_7TeV-madgraph_${i} )
 end
 
-set datasamples = ( )
+set run2010Bsamples = ( )
 foreach i (`seq -w 0 15 `)
-  set datasamples = ( $datasamples  data_Cert_132440-149442_7TeV_StreamExpress_Collisions10_JSON_v3_NOVRERECO_2010B_smaller_new2_${i} )
+  set run2010Bsamples = ( $run2010Bsamples  data_Cert_132440-149442_7TeV_StreamExpress_Collisions10_JSON_v3_NOVRERECO_2010B_smaller_new2_${i} )
 end
 
 set run2010Asamples = ( )
@@ -58,14 +59,14 @@ foreach i (`seq -w 0 42 `)
   set run2010Asamples = ( $run2010Asamples  run2010A_${i} )
 end
 
+set datasamples = ( $run2010Asamples  $run2010Bsamples )
 
 
 #set samples = ( $higgssamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples  $datasamples )
-#set samples = ( $datasamples )
-set samples = ( $run2010Asamples )
+set samples = ( $datasamples )
 
 
-set outdir = redntp.run2010A
+set outdir = redntp.V6
 set logdir = ${outdir}/log
 
 mkdir -p $outdir  $logdir
