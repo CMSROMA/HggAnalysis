@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
 
 #include <TTree.h>
 #include <TChain.h>
@@ -15,6 +16,8 @@
 #include <TVector2.h>
 #include <TVector3.h>
 #include <TAxis.h>
+#include <TString.h>
+#include <TRegexp.h>
 
 #include "RedNtpTree.h"
 
@@ -71,8 +74,90 @@ int main(int argc, char* argv[]) {
       sprintf(cutfile,argv[3]);
       cout << "cuts to be read from file: " << cutfile << endl;
 */
-       //================ Run analysis
- 
+
+       //  cross sections
+       std::map<TString, double> xsec; // in pb as in https://twiki.cern.ch/twiki/bin/view/CMS/ProductionFall2010
+       xsec["GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6"]       = 493.44;
+       xsec["DiPhotonJets_7TeV-madgraph"] 			     = 134.;
+       xsec["DiPhotonBox_Pt10to25_TrackingParticles_7TeV-pythia6"]   = 358.2;
+       xsec["DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6"]  = 12.37;
+       xsec["DiPhotonBox_Pt250toinf_TrackingParticles_7TeV-pythia6"] = 2.08e-4;
+       xsec["DYJetsToLL_TuneZ2_M-50_7TeV-madgraph"]                  = 2321.;
+       xsec["QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6"]    = 9.61e3;
+       xsec["QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6"]        = 4.04e4;
+/**
+       xsec["GluGluToHToGG_M-90_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-100_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-105_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-110_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-115_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-120_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-130_7TeV-powheg-pythia6"] = ;
+       xsec["GluGluToHToGG_M-140_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-90_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-95_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-100_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-105_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-110_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-115_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-120_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-130_7TeV-powheg-pythia6"] = ;
+       xsec["VBF_HToGG_M-140_7TeV-powheg-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-90_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-95_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-100_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-105_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-110_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-115_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-120_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-130_7TeV-pythia6"] = ;
+       xsec["WH_ZH_TTH_HToGG_M-140_7TeV-pythia6"] = ;
+**/
+       //xsec[""] = ;
+       //xsec[""] = ;
+
+       vector<TString> keys;
+       for(std::map<TString, double>::const_iterator k = xsec.begin(); k != xsec.end(); ++k) {
+          keys.push_back( k->first );
+       }
+       //  cross sections end
+
+
+       // find cross section for this list
+       TString alist(listName);
+       //cout << "input list: <" << alist << ">" << endl;
+       double myxsec = -1;
+       for(int i=0; i< keys.size() && myxsec<0.; ++i) {
+          //cout << "key: " << keys[i] << endl;
+          int pos = alist.Index( TRegexp(keys[i]) );
+          if(pos>=0) {
+             myxsec = xsec[keys[i]];
+             cout << "xsec: " << myxsec << "\t for " << listName << endl;
+          }
+       } 
+       if(myxsec<0) {
+         cout << "No xsection found for " << listName << endl;
+         cout << "exiting..." << endl; 
+         exit(-1);
+       }
+
+       // filter for 2gam + jets. this is included in GJets samples but we use dedicated DiPhotonjets-madgraph
+       int isGJet = 0;
+       int pos = alist.Index( TRegexp("GJet") );
+       if(pos>=0) {
+          isGJet = 1;
+          cout << "GJet* samples. will  filter out 2g+jet events included in dedicated DiPhotonJets-madgraph" << endl;
+       }
+
+       // compute equivalent luminosity
+       Long64_t  ntot = chain->GetEntries();
+       double lumi = ntot/myxsec;
+       cout << "#events: " << ntot << "\t xsec: " << myxsec << " pb\t equiv. lumi: " 
+            << lumi/1000. << " fb-1"
+            << endl;
+
+       // run analysis code
        RedNtpTree tool(chain, OutputFileName);
-       tool.Loop();
+       tool.SetNtotXsection( ntot, myxsec );
+       tool.Loop(isGJet);
 }

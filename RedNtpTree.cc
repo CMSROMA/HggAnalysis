@@ -25,6 +25,11 @@ inline double delta_eta(double eta1, double eta2) {
 RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V2(tree) 
 {
    hOutputFile   = new TFile(outname, "RECREATE" ) ;
+   // must be set by the user 
+   EquivLumi = -1.;
+   xsection = -1.;
+   NtotEvents = -1;
+   SampleID = -1;
 }
 
 RedNtpTree::~RedNtpTree()
@@ -291,6 +296,7 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("event",&eventRN,"event/I");
    ana_tree->Branch("lumi",&lumi,"lumi/I");
    ana_tree->Branch("massgg",&massgg,"massgg/F");
+   ana_tree->Branch("ptgg",&ptgg,"ptgg/F");
    ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
    ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
    ana_tree->Branch("etaphot1",&etaphot1,"etaphot1/F");
@@ -347,6 +353,10 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("invmass2g2j",&invmass2g2j,"invmass2g2j/F");
    ana_tree->Branch("nvtx",&nvtx,"nvtx/F");
    ana_tree->Branch("met",&met,"met/F");
+   ana_tree->Branch("NtotEvents",&NtotEvents,"NtotEvents/I");
+   ana_tree->Branch("xsection",&xsection,"xsection/F");
+   ana_tree->Branch("EquivLumi",&EquivLumi,"EquivLumi/F");
+   ana_tree->Branch("SampleID",&SampleID,"SampleID/I");
 
 
    photonidcuts mediumid;
@@ -426,12 +436,15 @@ void RedNtpTree::Loop(int isgjet)
    double dijetmasscut = 300;
    double deltaphicut = 2.;
 
+   int nprocessed = 0;
+   int nredntp = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
-      if (jentry%1000 == 0) cout << "Event " << jentry << endl;
+      nprocessed++;
+      if (nprocessed%1000 == 0) cout << "Event " << nprocessed << endl;
 
       vector<bool> photassocMC, photassocMChiggs;
       
@@ -706,7 +719,7 @@ void RedNtpTree::Loop(int isgjet)
 
       }	
 
-      double higgsisomass(0), etahiggsiso(-999);
+      double higgsisomass(0), etahiggsiso(-999), higgspt(-999.);
 
       if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 ) { 
 
@@ -719,6 +732,7 @@ void RedNtpTree::Loop(int isgjet)
  
 	higgsisomass = higgs.M();
 	etahiggsiso = higgs.Eta();
+        higgspt = higgs.Pt();
 	
 	higgsmassisoreco.Fill(higgs.M());
 	higgsmassisorecofull.Fill(higgs.M());
@@ -838,7 +852,9 @@ void RedNtpTree::Loop(int isgjet)
 	  zeppenjetisoreco2.Fill(zeppen2);	
 	}
 
+        nredntp++;
 	massgg = higgsisomass;
+	ptgg = higgspt;
 	ptphot1 = ptPhot[firsttwoisophot.at(0)];
 	ptphot2 = ptPhot[firsttwoisophot.at(1)];  
 	etaphot1 = etaPhot[firsttwoisophot.at(0)];
@@ -954,6 +970,9 @@ void RedNtpTree::Loop(int isgjet)
 
 
    }
+   cout << "Original number of events: " << NtotEvents << endl;
+   cout << "Processed events:          " << nprocessed << endl; 
+   cout << "Events in reduced ntuple:  " << nredntp << endl; 
 
    hOutputFile->Write() ;
 

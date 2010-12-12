@@ -29,7 +29,7 @@ endif
 set higgssamples = ( VBF_HToGG_7TeV_powheg_M100_22nov VBF_HToGG_7TeV_powheg_M110_24nov_bis VBF_HToGG_7TeV_powheg_M115_22nov VBF_HToGG_7TeV_powheg_M120_23nov VBF_HToGG_7TeV_powheg_M130_22nov VBF_HToGG_7TeV_powheg_M140_22nov WH_ZH_TTH_HToGG_M-120_7TeV-pythia6_Fall10_8dec )
 
 set qcdsamples = ( )
-foreach i (`seq -w 0 58 `)
+foreach i (`seq -w 0 29 `)
   set qcdsamples = ( $qcdsamples  QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6_a+b_${i} )
   #echo $qcdsamples[$i]
 end
@@ -62,8 +62,8 @@ end
 set datasamples = ( $run2010Asamples  $run2010Bsamples )
 
 
-#set samples = ( $higgssamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples  $datasamples )
-set samples = ( $datasamples )
+set samples = ( $higgssamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples  )
+#set samples = ( $run2010Bsamples )
 
 
 set outdir = redntp.V6
@@ -78,12 +78,12 @@ foreach sample ( $samples )
    set logfile = "${logdir}/${sample}.txt"
    set listfile = "list/${sample}.list"
    if(! -e $listfile ) then
-      echo "skipping non-existent file $listfile"
+      #echo "skipping non-existent file $listfile"
       continue
    endif
    set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} list/${sample}.list ${rootfile}"
    echo "submitted job: ${jobname}"
-   echo "   command: ${command}"
+   #echo "   command: ${command}"
    if($run == 1) then
      ${command}
      #sleep 1

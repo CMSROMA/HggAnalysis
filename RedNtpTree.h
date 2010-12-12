@@ -33,17 +33,28 @@ public:
    RedNtpTree(TTree *tree=0, const TString& outname="redntp.root");
    virtual ~RedNtpTree();
    virtual void     Loop(int isgjet=0);
+   void SetNtotXsection(int ntot, float xsec) {
+      NtotEvents = ntot;
+      xsection = xsec;
+      EquivLumi = ntot/xsec;
+   }
 
 
 private:
    TFile* hOutputFile ;
    TTree * ana_tree ;
 
+   Int_t SampleID;
+   Int_t  NtotEvents;
+   float xsection;
+   float EquivLumi;
+
    virtual vector<int>    firsttwo(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0);
 
    Float_t massgg;
+   Float_t ptgg;
    Float_t ptphot1;
    Float_t ptphot2;
    Float_t etaphot1;
