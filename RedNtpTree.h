@@ -48,6 +48,8 @@ private:
    Float_t ptphot2;
    Float_t etaphot1;
    Float_t etaphot2;
+   Float_t phiphot1;
+   Float_t phiphot2;
    Float_t E1phot1;
    Float_t E1phot2;
    Float_t E9phot1;
@@ -58,9 +60,13 @@ private:
    Float_t ptcorrjet2;
    Float_t etajet1;
    Float_t etajet2;
+   Float_t phijet1;
+   Float_t phijet2;
    Float_t deltaeta;
    Float_t zeppenjet;
    Float_t invmassjet;
+   Float_t invmass2g1j;
+   Float_t invmass2g2j;
    Float_t nvtx;
    Float_t met;
    Int_t isemEGphot1;

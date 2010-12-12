@@ -2,6 +2,7 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
+#include <TMath.h>
 #include <iostream>
 #include <vector>
 #include <TLorentzVector.h>
@@ -11,7 +12,7 @@ using std::endl;
 
 inline double delta_phi(double phi1, double phi2) {
 
-  double dphi = fabs(phi1 - phi2);
+  double dphi = TMath::Abs(phi1 - phi2);
   return (dphi <= TMath::Pi())? dphi : TMath::TwoPi() - dphi;
 
 }
@@ -294,6 +295,8 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
    ana_tree->Branch("etaphot1",&etaphot1,"etaphot1/F");
    ana_tree->Branch("etaphot2",&etaphot2,"etaphot2/F");
+   ana_tree->Branch("phiphot1",&phiphot1,"phiphot1/F");
+   ana_tree->Branch("phiphot2",&phiphot2,"phiphot2/F");
    ana_tree->Branch("E1phot1",&E1phot1,"E1phot1/F");
    ana_tree->Branch("E1phot2",&E1phot2,"E1phot2/F");
    ana_tree->Branch("E9phot1",&E9phot1,"E9phot1/F");
@@ -335,9 +338,13 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("ptcorrjet2",&ptcorrjet2,"ptcorrjet2/F");
    ana_tree->Branch("etajet1",&etajet1,"etajet1/F");
    ana_tree->Branch("etajet2",&etajet2,"etajet2/F");
+   ana_tree->Branch("phijet1",&phijet1,"phijet1/F");
+   ana_tree->Branch("phijet2",&phijet2,"phijet2/F");
    ana_tree->Branch("deltaeta",&deltaeta,"deltaeta/F");
    ana_tree->Branch("zeppenjet",&zeppenjet,"zeppenjet/F");
    ana_tree->Branch("invmassjet",&invmassjet,"invmassjet/F");
+   ana_tree->Branch("invmass2g1j",&invmass2g1j,"invmass2g1j/F");
+   ana_tree->Branch("invmass2g2j",&invmass2g2j,"invmass2g2j/F");
    ana_tree->Branch("nvtx",&nvtx,"nvtx/F");
    ana_tree->Branch("met",&met,"met/F");
 
@@ -478,6 +485,10 @@ void RedNtpTree::Loop(int isgjet)
       vector<bool> isophotemeg;
       vector<bool> isophotlooseeg;
       vector<bool> isophottighteg;
+
+      TLorentzVector thehiggs;
+      TLorentzVector thejet1;
+      TLorentzVector thejet2;
 
       for(int i=0; i<nPhot; i++){
      
@@ -704,7 +715,8 @@ void RedNtpTree::Loop(int isgjet)
 	phot2.SetPtEtaPhiE(ptPhot[firsttwoisophot.at(1)],etaPhot[firsttwoisophot.at(1)],phiPhot[firsttwoisophot.at(1)],ePhot[firsttwoisophot.at(1)]);
 
 	TLorentzVector higgs = phot1 + phot2;
-
+	thehiggs = phot1 + phot2;
+ 
 	higgsisomass = higgs.M();
 	etahiggsiso = higgs.Eta();
 	
@@ -812,7 +824,9 @@ void RedNtpTree::Loop(int isgjet)
 	  jet2.SetPtEtaPhiE(ptJet_pfakt5[firsttwonoisojet.at(1)],etaJet_pfakt5[firsttwonoisojet.at(1)],phiJet_pfakt5[firsttwonoisojet.at(1)],eJet_pfakt5[firsttwonoisojet.at(1)]);
 	  
 	  TLorentzVector sum = jet1 + jet2;
-	  
+	  thejet1 = jet1;
+	  thejet2 = jet2;
+
 	  twojetsmassiso = sum.M();
 	  etatwojetsiso = sum.Eta();
 
@@ -829,6 +843,8 @@ void RedNtpTree::Loop(int isgjet)
 	ptphot2 = ptPhot[firsttwoisophot.at(1)];  
 	etaphot1 = etaPhot[firsttwoisophot.at(0)];
 	etaphot2 = etaPhot[firsttwoisophot.at(1)];  
+	phiphot1 = phiPhot[firsttwoisophot.at(0)];
+	phiphot2 = phiPhot[firsttwoisophot.at(1)];  
 	E1phot1 = E1Phot[firsttwoisophot.at(0)];
 	E1phot2 = E1Phot[firsttwoisophot.at(1)];  
 	E9phot1 = E9Phot[firsttwoisophot.at(0)];
@@ -867,19 +883,23 @@ void RedNtpTree::Loop(int isgjet)
 	  ptjet1 = ptJet_pfakt5[firsttwonoisojet.at(0)];
 	  ptcorrjet1 = ptCorrJet_pfakt5[firsttwonoisojet.at(0)];	  
 	  etajet1 = etaJet_pfakt5[firsttwonoisojet.at(0)];
+	  phijet1 = phiJet_pfakt5[firsttwonoisojet.at(0)];
 	}else{
 	  ptjet1 = -999;
 	  ptcorrjet1 = -999;
 	  etajet1 = -999;	 
+	  phijet1 = -999;	 
 	}
 	if( firsttwonoisojet.at(1) > -1) {
 	  ptjet2 = ptJet_pfakt5[firsttwonoisojet.at(1)];
 	  ptcorrjet2 = ptCorrJet_pfakt5[firsttwonoisojet.at(1)];	  
 	  etajet2 = etaJet_pfakt5[firsttwonoisojet.at(1)];
+	  phijet2 = phiJet_pfakt5[firsttwonoisojet.at(1)];
 	}else{
 	  ptjet2 = -999;
 	  ptcorrjet2 = -999;
 	  etajet2 = -999;	 
+	  phijet2 = -999;	 
 	}
 	if( firsttwonoisojet.at(0) > -1 && firsttwonoisojet.at(1) > -1) {
 	  deltaeta = etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)];
@@ -893,6 +913,11 @@ void RedNtpTree::Loop(int isgjet)
         runRN = run;
         eventRN = event;
         lumi = lbn;
+	
+	TLorentzVector twog1j = thehiggs + thejet1;
+	TLorentzVector twog2j = thehiggs + thejet1 + thejet2; 
+	invmass2g1j = twog1j.M();
+	invmass2g2j = twog2j.M();
 	
 	ana_tree->Fill();
 
