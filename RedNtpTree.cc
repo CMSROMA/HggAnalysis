@@ -436,6 +436,12 @@ void RedNtpTree::Loop(int isgjet)
    double dijetmasscut = 300;
    double deltaphicut = 2.;
 
+   // temp varables to ckeep track of the file being processed
+   TString foldname("");
+   TString currfilename("");
+   int ifile(0);
+   int nfiles = ((TChain*)fChain)->GetListOfFiles()->GetEntries();
+
    int nprocessed = 0;
    int nredntp = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -445,6 +451,17 @@ void RedNtpTree::Loop(int isgjet)
       // if (Cut(ientry) < 0) continue;
       nprocessed++;
       if (nprocessed%1000 == 0) cout << "Event " << nprocessed << endl;
+
+      // print name of crrent file
+      currfilename = TString(fChain->GetCurrentFile()->GetName());
+      if(currfilename != foldname) {
+         ifile++;
+         cout << "Opening file " << ifile << " of "  << nfiles << "\n"
+              << currfilename  << "\n"
+              << "------------------------------"
+              << endl;
+         foldname = currfilename;
+      }
 
       vector<bool> photassocMC, photassocMChiggs;
       

@@ -23,6 +23,8 @@
 
 using namespace std;
 
+float CrossSection(const char*);
+
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
@@ -75,6 +77,34 @@ int main(int argc, char* argv[]) {
       cout << "cuts to be read from file: " << cutfile << endl;
 */
 
+       // find cross section for this list
+       float myxsec = CrossSection(listName);
+
+       TString alist(listName);
+       // filter for 2gam + jets. this is included in GJets samples but we use dedicated DiPhotonjets-madgraph
+       int isGJet = 0;
+       int pos = alist.Index( TRegexp("GJet") );
+       if(pos>=0) {
+          isGJet = 1;
+          cout << "GJet* samples. will  filter out 2g+jet events included in dedicated DiPhotonJets-madgraph" << endl;
+       }
+
+       // compute equivalent luminosity
+       //Long64_t  ntot = chain->GetEntries();
+       Long64_t  ntot = 1;
+       double lumi = ntot/myxsec;
+       cout << "#events: " << ntot << "\t xsec: " << myxsec << " pb\t equiv. lumi: " 
+            << lumi/1000. << " fb-1"
+            << endl;
+
+       // run analysis code
+       RedNtpTree tool(chain, OutputFileName);
+       tool.SetNtotXsection( ntot, myxsec );
+       tool.Loop(isGJet);
+}
+
+float CrossSection(const char* sample) {
+       TString alist(sample);
        //  cross sections
        std::map<TString, double> xsec; // in pb as in https://twiki.cern.ch/twiki/bin/view/CMS/ProductionFall2010
        xsec["GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6"]       = 493.44;
@@ -124,8 +154,6 @@ int main(int argc, char* argv[]) {
        //  cross sections end
 
 
-       // find cross section for this list
-       TString alist(listName);
        //cout << "input list: <" << alist << ">" << endl;
        double myxsec = -1;
        for(int i=0; i< keys.size() && myxsec<0.; ++i) {
@@ -133,33 +161,14 @@ int main(int argc, char* argv[]) {
           int pos = alist.Index( TRegexp(keys[i]) );
           if(pos>=0) {
              myxsec = xsec[keys[i]];
-             cout << "xsec: " << myxsec << "\t for " << listName << endl;
+             cout << "xsec: " << myxsec << "\t for " << alist << endl;
           }
        } 
        if(myxsec<0) {
-         cout << "No xsection found for " << listName << endl;
+         cout << "No xsection found for " << alist << endl;
          cout << "exiting..." << endl; 
          exit(-1);
+       } else {
+         return myxsec;
        }
-
-       // filter for 2gam + jets. this is included in GJets samples but we use dedicated DiPhotonjets-madgraph
-       int isGJet = 0;
-       int pos = alist.Index( TRegexp("GJet") );
-       if(pos>=0) {
-          isGJet = 1;
-          cout << "GJet* samples. will  filter out 2g+jet events included in dedicated DiPhotonJets-madgraph" << endl;
-       }
-
-       // compute equivalent luminosity
-       //Long64_t  ntot = chain->GetEntries();
-       Long64_t  ntot = 1;
-       double lumi = ntot/myxsec;
-       cout << "#events: " << ntot << "\t xsec: " << myxsec << " pb\t equiv. lumi: " 
-            << lumi/1000. << " fb-1"
-            << endl;
-
-       // run analysis code
-       RedNtpTree tool(chain, OutputFileName);
-       tool.SetNtotXsection( ntot, myxsec );
-       tool.Loop(isGJet);
 }
