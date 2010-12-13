@@ -1663,6 +1663,8 @@ void AnalysisTool::Loop() {
 	 
 	 for(int j=0;j<nMC;j++){
 
+           if( pdgIdMC[j] == 2212 ) continue;
+           if( motherIDMC[j]>149) continue;
 	   if(pdgIdMC[motherIDMC[j]]==25 && statusMC[j]==3 && pdgIdMC[j]==22){
 	     
 	     /** motherIDMC è l'indice nell'array MC della madre della particella **/
@@ -1780,7 +1782,9 @@ void AnalysisTool::Loop() {
 	 
        }   /* 4MC */ 
 
-       if(pdgIdMC[i]!=25 && pdgIdMC[i]!=22 && statusMC[i]==3 
+       //cout << "i : " << i << " pdgIdMC[i]: " << pdgIdMC[i] << " statusMC[i]: " << statusMC[i] << " mother: " << motherIDMC[i] << endl;
+       if( motherIDMC[i] > 149 ) continue;
+       if(pdgIdMC[i]!=25 && pdgIdMC[i]!=2212 && pdgIdMC[i]!=22 && statusMC[i]==3 
           && pdgIdMC[motherIDMC[i]]!=25 && pdgIdMC[motherIDMC[i]]!=22 && statusMC[motherIDMC[i]]==3){ /* partoni generati, check listdraw.txt */
 	 
 	 tempparton[quark][0]= eMC[i];

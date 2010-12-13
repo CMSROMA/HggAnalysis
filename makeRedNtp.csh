@@ -1,5 +1,7 @@
 #!/bin/tcsh
 
+set listdir  = list.V8
+
 if($#argv == 0) then
   echo "usage:  makeRedNtp.csh    <run if 1>   <queue>  <executable eg ./tmp/redntpApp>"
   exit 0
@@ -14,7 +16,7 @@ if ($#argv > 0) then
 endif 
 
 # roma
-set queue = cmslong
+set queue = cmsshort
 # cern
 #set queue = 8nh
 
@@ -32,7 +34,12 @@ if(! -e $app ) then
 endif 
 
 
-set higgssamples = ( VBF_HToGG_7TeV_powheg_M100_22nov VBF_HToGG_7TeV_powheg_M110_24nov_bis VBF_HToGG_7TeV_powheg_M115_22nov VBF_HToGG_7TeV_powheg_M120_23nov VBF_HToGG_7TeV_powheg_M130_22nov VBF_HToGG_7TeV_powheg_M140_22nov WH_ZH_TTH_HToGG_M-120_7TeV-pythia6_Fall10_8dec )
+set higgssamples = (   )
+foreach i ( 90 95 100 105 110 115 120 130 140 )
+  set higgssamples = ( $higgssamples VBF_HToGG_M-${i}_7TeV-powheg-pythia6_00  )
+  set higgssamples = ( $higgssamples WH_ZH_TTH_HToGG_M-${i}_7TeV-pythia6_00  )
+  set higgssamples = ( $higgssamples GluGluToHToGG_M-${i}_7TeV-powheg-pythia6_00  )
+end
 
 set qcdsamples = ( )
 foreach i (`seq -w 0 50 `)
@@ -43,7 +50,7 @@ end
 
 set gjetsamples = ( )
 foreach i (`seq -w 0 10 `)
-  set gjetsamples = ( $gjetsamples  GJet_Pt-20_doubleEMEnriched_TuneZ2_${i} )
+  set gjetsamples = ( $gjetsamples  GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6_${i} )
 end
 
 set boxsamples = ( )
@@ -76,26 +83,28 @@ end
 set datasamples = ( $run2010Asamples  $run2010Bsamples )
 
 
-#set samples = ( $datasamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples $zjetssamples )
-#set samples = ( $run2010Bsamples )
 
-set samples = ( )
+
+#set samples = ( $higgssamples $datasamples $qcdsamples $gjetsamples  $boxsamples  $digammajetsamples $zjetssamples )
+
+#set samples = ( )
 #foreach i (`seq -w 0 8 `)
 #  set samples = ( $samples  run2010A_0${i} )
 #end
 
-foreach i (`cat failed.txt`)
-  set samples = ( $samples  ${i} )
-end
+#set samples = ( )
+#foreach i (`cat failed.txt`)
+#  set samples = ( $samples  ${i} )
+#end
+
+set samples = ( $datasamples )
 
 
-
-set outdir = redntp.V7
+set outdir = redntp.V8
 set logdir = ${outdir}/log
 
 mkdir -p $outdir  $logdir
 
-set listdir  = list.387
 
 foreach sample ( $samples )
    set rootfile = "${outdir}/redntp_${sample}.root"
