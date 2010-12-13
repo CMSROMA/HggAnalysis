@@ -23,11 +23,12 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 5 ) {
-        cout << "Usage:  ./tmp/analysis  listfile   outputfile   histo_color cutfile\n" 
+      if(argc < 3 ) {
+        cout << "Usage:  ./tmp/analysis  listfile   outputfile  [cutfile]\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
-             << "    histo_color: fill color for histograms\n"
+             //<< "    histo_color: fill color for histograms\n"
+             << "optional:\n"
              << "    cutfile:     flat file with list of cuts in correct order"  
              << endl;
         exit(-1);
@@ -66,15 +67,18 @@ int main(int argc, char* argv[]) {
       }
       is.close();
 
-      //3rd option: hfill color
-      int color = 1;
-      color = atoi( argv[3] );
-      cout << "Hai scelto color: " << color << endl;
-
-      //4th option:  name of flat file with cuts
+      //3rd option:  name of flat file with cuts
       char  cutfile[200];
-      sprintf(cutfile,argv[4]);
-      cout << "cuts to be read from file: " << cutfile << endl;
+      sprintf(cutfile,"cuts.txt");
+      if( argc >3 ) {
+        sprintf(cutfile,argv[3]);
+        cout << "cuts to be read from file: " << cutfile << endl;
+      }
+
+      //4th option: hfill color   OBSOLETE
+      int color = 1;
+      //color = atoi( argv[3] );
+      //cout << "Hai scelto color: " << color << endl;
 
        //================ Run analysis
  

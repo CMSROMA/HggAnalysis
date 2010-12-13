@@ -1571,6 +1571,12 @@ void AnalysisTool::Loop() {
 
    /**************************************************************/
    int nev(0);     // equivale a nev=0 inizializzazione  
+   // temp varables to ckeep track of the file being processed
+   TString foldname("");
+   TString currfilename("");
+   int ifile(0);
+   int nfiles = ((TChain*)fChain)->GetListOfFiles()->GetEntries();
+
 
    // loop over events
    for (Long64_t jentry=0; jentry<nentries;jentry++) { /* 2 */
@@ -1585,6 +1591,16 @@ void AnalysisTool::Loop() {
      num_evts++;
 
      if(int(num_evts)%1000 == 0 ) cout << "Evento: " << num_evts << endl;
+      // print name of crrent file
+      currfilename = TString(fChain->GetCurrentFile()->GetName());
+      if(currfilename != foldname) {
+         ifile++;
+         cout << "Opening file " << ifile << " of "  << nfiles << "\n"
+              << currfilename  << "\n"
+              << "------------------------------"
+              << endl;
+         foldname = currfilename;
+      }
 
 
      //GENERATOR PART
