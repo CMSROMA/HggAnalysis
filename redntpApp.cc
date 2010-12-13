@@ -16,7 +16,6 @@
 #include <TVector3.h>
 #include <TAxis.h>
 #include <TString.h>
-#include <TRegexp.h>
 
 #include "RedNtpTree.h"
 #include "IsGJet.h"

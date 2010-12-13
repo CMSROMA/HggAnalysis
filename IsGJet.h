@@ -1,6 +1,7 @@
 #ifndef IsGJet_HH
 #define IsGJet_HH
 
+#include "TRegexp.h"
 #include "TString.h"
 #include <iostream>
 

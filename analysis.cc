@@ -17,6 +17,7 @@
 #include <TAxis.h>
 
 #include "AnalysisTool.h"
+#include "IsGJet.h"
 
 using namespace std;
 
@@ -84,7 +85,9 @@ int main(int argc, char* argv[]) {
  
        AnalysisTool tool(chain,OutputFileName);
        tool.SetHFillColor( color );
-       //tool.Filter2GammaJet(); // filter out 2gamma+jets events when running on GJets sample
+
+       // filter out 2gamma+jets events when running on GJets sample
+       if( IsGJet(listName) > 0 ) tool.Filter2GammaJet();
 
        tool.ReadCutsFromFile(cutfile);
        tool.Loop();
