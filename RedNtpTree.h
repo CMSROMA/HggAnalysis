@@ -84,8 +84,12 @@ private:
    Int_t isemEGphot2;
    Int_t idloosenewEGphot1;
    Int_t idloosenewEGphot2;
+   Int_t idloose006newEGphot1;
+   Int_t idloose006newEGphot2;
    Int_t idtightnewEGphot1;
    Int_t idtightnewEGphot2;
+   Int_t idhggtightnewEGphot1;
+   Int_t idhggtightnewEGphot2;
    Int_t idlooseEGphot1;
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;
