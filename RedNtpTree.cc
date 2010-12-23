@@ -593,7 +593,7 @@ void RedNtpTree::Loop(int isgjet)
 	//	if(cutID(i, mediumid, &idpass)) isophot.push_back(1); 
 	//if(cutID(i, looseid, &idpass)) isophot.push_back(1); 
 	// TEMP
-  	if(cutID(i, superlooseid, &idpass)) isophot.push_back(1); 
+  	if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
 	// END TEMP
         else isophot.push_back(0);  
 
