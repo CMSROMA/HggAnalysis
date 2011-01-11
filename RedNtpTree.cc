@@ -81,7 +81,9 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   bool ptiso = (ptiso035Phot[i] / ptPhot[i] < pid.trackiso_rel);
   bool ecaliso = (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel ||
                   ecaliso04Phot[i] < pid.ecaliso_abs);
-  double fhcal = hcalovecal04Phot[i];
+  //  double fhcal = hcalovecal04Phot[i];
+  // in order to fix bug in endcap use equivalent egamma variables
+  double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
   bool hcaliso = (fhcal < pid.hcaliso_rel ||
                   fhcal*ptPhot[i] < pid.hcaliso_abs);
   bool smaj = sMajMajPhot[i] < pid.smajmaj;
@@ -591,9 +593,9 @@ void RedNtpTree::Loop(int isgjet)
 	vector<bool> idpass(7);
 	vector<bool> idpasseg(5);
 	//	if(cutID(i, mediumid, &idpass)) isophot.push_back(1); 
-	//if(cutID(i, looseid, &idpass)) isophot.push_back(1); 
+	if(cutID(i, superlooseid, &idpass)) isophot.push_back(1); 
 	// TEMP
-  	if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
+  	//if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
 	// END TEMP
         else isophot.push_back(0);  
 
