@@ -81,9 +81,9 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   bool ptiso = (ptiso035Phot[i] / ptPhot[i] < pid.trackiso_rel);
   bool ecaliso = (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel ||
                   ecaliso04Phot[i] < pid.ecaliso_abs);
-  //  double fhcal = hcalovecal04Phot[i];
+  double fhcal = hcalovecal04Phot[i];
   // in order to fix bug in endcap use equivalent egamma variables
-  double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
+  //double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
   bool hcaliso = (fhcal < pid.hcaliso_rel ||
                   fhcal*ptPhot[i] < pid.hcaliso_abs);
   bool smaj = sMajMajPhot[i] < pid.smajmaj;
@@ -274,24 +274,28 @@ void RedNtpTree::Loop(int isgjet)
    TH1D ntrkisoassphot_EB("ntrkisoassphot_EB","ntrkisoassphot_EB",10,0.,10);
    TH1D sminminclusassphot_EB("sminminclusassphot_EB","sminminclusassphot_EB",100,0.,1.);
    TH1D smaxmaxclusassphot_EB("smaxmaxclusassphot_EB","smaxmaxclusassphot_EB",100,0.,1.);
+   TH1D alphaclusassphot_EB("alphaclusassphot_EB","alphaclusassphot_EB",50,-1.57,1.57);
    TH1D hcalisoassjet_EB("hcalisoassjet_EB","hcalisoassjet_EB",100,0.,1.);
    TH1D ecalisoassjet_EB("ecalisoassjet_EB","ecalisoassjet_EB",100,0.,1.);
    TH1D ptisoassjet_EB("ptisoassjet_EB","ptisoassjet_EB",100,0.,1.);
    TH1D ntrkisoassjet_EB("ntrkisoassjet_EB","ntrkisoassjet_EB",10,0.,10);
    TH1D sminminclusassjet_EB("sminminclusassjet_EB","sminminclusassjet_EB",100,0.,1.);
    TH1D smaxmaxclusassjet_EB("smaxmaxclusassjet_EB","smaxmaxclusassjet_EB",100,0.,1.);
+   TH1D alphaclusassjet_EB("alphaclusassjet_EB","alphaclusassjet_EB",50,-1.57,1.57);
    TH1D hcalisoassphot_EE("hcalisoassphot_EE","hcalisoassphot_EE",100,0.,1.);
    TH1D ecalisoassphot_EE("ecalisoassphot_EE","ecalisoassphot_EE",100,0.,1.);
    TH1D ptisoassphot_EE("ptisoassphot_EE","ptisoassphot_EE",100,0.,1.);
    TH1D ntrkisoassphot_EE("ntrkisoassphot_EE","ntrkisoassphot_EE",10,0.,10);
    TH1D sminminclusassphot_EE("sminminclusassphot_EE","sminminclusassphot_EE",100,0.,1.);
    TH1D smaxmaxclusassphot_EE("smaxmaxclusassphot_EE","smaxmaxclusassphot_EE",100,0.,1.);
+   TH1D alphaclusassphot_EE("alphaclusassphot_EE","alphaclusassphot_EE",50,-1.57,1.57);
    TH1D hcalisoassjet_EE("hcalisoassjet_EE","hcalisoassjet_EE",100,0.,1.);
    TH1D ecalisoassjet_EE("ecalisoassjet_EE","ecalisoassjet_EE",100,0.,1.);
    TH1D ptisoassjet_EE("ptisoassjet_EE","ptisoassjet_EE",100,0.,1.);
    TH1D ntrkisoassjet_EE("ntrkisoassjet_EE","ntrkisoassjet_EE",10,0.,10);
    TH1D sminminclusassjet_EE("sminminclusassjet_EE","sminminclusassjet_EE",100,0.,1.);
    TH1D smaxmaxclusassjet_EE("smaxmaxclusassjet_EE","smaxmaxclusassjet_EE",100,0.,1.);
+   TH1D alphaclusassjet_EE("alphaclusassjet_EE","alphaclusassjet_EE",50,-1.57,1.57);
       
    ana_tree = new TTree ("AnaTree","Reduced tree for final analysis") ;
    ana_tree->Branch("run",&runRN,"run/I");
@@ -555,6 +559,8 @@ void RedNtpTree::Loop(int isgjet)
 	bool assh(0);
 	bool assp(0);
 	bool assj(0);
+	bool assjmc(0);
+
 
 	for(int j=0; j<nMC; j++){
 	  
@@ -573,7 +579,7 @@ void RedNtpTree::Loop(int isgjet)
 	  
 	}
 
-	for(int j=0; j<nJet_pfakt5; j++){
+	for(int j=0; j<nJetGen_akt5; j++){
 
 	  double DR = sqrt(delta_eta(etaPhot[i],etaJetGen_akt5[j])*delta_eta(etaPhot[i],etaJetGen_akt5[j]) + 
 			   delta_phi(phiPhot[i],phiJetGen_akt5[j])*delta_phi(phiPhot[i],phiJetGen_akt5[j]) ) ;
@@ -593,7 +599,7 @@ void RedNtpTree::Loop(int isgjet)
 	vector<bool> idpass(7);
 	vector<bool> idpasseg(5);
 	//	if(cutID(i, mediumid, &idpass)) isophot.push_back(1); 
-	if(cutID(i, superlooseid, &idpass)) isophot.push_back(1); 
+	if(cutID(i, looseid, &idpass)) isophot.push_back(1); 
 	// TEMP
   	//if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
 	// END TEMP
@@ -631,6 +637,7 @@ void RedNtpTree::Loop(int isgjet)
 	      ntrkisoassphot_EB.Fill(ntrkiso035Phot[i]);
 	      sminminclusassphot_EB.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassphot_EB.Fill(sMajMajPhot[i]);
+	      alphaclusassphot_EB.Fill(alphaPhot[i]);
 	    }else if(etaPhot[i]<2.5){
 	      hcalisoassphot_EE.Fill(hcalovecal04Phot[i]);
 	      ecalisoassphot_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
@@ -638,6 +645,7 @@ void RedNtpTree::Loop(int isgjet)
 	      ntrkisoassphot_EE.Fill(ntrkiso035Phot[i]);
 	      sminminclusassphot_EE.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassphot_EE.Fill(sMajMajPhot[i]);	    
+	      alphaclusassphot_EE.Fill(alphaPhot[i]);
 	    }
           }
 	}
@@ -657,7 +665,7 @@ void RedNtpTree::Loop(int isgjet)
 	  ptphotisonotassreco.Fill(ptPhot[i]);
 	  etaphotisonotassreco.Fill(etaPhot[i]);
 	}
-	if( assj )	{
+	if( !assp )	{
 	  ptphotjetreco.Fill(ptPhot[i]);
 	  etaphotjetreco.Fill(etaPhot[i]);
 	  if(ptPhot[i]>30) {
@@ -668,6 +676,7 @@ void RedNtpTree::Loop(int isgjet)
 	      ntrkisoassjet_EB.Fill(ntrkiso035Phot[i]);
 	      sminminclusassjet_EB.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassjet_EB.Fill(sMajMajPhot[i]);
+	      alphaclusassjet_EB.Fill(alphaPhot[i]);
 	    }else if(etaPhot[i]<2.5){
 	      hcalisoassjet_EE.Fill(hcalovecal04Phot[i]);
 	      ecalisoassjet_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
@@ -675,6 +684,7 @@ void RedNtpTree::Loop(int isgjet)
 	      ntrkisoassjet_EE.Fill(ntrkiso035Phot[i]);
 	      sminminclusassjet_EE.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassjet_EE.Fill(sMajMajPhot[i]);	    
+	      alphaclusassjet_EE.Fill(alphaPhot[i]);
 	    }
           }
 	}
