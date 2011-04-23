@@ -32,7 +32,7 @@ public:
 
    RedNtpTree(TTree *tree=0, const TString& outname="redntp.root");
    virtual ~RedNtpTree();
-   virtual void     Loop(int isgjet=0);
+   virtual void     Loop(int isgjet=0, char* selection = "loose");
    void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
@@ -52,6 +52,9 @@ private:
    virtual vector<int>    firsttwo(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0);
+   bool cutIDele(int i, photonidelecuts const& pid, std::vector<bool> *vpass = 0);
+   bool cutIDpresel(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
+   bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
 
    Float_t massgg;
    Float_t ptgg;
@@ -94,10 +97,16 @@ private:
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;
    Int_t idtightEGphot2;
-   Int_t idloosephot1;
-   Int_t idloosephot2;
-   Int_t idmediumphot1;
-   Int_t idmediumphot2;
+   Int_t idloosephot1; 
+   Int_t idloosephot2; 
+   Int_t idmediumphot1; 
+   Int_t idmediumphot2; 
+   Int_t idloosecsphot1;
+   Int_t idloosecsphot2;
+   Int_t idmediumcsphot1;
+   Int_t idmediumcsphot2;
+   Int_t idelephot1;
+   Int_t idelephot2;
    Int_t     pid_haspixelseedphot1; 
    Int_t     pid_haspixelseedphot2; 
    Int_t     pid_isEMphot1;
@@ -112,6 +121,22 @@ private:
    Float_t   pid_hlwTrackphot2;
    Float_t   pid_etawidphot1;
    Float_t   pid_etawidphot2;
+   Float_t   pid_sminphot1;
+   Float_t   pid_sminphot2;
+   Float_t   pid_smajphot1;
+   Float_t   pid_smajphot2;
+   Int_t     pid_ntrkphot1;
+   Int_t     pid_ntrkphot2;
+   Float_t   pid_ptisophot1;
+   Float_t   pid_ptisophot2;
+   Int_t     pid_ntrkcsphot1; 
+   Int_t     pid_ntrkcsphot2; 
+   Float_t   pid_ptisocsphot1; 
+   Float_t   pid_ptisocsphot2; 
+   Float_t   pid_ecalisophot1;
+   Float_t   pid_ecalisophot2;
+   Float_t   pid_hcalisophot1;
+   Float_t   pid_hcalisophot2;
    Int_t runRN;
    Int_t eventRN;
    Int_t lumi;

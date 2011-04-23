@@ -41,6 +41,29 @@ struct photonidegcuts {
   float setaetaEE;
 };
 
+struct photonidelecuts {
+  float trackiso_relEB;
+  float ecaliso_relEB;
+  float hovereisoEB;
+  float hcaliso_relEB;
+  float setaetaEB;
+  float detaEB;
+  float dphiEB;
+  int minhitsEB;
+  float dcotEB;
+  float distEB;
+  float trackiso_relEE;
+  float ecaliso_relEE;
+  float hovereisoEE;
+  float hcaliso_relEE;
+  float setaetaEE;
+  float detaEE;
+  float dphiEE;
+  int minhitsEE;
+  float dcotEE;
+  float distEE;
+};
+
 class tree_reader_V2 {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -98,6 +121,19 @@ public :
    Float_t         E1Phot[40];   //[nPhot]
    Float_t         E9Phot[40];   //[nPhot]
    Float_t         E25Phot[40];   //[nPhot]
+   Int_t           ieleassocPhot[40];   //[nPhot]
+   Int_t           nElePhot;
+   Float_t         pid_jurECALElePhot [40];   //[nElePhot]
+   Float_t         pid_twrHCALElePhot [40];   //[nElePhot]
+   Float_t         pid_HoverEElePhot [40];   //[nElePhot]
+   Float_t         pid_hlwTrackElePhot [40];   //[nElePhot]
+   Float_t         pid_etawidElePhot [40];   //[nElePhot]
+   Float_t         pid_dphivtxElePhot [40];   //[nElePhot]
+   Float_t         pid_detavtxElePhot [40];   //[nElePhot]
+   Float_t         pid_dcotElePhot [40];   //[nElePhot]
+   Float_t         pid_distElePhot [40];   //[nElePhot]
+   Float_t         pid_ptElePhot [40];   //[nElePhot]
+   Int_t           pid_mishitsElePhot [40];   //[nElePhot]
    Int_t           nJet_akt5;
    Float_t         ptJet_akt5 [100];   //[nJet_akt5]
    Float_t         ptCorrJet_akt5 [100];   //[nJet_akt5]
@@ -307,6 +343,19 @@ public :
    TBranch        *b_E1Phot;   //!
    TBranch        *b_E9Phot;   //!
    TBranch        *b_E25Phot;   //!
+   TBranch        *b_ieleassocPhot;   //!
+   TBranch        *b_nElePhot;   //!
+   TBranch        *b_pid_jurECALElePhot ;   //!
+   TBranch        *b_pid_twrHCALElePhot ;   //!
+   TBranch        *b_pid_HoverEElePhot ;   //!
+   TBranch        *b_pid_hlwTrackElePhot ;   //!
+   TBranch        *b_pid_etawidElePhot ;   //!
+   TBranch        *b_pid_dphivtxElePhot ;   //!
+   TBranch        *b_pid_dcotElePhot ;   //!
+   TBranch        *b_pid_distElePhot ;   //!
+   TBranch        *b_pid_detavtxElePhot ;   //!
+   TBranch        *b_pid_ptElePhot ;   //!
+   TBranch        *b_pid_mishitsElePhot ;   //!
    TBranch        *b_nJet_akt5;   //!
    TBranch        *b_ptJet_akt5 ;   //!
    TBranch        *b_ptCorrJet_akt5 ;   //!

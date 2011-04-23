@@ -18,6 +18,9 @@ float CrossSection(const char* sample) {
        xsec["DYJetsToLL_TuneZ2_M-50_7TeV-madgraph"]                  = 2321.;
        xsec["QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6"]    = 9.61e3;
        xsec["QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6"]        = 4.04e4;
+       xsec["QCD_Pt-20to30-EMEnriched_TuneZ2_7TeV-pythia6"]    = 2.45e6; 
+       xsec["QCD_Pt-30to80-EMEnriched_TuneZ2_7TeV-pythia6"]    = 3.87e6; 
+       xsec["QCD_Pt-80to170-EMEnriched_TuneZ2_7TeV-pythia6"]    = 1.40e5; 
        xsec["run2010"]                                               = 1.;
 
        xsec["GluGluToHToGG_M-90_7TeV-powheg-pythia6"] = 1.;

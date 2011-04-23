@@ -23,9 +23,9 @@ inline double delta_eta(double eta1, double eta2) {
 }
 
 RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V2(tree) 
-{
-   hOutputFile   = new TFile(outname, "RECREATE" ) ;
-   // must be set by the user 
+{  
+  hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
+  // must be set by the user 
    EquivLumi = -1.;
    xsection = -1.;
    NtotEvents = -1;
@@ -79,13 +79,18 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise)
   bool ntrkiso = ntrkiso035Phot[i] < pid.tracknb;
   bool ptiso = (ptiso035Phot[i] / ptPhot[i] < pid.trackiso_rel);
-  bool ecaliso = (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel ||
-                  ecaliso04Phot[i] < pid.ecaliso_abs);
-  double fhcal = hcalovecal04Phot[i];
-  // in order to fix bug in endcap use equivalent egamma variables
-  //double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
-  bool hcaliso = (fhcal < pid.hcaliso_rel ||
-                  fhcal*ptPhot[i] < pid.hcaliso_abs);
+//   bool ecaliso = (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel ||
+//                    ecaliso04Phot[i] < pid.ecaliso_abs);
+  // in order to fix bug in endcap use equivalent egamma variables 
+  bool ecaliso = (pid_jurECAL[i]*cosh(etaPhot[i]) / ePhot[i] < pid.ecaliso_rel/2. ||
+                  pid_jurECAL[i]*cosh(etaPhot[i]) < pid.ecaliso_abs/2.);
+//    double fhcal = hcalovecal04Phot[i];
+//    bool hcaliso = (fhcal < pid.hcaliso_rel ||
+// 		  fhcal*ptPhot[i] < pid.hcaliso_abs);
+   // in order to fix bug in endcap use equivalent egamma variables
+  double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
+  bool hcaliso = (fhcal < pid.hcaliso_rel/2. ||
+		  fhcal*ptPhot[i] < pid.hcaliso_abs/2.);
   bool smaj = sMajMajPhot[i] < pid.smajmaj;
   bool smin = sMinMinPhot[i] < pid.sminmin;
   bool smin_min = sMinMinPhot[i] > pid.sminmin_min;
@@ -93,9 +98,9 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   bool eta = true;
 
 
-  if(TMath::Abs(etaPhot[i]) > 1.44) {
-    smaj = 1; smin = 1; smin_min = 1;
-  }
+//   if(TMath::Abs(etaPhot[i]) > 1.44) {
+//     smaj = 1; smin = 1; smin_min = 1;
+//   }
   
   if (vpass) {
     //assert((*vpass).size()==7);
@@ -110,6 +115,139 @@ bool RedNtpTree::cutID(int i, photonidcuts const& pid, vector<bool> *vpass) {
   }
 
   return (ntrkiso && ptiso && hcaliso && ecaliso && smaj && smin && smin_min && eta);
+}
+
+bool RedNtpTree::cutIDcs(int i, photonidcuts const& pid, vector<bool> *vpass) { 
+ 
+  // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise) 
+  bool ntrkiso = ntrkiso035Phot[i] < pid.tracknb;  
+  bool ptiso = (ptiso035Phot[i])/ ptPhot[i] < pid.trackiso_rel; 
+
+  if(ieleassocPhot[i] > -1){
+    ntrkiso = ntrkiso035Phot[i]-1 < pid.tracknb;   
+    ptiso = (ptiso035Phot[i]-pid_ptElePhot[ieleassocPhot[i]])/ ptPhot[i] < pid.trackiso_rel;  
+  }
+  bool ecaliso = (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel || 
+                  ecaliso04Phot[i] < pid.ecaliso_abs); 
+  double fhcal = hcalovecal04Phot[i]; 
+  // in order to fix bug in endcap use equivalent egamma variables 
+  //double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i]; 
+  bool hcaliso = (fhcal < pid.hcaliso_rel || 
+                  fhcal*ptPhot[i] < pid.hcaliso_abs); 
+  bool smaj = sMajMajPhot[i] < pid.smajmaj; 
+  bool smin = sMinMinPhot[i] < pid.sminmin; 
+  bool smin_min = sMinMinPhot[i] > pid.sminmin_min; 
+  //bool eta = TMath::Abs(etaPhot[i]) < 2.5;  
+  bool eta = true; 
+ 
+ 
+  //   if(TMath::Abs(etaPhot[i]) > 1.44) { 
+  //     smaj = 1; smin = 1; smin_min = 1; 
+  //   } 
+   
+  if (vpass) { 
+    //assert((*vpass).size()==7); 
+    if((*vpass).size()!=7) { cout << "major failure! (*vpass).size()!=7.. die!" << endl; exit(0) ; } 
+    (*vpass)[0] = ntrkiso; 
+    (*vpass)[1] = ptiso; 
+    (*vpass)[2] = hcaliso; 
+    (*vpass)[3] = ecaliso; 
+    (*vpass)[4] = smaj; 
+    (*vpass)[5] = smin; 
+    (*vpass)[6] = smin_min;  
+  } 
+ 
+  return (ntrkiso && ptiso && hcaliso && ecaliso && smaj && smin && smin_min && eta); 
+} 
+ 
+
+bool RedNtpTree::cutIDpresel(int i, photonidcuts const& pid, vector<bool> *vpass) {
+
+  // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise)
+  bool ntrkiso = ntrkiso035Phot[i] < pid.tracknb;
+  bool ptiso = (ptiso035Phot[i] / ptPhot[i] < pid.trackiso_rel);
+  bool ecaliso =  (ecaliso04Phot[i] / ePhot[i] < pid.ecaliso_rel ||
+		   ecaliso04Phot[i] < pid.ecaliso_abs) ||
+                  (pid_jurECAL[i] < ptPhot[i] * pid.ecaliso_rel + pid.ecaliso_abs);
+  double fhcal = hcalovecal04Phot[i];
+  // in order to fix bug in endcap use equivalent egamma variables
+  //double fhcal = pid_HoverE[i] + pid_twrHCAL[i] / ptPhot[i];
+  bool hcaliso = (fhcal < pid.hcaliso_rel ||
+                  fhcal*ptPhot[i] < pid.hcaliso_abs) ||
+                 (pid_twrHCAL[i] < ptPhot[i] * pid.hcaliso_rel + pid.hcaliso_abs);
+  bool smaj = sMajMajPhot[i] < pid.smajmaj;
+  bool smin = sMinMinPhot[i] < pid.sminmin;
+  bool smin_min = sMinMinPhot[i] > pid.sminmin_min;
+  //bool eta = TMath::Abs(etaPhot[i]) < 2.5; 
+  bool eta = true;
+
+
+//   if(TMath::Abs(etaPhot[i]) > 1.44) {
+//     smaj = 1; smin = 1; smin_min = 1;
+//   }
+  
+  if (vpass) {
+    //assert((*vpass).size()==7);
+    if((*vpass).size()!=7) { cout << "major failure! (*vpass).size()!=7.. die!" << endl; exit(0) ; }
+    (*vpass)[0] = ntrkiso;
+    (*vpass)[1] = ptiso;
+    (*vpass)[2] = hcaliso;
+    (*vpass)[3] = ecaliso;
+    (*vpass)[4] = smaj;
+    (*vpass)[5] = smin;
+    (*vpass)[6] = smin_min; 
+  }
+
+  return (ntrkiso && ptiso && hcaliso && ecaliso && smaj && smin && smin_min && eta);
+}
+
+bool RedNtpTree::cutIDele(int i, photonidelecuts const& pid, vector<bool> *vpass) {
+
+  if(ieleassocPhot[i] < 0) return 0;
+
+  // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise)
+  bool ptiso,ecaliso, hcaliso, hoveiso, setaeta, deta, dphi, minhits, dcot, dist;
+  if(TMath::Abs(etaPhot[i]) < 1.44) {
+    ptiso = pid_hlwTrackElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.trackiso_relEB;
+    ecaliso = pid_jurECALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.ecaliso_relEB;
+    hcaliso = pid_twrHCALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.hcaliso_relEB;
+    hoveiso = pid_HoverEElePhot[ieleassocPhot[i]] < pid.hovereisoEB;
+    setaeta = pid_etawidElePhot[ieleassocPhot[i]] < pid.setaetaEB;
+    deta = pid_detavtxElePhot[ieleassocPhot[i]] < pid.detaEB;
+    dphi = pid_dphivtxElePhot[ieleassocPhot[i]] < pid.dphiEB;
+    minhits = pid_mishitsElePhot[ieleassocPhot[i]] < pid.minhitsEB;
+    dcot = TMath::Abs(pid_dcotElePhot[ieleassocPhot[i]]) > pid.dcotEB;      
+    dist = TMath::Abs(pid_distElePhot[ieleassocPhot[i]]) > pid.distEB;      
+  }else{
+    ptiso = pid_hlwTrackElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.trackiso_relEE;
+    ecaliso = pid_jurECALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.ecaliso_relEE;
+    hcaliso = pid_twrHCALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.hcaliso_relEE;
+    hoveiso = pid_HoverEElePhot[ieleassocPhot[i]] < pid.hovereisoEE;
+    setaeta = pid_etawidElePhot[ieleassocPhot[i]] < pid.setaetaEE;
+    deta = pid_detavtxElePhot[ieleassocPhot[i]] < pid.detaEE;
+    dphi = pid_dphivtxElePhot[ieleassocPhot[i]] < pid.dphiEE;
+    minhits = pid_mishitsElePhot[ieleassocPhot[i]] < pid.minhitsEE;    
+    dcot = TMath::Abs(pid_dcotElePhot[ieleassocPhot[i]]) > pid.dcotEE;     
+    dist = TMath::Abs(pid_distElePhot[ieleassocPhot[i]]) > pid.distEE;     
+  }
+
+  if (vpass) {
+    //assert((*vpass).size()==9);
+    if((*vpass).size()!=9) { cout << "major failure! (*vpass).size()!=9.. die!" << endl; exit(0) ; }
+    (*vpass)[0] = ptiso;
+    (*vpass)[1] = ecaliso;
+    (*vpass)[2] = hcaliso;
+    (*vpass)[3] = hoveiso;
+    (*vpass)[4] = setaeta;
+    (*vpass)[5] = deta;
+    (*vpass)[6] = dphi;
+    (*vpass)[7] = minhits;
+    (*vpass)[8] = dcot; 
+    (*vpass)[9] = dist; 
+
+  }
+
+  return (ptiso && hcaliso && ecaliso && hoveiso && setaeta && deta && minhits && dcot && dist);
 }
 
 bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass) {
@@ -138,7 +276,7 @@ bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass) 
 }
 
 
-void RedNtpTree::Loop(int isgjet)
+void RedNtpTree::Loop(int isgjet, char* selection)
 {
 //   In a ROOT session, you can do:
 //      Root > .L RedNtpTree.C
@@ -163,6 +301,7 @@ void RedNtpTree::Loop(int isgjet)
 // METHOD2: replace line
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
+
    if (fChain == 0) return;
 
    Long64_t nentries = fChain->GetEntriesFast();
@@ -331,6 +470,12 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("idloosephot2",&idloosephot2,"idloosephot2/I");
    ana_tree->Branch("idmediumphot1",&idmediumphot1,"idmediumphot1/I");
    ana_tree->Branch("idmediumphot2",&idmediumphot2,"idmediumphot2/I");
+   ana_tree->Branch("idloosecsphot1",&idloosecsphot1,"idloosecsphot1/I"); 
+   ana_tree->Branch("idloosecsphot2",&idloosecsphot2,"idloosecsphot2/I"); 
+   ana_tree->Branch("idmediumcsphot1",&idmediumcsphot1,"idmediumcsphot1/I"); 
+   ana_tree->Branch("idmediumcsphot2",&idmediumcsphot2,"idmediumcsphot2/I"); 
+   ana_tree->Branch("idelephot1",&idelephot1,"idelephot1/I");
+   ana_tree->Branch("idelephot2",&idelephot2,"idelephot2/I");
    
    ana_tree->Branch("pid_isEMphot1",&pid_isEMphot1,"pid_isEMphot1/I");
    ana_tree->Branch("pid_isEMphot2",&pid_isEMphot2,"pid_isEMphot2/I");
@@ -347,6 +492,23 @@ void RedNtpTree::Loop(int isgjet)
    ana_tree->Branch("pid_hlwTrackphot2",&pid_hlwTrackphot2,"pid_hlwTrackphot2/F");
    ana_tree->Branch("pid_etawidphot1",&pid_etawidphot1,"pid_etawidphot1/F");
    ana_tree->Branch("pid_etawidphot2",&pid_etawidphot2,"pid_etawidphot2/F");
+
+   ana_tree->Branch("pid_sminphot1",&pid_sminphot1,"pid_sminphot1/F");
+   ana_tree->Branch("pid_sminphot2",&pid_sminphot2,"pid_sminphot2/F");
+   ana_tree->Branch("pid_smajphot1",&pid_smajphot1,"pid_smajphot1/F");
+   ana_tree->Branch("pid_smajphot2",&pid_smajphot2,"pid_smajphot2/F");
+   ana_tree->Branch("pid_ntrkphot1",&pid_ntrkphot1,"pid_ntrkphot1/I");
+   ana_tree->Branch("pid_ntrkphot2",&pid_ntrkphot2,"pid_ntrkphot2/I");
+   ana_tree->Branch("pid_ptisophot1",&pid_ptisophot1,"pid_ptisophot1/F");
+   ana_tree->Branch("pid_ptisophot2",&pid_ptisophot2,"pid_ptisophot2/F");
+   ana_tree->Branch("pid_ntrkcsphot1",&pid_ntrkcsphot1,"pid_ntrkcsphot1/I"); 
+   ana_tree->Branch("pid_ntrkcsphot2",&pid_ntrkcsphot2,"pid_ntrkcsphot2/I"); 
+   ana_tree->Branch("pid_ptisocsphot1",&pid_ptisocsphot1,"pid_ptisocsphot1/F"); 
+   ana_tree->Branch("pid_ptisocsphot2",&pid_ptisocsphot2,"pid_ptisocsphot2/F"); 
+   ana_tree->Branch("pid_ecalisophot1",&pid_ecalisophot1,"pid_ecalisophot1/F");
+   ana_tree->Branch("pid_ecalisophot2",&pid_ecalisophot2,"pid_ecalisophot2/F");
+   ana_tree->Branch("pid_hcalisophot1",&pid_hcalisophot1,"pid_hcalisophot1/F");
+   ana_tree->Branch("pid_hcalisophot2",&pid_hcalisophot2,"pid_hcalisophot2/F");
 
    ana_tree->Branch("ptjet1",&ptjet1,"ptjet1/F");
    ana_tree->Branch("ptjet2",&ptjet2,"ptjet2/F");
@@ -401,6 +563,61 @@ void RedNtpTree::Loop(int isgjet)
    superlooseid.sminmin=             0.60;
    superlooseid.sminmin_min=         0.15;
    superlooseid.smajmaj=             0.70; 
+
+   photonidcuts preselid; 
+   preselid.hcaliso_rel=         1000; 
+   preselid.hcaliso_abs=         8.; 
+   preselid.ecaliso_rel=         1000; 
+   preselid.ecaliso_abs=         10; 
+   preselid.tracknb=             1000.; 
+   preselid.trackiso_rel=        1000.; 
+   preselid.sminmin=             0.60; 
+   preselid.sminmin_min=         0.10; 
+   preselid.smajmaj=             1000.;  
+ 
+   photonidelecuts WP95id;
+   WP95id.hovereisoEB=           0.15;
+   WP95id.hcaliso_relEB=         0.12;
+   WP95id.ecaliso_relEB=         2.0;
+   WP95id.trackiso_relEB=        0.15;
+   WP95id.setaetaEB=             0.01;
+   WP95id.detaEB     =           0.007;
+   WP95id.dphiEB     =           1000.;
+   WP95id.minhitsEB  =           2.;
+   WP95id.dcotEB     =           -1000.;
+   WP95id.distEB     =           -1000.;
+   WP95id.hovereisoEE=           0.07;
+   WP95id.hcaliso_relEE=         0.05;
+   WP95id.ecaliso_relEE=         0.06;
+   WP95id.trackiso_relEE=        0.08;
+   WP95id.setaetaEE=             0.03;
+   WP95id.detaEE     =           0.01;
+   WP95id.dphiEE     =           1000.;
+   WP95id.minhitsEE  =           2.;
+   WP95id.dcotEE     =           -1000;
+   WP95id.distEE     =           -1000;
+
+   photonidelecuts WP80id;
+   WP80id.hovereisoEB=           0.04;
+   WP80id.hcaliso_relEB=         0.10;
+   WP80id.ecaliso_relEB=         0.07;
+   WP80id.trackiso_relEB=        0.09;
+   WP80id.setaetaEB=             0.01;
+   WP80id.detaEB     =           0.004;
+   WP80id.dphiEB     =           0.06;
+   WP80id.minhitsEB  =           1.;
+   WP80id.dcotEB     =           0.02;
+   WP80id.distEB     =           0.02;
+   WP80id.hovereisoEE=           0.025;
+   WP80id.hcaliso_relEE=         0.025;
+   WP80id.ecaliso_relEE=         0.05;
+   WP80id.trackiso_relEE=        0.04;
+   WP80id.setaetaEE=             0.03;
+   WP80id.detaEE     =           0.007;
+   WP80id.dphiEE     =           0.03;
+   WP80id.minhitsEE  =           1.;
+   WP80id.dcotEE     =           0.02;
+   WP80id.distEE     =           0.02;
 
    photonidegcuts looseegid;
    looseegid.hovereiso=           0.05;
@@ -497,8 +714,12 @@ void RedNtpTree::Loop(int isgjet)
 
       vector<bool> photassocMC, photassocMChiggs;
       
-      int counter(0);
+      int counter(0), countertt(0), ishiggsev(0);
 
+      for(int i=0; i<nMC; i++)
+	if(pdgIdMC[i] == 25) 
+	  ishiggsev=1;
+      
       for(int i=0; i<nMC; i++){      
 
 	if(pdgIdMC[i] == 22 && statusMC[i] == 3){
@@ -513,9 +734,13 @@ void RedNtpTree::Loop(int isgjet)
 	else
 	  photassocMChiggs.push_back(0);
 	
+	if(TMath::Abs(pdgIdMC[i]) == 6 && TMath::Abs(pdgIdMC[motherIDMC[i]])<23)
+	  countertt++;
+
       }
       
       if(isgjet && counter > 1) continue; 
+      if(ishiggsev && countertt>0) continue; 
 
       vector<int> firsttwogenphot = firsttwo(ptMC,&photassocMC);
       vector<int> firsttwohiggsgenphot = firsttwo(ptMC,&photassocMChiggs);
@@ -542,8 +767,11 @@ void RedNtpTree::Loop(int isgjet)
       vector<bool> assophot;
       vector<bool> jetphot;
       vector<bool> isophot;
+      vector<bool> isophotele;
       vector<bool> isophotloose;
       vector<bool> isophotmedium;
+      vector<bool> isophotloosecs; 
+      vector<bool> isophotmediumcs; 
       vector<bool> isophotemeg;
       vector<bool> isophotlooseeg;
       vector<bool> isophotloose006eg;
@@ -597,20 +825,47 @@ void RedNtpTree::Loop(int isgjet)
         else jetphot.push_back(0);  
 
 	vector<bool> idpass(7);
+	vector<bool> idpassele(9);
 	vector<bool> idpasseg(5);
-	//	if(cutID(i, mediumid, &idpass)) isophot.push_back(1); 
-	if(cutID(i, looseid, &idpass)) isophot.push_back(1); 
+	
+	// photon id used for preselection
+	string finder(selection);
+	bool preselection;
+	
+	if (finder == "superloose") preselection = cutID(i, superlooseid, &idpass);
+	else if (finder == "loose") preselection = cutID(i, looseid, &idpass);
+	else if (finder == "medium") preselection = cutID(i, mediumid, &idpass);
+	else if (finder == "isem") preselection = cutIDEG(i, isemid, &idpasseg);
+	else if (finder == "looseeg") preselection = cutIDEG(i, looseegid, &idpasseg);
+	else if (finder == "tighteg") preselection = cutIDEG(i, tightegid, &idpasseg);
+	else if (finder == "hggtighteg") preselection = cutIDEG(i, hggtightid, &idpasseg);
+	else if (finder == "preselection") preselection = cutIDpresel(i, preselid, &idpass);
+	else {
+	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
+	  continue;
+	}
+	if(preselection) isophot.push_back(1); 
+	//if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
 	// TEMP
-  	//if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
+  	//if(cutIDpresel(i, preselid, &idpass)) isophot.push_back(1); 
 	// END TEMP
         else isophot.push_back(0);  
 
+	if(cutIDele(i, WP80id, &idpassele)) isophotele.push_back(1); 
+        else isophotele.push_back(0);  
+	
 	if(cutID(i, looseid, &idpass)) isophotloose.push_back(1); 
         else isophotloose.push_back(0);  
 
 	if(cutID(i, mediumid, &idpass)) isophotmedium.push_back(1); 
         else isophotmedium.push_back(0);  
 
+        if(cutIDcs(i, looseid, &idpass)) isophotloosecs.push_back(1);  
+        else isophotloosecs.push_back(0);   
+ 
+        if(cutIDcs(i, mediumid, &idpass)) isophotmediumcs.push_back(1);  
+        else isophotmediumcs.push_back(0);   
+ 
 	if(cutIDEG(i, isemid, &idpasseg)) isophotemeg.push_back(1); 
         else isophotemeg.push_back(0);  
 
@@ -737,9 +992,9 @@ void RedNtpTree::Loop(int isgjet)
 
       }
 
-      vector<int> firsttwonohiggsjet = firsttwo(ptJet_pfakt5,&jetnohiggsphot);
-      vector<int> firsttwonoassjet = firsttwo(ptJet_pfakt5,&jetnoassphot);
-      vector<int> firsttwonoisojet = firsttwo(ptJet_pfakt5,&jetnoisophot);      
+      vector<int> firsttwonohiggsjet = firsttwo(ptCorrJet_pfakt5,&jetnohiggsphot);
+      vector<int> firsttwonoassjet = firsttwo(ptCorrJet_pfakt5,&jetnoassphot);
+      vector<int> firsttwonoisojet = firsttwo(ptCorrJet_pfakt5,&jetnoisophot);      
 
       if( firsttwohiggsassphot.at(0)>-1 && firsttwohiggsassphot.at(1)>-1 ) { 
 
@@ -811,11 +1066,11 @@ void RedNtpTree::Loop(int isgjet)
       if( firsttwohiggsassphot.at(0)>-1 && firsttwohiggsassphot.at(1)>-1 ) { 
 
 	if( firsttwonohiggsjet.at(0) > -1) {
-	  ptjethiggsassreco1.Fill(ptJet_pfakt5[firsttwonohiggsjet.at(0)]);
+	  ptjethiggsassreco1.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(0)]);
 	  etajethiggsassreco1.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)]);
 	}
 	if( firsttwonohiggsjet.at(1) > -1) {
-	  ptjethiggsassreco2.Fill(ptJet_pfakt5[firsttwonohiggsjet.at(1)]);
+	  ptjethiggsassreco2.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(1)]);
 	  etajethiggsassreco2.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(1)]);
 	}
 	if( firsttwonohiggsjet.at(0) > -1 && firsttwonohiggsjet.at(1) > -1) {
@@ -834,17 +1089,17 @@ void RedNtpTree::Loop(int isgjet)
       if( firsttwoassphot.at(0)>-1 && firsttwoassphot.at(1)>-1 ) { 
 
 	if( firsttwonoassjet.at(0) > -1) {
-	  ptjetassreco1.Fill(ptJet_pfakt5[firsttwonoassjet.at(0)]);
+	  ptjetassreco1.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(0)]);
 	  etajetassreco1.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]);
 	}
 	if( firsttwonoassjet.at(1) > -1) {
-	  ptjetassreco2.Fill(ptJet_pfakt5[firsttwonoassjet.at(1)]);
+	  ptjetassreco2.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(1)]);
 	  etajetassreco2.Fill(etaJet_pfakt5[firsttwonoassjet.at(1)]);
 	}
 	if( firsttwonoassjet.at(0) > -1 && firsttwonoassjet.at(1) > -1) {
 	  TLorentzVector jet1, jet2;	
-	  jet1.SetPtEtaPhiE(ptJet_pfakt5[firsttwonoassjet.at(0)],etaJet_pfakt5[firsttwonoassjet.at(0)],phiJet_pfakt5[firsttwonoassjet.at(0)],eJet_pfakt5[firsttwonoassjet.at(0)]);
-	  jet2.SetPtEtaPhiE(ptJet_pfakt5[firsttwonoassjet.at(1)],etaJet_pfakt5[firsttwonoassjet.at(1)],phiJet_pfakt5[firsttwonoassjet.at(1)],eJet_pfakt5[firsttwonoassjet.at(1)]);
+	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoassjet.at(0)],etaJet_pfakt5[firsttwonoassjet.at(0)],phiJet_pfakt5[firsttwonoassjet.at(0)],eJet_pfakt5[firsttwonoassjet.at(0)]/ptJet_pfakt5[firsttwonoassjet.at(0)]*ptCorrJet_pfakt5[firsttwonoassjet.at(0)]);
+	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoassjet.at(1)],etaJet_pfakt5[firsttwonoassjet.at(1)],phiJet_pfakt5[firsttwonoassjet.at(1)],eJet_pfakt5[firsttwonoassjet.at(1)]/ptJet_pfakt5[firsttwonoassjet.at(1)]*ptCorrJet_pfakt5[firsttwonoassjet.at(1)]);
 	  
 	  TLorentzVector sum = jet1 + jet2;
 	  
@@ -859,11 +1114,9 @@ void RedNtpTree::Loop(int isgjet)
 	  zeppenjetassreco2.Fill(zeppen2);	
 	}
 
-	if(  ptJet_pfakt5[firsttwonoassjet.at(0)] > ptjet1cut && ptJet_pfakt5[firsttwonoassjet.at(1)] > ptjet2cut 
+	if(  ptCorrJet_pfakt5[firsttwonoassjet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoassjet.at(1)] > ptjet2cut 
 	    && ptPhot[firsttwoassphot.at(0)] > ptphot1cut && ptPhot[firsttwoassphot.at(1)] > ptphot2cut ){
 
-	  //	  deltaetajetreco.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)]);
-	  //	  double zeppen = higgsreco_pt - aveeta;
 	  if(TMath::Abs(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)])>deltaetacut){
 	    higgsmasscutreco.Fill(higgsmass);
 	    if(isophot.at(firsttwoassphot.at(0)) && isophot.at(firsttwoassphot.at(1)))  higgsmassisorecocheck.Fill(higgsisomass);	    
@@ -884,21 +1137,23 @@ void RedNtpTree::Loop(int isgjet)
 
       double twojetsmassiso(0), etatwojetsiso(-999);
       
-      if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 ) { 
+      if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 
+	  && ptPhot[firsttwoisophot.at(0)]>20 && ptPhot[firsttwoisophot.at(1)]>20
+	  ) { 
 	
 	if( firsttwonoisojet.at(0) > -1) {
-	  ptjetisoreco1.Fill(ptJet_pfakt5[firsttwonoisojet.at(0)]);
+	  ptjetisoreco1.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)]);
 	  etajetisoreco1.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]);
 	}
 	if( firsttwonoisojet.at(1) > -1) {
-	  ptjetisoreco2.Fill(ptJet_pfakt5[firsttwonoisojet.at(1)]);
+	  ptjetisoreco2.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(1)]);
 	  etajetisoreco2.Fill(etaJet_pfakt5[firsttwonoisojet.at(1)]);
 	}
 	if( firsttwonoisojet.at(0) > -1 && firsttwonoisojet.at(1) > -1) {
 	  
 	  TLorentzVector jet1, jet2;	
-	  jet1.SetPtEtaPhiE(ptJet_pfakt5[firsttwonoisojet.at(0)],etaJet_pfakt5[firsttwonoisojet.at(0)],phiJet_pfakt5[firsttwonoisojet.at(0)],eJet_pfakt5[firsttwonoisojet.at(0)]);
-	  jet2.SetPtEtaPhiE(ptJet_pfakt5[firsttwonoisojet.at(1)],etaJet_pfakt5[firsttwonoisojet.at(1)],phiJet_pfakt5[firsttwonoisojet.at(1)],eJet_pfakt5[firsttwonoisojet.at(1)]);
+	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],etaJet_pfakt5[firsttwonoisojet.at(0)],phiJet_pfakt5[firsttwonoisojet.at(0)],eJet_pfakt5[firsttwonoisojet.at(0)]/ptJet_pfakt5[firsttwonoisojet.at(0)]*ptCorrJet_pfakt5[firsttwonoisojet.at(0)]);
+	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoisojet.at(1)],etaJet_pfakt5[firsttwonoisojet.at(1)],phiJet_pfakt5[firsttwonoisojet.at(1)],eJet_pfakt5[firsttwonoisojet.at(1)]/ptJet_pfakt5[firsttwonoisojet.at(1)]*ptCorrJet_pfakt5[firsttwonoisojet.at(1)]);
 	  
 	  TLorentzVector sum = jet1 + jet2;
 	  thejet1 = jet1;
@@ -946,6 +1201,12 @@ void RedNtpTree::Loop(int isgjet)
 	idloosephot2 = isophotloose.at(firsttwoisophot.at(1));
 	idmediumphot1 = isophotmedium.at(firsttwoisophot.at(0));
 	idmediumphot2 = isophotmedium.at(firsttwoisophot.at(1));
+        idloosecsphot1 = isophotloosecs.at(firsttwoisophot.at(0)); 
+        idloosecsphot2 = isophotloosecs.at(firsttwoisophot.at(1)); 
+        idmediumcsphot1 = isophotmediumcs.at(firsttwoisophot.at(0)); 
+        idmediumcsphot2 = isophotmediumcs.at(firsttwoisophot.at(1)); 
+	idelephot1 = isophotele.at(firsttwoisophot.at(0));
+	idelephot2 = isophotele.at(firsttwoisophot.at(1));
 
         pid_haspixelseedphot1 =  hasPixelSeedPhot[firsttwoisophot.at(0)]; 
         pid_haspixelseedphot2 =  hasPixelSeedPhot[firsttwoisophot.at(1)]; 
@@ -961,6 +1222,33 @@ void RedNtpTree::Loop(int isgjet)
         pid_hlwTrackphot2 =  pid_hlwTrack[firsttwoisophot.at(1)];
         pid_etawidphot1 =  pid_etawid[firsttwoisophot.at(0)];
         pid_etawidphot2 =  pid_etawid[firsttwoisophot.at(1)];
+	
+	pid_sminphot1 =  sMinMinPhot[firsttwoisophot.at(0)];
+	pid_sminphot2 =  sMinMinPhot[firsttwoisophot.at(1)];
+	pid_smajphot1 =  sMajMajPhot[firsttwoisophot.at(0)];
+	pid_smajphot2 =  sMajMajPhot[firsttwoisophot.at(1)];
+	pid_ntrkphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)];
+	pid_ntrkphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)];
+	pid_ptisophot1 =  ptiso035Phot[firsttwoisophot.at(0)];
+	pid_ptisophot2 =  ptiso035Phot[firsttwoisophot.at(1)];
+	pid_ecalisophot1 =  ecaliso04Phot[firsttwoisophot.at(0)];
+	pid_ecalisophot2 =  ecaliso04Phot[firsttwoisophot.at(1)];
+	pid_hcalisophot1 =  hcalovecal04Phot[firsttwoisophot.at(0)];
+	pid_hcalisophot2 =  hcalovecal04Phot[firsttwoisophot.at(1)];
+	if(!ieleassocPhot[firsttwoisophot.at(0)]){
+	  pid_ntrkcsphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)]; 
+	  pid_ptisocsphot1 =  ptiso035Phot[firsttwoisophot.at(0)]; 
+	}else{
+          pid_ntrkcsphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)]-1;  
+          pid_ptisocsphot1 =  ptiso035Phot[firsttwoisophot.at(0)]-pid_ptElePhot[ieleassocPhot[firsttwoisophot.at(0)]];  
+	}
+        if(!ieleassocPhot[firsttwoisophot.at(1)]){ 
+          pid_ntrkcsphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)];  
+          pid_ptisocsphot2 =  ptiso035Phot[firsttwoisophot.at(1)];  
+        }else{ 
+          pid_ntrkcsphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)]-1;   
+          pid_ptisocsphot2 =  ptiso035Phot[firsttwoisophot.at(1)]-pid_ptElePhot[ieleassocPhot[firsttwoisophot.at(1)]];   
+        } 
 
 	if( firsttwonoisojet.at(0) > -1) {
 	  ptjet1 = ptJet_pfakt5[firsttwonoisojet.at(0)];
@@ -1009,7 +1297,7 @@ void RedNtpTree::Loop(int isgjet)
 	  higgsmassjustisocutrecofull.Fill(higgsisomass);
 	}
 
-	if( ptJet_pfakt5[firsttwonoisojet.at(0)] > ptjet1cut && ptJet_pfakt5[firsttwonoisojet.at(1)] > ptjet2cut 
+	if( ptCorrJet_pfakt5[firsttwonoisojet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoisojet.at(1)] > ptjet2cut 
 	    && ptPhot[firsttwoisophot.at(0)] > ptphot1cut && ptPhot[firsttwoisophot.at(1)] > ptphot2cut){
 	  higgsmassisojetptcutreco.Fill(higgsisomass);
 	  higgsmassisojetptcutrecofull.Fill(higgsisomass);

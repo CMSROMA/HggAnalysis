@@ -27,10 +27,10 @@ int main(int argc, char* argv[]) {
 
       //================ Parameters 
       if(argc < 3 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   histo_color cutfile\n" 
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection \n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
-             //<< "    cutfile:     flat file with list of cuts in correct order"  
+             << "    selection:   selection for preselecting events"  
              << endl;
         exit(-1);
       }
@@ -67,12 +67,13 @@ int main(int argc, char* argv[]) {
       }
       is.close();
 
-/*
+
       //4th option:  name of flat file with cuts
-      char  cutfile[200];
-      sprintf(cutfile,argv[3]);
-      cout << "cuts to be read from file: " << cutfile << endl;
-*/
+      char  selection[100];
+      sprintf(selection,argv[3]);
+      string finder(selection);
+      if(finder == "") sprintf(selection,"looseeg");
+      cout << "Photon selection is : " << selection << endl;
 
        // find cross section for this list
        float myxsec = CrossSection(listName);
@@ -91,5 +92,5 @@ int main(int argc, char* argv[]) {
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
-       tool.Loop(isGJet);
+       tool.Loop(isGJet, selection);
 }
