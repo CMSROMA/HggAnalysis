@@ -200,6 +200,7 @@ void datamc_tree_complete_global(int rebin, double int_exp, double int_exp_2011,
   AnaTree->Project(name,"massgg",allcut);
   ((TH1D*)gDirectory->Get(name))->Sumw2();
   ((TH1D*)gDirectory->Get(name))->Rebin(rebin);
+  double num_data = ((TH1D*)gDirectory->Get(name))->Integral(101,150); 
   sprintf(name,"higgsmassdata2010");
   sprintf(tempcut,"%s%s",allcut,"&&run<160000");
   AnaTree->Project(name,"massgg",tempcut);
@@ -228,7 +229,6 @@ void datamc_tree_complete_global(int rebin, double int_exp, double int_exp_2011,
   sprintf(tempcut,"%s%s",allcut,"&&massgg>100&&massgg<150");
   //  AnaTree->Scan("ptphot1:etaphot1:timephot1:pid_hlwTrackphot1:pid_etawidphot1:pid_HoverEphot1:pid_jurECALphot1:pid_twrHCALphot1:ptphot2:etaphot2:timephot2:pid_hlwTrackphot2:pid_etawidphot2:pid_jurECALphot2:pid_twrHCALphot2:pid_HoverEphot2",tempcut);
   AnaTree->Scan("ptphot1:ptphot2:massgg:run:lumi:event",tempcut);
-  double num_data = ((TH1D*)gDirectory->Get(name))->Integral(101,150);
   sprintf(name,"higgsmassdatacs");
   AnaTree->Project(name,"massgg",allcut2);
   sprintf(tempcut,"%s%s",allcut2,"&&massgg>123&&massgg<131");
