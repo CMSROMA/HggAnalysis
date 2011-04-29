@@ -444,6 +444,8 @@ void RedNtpTree::Loop(int isgjet, char* selection)
    ana_tree->Branch("ptgg",&ptgg,"ptgg/F");
    ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
    ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
+   ana_tree->Branch("timephot1",&timephot1,"timephot1/F"); 
+   ana_tree->Branch("timephot2",&timephot2,"timephot2/F"); 
    ana_tree->Branch("etaphot1",&etaphot1,"etaphot1/F");
    ana_tree->Branch("etaphot2",&etaphot2,"etaphot2/F");
    ana_tree->Branch("phiphot1",&phiphot1,"phiphot1/F");
@@ -1173,8 +1175,10 @@ void RedNtpTree::Loop(int isgjet, char* selection)
         nredntp++;
 	massgg = higgsisomass;
 	ptgg = higgspt;
-	ptphot1 = ptPhot[firsttwoisophot.at(0)];
-	ptphot2 = ptPhot[firsttwoisophot.at(1)];  
+        ptphot1 = ptPhot[firsttwoisophot.at(0)]; 
+        ptphot2 = ptPhot[firsttwoisophot.at(1)];   
+	timephot1 = timePhot[firsttwoisophot.at(0)];
+	timephot2 = timePhot[firsttwoisophot.at(1)];  
 	etaphot1 = etaPhot[firsttwoisophot.at(0)];
 	etaphot2 = etaPhot[firsttwoisophot.at(1)];  
 	phiphot1 = phiPhot[firsttwoisophot.at(0)];

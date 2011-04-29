@@ -64,6 +64,8 @@ private:
    Float_t etaphot2;
    Float_t phiphot1;
    Float_t phiphot2;
+   Float_t timephot1; 
+   Float_t timephot2; 
    Float_t E1phot1;
    Float_t E1phot2;
    Float_t E9phot1;

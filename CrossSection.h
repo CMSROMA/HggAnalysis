@@ -22,15 +22,16 @@ float CrossSection(const char* sample) {
        xsec["QCD_Pt-30to80-EMEnriched_TuneZ2_7TeV-pythia6"]    = 3.87e6; 
        xsec["QCD_Pt-80to170-EMEnriched_TuneZ2_7TeV-pythia6"]    = 1.40e5; 
        xsec["run2010"]                                               = 1.;
+       xsec["run2011"]                                               = 1.;
 
-       xsec["GluGluToHToGG_M-90_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-100_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-105_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-110_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-115_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-120_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-130_7TeV-powheg-pythia6"] = 1.;
-       xsec["GluGluToHToGG_M-140_7TeV-powheg-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-90_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-100_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-105_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-110_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-115_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-120_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-130_7TeV-pythia6"] = 1.;
+       xsec["GluGluToHToGG_M-140_7TeV-pythia6"] = 1.;
        xsec["VBF_HToGG_M-90_7TeV-powheg-pythia6"] = 1.;
        xsec["VBF_HToGG_M-95_7TeV-powheg-pythia6"] = 1.;
        xsec["VBF_HToGG_M-100_7TeV-powheg-pythia6"] = 1.;

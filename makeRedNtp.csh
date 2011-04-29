@@ -1,6 +1,7 @@
 #!/bin/tcsh
 
-set listdir  = list.V21
+set listdir  = list.V27.41x 
+#set listdir  = list.V21
 
 if($#argv == 0) then
   echo "usage:  makeRedNtp.csh    <run if 1>   <queue>  <selection>"
@@ -43,7 +44,7 @@ set higgssamples = (   )
 foreach i ( 90 95 100 105 110 115 120 130 140 )
   set higgssamples = ( $higgssamples VBF_HToGG_M-${i}_7TeV-powheg-pythia6_00  )
   set higgssamples = ( $higgssamples WH_ZH_TTH_HToGG_M-${i}_7TeV-pythia6_00  )
-#  set higgssamples = ( $higgssamples GluGluToHToGG_M-${i}_7TeV-powheg-pythia6_00  )
+  set higgssamples = ( $higgssamples GluGluToHToGG_M-${i}_7TeV-pythia6_00  )
 end
 
 set qcdsamples = ( )
@@ -80,7 +81,8 @@ end
 
 set zjetssamples = ( )
 foreach i (`seq -w 0 10 `)
-  set zjetssamples = ( $zjetssamples  DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola_PU_${i} )
+#  set zjetssamples = ( $zjetssamples  DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola_PU_${i} )
+  set zjetssamples = ( $zjetssamples  DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola_${i} )
 end
 
 set run2010Bsamples = ( )
@@ -93,33 +95,73 @@ foreach i (`seq -w 0 58 `)
   set run2010Asamples = ( $run2010Asamples  run2010A_${i} )
 end
 
-set datasamples = ( $run2010Asamples $run2010Bsamples )
-
-
-
-
-set samples = ( $higgssamples $datasamples $gjetsamples  $boxsamples  $digammajetsamples $zjetssamples $qcdsamples )
-
-#set samples = ( $higgssamples  )
-
-#set samples = ( )
-#foreach i (`seq -w 0 8 `)
-#  set samples = ( $samples  run2010A_0${i} )
+#set run2011A_v1samples = ( )
+#foreach i (`seq -w 0 3 `)
+#  set run2011A_v1samples = ( $run2011A_v1samples  run2011A_v1_${i} )
 #end
 
-#set samples = ( )
-#foreach i (`cat failed.txt`)
-#  set samples = ( $samples  ${i} )
+#set run2011A_v2samples = ( )
+#foreach i (`seq -w 0 1 `)
+#  set run2011A_v2samples = ( $run2011A_v2samples  run2011A_v2_${i} )
 #end
 
-#set samples = ( $datasamples )
+#set run2011A_v2_chunck2samples = ( )
+#foreach i (`seq -w 0 1 `)
+#  set run2011A_v2_chunck2samples = ( $run2011A_v2_chunck2samples  run2011A_v2_chunck2_${i} )
+#end
 
-set namedir = redntp.V27.39x.eg
+set run2011A_v1samples = ( )
+foreach i (`seq -w 0 3 `)
+  set run2011A_v1samples = ( $run2011A_v1samples  run2011A_v1-ESFixed_0${i} )
+end
+
+set run2011A_v2samples = ( )
+foreach i (`seq -w 0 3 `)
+  set run2011A_v2samples = ( $run2011A_v2samples  run2011A_v2-163078-163340_0${i} )
+end
+
+set run2011A_v2_chunck2samples = ( )
+foreach i (`seq -w 0 0 `)
+  set run2011A_v2_chunck2samples = ( $run2011A_v2_chunck2samples  run2011A_v2-upto-163289_0${i} )
+end
+
+ 
+set run2011A_v3a_samples = ( ) 
+foreach i (`seq -w 0 2 `) 
+  set run2011A_v3a_samples = ( $run2011A_v3a_samples  run2011A_v3a-160341-163401_0${i} ) 
+end 
+
+set run2011A_v10425samples = ( )
+foreach i (`seq -w 0 1 `)
+  set run2011A_v10425samples = ( $run2011A_v10425samples  run2011A_v10425_0${i} )
+end
+
+set run2011A_v20425samples = ( )
+foreach i (`seq -w 0 2 `)
+  set run2011A_v20425samples = ( $run2011A_v20425samples  run2011A_v20425_0${i} )
+end
+
+
+#set datasamples = ( $run2010Asamples $run2010Bsamples )
+#set datasamples = (  $run2011A_v1samples $run2011A_v2samples $run2011A_v2_chunck2samples $run2011A_v10425samples $run2011A_v20425samples )
+set datasamples = ( $run2011A_v3a_samples )
+
+
+#set samples = ( $higgssamples $datasamples $gjetsamples  $boxsamples  $zjetssamples $qcdsamples )
+
+#set samples = ( $digammajetsamples ) 
+#set samples = ( $higgssamples $datasamples )
+
+
+set samples = ( $datasamples )
+
+set namedir = redntp.V27.41x.hgg
 set castordir = /castor/cern.ch/user/d/delre/reduced/
 set outdir = ${castordir}/${namedir}
 set logdir = ${namedir}/log
 
 rfmkdir  $outdir  
+mkdir  $namedir
 mkdir  $logdir
 
 
