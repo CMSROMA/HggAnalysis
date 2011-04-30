@@ -846,7 +846,9 @@ void RedNtpTree::Loop(int isgjet, char* selection)
 	else if (finder == "preselection") preselection = cutIDpresel(i, preselid, &idpass);
 	else {
 	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
-	  continue;
+          cout << "Good options are: superloose loose medium isem looseeg tighteg hggtighteg preselection" << endl;
+          cout << "now exiting" << endl;
+	  exit(-1);
 	}
 	if(preselection) isophot.push_back(1); 
 	//if(cutIDEG(i, looseegid, &idpasseg)) isophot.push_back(1); 
