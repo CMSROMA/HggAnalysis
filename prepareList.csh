@@ -28,7 +28,7 @@ set files = ( `/bin/ls $indir` )
 echo "# of root files in directory: $#files"
 echo "# of files per list: $filexlist"
 
-set tmpfile = /tmp/tmpfile
+set tmpfile = /tmp/tmpfilelist
 rm -Rf $tmpfile
 touch $tmpfile
 
