@@ -2,7 +2,10 @@
 #define RedNtpTree_h
 
 //#include "higgsanal_tree_V1.h"
-#include "tree_reader_V2.h"
+//#include "tree_reader_V2.h"
+//#include "tree_reader_V3.h"
+#include "tree_reader_V6.h"
+#include "PhotonIdCuts.h"
 
 
 #include <TFile.h>
@@ -12,21 +15,8 @@
 using std::string;
 using std::vector;
 
-/*
-struct photonidcuts {
-  int tracknb;
-  float trackiso_rel;
-  float ecaliso_rel;
-  float ecaliso_abs;
-  float hcaliso_rel;
-  float hcaliso_abs;
-  float sminmin;
-  float sminmin_min;
-  float smajmaj;
-};
-*/
 
-class RedNtpTree : public tree_reader_V2 {
+class RedNtpTree : public tree_reader_V6 {
 
 public:
 
@@ -144,5 +134,4 @@ private:
    Int_t lumi;
 
 };
-
 #endif

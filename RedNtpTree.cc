@@ -10,6 +10,18 @@ using std::cout;
 using std::endl;
 
 
+RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree) 
+{  
+  hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
+  // must be set by the user 
+   EquivLumi = -1.;
+   xsection = -1.;
+   NtotEvents = -1;
+   SampleID = -1;
+}
+
+
+
 inline double delta_phi(double phi1, double phi2) {
 
   double dphi = TMath::Abs(phi1 - phi2);
@@ -20,16 +32,6 @@ inline double delta_phi(double phi1, double phi2) {
 inline double delta_eta(double eta1, double eta2) {
 
   return (eta2 >= 0 ? eta1 - eta2 : eta2 - eta1);
-}
-
-RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V2(tree) 
-{  
-  hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
-  // must be set by the user 
-   EquivLumi = -1.;
-   xsection = -1.;
-   NtotEvents = -1;
-   SampleID = -1;
 }
 
 RedNtpTree::~RedNtpTree()
