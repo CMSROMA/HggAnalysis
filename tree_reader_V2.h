@@ -16,6 +16,8 @@
 using std::vector;
 using std::string;
 
+/*
+
 //Photon ID DelRe                                                            
 struct photonidcuts {
   int tracknb;
@@ -63,6 +65,7 @@ struct photonidelecuts {
   float dcotEE;
   float distEE;
 };
+*/
 
 class tree_reader_V2 {
 public :

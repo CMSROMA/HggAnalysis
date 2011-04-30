@@ -143,9 +143,9 @@ void tree_reader_V6::Init(TTree *tree)
    fChain->SetBranchAddress("hasPixelSeedPhot", hasPixelSeedPhot, &b_hasPixelSeedPhot);
    fChain->SetBranchAddress("hasMatchedPromptElePhot", hasMatchedPromptElePhot, &b_hasMatchedPromptElePhot);
    fChain->SetBranchAddress("hasMatchedConvPhot", hasMatchedConvPhot, &b_hasMatchedConvPhot);
-   fChain->SetBranchAddress("isEBPhot", &isEBPhot, &b_isEBPhot);
-   fChain->SetBranchAddress("isEEPhot", &isEEPhot, &b_isEEPhot);
-   fChain->SetBranchAddress("isEBEEGapPhot", &isEBEEGapPhot, &b_isEBEEGapPhot);
+//   fChain->SetBranchAddress("isEBPhot", &isEBPhot, &b_isEBPhot);
+//   fChain->SetBranchAddress("isEEPhot", &isEEPhot, &b_isEEPhot);
+//   fChain->SetBranchAddress("isEBEEGapPhot", &isEBEEGapPhot, &b_isEBEEGapPhot);
    fChain->SetBranchAddress("pid_isEM", pid_isEM, &b_pid_isEM);
    fChain->SetBranchAddress("pid_isLoose", pid_isLoose, &b_pid_isLoose);
    fChain->SetBranchAddress("pid_isTight", pid_isTight, &b_pid_isTight);

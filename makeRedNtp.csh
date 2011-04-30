@@ -16,9 +16,6 @@ if($#argv == 0 || $#argv < 5) then
   exit 0
 endif
 
-set rootdir = ""
-
-
 # submit the job only if the 2nd argument is 1
 set listdir  = list.V27.41x 
 if ($#argv > 0) then

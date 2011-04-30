@@ -1,4 +1,5 @@
 #!/bin/csh
+# $Id: $
 
 if( $#argv<2  ) then
   echo "usage:  prepareList.csh  <valid directory>   <listname>   [run if 1]"
@@ -19,11 +20,11 @@ endif
 set listname = $2
 
 # num of files per list file
-set filexlist  = 50
+set filexlist  = 20
 
 set prepend="dcap://cmsrm-se01.roma1.infn.it"
  
-set files = ( `/bin/ls $indir` )
+set files = ( `/bin/ls -1 $indir` )
 
 echo "# of root files in directory: $#files"
 echo "# of files per list: $filexlist"

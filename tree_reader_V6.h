@@ -268,12 +268,12 @@ public :
    Float_t         vxMC;
    Float_t         vyMC;
    Float_t         vzMC;
-   Float_t         vx[21];   //[nvertex]
-   Float_t         vy[21];   //[nvertex]
-   Float_t         vz[21];   //[nvertex]
-   Float_t         vntracks[21];   //[nvertex]
-   Float_t         vchi2[21];   //[nvertex]
-   Float_t         vndof[21];   //[nvertex]
+   Float_t         vx[100];   //[nvertex]
+   Float_t         vy[100];   //[nvertex]
+   Float_t         vz[100];   //[nvertex]
+   Float_t         vntracks[100];   //[nvertex]
+   Float_t         vchi2[100];   //[nvertex]
+   Float_t         vndof[100];   //[nvertex]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;
