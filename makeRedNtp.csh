@@ -11,8 +11,9 @@ if($#argv == 0 || $#argv < 5) then
   echo "        listdir: valid directory containing list files"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
-  echo "        locations: cern roma"
   echo "        preselection:  $preselections"
+  echo "        locations: cern roma"
+  echo "        run: default=0  set to 1 to execute"
   exit 0
 endif
 
