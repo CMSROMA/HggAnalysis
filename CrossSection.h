@@ -72,8 +72,10 @@ float CrossSection(const char* sample) {
        } 
        if(myxsec<0) {
          cout << "No xsection found for " << alist << endl;
-         cout << "exiting..." << endl; 
-         exit(-1);
+         cout << "settinx xsection = 1. !" << endl;
+         return 1.;
+         //cout << "exiting..." << endl; 
+         //exit(-1);
        } else {
          return myxsec;
        }

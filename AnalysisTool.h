@@ -2,11 +2,14 @@
 #define AnalysisTool_H
 
 //#include "tree_reader_V1.h"
-#include "tree_reader_V2.h"
+//#include "tree_reader_V2.h"
+//#include "tree_reader_V3.h"
+#include "tree_reader_V6.h"
+#include "PhotonIdCuts.h"
 
 #include "TString.h"
 
-class AnalysisTool : public tree_reader_V2 {
+class AnalysisTool : public tree_reader_V6 {
 
 private:
   TString outname_; // output file

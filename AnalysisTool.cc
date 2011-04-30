@@ -15,7 +15,7 @@
 using namespace std;
 
 AnalysisTool::AnalysisTool(TTree *tree, const TString& outname) 
-   : tree_reader_V2(tree) { 
+   : tree_reader_V6(tree) { 
      outname_=outname; 
      ptJet1_cut = ptJet2_cut = 20.;
      detaJets_cut = 3.;
