@@ -895,7 +895,7 @@ void RedNtpTree::Loop(int isgjet, char* selection)
 	else if (finder == "mcass") preselection = mcID(i);
 	else {
 	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
-          cout << "Good options are: superloose loose medium isem looseeg tighteg hggtighteg preselection mcass" << endl;
+          cout << "Good options are: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection mcass" << endl;
           cout << "now exiting" << endl;
 	  exit(-1);
 	}
