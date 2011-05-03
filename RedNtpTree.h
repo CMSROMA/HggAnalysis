@@ -41,10 +41,11 @@ private:
 
    virtual vector<int>    firsttwo(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
-   bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0);
+   bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0,  bool pu = 0);
    bool cutIDele(int i, photonidelecuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDpresel(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
+   bool mcID(int i); 
 
    Float_t massgg;
    Float_t ptgg;
@@ -85,6 +86,12 @@ private:
    Int_t idtightnewEGphot2;
    Int_t idhggtightnewEGphot1;
    Int_t idhggtightnewEGphot2;
+   Int_t idloosenewpuEGphot1;
+   Int_t idloosenewpuEGphot2;
+   Int_t idtightnewpuEGphot1;
+   Int_t idtightnewpuEGphot2;
+   Int_t idhggtightnewpuEGphot1;
+   Int_t idhggtightnewpuEGphot2;
    Int_t idlooseEGphot1;
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;

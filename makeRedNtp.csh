@@ -3,7 +3,7 @@
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
 
-set preselections = ( looseeg  tighteg  hggtighteg isem superloose loose medium  )
+set preselections = ( looseeg  tighteg  hggtighteg isem superloose loose medium mcass )
 
 
 if($#argv == 0 || $#argv < 5) then
