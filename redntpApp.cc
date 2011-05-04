@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
+             << "       options: looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium mcass "
              << endl;
         exit(-1);
       }

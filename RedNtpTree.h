@@ -139,6 +139,13 @@ private:
    Int_t runRN;
    Int_t eventRN;
    Int_t lumi;
+   Float_t   rhoPFRN;
+   Float_t   pid_hlwTrackNoDzphot1;
+   Float_t   pid_hlwTrackNoDzphot2;
+   Int_t     pid_hasMatchedConvphot1;
+   Int_t     pid_hasMatchedConvphot2;
+   Int_t     pid_hasMatchedPromptElephot1;
+   Int_t     pid_hasMatchedPromptElephot2;
 
 };
 #endif

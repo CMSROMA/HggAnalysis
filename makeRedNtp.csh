@@ -3,7 +3,7 @@
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
 
-set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium mcass )
+set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium mcass preselection)
 
 
 if($#argv == 0 || $#argv < 5) then
@@ -24,7 +24,8 @@ if ($#argv > 0) then
   echo "listdir : $listdir "
   if(! -d $listdir ) then
     echo "<$listdir> does not exist... check again"
-    exit -1
+    if(-f $listdir) echo "this is a single file"
+    #exit -1
   endif
 endif 
 
@@ -97,20 +98,14 @@ if(! -e $app ) then
   exit 0
 endif 
 
-#set samples = ( $datasamples )
 
-set samples  =  `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}'` 
-
-
-foreach sample ( $samples )
+if(-f $listdir) then
+   set sample = `echo $listdir | awk  'BEGIN{FS="/"}{print $NF}' | awk 'BEGIN{FS="."}{print $1}'`
+   set listdir = `echo $listdir | awk  'BEGIN{FS="/"}{print $1}'`
    set rootfile = "${prefix}${outdir}/redntp_${sample}.root"
    set jobname = "${sample}"
    set logfile = "${logdir}/${sample}.txt"
    set listfile = "${listdir}/${sample}.list"
-   if(! -e $listfile ) then
-      echo "skipping non-existent file $listfile"
-      continue
-   endif
    set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
    echo "---------------------------"
    echo "job name: ${jobname}"
@@ -119,4 +114,30 @@ foreach sample ( $samples )
      ${command}
      #sleep 2 
    endif
-end
+
+else if(-d $listdir) then
+  #set samples  =  `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}'` 
+  foreach i ( `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}' | xargs  -I sample echo sample ` )
+   set  sample = $i
+   echo "sample : $sample"
+   set rootfile = "${prefix}${outdir}/redntp_${sample}.root"
+   set jobname = "${sample}"
+   set logfile = "${logdir}/${sample}.txt"
+   set listfile = "${listdir}/${sample}.list"
+   #if(! -e $listfile ) then
+   #   echo "skipping non-existent file $listfile"
+   #   continue
+   #endif
+   set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+   echo "---------------------------"
+   echo "job name: ${jobname}"
+   #echo " command: ${command}"
+   if($run == 1) then
+     ${command}
+     #sleep 2 
+   endif
+
+
+  end
+
+endif

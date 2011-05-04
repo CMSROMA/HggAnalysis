@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: $
+# $Id: prepareList.csh,v 1.3 2011/04/30 12:59:36 rahatlou Exp $
 
 if( $#argv<2  ) then
   echo "usage:  prepareList.csh  <valid directory>   <listname>   [run if 1]"
@@ -20,7 +20,7 @@ endif
 set listname = $2
 
 # num of files per list file
-set filexlist  = 20
+set filexlist  = 10
 
 set prepend="dcap://cmsrm-se01.roma1.infn.it"
  

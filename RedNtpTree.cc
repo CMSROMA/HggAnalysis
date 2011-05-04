@@ -478,6 +478,7 @@ void RedNtpTree::Loop(int isgjet, char* selection)
    ana_tree->Branch("run",&runRN,"run/I");
    ana_tree->Branch("event",&eventRN,"event/I");
    ana_tree->Branch("lumi",&lumi,"lumi/I");
+   ana_tree->Branch("rhoPF",&rhoPFRN,"rhoPF/F");
    ana_tree->Branch("massgg",&massgg,"massgg/F");
    ana_tree->Branch("ptgg",&ptgg,"ptgg/F");
    ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
@@ -538,6 +539,12 @@ void RedNtpTree::Loop(int isgjet, char* selection)
    ana_tree->Branch("pid_hlwTrackphot2",&pid_hlwTrackphot2,"pid_hlwTrackphot2/F");
    ana_tree->Branch("pid_etawidphot1",&pid_etawidphot1,"pid_etawidphot1/F");
    ana_tree->Branch("pid_etawidphot2",&pid_etawidphot2,"pid_etawidphot2/F");
+   ana_tree->Branch("pid_hlwTrackNoDzphot1",&pid_hlwTrackNoDzphot1,"pid_hlwTrackNoDzphot1/F");
+   ana_tree->Branch("pid_hlwTrackNoDzphot2",&pid_hlwTrackNoDzphot2,"pid_hlwTrackNoDzphot2/F");
+   ana_tree->Branch("pid_hasMatchedConvphot1",&pid_hasMatchedConvphot1,"pid_hasMatchedConvphot1/F");
+   ana_tree->Branch("pid_hasMatchedConvphot2",&pid_hasMatchedConvphot2,"pid_hasMatchedConvphot2/F");
+   ana_tree->Branch("pid_hasMatchedPromptElephot1",&pid_hasMatchedPromptElephot1,"pid_hasMatchedPromptElephot1/F");
+   ana_tree->Branch("pid_hasMatchedPromptElephot2",&pid_hasMatchedPromptElephot2,"pid_hasMatchedPromptElephot2/F");
 
    ana_tree->Branch("pid_sminphot1",&pid_sminphot1,"pid_sminphot1/F");
    ana_tree->Branch("pid_sminphot2",&pid_sminphot2,"pid_sminphot2/F");
@@ -1290,6 +1297,12 @@ void RedNtpTree::Loop(int isgjet, char* selection)
         pid_hlwTrackphot2 =  pid_hlwTrack[firsttwoisophot.at(1)];
         pid_etawidphot1 =  pid_etawid[firsttwoisophot.at(0)];
         pid_etawidphot2 =  pid_etawid[firsttwoisophot.at(1)];
+        pid_hlwTrackNoDzphot1 =  pid_hlwTrackNoDz[firsttwoisophot.at(0)];
+        pid_hlwTrackNoDzphot2 =  pid_hlwTrackNoDz[firsttwoisophot.at(1)];
+        pid_hasMatchedConvphot1 =  hasMatchedConvPhot[firsttwoisophot.at(0)]; 
+        pid_hasMatchedConvphot2 =  hasMatchedConvPhot[firsttwoisophot.at(1)]; 
+        pid_hasMatchedPromptElephot1 =  hasMatchedPromptElePhot[firsttwoisophot.at(0)]; 
+        pid_hasMatchedPromptElephot2 =  hasMatchedPromptElePhot[firsttwoisophot.at(1)]; 
 	
 	pid_sminphot1 =  sMinMinPhot[firsttwoisophot.at(0)];
 	pid_sminphot2 =  sMinMinPhot[firsttwoisophot.at(1)];
@@ -1352,6 +1365,7 @@ void RedNtpTree::Loop(int isgjet, char* selection)
         runRN = run;
         eventRN = event;
         lumi = lbn;
+        rhoPFRN = rhoPF;
 	
 	TLorentzVector twog1j = thehiggs + thejet1;
 	TLorentzVector twog2j = thehiggs + thejet1 + thejet2; 
