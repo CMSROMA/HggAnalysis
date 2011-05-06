@@ -146,6 +146,12 @@ private:
    Int_t     pid_hasMatchedConvphot2;
    Int_t     pid_hasMatchedPromptElephot1;
    Int_t     pid_hasMatchedPromptElephot2;
+   Float_t   r9phot1;
+   Float_t   r9phot2;
+   Float_t   etascphot1;
+   Float_t   etascphot2;
+   Float_t   phiscphot1;
+   Float_t   phiscphot2;
 
 };
 #endif

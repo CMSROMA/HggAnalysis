@@ -99,6 +99,7 @@ if(! -e $app ) then
 endif 
 
 
+## if listdir is one file only
 if(-f $listdir) then
    set sample = `echo $listdir | awk  'BEGIN{FS="/"}{print $NF}' | awk 'BEGIN{FS="."}{print $1}'`
    set listdir = `echo $listdir | awk  'BEGIN{FS="/"}{print $1}'`
@@ -115,11 +116,19 @@ if(-f $listdir) then
      #sleep 2 
    endif
 
+## if input is a directory
 else if(-d $listdir) then
   #set samples  =  `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}'` 
   foreach i ( `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}' | xargs  -I sample echo sample ` )
    set  sample = $i
    echo "sample : $sample"
+
+   if( "`echo $sample | egrep -e "^G_Pt_"`XXX" != "XXX" ) then
+     echo "skipping $sample"
+     continue
+   endif
+
+
    set rootfile = "${prefix}${outdir}/redntp_${sample}.root"
    set jobname = "${sample}"
    set logfile = "${logdir}/${sample}.txt"
