@@ -23,9 +23,9 @@ if ($#argv > 0) then
   set listdir = $1
   echo "listdir : $listdir "
   if(! -d $listdir ) then
-    echo "<$listdir> does not exist... check again"
-    if(-f $listdir) echo "this is a single file"
-    #exit -1
+    #echo "<$listdir> does not exist... check again"
+    if(-f $listdir) echo "<$listdir> is a single file"
+    else exit -1
   endif
 endif 
 
