@@ -1,4 +1,5 @@
 #!/bin/tcsh
+# $Id: $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
@@ -7,8 +8,8 @@ set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtigh
 
 
 if($#argv == 0 || $#argv < 5) then
-  echo "usage:  makeRedNtp.csh  <listdir>  <outdir>  <pre-selection>  <location>   <run if 1>"
-  echo "        listdir: valid directory containing list files"
+  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>   <run if 1>"
+  echo "        inlist: valid directory containing list files OR valid list file"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
   echo "        preselection:  $preselections"
@@ -21,11 +22,14 @@ endif
 set listdir  = list.V27.41x 
 if ($#argv > 0) then
   set listdir = $1
-  echo "listdir : $listdir "
-  if(! -d $listdir ) then
+  #echo "listdir : $listdir "
+  if(-f $listdir) then
+       echo "<$listdir> is a single file"
+  else if( -d $listdir ) then
+       echo "<$listdir> is a directory"
     #echo "<$listdir> does not exist... check again"
-    if(-f $listdir) echo "<$listdir> is a single file"
-    else exit -1
+   else 
+    exit -1
   endif
 endif 
 
