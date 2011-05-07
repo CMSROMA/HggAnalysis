@@ -547,10 +547,10 @@ void RedNtpTree::Loop(int isgjet, char* selection)
    ana_tree->Branch("pid_etawidphot2",&pid_etawidphot2,"pid_etawidphot2/F");
    ana_tree->Branch("pid_hlwTrackNoDzphot1",&pid_hlwTrackNoDzphot1,"pid_hlwTrackNoDzphot1/F");
    ana_tree->Branch("pid_hlwTrackNoDzphot2",&pid_hlwTrackNoDzphot2,"pid_hlwTrackNoDzphot2/F");
-   ana_tree->Branch("pid_hasMatchedConvphot1",&pid_hasMatchedConvphot1,"pid_hasMatchedConvphot1/F");
-   ana_tree->Branch("pid_hasMatchedConvphot2",&pid_hasMatchedConvphot2,"pid_hasMatchedConvphot2/F");
-   ana_tree->Branch("pid_hasMatchedPromptElephot1",&pid_hasMatchedPromptElephot1,"pid_hasMatchedPromptElephot1/F");
-   ana_tree->Branch("pid_hasMatchedPromptElephot2",&pid_hasMatchedPromptElephot2,"pid_hasMatchedPromptElephot2/F");
+   ana_tree->Branch("pid_hasMatchedConvphot1",&pid_hasMatchedConvphot1,"pid_hasMatchedConvphot1/I");
+   ana_tree->Branch("pid_hasMatchedConvphot2",&pid_hasMatchedConvphot2,"pid_hasMatchedConvphot2/I");
+   ana_tree->Branch("pid_hasMatchedPromptElephot1",&pid_hasMatchedPromptElephot1,"pid_hasMatchedPromptElephot1/I");
+   ana_tree->Branch("pid_hasMatchedPromptElephot2",&pid_hasMatchedPromptElephot2,"pid_hasMatchedPromptElephot2/I");
 
    ana_tree->Branch("pid_sminphot1",&pid_sminphot1,"pid_sminphot1/F");
    ana_tree->Branch("pid_sminphot2",&pid_sminphot2,"pid_sminphot2/F");
