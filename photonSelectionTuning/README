@@ -1,0 +1,174 @@
+==============================================================================
+          S/B Iterative Method Root Implementation: Instructions
+==============================================================================
+Version 3.1 Released 23 June 09
+
+  This is an implementation of the S/B iterative method for electron selection
+  tuning. This file contains instructions on how to run the code.
+
+  Version 2.0: same results as version 1, but now the signal and bkg are
+  distinguished by a user defined filter instead of giving as input separate
+  root files
+
+  Version 3.0: option is added to have a minimum allowed cut for each
+  variable that we cut.
+
+  Version 3.1: option to name explicitly the types of signal and bkg that
+  we want in the calculation, e.g. in the Filter block:
+    type = 1,2,3,4,5,6
+    type_equal = true
+  which means that this is considered only if the type is 1,2,3,4,5 or 6.
+  Some bug-fixes wrt the data driven implementation (MC values)
+
+  Version 3.2: released 16 March 2010.
+     following options added:
+     a. met type can be specified in python cfg with the keyword
+        type_met = event_pfMET # (this is an example)
+     b. option to have some extra preselection criteria
+        presel_type = 0 # 0: default, 1: first PXB hit, 2: Dcot,Dist fixed
+                        # 12: both 1 and 2
+     c. now signal contains all with type == 0 and bkg all the rest
+        see also inline comments
+     d. rounder facility added. Rounding scheme proposed by Chris Seez.
+        Implementation flexible to changes. Currently cut rounded to the
+        closest 10,15,20,25,30,40,50,60,70,80,90
+        In order to use the rounder you have to use the same python cfg
+	and add in the first block, i.e. the parameters block an entry named
+	rounding_points = 12,56,85
+	that has the number of the points that you want to round. you can run the
+	rounder:
+	python SoBIterRounder.py <your python cfg> <the tuning output file>
+	by default the output is directed to a file named rounder_out.
+	it contains also the rounded values in a format that you can plot them
+	together with the original points and spot differences.
+
+For the impatient user:
+======================
+  1. change the configuration file SoBITerConfiguration.cfg file according to
+     your needs
+  2. enter in terminal
+         python SoBIterSetup.py
+     this will automatically run the code and direct the output to out_test
+  3. when the code finishes you can get the working points with
+         grep "sob\[" out_test
+
+
+More Detailed Description:
+=========================
+  A. The configuration file:
+     This is the file where all the parameters that the method needs are kept.
+     No other file is needed for the user to keep in order to reproduce their
+     results on the same dataset. The configuration file syntax has the follo
+     ing features:
+     1. all lines  starting with  space or  #  are comments.  More general  # 
+        comments out whatever it is on its right
+     2. blocks start and end with "@". There are 5 blocks, which are denoted
+	with characteristic keywords after the "@". Each block must end with a
+        line starting with @.
+        (i) @ parameters block: contains the parameters that characterize the 
+         method. In particular 
+         -> step in S/B
+         -> relative:  relative = true means that new S/B = (old S/B)*(1+step),
+         whereas relative = false means that  new S/B = old S/B + step,
+	 -> min_step: the maximum step allowed in case relative = true. With
+         relative = true the step increases as the S/B increases. min_step
+         does not allow a further increase of the step, so that always the
+         absolute step < min_step
+	 -> lowest_eff: the iterations will continue until signal efficiency
+  	 drops below lowest_eff
+ 	(ii) @ weights block: relative weights of the samples. see the given
+ 	 file SoBIterConfiguration.cfg for a demonstration of the syntax
+   	(iii)@ files block: the address of the input files, each file 
+         in a separate line, no separation between signal and bkg datasets
+ 	(iv) @ signal_filter: the definition of a signal filter. An example
+         is the following:
+	   @ signal_filter
+	   et = 30	
+	   et_less = false
+           met = 100
+	   met_less = true
+	   type = 0
+	   type_equal = true
+	   exclusion = true
+	   @ signal_filter end
+          in this filter signal events will be considered the ones with et>30
+          (the parameter et_less = false says that it is not <30, hence >30 )
+          and with MET<100 (here met_less is true) and the ones that have type
+          equal to 0 (equal because type_equal = true, otherwise it would be 
+	  not equal to 0) and no events with a second electron in event are 
+	  included (exclusion = true). Same definitions for the bkg_filter.
+          You can specify more that one types separated by comma. With 
+          type equal false, any event that does not belong to any of the
+          specified types is considered.
+	(v)  @ address : the path of the source code SobIter.cc, that contains
+ 	 the root class that implements the method
+	(vi) @ variables_barrel: the barrel variables. 5 columns separated with
+	 commas (',') with the name of the tree branch of your variable, the
+	 name that you prefer to call the variable, the initial cut value for
+ 	 the variable, the minimum cut value for this variable and the number 
+	 of points where the efficiency and S/B will be calculated in order to
+	 fit them.
+	(vii) @ variables_endcaps: similar for the endcaps variables
+	Barrel-only or Endcaps-only tuning is allowed by leaving the 
+	corresponding block empty of variables.
+  B. SoBIterSetup.py: a python script that reads the cfg file and creates a 
+	root macro with the name IterRun.C that compiles the class SobIter
+	and initializes and object with the specifications of the cfg file.
+	The script runs automatically the macro and directs the output to
+	out_test. WARNING! it will overwrite without notice a file with the
+	same name in your working directory.
+	The syntax is 
+                python SoBIterSetup  <my_cfg.cfg>
+	there is a default cfg name SoBIterConfiguration.cfg
+  C. SobIter.cc : the source file that contains a class that implements the
+	S/B iterative tuning method.
+
+INPUT FILES FOR THE METHOD:
+==========================
+  Input files for the method are simply root binary files containing the data
+  in a TTree format.  Each TTree
+  entry contains the parameters for 1 electron, whose origin is specified with
+  a short int type. E.g. one can choose Wenu electrons to have type 0 and ttbar
+  electrons to have type 1. The number of the type should start from 0 and is
+  used in order to weight the events that are processed to allow for samples
+  corresponding to different integrated luminosity. The TTree must be named
+  probe_tree and must  contain the  following branches apart from the selection 
+  variables branches:
+  Branch Name     variable type      description
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  probe_sc_et     double             the ET  of the ECAL SC
+  probe_sc_eta    double             the eta of the ECAL SC
+  event_MET       double             MET for the event that has the electron
+  type            short int          the type of the event (see above)
+  exclude         short int          set it to 1 if you want to exclude this
+                                     electron for some reason *
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  * Parameter exclude is being used in the filter. With exclusion = true in the
+    Filter block all electrons with this parameter 1 are excluded from the tuning
+    Serves as a shortcut so that you don't need multiple data files.
+  There is an analyzer that produces exactly the format of the root tuples from
+  RECO or PAT. The RECO version of the analyzer is in:
+  /UserCode/NRomp/CMSSW_2_1_X/WenuSelectionOptTool/src/OptSpecSkimmer.cc
+
+ALGORITHM DESCRIPTION:
+=====================
+  The following presentations contain a description of the algorithm and an
+  application on the Wenu analysis selection tuning:
+http://indico.cern.ch/getFile.py/access?contribId=2&resId=2&materialId=slides&confId=49013
+http://indico.cern.ch/getFile.py/access?contribId=1&resId=0&materialId=1&confId=52580
+http://indico.cern.ch/getFile.py/access?contribId=3&resId=0&materialId=1&confId=49016
+http://indico.cern.ch/getFile.py/access?contribId=2&resId=0&materialId=0&confId=49057
+
+
+FURTHER INQUIRIES:
+=================
+
+    Nikolaos.Rompotis@Cern.ch
+
+
+
+--
+
+Nikolaos Rompotis 27 March 09 Initial Version
+Nikolaos Rompotis 30 April 09 Version 2.0
+Nikolaos Rompotis 23 June 09 Version 3.1
