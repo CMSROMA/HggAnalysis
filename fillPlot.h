@@ -37,6 +37,13 @@ public :
    // bool to decide if we want to write output txt file
    bool writetxt;
    
+   // bool for switching on smearing and smearing parameters
+   bool dosmear;
+   double meansmear, spreadsmear;
+
+   // vector of pu weights
+   std::vector<Double_t> puweights_;
+
    // Declaration of leaf types
    Int_t           run;
    Int_t           event;
@@ -259,22 +266,24 @@ public :
    TBranch        *b_EquivLumi;   //!
    TBranch        *b_SampleID;   //!
 
-   fillPlot(TTree *tree=0);
+   fillPlot(TTree *tree=0, bool isData=0);
    virtual ~fillPlot();
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Setcuts(double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, bool eb = 1, bool r9 = 1, int isolscaletrk = 100, int isolscaleecal = 100, int isolscalehcal = 100, int isolscalehove = 100, bool pixelseedveto = 1);
-   virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190);
+   virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual void     Writetxt(bool value);
+   virtual void     SetPuWeights(bool isData = 0);
+   virtual void     DoSmearing(double mean, double spread);   
    virtual Bool_t   Notify();
 };
 
 #endif
 
 #ifdef fillPlot_cxx
-fillPlot::fillPlot(TTree *tree)
+fillPlot::fillPlot(TTree *tree, bool isData)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
@@ -287,7 +296,8 @@ fillPlot::fillPlot(TTree *tree)
 
    }
    Init(tree);
-   writetxt = 0;
+   writetxt = dosmear = 0;
+   SetPuWeights(isData);
 }
 
 fillPlot::~fillPlot()

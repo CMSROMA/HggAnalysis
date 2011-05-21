@@ -2,11 +2,12 @@
 #include "fillPlot.h"
 #include <TH2.h>
 #include <TStyle.h>
+#include <TRandom3.h>
 #include <TCanvas.h>
 #include <iostream>
 #include <fstream>
 
-TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max)
+TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max, bool cs)
 {
 //   In a ROOT session, you can do:
 //      Root > .L fillPlot.C
@@ -56,15 +57,29 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max)
       if(ptjet1<ptjet1cut) continue; //pt first photon
       if(ptjet2<ptjet2cut) continue; //pt second photon
 
-      if(TMath::Abs(deltaeta)<deltaetacut) continue; //delteta
-      if(TMath::Abs(zeppenjet)>zeppencut) continue; //zeppenfeld
+      //delteta
+      if(deltaetacut!=0)
+	if(deltaetacut>0){
+	  if(TMath::Abs(deltaeta)<deltaetacut) continue;  // vbf selection 
+	}else{
+	  if(TMath::Abs(deltaeta)<deltaetacut) continue;  // WZH selection
+	}
+      
+      //zeppenfeld
+      if(zeppencut!=0) 
+	if(TMath::Abs(zeppenjet)>zeppencut) continue; 
 
-      if(invmassjet<invmassjetcut) continue; //inv mass of jets
+      //inv mass of jets
+      if(invmassjetcut!=0) 
+	if(invmassjetcut>0){
+	  if(invmassjet<invmassjetcut) continue; // vbf selection 
+	}else{
+	  if(TMath::Abs(invmassjet-85)>invmassjetcut) continue; // WZH selection
+	}
 
-      if((pid_haspixelseedphot1||pid_haspixelseedphot2) && pixelseedcut) continue; // pixel seed
-      if(ebcat) { // EB EE categories
+      if(ebcat == 1) { // EB EE categories
 	if((TMath::Abs(etaphot1)>1.4442||TMath::Abs(etaphot2)>1.4442)) continue; 
-      } else {
+      } else if(ebcat == 0){
 	if((TMath::Abs(etaphot1)<1.4442&&TMath::Abs(etaphot2)<1.4442)) continue; 
       }
 
@@ -73,17 +88,36 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max)
       if(TMath::Abs(etaphot2)<1.4442 && r9phot2>.93) isr9phot2 = 1;
       if(TMath::Abs(etaphot1)>1.4442 && r9phot1>.9) isr9phot1 = 1;
       if(TMath::Abs(etaphot2)>1.4442 && r9phot2>.9) isr9phot2 = 1;
-      if(r9cat) { // r9 categories
+      if(r9cat == 1) { // r9 categories
 	if(!isr9phot1 || !isr9phot2) continue;
-      } else {
+      } else if (r9cat == 0){
 	if(isr9phot1 && isr9phot2) continue;
-      }
+      } 
 
       // photon id
-      if(!cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove)) 
-	continue;
-      if(!cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove)) 
-	continue;
+      bool idphot1(0), idphot2(0), looseidphot1(0), looseidphot2(0), pxlphot1(1), pxlphot2(1);
+
+      if(pixelseedcut) { 
+	pxlphot1 = !pid_haspixelseedphot1;
+	pxlphot2 = !pid_haspixelseedphot2;
+      }
+
+      idphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
+      idphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
+
+      if(!cs){ // usual photon id (no control sample
+
+	if(!(idphot1 && pxlphot1)) continue;
+	if(!(idphot2 && pxlphot2)) continue;
+
+      }else{ // photon id for control sample
+
+	looseidphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+	looseidphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+
+	if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
+
+      }
 
       double variable(0);
       if (var == "massgg")  variable = massgg;
@@ -120,9 +154,21 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max)
 	cout << "NO SUCH VARIABLE IMPLEMENTED!" << endl;
 	break;
       }
-      tempplot->Fill(variable);
+
+      if(dosmear){
+	TRandom3 smearing(565656);
+	variable *= smearing.Gaus(meansmear,spreadsmear);
+      }
+
+      if(nvtx<20) 
+	tempplot->Fill(variable, puweights_[nvtx]);
+      else{
+	tempplot->Fill(variable, puweights_[nvtx]);
+	cout << "Number of vtx outside the reweighting range N<20" << endl;
+      } 
+
       if(writetxt) 
-	outfile << run << " : " << lumi << " : " << event << " : "<< ptphot1 << " : " << ptphot2<< " : " << massgg<< endl;      
+	outfile << run << " " << event  << " " << lumi << " mass " << massgg<< endl;      
 
    }
    
@@ -198,4 +244,27 @@ bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, d
 void fillPlot::Writetxt(bool value)
 {
   writetxt = value;
+}
+
+void fillPlot::SetPuWeights(bool isData)
+{
+
+  TFile *f_pu  = new TFile("/afs/cern.ch/user/d/delre/public/nvtx.root","READ");
+  TH1F *puweights = 0;
+  puweights= (TH1F*) f_pu->Get("h1_MC_nvtx");
+
+ for (int i = 0; i<20; i++) {
+       
+   if( !isData ) puweights_.push_back(puweights->GetBinContent(i+1));
+   else puweights_.push_back(1);
+   //std::cout<<puweights_[i]<<std::endl;
+   }
+
+}
+
+void fillPlot::DoSmearing(double mean, double spread)
+{
+  dosmear = 1;
+  meansmear = mean;
+  spreadsmear = spread;
 }
