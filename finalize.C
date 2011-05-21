@@ -97,11 +97,20 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   mc_2010[5] = new TFile("redntp.39xv7.preselection.v2/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.root"); 
   mc_2011[5] = new TFile("redntp.41xv7.preselection.v3/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.root"); 
 
-  // higgs samples (only gluglu so far)
+  // gluglu higgs samples 
   mc_2010[6] = new TFile("redntp.39xv7.preselection.v2/redntp_GluGluToHToGG_M-115_7TeV-pythia6_00.root");
   mc_2011[6] = new TFile("redntp.41xv7.preselection.v3/redntp_GluGluToHToGG_M-115_7TeV-pythia6_00.root");
 
+  // vbf higgs samples 
+  mc_2010[7] = new TFile("redntp.39xv7.preselection.v2/redntp_VBF_HToGG_M-105_00.root");
+  mc_2011[7] = new TFile("redntp.41xv7.preselection.v3/redntp_VBF_HToGG_M-105-41x_ntpv1_00.root");
+
+  // W/Z/TT H higgs samples 
+  mc_2010[8] = new TFile("redntp.39xv7.preselection.v2/redntp_WH_ZH_TTH_HToGG_M-115_00.root");
+  mc_2011[8] = new TFile("redntp.41xv7.preselection.v3/redntp_WH_ZH_TTH_HToGG_M-115-41x_ntpv1_00.root");
+
   // cross sections and scaling
+  double boosthiggs(15);
   double cross_mc[9];
   cross_mc[0] = 12.37; // box
   cross_mc[1] = 134; // diphoton jets
@@ -109,18 +118,20 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   cross_mc[3] = 40392; // qcd pt>40
   cross_mc[4] = 9610; // qcd 30<pt<40 
   cross_mc[5] = 2321; // drell yan
-  cross_mc[6] = 18.23 * 2.13e-03 * 15; // higgs
+  cross_mc[6] = 18.23 * 2.13e-03 * boosthiggs; // glu glu higgs
+  cross_mc[7] = 1.332 * 2.13e-03 * boosthiggs; // vbf higgs
+  cross_mc[8] = (0.7546 + 0.4107 + 0.1106) * 2.13e-03 * boosthiggs; // WHtt higgs
 
   // getting the number of original events in each sample (processed with CMSSW)
   int n_mc_2010[9], n_mc_2011[9];
-  for(int i=0; i<7; i++){
+  for(int i=0; i<9; i++){
     n_mc_2010[i] = ((TH1D*)mc_2010[i]->Get("ptphotgen1"))->GetEntries();
     n_mc_2011[i] = ((TH1D*)mc_2011[i]->Get("ptphotgen1"))->GetEntries();
   }
 
   // setting the scaling factor to actual lumi
   double scale_mc_2010[9], scale_mc_2011[9];
-  for(int i=0; i<7; i++){
+  for(int i=0; i<9; i++){
     scale_mc_2010[i] = cross_mc[i] * int_exp_2010 / n_mc_2010[i];
     scale_mc_2011[i] = cross_mc[i] * int_exp_2011 / n_mc_2011[i];
   }
@@ -151,7 +162,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   fillPlot* mc_2010_fill[9];
   fillPlot* mc_2011_fill[9];
 
-  for (int i=0; i<7; i++){
+  for (int i=0; i<9; i++){
     mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"));
     mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"));
     mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
@@ -159,8 +170,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   }
  
   // smear mc
-  mc_2010_fill[6]->DoSmearing(1.,0.0001);
-  mc_2011_fill[6]->DoSmearing(1.,0.0001);
+  for (int i=0; i<9; i++){
+    mc_2010_fill[i]->DoSmearing(1.,0.0001);
+    mc_2011_fill[i]->DoSmearing(1.,0.0001);
+  }
 
   // filling histograms
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
@@ -170,7 +183,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   data_fill.Writetxt(0);
   vardatacs = data_fill.Plot(variable,"datacs", nbin, min, max, 1); 
 
-  for (int i=0; i<7; i++){ 
+  for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
     cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
     var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
@@ -180,14 +193,14 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   }
 
   // scale mc to equivalent lumi
-  for (int i=0; i<7; i++){ 
+  for (int i=0; i<9; i++){ 
     var_mc_2010[i]->Scale(scale_mc_2010[i]);  
     var_mc_2011[i]->Scale(scale_mc_2011[i]);  
   }
 
   // counting number of events passing selection (scaled)
   double num_mc_2010[9],num_mc_2011[9]; 
-  for (int i=0; i<7; i++){ 
+  for (int i=0; i<9; i++){ 
     num_mc_2010[i]       = var_mc_2010[i]->Integral();  
     num_mc_2011[i]       = var_mc_2011[i]->Integral();  
   }
@@ -206,8 +219,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   for (int i=1; i<nbin+1; i++){      
     for (int j=0; j<6; j++){            
       int offset(0);
-      if(j>2) offset = 1;
-      for (int k=0 ; k<7-j-offset; k++){ 
+      if(j>0) offset = 2; // to add higgs contribution up
+      if(j>2) offset = 3; // to add qcd contribution up
+      for (int k=0 ; k<9-j-offset; k++){ 
 	var[j]->SetBinContent(i,var_mc_2010[k]->GetBinContent(i) + var[j]->GetBinContent(i));
 	var[j]->SetBinContent(i,var_mc_2011[k]->GetBinContent(i) + var[j]->GetBinContent(i));
       }	
@@ -233,7 +247,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   leg = new TLegend(0.5,0.6,0.75,0.85);
   leg->SetFillStyle(0); leg->SetBorderSize(0); leg->SetTextSize(0.05);
   leg->SetFillColor(0);
-  legge = leg->AddEntry(var[0], "h_{f} M(115) x 15", "f");
+  sprintf(name,"H M(115)");
+  if(boosthiggs!=1) sprintf(name,"%s%2.0f", "H M(115) x ", boosthiggs);
+  legge = leg->AddEntry(var[0], name, "f");
   legge = leg->AddEntry(var[1], "DY", "f");
   legge = leg->AddEntry(var[2], "QCD", "f");
   legge = leg->AddEntry(var[3], "#gamma + jets", "f");
@@ -259,6 +275,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   //higgs only plot
   var_mc_2010[6]->Add(var_mc_2011[6]);
+  var_mc_2010[6]->Add(var_mc_2010[7]);
+  var_mc_2010[6]->Add(var_mc_2011[7]);
+  var_mc_2010[6]->Add(var_mc_2010[8]);
+  var_mc_2010[6]->Add(var_mc_2011[8]);
   sprintf(ytitle,"%s%d%s","N_{ev}/",int(int_exp_2010+int_exp_2011),"pb^{-1}");
   var_mc_2010[6]->SetXTitle(axis.c_str());
   var_mc_2010[6]->SetYTitle(ytitle);
@@ -276,7 +296,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   double entrieshiggs =  var_mc_2010[6]->Integral(0,201);
   double integralbkg = var[1]->Integral(30,71)/3.;
   cout << "Fraction in signal box " << integralhiggs/entrieshiggs << endl;
-  cout << "Number of signal events " << integralhiggs/15 << endl;
+  cout << "Number of signal events " << integralhiggs/boosthiggs << endl;
   cout << "Number of bkg events " << integralbkg << endl;
   cout << "S/sqrt(B) " << integralhiggs/15/sqrt(integralbkg) << endl;
 
@@ -388,7 +408,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   outfile << "####################################" << endl;
   outfile << "N of generated events" << endl;
   outfile << "####################################" << endl;
-  outfile << "# events hig_2010 =       " << n_mc_2010[6] << endl;
+  outfile << "# events hig_glu2010 =    " << n_mc_2010[6] << endl;
+  outfile << "# events hig_vbf2010 =    " << n_mc_2010[7] << endl;
+  outfile << "# events hig_wzt2010 =    " << n_mc_2010[8] << endl;
   outfile << "# events dy_2010 =        " << n_mc_2010[5] << endl;
   outfile << "# events box_2010 =       " << n_mc_2010[0] << endl;
   outfile << "# events diphotjet_2010 = " << n_mc_2010[1] << endl;
@@ -396,6 +418,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   outfile << "# events qcd_2010 =       " << n_mc_2010[3] << endl;
   outfile << "# events qcd2_2010 =      " << n_mc_2010[4] << endl;
   outfile << "# events hig_2011 =       " << n_mc_2011[6] << endl;
+  outfile << "# events hig_vbf2011 =    " << n_mc_2011[7] << endl;
+  outfile << "# events hig_wzt2011 =    " << n_mc_2011[8] << endl;
   outfile << "# events dy_2011 =        " << n_mc_2011[5] << endl;
   outfile << "# events box_2011 =       " << n_mc_2011[0] << endl;
   outfile << "# events diphotjet_2011 = " << n_mc_2011[1] << endl;
@@ -411,15 +435,19 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   double num_bkg(0);
   double num_mc_total[9], n_mc_total[9];
-  for (int i=0; i<7; i++){
-    num_bkg += num_mc_2010[i];
-    num_bkg += num_mc_2011[i];
+  for (int i=0; i<9; i++){
+    if(i<6){
+      num_bkg += num_mc_2010[i];
+      num_bkg += num_mc_2011[i];
+    }
     num_mc_total[i] = num_mc_2010[i] + num_mc_2011[i];
     n_mc_total[i] = n_mc_2010[i] * scale_mc_2010[i] + n_mc_2011[i] * scale_mc_2011[i];
   }
 
   outfile << "nallbkg    = " << num_bkg << endl;
-  outfile << "nhig       = " << num_mc_total[6] << endl;
+  outfile << "nhig glu   = " << num_mc_total[6] << endl;
+  outfile << "nhig vbf   = " << num_mc_total[7] << endl;
+  outfile << "nhig wzt   = " << num_mc_total[8] << endl;
   outfile << "ndy        = " << num_mc_total[5] << endl;
   outfile << "nbox       = " << num_mc_total[0] << endl;
   outfile << "ndiphot    = " << num_mc_total[1] << endl;
@@ -427,7 +455,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   outfile << "nqcd40     = " << num_mc_total[3] << endl;
   outfile << "nqcd30-40  = " << num_mc_total[4] << endl;
   outfile << endl;
-  outfile << "eff nhig      = " << num_mc_total[6] / n_mc_total[6] << endl;
+  outfile << "eff nhig      = " << (num_mc_total[6] + num_mc_total[7] + num_mc_total[8]) 
+                                   / (n_mc_total[6] + n_mc_total[7] + n_mc_total[8]) << endl;
   outfile << "eff ndy       = " << num_mc_total[5] / n_mc_total[5] << endl;
   outfile << "eff nbox      = " << num_mc_total[0] / n_mc_total[0] << endl;
   outfile << "eff ndiphot   = " << num_mc_total[1] / n_mc_total[1] << endl;
