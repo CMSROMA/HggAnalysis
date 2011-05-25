@@ -24,6 +24,8 @@ public :
 
    // Declaration of leaf types
    Float_t         genpt;
+   Int_t           genProcessId;
+   Float_t         genQScale;
    Bool_t          isMC;
    Int_t           store;
    Int_t           lbn;
@@ -51,8 +53,12 @@ public :
    Float_t         ptPhot [40];   //[nPhot]
    Float_t         ePhot  [40];   //[nPhot]
    Float_t         escPhot  [40];   //[nPhot]
+   Float_t         escRawPhot  [40];   //[nPhot]
    Float_t         etascPhot  [40];   //[nPhot]
    Float_t         phiscPhot  [40];   //[nPhot]
+   Float_t         xscPhot  [7];   //[nPhot]
+   Float_t         yscPhot  [7];   //[nPhot]
+   Float_t         zscPhot  [7];   //[nPhot]
    Float_t         eseedPhot  [40];   //[nPhot]
    Float_t         etaPhot[40];   //[nPhot]
    Float_t         phiPhot[40];   //[nPhot]
@@ -71,12 +77,17 @@ public :
    Float_t         pid_twrHCAL[40];   //[nPhot]
    Float_t         pid_HoverE[40];   //[nPhot]
    Float_t         pid_hlwTrack[40];   //[nPhot]
+   Float_t         pid_hlwTrackBestRank[40];   //[nPhot]
+   Float_t         pid_hlwTrackWorstVtx[40];   //[nPhot]
    Float_t         pid_hlwTrackNoDz[40];   //[nPhot]
    Float_t         pid_etawid[40];   //[nPhot]
    Float_t         pid_jurECAL03[40];   //[nPhot]
    Float_t         pid_twrHCAL03[40];   //[nPhot]
    Float_t         pid_hlwTrack03[40];   //[nPhot]
+   Float_t         pid_hlwTrack03BestRank[40];   //[nPhot]
+   Float_t         pid_hlwTrack03WorstVtx[40];   //[nPhot]
    Float_t         pid_hlwTrack03NoDz[40];   //[nPhot]
+   Float_t         pid_deltaRToTrackPhot[40];   //[nPhot]
    Float_t         ptiso004Phot[40];   //[nPhot]
    Int_t           ntrkiso004Phot[40];   //[nPhot]
    Float_t         ptiso035Phot[40];   //[nPhot]
@@ -129,18 +140,6 @@ public :
    Float_t         n90HitsJet_akt7[100];   //[nJet_akt7]
    Float_t         fHPDJet_akt7[100];   //[nJet_akt7]
    Float_t         fRBXJet_akt7[100];   //[nJet_akt7]
-   Int_t           nJet_jptak5;
-   Float_t         ptJet_jptak5 [100];   //[nJet_jptak5]
-   Float_t         ptCorrJet_jptak5 [100];   //[nJet_jptak5]
-   Float_t         eJet_jptak5  [100];   //[nJet_jptak5]
-   Float_t         etaJet_jptak5[100];   //[nJet_jptak5]
-   Float_t         phiJet_jptak5[100];   //[nJet_jptak5]
-   Float_t         emfJet_jptak5[100];   //[nJet_jptak5]
-   Int_t           nJet_pfkt4;
-   Float_t         ptJet_pfkt4 [100];   //[nJet_pfkt4]
-   Float_t         eJet_pfkt4  [100];   //[nJet_pfkt4]
-   Float_t         etaJet_pfkt4[100];   //[nJet_pfkt4]
-   Float_t         phiJet_pfkt4[100];   //[nJet_pfkt4]
    Int_t           nJet_pfakt5;
    Float_t         ptJet_pfakt5 [100];   //[nJet_pfakt5]
    Float_t         ptCorrJet_pfakt5 [100];   //[nJet_pfakt5]
@@ -182,11 +181,6 @@ public :
    Float_t         eJet_pfakt7  [100];   //[nJet_pfakt7]
    Float_t         etaJet_pfakt7[100];   //[nJet_pfakt7]
    Float_t         phiJet_pfakt7[100];   //[nJet_pfakt7]
-   Int_t           nJet_pfkt6;
-   Float_t         ptJet_pfkt6 [100];   //[nJet_pfkt6]
-   Float_t         eJet_pfkt6  [100];   //[nJet_pfkt6]
-   Float_t         etaJet_pfkt6[100];   //[nJet_pfkt6]
-   Float_t         phiJet_pfkt6[100];   //[nJet_pfkt6]
    Int_t           nJetGen_akt5;
    Float_t         ptJetGen_akt5 [100];   //[nJetGen_akt5]
    Float_t         eJetGen_akt5  [100];   //[nJetGen_akt5]
@@ -223,16 +217,6 @@ public :
    Float_t         eJetGen_akt7  [100];   //[nJetGen_akt7]
    Float_t         etaJetGen_akt7[100];   //[nJetGen_akt7]
    Float_t         phiJetGen_akt7[100];   //[nJetGen_akt7]
-   Int_t           nJetGen_kt4;
-   Float_t         ptJetGen_kt4 [100];   //[nJetGen_kt4]
-   Float_t         eJetGen_kt4  [100];   //[nJetGen_kt4]
-   Float_t         etaJetGen_kt4[100];   //[nJetGen_kt4]
-   Float_t         phiJetGen_kt4[100];   //[nJetGen_kt4]
-   Int_t           nJetGen_kt6;
-   Float_t         ptJetGen_kt6 [100];   //[nJetGen_kt6]
-   Float_t         eJetGen_kt6  [100];   //[nJetGen_kt6]
-   Float_t         etaJetGen_kt6[100];   //[nJetGen_kt6]
-   Float_t         phiJetGen_kt6[100];   //[nJetGen_kt6]
    Float_t         sMet  ;
    Float_t         eMet  ;
    Float_t         phiMet;
@@ -274,14 +258,21 @@ public :
    Float_t         vntracks[100];   //[nvertex]
    Float_t         vchi2[100];   //[nvertex]
    Float_t         vndof[100];   //[nvertex]
+   Float_t         vptbal[100];   //[nvertex]
+   Float_t         vptasym[100];   //[nvertex]
+   Float_t         vlogsumpt2[100];   //[nvertex]
+   Int_t           vrank[100];   //[nvertex]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;
    vector<bool>    *HLTResults;
+   
    Double_t        Xsec;
 
    // List of branches
    TBranch        *b_genpt;   //!
+   TBranch        *b_genProcessId;   //!
+   TBranch        *b_genQScale;   //!
    TBranch        *b_isMC;   //!
    TBranch        *b_store;   //!
    TBranch        *b_lbn;   //!
@@ -309,8 +300,12 @@ public :
    TBranch        *b_ptPhot ;   //!
    TBranch        *b_ePhot  ;   //!
    TBranch        *b_escPhot  ;   //!
+   TBranch        *b_escRawPhot  ;   //!
    TBranch        *b_etascPhot  ;   //!
    TBranch        *b_phiscPhot  ;   //!
+   TBranch        *b_xscPhot  ;   //!
+   TBranch        *b_yscPhot  ;   //!
+   TBranch        *b_zscPhot  ;   //!
    TBranch        *b_eseedPhot  ;   //!
    TBranch        *b_etaPhot;   //!
    TBranch        *b_phiPhot;   //!
@@ -329,12 +324,17 @@ public :
    TBranch        *b_pid_twrHCAL;   //!
    TBranch        *b_pid_HoverE;   //!
    TBranch        *b_pid_hlwTrack;   //!
+   TBranch        *b_pid_hlwTrackBestRank;   //!
+   TBranch        *b_pid_hlwTrackWorstVtx;   //!
    TBranch        *b_pid_hlwTrackNoDz;   //!
    TBranch        *b_pid_etawid;   //!
    TBranch        *b_pid_jurECAL03;   //!
    TBranch        *b_pid_twrHCAL03;   //!
    TBranch        *b_pid_hlwTrack03;   //!
+   TBranch        *b_pid_hlwTrack03BestRank;   //!
+   TBranch        *b_pid_hlwTrack03WorstVtx;   //!
    TBranch        *b_pid_hlwTrack03NoDz;   //!
+   TBranch        *b_pid_deltaRToTrackPhot;   //!
    TBranch        *b_ptiso004Phot;   //!
    TBranch        *b_ntrkiso004Phot;   //!
    TBranch        *b_ptiso035Phot;   //!
@@ -387,13 +387,6 @@ public :
    TBranch        *b_n90HitsJet_akt7;   //!
    TBranch        *b_fHPDJet_akt7;   //!
    TBranch        *b_fRBXJet_akt7;   //!
-   TBranch        *b_nJet_jptak5;   //!
-   TBranch        *b_ptJet_jptak5 ;   //!
-   TBranch        *b_ptCorrJet_jptak5 ;   //!
-   TBranch        *b_eJet_jptak5  ;   //!
-   TBranch        *b_etaJet_jptak5;   //!
-   TBranch        *b_phiJet_jptak5;   //!
-   TBranch        *b_emfJet_jptak5;   //!
    TBranch        *b_nJet_pfkt4;   //!
    TBranch        *b_ptJet_pfkt4 ;   //!
    TBranch        *b_eJet_pfkt4  ;   //!
@@ -440,11 +433,6 @@ public :
    TBranch        *b_eJet_pfakt7  ;   //!
    TBranch        *b_etaJet_pfakt7;   //!
    TBranch        *b_phiJet_pfakt7;   //!
-   TBranch        *b_nJet_pfkt6;   //!
-   TBranch        *b_ptJet_pfkt6 ;   //!
-   TBranch        *b_eJet_pfkt6  ;   //!
-   TBranch        *b_etaJet_pfkt6;   //!
-   TBranch        *b_phiJet_pfkt6;   //!
    TBranch        *b_nJetGen_akt5;   //!
    TBranch        *b_ptJetGen_akt5 ;   //!
    TBranch        *b_eJetGen_akt5  ;   //!
@@ -481,16 +469,6 @@ public :
    TBranch        *b_eJetGen_akt7  ;   //!
    TBranch        *b_etaJetGen_akt7;   //!
    TBranch        *b_phiJetGen_akt7;   //!
-   TBranch        *b_nJetGen_kt4;   //!
-   TBranch        *b_ptJetGen_kt4 ;   //!
-   TBranch        *b_eJetGen_kt4  ;   //!
-   TBranch        *b_etaJetGen_kt4;   //!
-   TBranch        *b_phiJetGen_kt4;   //!
-   TBranch        *b_nJetGen_kt6;   //!
-   TBranch        *b_ptJetGen_kt6 ;   //!
-   TBranch        *b_eJetGen_kt6  ;   //!
-   TBranch        *b_etaJetGen_kt6;   //!
-   TBranch        *b_phiJetGen_kt6;   //!
    TBranch        *b_sMet;   //!
    TBranch        *b_eMet;   //!
    TBranch        *b_phiMet;   //!
@@ -532,6 +510,10 @@ public :
    TBranch        *b_vntracks;   //!
    TBranch        *b_vchi2;   //!
    TBranch        *b_vndof;   //!
+   TBranch        *b_vptbal;   //!
+   TBranch        *b_vptasym;   //!
+   TBranch        *b_vlogsumpt2;   //!
+   TBranch        *b_vrank;   //!
    TBranch        *b_nHLT;   //!
    TBranch        *b_hltNamesLen;   //!
    TBranch        *b_HLTNames;   //!

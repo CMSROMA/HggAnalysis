@@ -22,7 +22,7 @@ public:
 
    RedNtpTree(TTree *tree=0, const TString& outname="redntp.root");
    virtual ~RedNtpTree();
-   virtual void     Loop(int isgjet=0, char* selection = "loose");
+   virtual void     Loop(int isgjetqcd=0, char* selection = "loose");
    void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
@@ -47,8 +47,65 @@ private:
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
    bool mcID(int i); 
 
+   enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
+   enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
+   enum phoCiC6Categories { phoCiC6EBhighR9=0, phoCiC6EBmidR9, phoCiC6EBlowR9, phoCiC6EEhighR9, phoCiC6EEmidR9, phoCiC6EElowR9, phoCiC6NCATEGORIES };
+   enum phoCiC4Categories { phoCiC4EBhighR9=0, phoCiC4EBlowR9, phoCiC4EEhighR9, phoCiC4EElowR9, phoCiC4NCATEGORIES };
+   void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead);
+   float cic6_cut_lead_isosumoet[phoNCUTLEVELS][6];
+   float cic6_cut_lead_isosumoetbad[phoNCUTLEVELS][6];
+   float cic6_cut_lead_trkisooet[phoNCUTLEVELS][6];
+   float cic6_cut_lead_sieie[phoNCUTLEVELS][6];
+   float cic6_cut_lead_hovere[phoNCUTLEVELS][6];
+   float cic6_cut_lead_r9[phoNCUTLEVELS][6];
+   float cic6_cut_lead_drtotk_25_99[phoNCUTLEVELS][6];
+   float cic6_cut_lead_pixel[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_isosumoet[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_isosumoetbad[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_trkisooet[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_sieie[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_hovere[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_r9[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_drtotk_25_99[phoNCUTLEVELS][6];
+   float cic6_cut_sublead_pixel[phoNCUTLEVELS][6];
+   
+   float cic4_cut_lead_isosumoet[phoNCUTLEVELS][4];
+   float cic4_cut_lead_isosumoetbad[phoNCUTLEVELS][4];
+   float cic4_cut_lead_trkisooet[phoNCUTLEVELS][4];
+   float cic4_cut_lead_sieie[phoNCUTLEVELS][4];
+   float cic4_cut_lead_hovere[phoNCUTLEVELS][4];
+   float cic4_cut_lead_r9[phoNCUTLEVELS][4];
+   float cic4_cut_lead_drtotk_25_99[phoNCUTLEVELS][4];
+   float cic4_cut_lead_pixel[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_isosumoet[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_isosumoetbad[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_trkisooet[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_sieie[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_hovere[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_r9[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_drtotk_25_99[phoNCUTLEVELS][4];
+   float cic4_cut_sublead_pixel[phoNCUTLEVELS][4];
+
+   int   PhotonCiCSelectionLevel( int photon_index);
+   //photon category functions (r9 and eta)
+   int PhotonCategory(int photonindex) { 
+     return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);
+   }
+   Int_t PhotonR9Category(int photonindex) { 
+     if(photonindex < 0) return -1;
+     int r9cat = (Int_t)(E9Phot[photonindex]/escRawPhot[photonindex]<0.94);// 0, 1(high r9 --> low r9)
+     return r9cat;
+   }
+   int PhotonEtaCategory(int photonindex) {
+     if(photonindex < 0) return -1;
+     int etacat = (Int_t)(etaPhot[photonindex]>1.479);   // 0, 1 (barrel --> endcap)
+     return  etacat;
+   }
+
    Float_t massgg;
    Float_t ptgg;
+   Float_t massggnewvtx;
+   Float_t ptggnewvtx;
    Float_t ptphot1;
    Float_t ptphot2;
    Float_t etaphot1;
@@ -76,6 +133,7 @@ private:
    Float_t invmass2g2j;
    Float_t nvtx;
    Float_t met;
+   Int_t npu;
    Int_t isemEGphot1;
    Int_t isemEGphot2;
    Int_t idloosenewEGphot1;
@@ -92,6 +150,8 @@ private:
    Int_t idtightnewpuEGphot2;
    Int_t idhggtightnewpuEGphot1;
    Int_t idhggtightnewpuEGphot2;
+   Int_t idcicphot1;
+   Int_t idcicphot2;
    Int_t idlooseEGphot1;
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;

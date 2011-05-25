@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
-             << "       options: looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium mcass "
+             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass "
              << endl;
         exit(-1);
       }
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
        float myxsec = CrossSection(listName);
 
        // filter for 2gam + jets. this is included in GJets samples but we use dedicated DiPhotonjets-madgraph
-       int isGJet = IsGJet(listName);
+       int isGJetQCD = IsGJet(listName);
 
        // compute equivalent luminosity
        //Long64_t  ntot = chain->GetEntries();
@@ -93,5 +93,5 @@ int main(int argc, char* argv[]) {
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
-       tool.Loop(isGJet, selection);
+       tool.Loop(isGJetQCD, selection);
 }
