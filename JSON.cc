@@ -30,9 +30,9 @@ JSON::JSON(const char* json) {
 
   cout << "Following LS will be used" << endl;
   cout << "-------------------------" << endl;
-  while( fscanf(iff,"%*[ \t\n]%c%d:%d-%d:%d%c%c",&c1,&run1,&LS1,&run2,&LS2,&c2,&c3 ) != EOF ) {
+  while( fscanf(iff,"%c%d:%d-%d:%d%c%c,",&c1,&run1,&LS1,&run2,&LS2,&c2,&c3) != EOF ) {
       cout << "run: " << run1 << "  LS range: " << LS1
-         << " --> " << LS2 << endl;
+	   << " --> " << LS2 << "  " << c1 << "   " << c2<< "  " << c3<<endl;
       goodLS_[run1].push_back(  pair<int,int>(LS1,LS2) );
   }
   fclose(iff);

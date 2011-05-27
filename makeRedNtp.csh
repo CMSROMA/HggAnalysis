@@ -1,10 +1,10 @@
 #!/bin/tcsh
-# $Id: $
+# $Id: makeRedNtp.csh,v 1.18 2011/05/07 17:37:34 rahatlou Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
 
-set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium mcass preselection)
+set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection)
 
 
 if($#argv == 0 || $#argv < 5) then
@@ -13,7 +13,7 @@ if($#argv == 0 || $#argv < 5) then
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
   echo "        preselection:  $preselections"
-  echo "        locations: cern roma"
+  echo "        locations: cern roma eth"
   echo "        run: default=0  set to 1 to execute"
   exit 0
 endif
@@ -39,9 +39,9 @@ if ($#argv > 1) then
   echo "outdir : $outdir "
 endif 
 
-set selection = ""
+setenv selection  ""
 if ($#argv > 2) then
-  set selection = $3
+  setenv selection  $3
   set found = 0
   foreach i  ( $preselections )
     if( $selection == $i ) set found = 1
@@ -53,13 +53,13 @@ if ($#argv > 2) then
   echo "selection : $selection "
 endif 
 
-# location: roma or cern
+# location: roma or cern or eth
 set location = ""
 if ($#argv > 3) then
   set location = $4
   echo "location : $location "
-  if( $location != roma && $location != cern ) then
-    echo "bad location. options: roma or cern"
+  if( $location != roma && $location != cern && $location != eth) then
+    echo "bad location. options: roma or cern or eth"
     exit -1
 endif 
 
@@ -72,7 +72,7 @@ endif
 echo "------   ready ro run at $location ------------------"
 
 # logfiles always stored locally
-set logdir = "./log/$outdir"
+set logdir = "$PWD/log/$outdir"
 if($run == 1) mkdir -p $logdir
 
 # choose queue, location based on location
@@ -85,6 +85,11 @@ if ($location == "cern" ) then
 else if ($location == "roma" ) then
   set queue = "cmsshort"
   set outdir = ./$outdir
+  set prefix = ""
+  if($run == 1) mkdir -p $outdir
+else if ($location == "eth" ) then
+  set queue = "short.q"
+  set outdir = $outdir
   set prefix = ""
   if($run == 1) mkdir -p $outdir
 endif 
@@ -107,20 +112,26 @@ endif
 if(-f $listdir) then
    set sample = `echo $listdir | awk  'BEGIN{FS="/"}{print $NF}' | awk 'BEGIN{FS="."}{print $1}'`
    set listdir = `echo $listdir | awk  'BEGIN{FS="/"}{print $1}'`
-   set rootfile = "${prefix}${outdir}/redntp_${sample}.root"
+   setenv listfile $listdir
+   setenv rootfile "${prefix}${outdir}/redntp_${sample}.root"
    set jobname = "${sample}"
    set logfile = "${logdir}/${sample}.txt"
+   set logerrfile = "${logdir}/${sample}_err.txt"
    set listfile = "${listdir}/${sample}.list"
-   set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+   if ($location == "cern" || $location == "roma") then  
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+   else if ($location == "eth" ) then
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection}"
+   endif  
    echo "---------------------------"
    echo "job name: ${jobname}"
-   #echo " command: ${command}"
+   echo " command: ${command}"
    if($run == 1) then
      ${command}
      #sleep 2 
    endif
 
-## if input is a directory
+  ## if input is a directory
 else if(-d $listdir) then
   #set samples  =  `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}'` 
   foreach i ( `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}' | xargs  -I sample echo sample ` )
@@ -133,18 +144,23 @@ else if(-d $listdir) then
    endif
 
 
-   set rootfile = "${prefix}${outdir}/redntp_${sample}.root"
+   setenv rootfile "${prefix}${outdir}/redntp_${sample}.root"
    set jobname = "${sample}"
    set logfile = "${logdir}/${sample}.txt"
-   set listfile = "${listdir}/${sample}.list"
+   set logerrfile = "${logdir}/${sample}_err.txt"
+   setenv listfile  "${listdir}/${sample}.list"
    #if(! -e $listfile ) then
    #   echo "skipping non-existent file $listfile"
    #   continue
    #endif
-   set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+   if ($location == "cern" || $location == "roma") then  
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+   else if ($location == "eth" ) then
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection}"
+   endif  
    echo "---------------------------"
    echo "job name: ${jobname}"
-   #echo " command: ${command}"
+   echo " command: ${command}"
    if($run == 1) then
      ${command}
      #sleep 2 

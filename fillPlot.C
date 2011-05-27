@@ -49,20 +49,21 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       // analysis cuts
 
-      if((TMath::Abs(etaphot1)>1.4442&&TMath::Abs(etaphot1)<1.566)||(TMath::Abs(etaphot2)>1.4442&&TMath::Abs(etaphot2)<1.566)) continue;  // acceptance
+      if((TMath::Abs(etaphot1)>1.4442&&TMath::Abs(etaphot1)<1.566)||(TMath::Abs(etaphot2)>1.4442&&TMath::Abs(etaphot2)<1.566)
+	 || TMath::Abs(etaphot1)>2.5 || TMath::Abs(etaphot2)>2.5) continue;  // acceptance
 
       if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
 
-      if(ptjet1<ptjet1cut) continue; //pt first photon
-      if(ptjet2<ptjet2cut) continue; //pt second photon
+      if(ptjet1<ptjet1cut) continue; //pt first jet
+      if(ptjet2<ptjet2cut) continue; //pt second jet
 
       //delteta
       if(deltaetacut!=0)
 	if(deltaetacut>0){
 	  if(TMath::Abs(deltaeta)<deltaetacut) continue;  // vbf selection 
 	}else{
-	  if(TMath::Abs(deltaeta)<deltaetacut) continue;  // WZH selection
+	  if(TMath::Abs(deltaeta)>-deltaetacut) continue;  // WZH selection
 	}
       
       //zeppenfeld
@@ -74,7 +75,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	if(invmassjetcut>0){
 	  if(invmassjet<invmassjetcut) continue; // vbf selection 
 	}else{
-	  if(TMath::Abs(invmassjet-85)>invmassjetcut) continue; // WZH selection
+	  if(TMath::Abs(invmassjet-85)>-invmassjetcut) continue; // WZH selection
 	}
 
       if(ebcat == 1) { // EB EE categories
@@ -83,12 +84,13 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	if((TMath::Abs(etaphot1)<1.4442&&TMath::Abs(etaphot2)<1.4442)) continue; 
       }
 
+      // r9 categories
       bool isr9phot1(0), isr9phot2(0);
       if(TMath::Abs(etaphot1)<1.4442 && r9phot1>.93) isr9phot1 = 1;
       if(TMath::Abs(etaphot2)<1.4442 && r9phot2>.93) isr9phot2 = 1;
       if(TMath::Abs(etaphot1)>1.4442 && r9phot1>.9) isr9phot1 = 1;
       if(TMath::Abs(etaphot2)>1.4442 && r9phot2>.9) isr9phot2 = 1;
-      if(r9cat == 1) { // r9 categories
+      if(r9cat == 1) {
 	if(!isr9phot1 || !isr9phot2) continue;
       } else if (r9cat == 0){
 	if(isr9phot1 && isr9phot2) continue;
@@ -105,7 +107,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       idphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
       idphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
 
-      if(!cs){ // usual photon id (no control sample
+      if(!cs){ // photon id no control sample
 
 	if(!(idphot1 && pxlphot1)) continue;
 	if(!(idphot2 && pxlphot2)) continue;
@@ -119,6 +121,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       }
 
+      // finding variable to be plotted
       double variable(0);
       if (var == "massgg")  variable = massgg;
       else if (var == "ptphot1")  variable = ptphot1;
@@ -155,18 +158,21 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	break;
       }
 
+      // energy smearing
       if(dosmear){
 	TRandom3 smearing(565656);
 	variable *= smearing.Gaus(meansmear,spreadsmear);
       }
 
+      // pu reweighting
       if(nvtx<20) 
 	tempplot->Fill(variable, puweights_[nvtx]);
       else{
-	tempplot->Fill(variable, puweights_[nvtx]);
+	tempplot->Fill(variable);
 	cout << "Number of vtx outside the reweighting range N<20" << endl;
       } 
 
+      // write on file
       if(writetxt) 
 	outfile << run << " " << event  << " " << lumi << " mass " << massgg<< endl;      
 
@@ -178,7 +184,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
 }
 
-void  fillPlot::Setcuts(double pt1, double pt2, double ptj1, double ptj2, double deltae, double zep, double mjj, bool eb, bool r9, int isolscaletrk, int isolscaleecal, int isolscalehcal, int isolscalehove, bool pixelseedveto)
+void  fillPlot::Setcuts(double pt1, double pt2, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, int isolscaletrk, int isolscaleecal, int isolscalehcal, int isolscalehove, bool pixelseedveto)
 {
   ptphot1cut = pt1;
   ptphot2cut = pt2;
@@ -249,7 +255,7 @@ void fillPlot::Writetxt(bool value)
 void fillPlot::SetPuWeights(bool isData)
 {
 
-  TFile *f_pu  = new TFile("/afs/cern.ch/user/d/delre/public/nvtx.root","READ");
+  TFile *f_pu  = new TFile("nvtx.root","READ");
   TH1F *puweights = 0;
   puweights= (TH1F*) f_pu->Get("h1_MC_nvtx");
 

@@ -298,7 +298,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   cout << "Fraction in signal box " << integralhiggs/entrieshiggs << endl;
   cout << "Number of signal events " << integralhiggs/boosthiggs << endl;
   cout << "Number of bkg events " << integralbkg << endl;
-  cout << "S/sqrt(B) " << integralhiggs/15/sqrt(integralbkg) << endl;
+  cout << "S/sqrt(B) " << integralhiggs/boosthiggs/sqrt(integralbkg) << endl;
 
   // data only plot
   vardata->SetXTitle(axis.c_str());
@@ -457,6 +457,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   outfile << endl;
   outfile << "eff nhig      = " << (num_mc_total[6] + num_mc_total[7] + num_mc_total[8]) 
                                    / (n_mc_total[6] + n_mc_total[7] + n_mc_total[8]) << endl;
+  outfile << "eff nhig glu  = " << num_mc_total[6] / n_mc_total[6] << endl;
+  outfile << "eff nhig vbf  = " << num_mc_total[7] / n_mc_total[7] << endl;
+  outfile << "eff nhig wzt  = " << num_mc_total[8] / n_mc_total[8] << endl;
   outfile << "eff ndy       = " << num_mc_total[5] / n_mc_total[5] << endl;
   outfile << "eff nbox      = " << num_mc_total[0] / n_mc_total[0] << endl;
   outfile << "eff ndiphot   = " << num_mc_total[1] / n_mc_total[1] << endl;

@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: prepareList.csh,v 1.3 2011/04/30 12:59:36 rahatlou Exp $
+# $Id: prepareList.csh,v 1.4 2011/05/04 10:58:28 rahatlou Exp $
 
 if( $#argv<2  ) then
   echo "usage:  prepareList.csh  <valid directory>   <listname>   [run if 1]"
@@ -14,7 +14,7 @@ endif
 set indir = $1
 if( ! -d $indir ) then
   echo "invalid directory <$indir>"
-  exit -1
+#  exit -1
 endif
 
 set listname = $2
@@ -22,9 +22,12 @@ set listname = $2
 # num of files per list file
 set filexlist  = 10
 
-set prepend="dcap://cmsrm-se01.roma1.infn.it"
+#set prepend="dcap://cmsrm-se01.roma1.infn.it"
+set prepend="dcap://t3se01.psi.ch"
  
-set files = ( `/bin/ls -1 $indir` )
+#set files = ( `/bin/ls -1 $indir` )
+set files = ( `lcg-ls $indir` )
+
 
 echo "# of root files in directory: $#files"
 echo "# of files per list: $filexlist"
@@ -34,7 +37,8 @@ rm -Rf $tmpfile
 touch $tmpfile
 
 foreach i ( $files )
-  echo "$prepend/$indir/$i" >> $tmpfile
+#  echo "$prepend/$indir/$i" >> $tmpfile
+  echo "$prepend/$i" >> $tmpfile
 end
 
 set suffixlen = 2

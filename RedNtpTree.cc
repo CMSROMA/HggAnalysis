@@ -1,4 +1,5 @@
 #include "RedNtpTree.h"
+#include "JSON.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -820,6 +821,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    Long64_t nbytes = 0, nb = 0;
 
+   JSON myjson("Cert_160404-163869_7TeV_May10ReReco_Collisions11_CMSSWConfig.txt");
+   
    // hOutputFile = new TFile("output.root" , "RECREATE" ) ;
    TH1D higgsmasshiggsassreco("higgsmasshiggsassreco","higgsmasshiggsassreco", 100, 100.,150.);
    TH1D higgsmassassreco("higgsmassassreco","higgsmassassreco", 100, 100.,150.);
@@ -1278,6 +1281,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+
+      // json file event removal
+      if (!myjson.isGoodLS(run,lbn)) continue;
+
       nprocessed++;
       if (nprocessed%1000 == 0) cout << "Event " << nprocessed << endl;
 
