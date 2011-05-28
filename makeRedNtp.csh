@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.18 2011/05/07 17:37:34 rahatlou Exp $
+# $Id: makeRedNtp.csh,v 1.19 2011/05/27 07:48:49 delre Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
@@ -7,14 +7,15 @@ set castordir = /castor/cern.ch/user/d/delre/reduced/
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection)
 
 
-if($#argv == 0 || $#argv < 5) then
-  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>   <run if 1>"
+if($#argv == 0 || $#argv < 5 || $#argv > 6 ) then
+  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile>"
   echo "        inlist: valid directory containing list files OR valid list file"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
   echo "        preselection:  $preselections"
   echo "        locations: cern roma eth"
   echo "        run: default=0  set to 1 to execute"
+  echo "        jsonfile: optional json to select good RUN_LS"
   exit 0
 endif
 
@@ -69,6 +70,12 @@ if ($#argv > 4) then
   echo "run : $run "
 endif 
 
+set json = 0
+if ($#argv > 5) then
+  set json = $6
+  echo "json : $json "
+endif 
+
 echo "------   ready ro run at $location ------------------"
 
 # logfiles always stored locally
@@ -110,8 +117,8 @@ endif
 
 ## if listdir is one file only
 if(-f $listdir) then
-   set sample = `echo $listdir | awk  'BEGIN{FS="/"}{print $NF}' | awk 'BEGIN{FS="."}{print $1}'`
-   set listdir = `echo $listdir | awk  'BEGIN{FS="/"}{print $1}'`
+   set sample = `echo $listdir  | awk  'BEGIN{FS="/"}{print $NF}' | awk 'BEGIN{FS="."}{print $1}'`
+   set listdir = `echo $listdir  | awk  'BEGIN{FS="/"}{print $1}'`
    setenv listfile $listdir
    setenv rootfile "${prefix}${outdir}/redntp_${sample}.root"
    set jobname = "${sample}"
@@ -119,10 +126,11 @@ if(-f $listdir) then
    set logerrfile = "${logdir}/${sample}_err.txt"
    set listfile = "${listdir}/${sample}.list"
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json}"
    endif  
+
    echo "---------------------------"
    echo "job name: ${jobname}"
    echo " command: ${command}"
@@ -134,7 +142,7 @@ if(-f $listdir) then
   ## if input is a directory
 else if(-d $listdir) then
   #set samples  =  `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}'` 
-  foreach i ( `/bin/ls -1 ${listdir} | awk 'BEGIN{FS="."}{print $1}' | xargs  -I sample echo sample ` )
+  foreach i ( `/bin/ls -1 ${listdir} | grep ".list" | awk 'BEGIN{FS="."}{print $1}' | xargs  -I sample echo sample ` )
    set  sample = $i
    echo "sample : $sample"
 
@@ -153,11 +161,13 @@ else if(-d $listdir) then
    #   echo "skipping non-existent file $listfile"
    #   continue
    #endif
+
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json}"
    endif  
+
    echo "---------------------------"
    echo "job name: ${jobname}"
    echo " command: ${command}"

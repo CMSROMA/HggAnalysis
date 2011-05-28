@@ -19,11 +19,12 @@ using std::vector;
 class RedNtpTree : public tree_reader_V6 {
 
 public:
-
-   RedNtpTree(TTree *tree=0, const TString& outname="redntp.root");
-   virtual ~RedNtpTree();
-   virtual void     Loop(int isgjetqcd=0, char* selection = "loose");
-   void SetNtotXsection(int ntot, float xsec) {
+  
+  RedNtpTree(TTree *tree=0, const TString& outname="redntp.root");
+    virtual ~RedNtpTree();
+    virtual void     Loop(int isgjetqcd=0, char* selection = "loose");
+    void SetJsonFile(const char* json) { jsonFile = json; };
+    void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
       EquivLumi = ntot/xsec;
@@ -34,6 +35,8 @@ private:
    TFile* hOutputFile ;
    TTree * ana_tree ;
 
+   const char* jsonFile;
+   
    Int_t SampleID;
    Int_t  NtotEvents;
    float xsection;
@@ -98,7 +101,7 @@ private:
    }
    int PhotonEtaCategory(int photonindex) {
      if(photonindex < 0) return -1;
-     int etacat = (Int_t)(etaPhot[photonindex]>1.479);   // 0, 1 (barrel --> endcap)
+     int etacat = (Int_t)(etascPhot[photonindex]>1.479);   // 0, 1 (barrel --> endcap)
      return  etacat;
    }
 

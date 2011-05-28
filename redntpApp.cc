@@ -26,12 +26,13 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection \n" 
+      if(argc < 3 || argc>5 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile (optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
-             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass "
+             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass\n"
+             << "   jsonfile: jsonfile used to select RUN/LS when looping over data"
              << endl;
         exit(-1);
       }
@@ -93,5 +94,7 @@ int main(int argc, char* argv[]) {
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
+       if (argc>4)
+	 tool.SetJsonFile(argv[4]);
        tool.Loop(isGJetQCD, selection);
 }

@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 
 
-RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree) 
+RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree), jsonFile(0) 
 {  
   hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
   // must be set by the user 
@@ -821,8 +821,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    Long64_t nbytes = 0, nb = 0;
 
-   JSON myjson("Cert_160404-163869_7TeV_May10ReReco_Collisions11_CMSSWConfig.txt");
-   
+
+   //   JSON myjson("Cert_160404-163869_7TeV_May10ReReco_Collisions11_CMSSWConfig.txt");
+   JSON* myjson=0;
+   if (jsonFile)
+     {
+       std::cout << "Reading JSON" << jsonFile << std::endl;
+       myjson=new JSON(jsonFile);
+     }
+
    // hOutputFile = new TFile("output.root" , "RECREATE" ) ;
    TH1D higgsmasshiggsassreco("higgsmasshiggsassreco","higgsmasshiggsassreco", 100, 100.,150.);
    TH1D higgsmassassreco("higgsmassassreco","higgsmassassreco", 100, 100.,150.);
@@ -1281,12 +1288,17 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
-
       // json file event removal
-      if (!myjson.isGoodLS(run,lbn)) continue;
+      if (myjson && !isMC) 
+	if (!myjson->isGoodLS(run,lbn))
+	  {
+	    //	    std::cout << "Event skipped " << run << " " << lbn << std::endl;
+	    continue;
+	  }
+
 
       nprocessed++;
-      if (nprocessed%1000 == 0) cout << "Event " << nprocessed << endl;
+      if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
 
       // print name of crrent file
       currfilename = TString(fChain->GetCurrentFile()->GetName());
@@ -1990,5 +2002,6 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    cout << "Events in reduced ntuple:  " << nredntp << endl; 
 
    hOutputFile->Write() ;
-
+   if (myjson)
+     delete myjson;
 }
