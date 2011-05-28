@@ -1,0 +1,105 @@
+[Warning] : run 165098 :ls 7 has 0 instlumi but trigger has data
+[Warning] : run 165098 :ls 8 has 0 instlumi but trigger has data
+[Warning] : run 165364 :ls 1298 has 0 dead counts or 0 zerobias bit counts, but inst!=0
+[Warning] : run 165506 :ls 168 has 0 dead counts or 0 zerobias bit counts, but inst!=0
+[Warning] : run 165514 :ls 562 has 0 dead counts or 0 zerobias bit counts, but inst!=0
+|    Run | Delivered LS | Delivered (/μb) |          Selected LS | Recorded (/μb) |
+-------------------------------------------------------------------------------------
+| 165071 |          N/A |              N/A |                  N/A |             N/A |
+| 165088 |          391 |         6461.866 |              [1-347] |        6403.145 |
+| 165093 |          N/A |              N/A |                  N/A |             N/A |
+| 165098 |          439 |        34365.940 |  [1-187], [190-193], |       31035.141 |
+|        |              |                  |           [195-248], |                 |
+|        |              |                  |           [250-254], |                 |
+|        |              |                  |           [256-331], |                 |
+|        |              |                  | [333-367], [369-415] |                 |
+| 165099 |          125 |         9569.015 |              [1-105] |        7897.838 |
+| 165102 |          200 |        15915.095 |              [1-185] |       14709.529 |
+| 165103 |          451 |        42808.246 |              [1-440] |       41697.998 |
+| 165120 |          108 |       408680.311 |               [1-97] |      348118.672 |
+| 165121 |          713 |      2904421.452 |              [1-665] |     2689015.376 |
+| 165129 |          N/A |              N/A |                  N/A |             N/A |
+| 165150 |          N/A |              N/A |                  N/A |             N/A |
+| 165163 |          N/A |              N/A |                  N/A |             N/A |
+| 165165 |          N/A |              N/A |                  N/A |             N/A |
+| 165168 |          N/A |              N/A |                  N/A |             N/A |
+| 165180 |          N/A |              N/A |                  N/A |             N/A |
+| 165182 |          N/A |              N/A |                  N/A |             N/A |
+| 165205 |          259 |      2337930.284 |              [1-248] |     2188348.427 |
+| 165208 |          184 |      1675088.596 |              [1-148] |     1312513.806 |
+| 165210 |          N/A |              N/A |                  N/A |             N/A |
+| 165229 |          N/A |              N/A |                  N/A |             N/A |
+| 165233 |          N/A |              N/A |                  N/A |             N/A |
+| 165238 |          N/A |              N/A |                  N/A |             N/A |
+| 165241 |          N/A |              N/A |                  N/A |             N/A |
+| 165248 |          N/A |              N/A |                  N/A |             N/A |
+| 165254 |          N/A |              N/A |                  N/A |             N/A |
+| 165255 |          N/A |              N/A |                  N/A |             N/A |
+| 165262 |          N/A |              N/A |                  N/A |             N/A |
+| 165268 |          N/A |              N/A |                  N/A |             N/A |
+| 165269 |          N/A |              N/A |                  N/A |             N/A |
+| 165271 |          N/A |              N/A |                  N/A |             N/A |
+| 165272 |          N/A |              N/A |                  N/A |             N/A |
+| 165306 |          N/A |              N/A |                  N/A |             N/A |
+| 165358 |          N/A |              N/A |                  N/A |             N/A |
+| 165364 |         1351 |     19320520.801 |  [1-111], [114-807], |    18774177.895 |
+|        |              |                  |           [809-1301] |                 |
+| 165399 |           47 |       366943.379 |       [1-5], [13-17] |          14.382 |
+| 165400 |           87 |      1500652.387 |               [1-78] |     1292866.466 |
+| 165402 |           48 |       438088.596 |               [1-29] |      402829.700 |
+| 165415 |         1427 |     20163660.421 |  [1-640], [643-707], |    19062516.177 |
+|        |              |                  |           [712-777], |                 |
+|        |              |                  |           [780-1383] |                 |
+| 165421 |          N/A |              N/A |                  N/A |             N/A |
+| 165423 |          N/A |              N/A |                  N/A |             N/A |
+| 165467 |          735 |     12676514.131 |              [1-708] |    11591541.550 |
+| 165472 |          917 |     12788763.601 |   [1-184], [186-897] |    12426221.192 |
+| 165484 |          N/A |              N/A |                  N/A |             N/A |
+| 165486 |          117 |      2236609.564 |              [1-102] |     1814152.201 |
+| 165487 |          158 |      2983292.361 |              [1-150] |     2859517.290 |
+| 165506 |          178 |      2202791.235 |              [1-169] |     2074752.800 |
+| 165514 |          584 |     12226712.058 |              [1-566] |    11574814.675 |
+| 165523 |           91 |      1065269.992 |      [1-41], [46-59] |      314975.426 |
+| 165525 |           67 |      1286601.438 |               [1-31] |      546026.896 |
+| 165529 |            9 |       166309.515 |                [1-1] |        1393.382 |
+| 165536 |           18 |       318661.471 |                [1-1] |        1240.795 |
+| 165537 |          303 |      5108416.760 |              [1-295] |     4643583.702 |
+| 165542 |          188 |      2956723.995 |              [1-174] |     2658699.538 |
+| 165548 |          629 |      9004884.204 |   [1-363], [365-589] |     8237940.312 |
+| 165557 |           23 |       307081.455 |                [1-1] |           8.555 |
+| 165558 |           85 |       993659.563 |               [1-77] |      925777.023 |
+
+ ==  =  Total : 
+| Delivered LS | Delivered (/μb) | Selected LS | Recorded (/μb) |
+-------------------------------------------------------------------
+|         9932 |    115547397.732 |        9247 |   105842789.889 |
+
+[WARNING] : run 165120 : total non-GOOD LS: UNKNOWN 98, BAD 0, SUSPECT 0
+[WARNING] : run 165121 : total non-GOOD LS: UNKNOWN 665, BAD 0, SUSPECT 0
+[WARNING] : run 165506 : total non-GOOD LS: UNKNOWN 170, BAD 0, SUSPECT 0
+[WARNING] : run 165514 : total non-GOOD LS: UNKNOWN 567, BAD 0, SUSPECT 0
+[WARNING] : run 165523 : total non-GOOD LS: UNKNOWN 55, BAD 0, SUSPECT 0
+[WARNING] : run 165102 : total non-GOOD LS: UNKNOWN 186, BAD 0, SUSPECT 0
+[WARNING] : run 165399 : total non-GOOD LS: UNKNOWN 11, BAD 0, SUSPECT 0
+[WARNING] : run 165400 : total non-GOOD LS: UNKNOWN 79, BAD 0, SUSPECT 0
+[WARNING] : run 165529 : total non-GOOD LS: UNKNOWN 1, BAD 0, SUSPECT 0
+[WARNING] : run 165402 : total non-GOOD LS: UNKNOWN 30, BAD 0, SUSPECT 0
+[WARNING] : run 165103 : total non-GOOD LS: UNKNOWN 441, BAD 0, SUSPECT 0
+[WARNING] : run 165536 : total non-GOOD LS: UNKNOWN 1, BAD 0, SUSPECT 0
+[WARNING] : run 165537 : total non-GOOD LS: UNKNOWN 296, BAD 0, SUSPECT 0
+[WARNING] : run 165542 : total non-GOOD LS: UNKNOWN 175, BAD 0, SUSPECT 0
+[WARNING] : run 165415 : total non-GOOD LS: UNKNOWN 1375, BAD 0, SUSPECT 0
+[WARNING] : run 165548 : total non-GOOD LS: UNKNOWN 588, BAD 0, SUSPECT 0
+[WARNING] : run 165557 : total non-GOOD LS: UNKNOWN 1, BAD 0, SUSPECT 0
+[WARNING] : run 165558 : total non-GOOD LS: UNKNOWN 78, BAD 0, SUSPECT 0
+[WARNING] : run 165088 : total non-GOOD LS: UNKNOWN 347, BAD 0, SUSPECT 0
+[WARNING] : run 165205 : total non-GOOD LS: UNKNOWN 248, BAD 0, SUSPECT 0
+[WARNING] : run 165208 : total non-GOOD LS: UNKNOWN 149, BAD 0, SUSPECT 0
+[WARNING] : run 165467 : total non-GOOD LS: UNKNOWN 709, BAD 0, SUSPECT 0
+[WARNING] : run 165472 : total non-GOOD LS: UNKNOWN 897, BAD 0, SUSPECT 0
+[WARNING] : run 165098 : total non-GOOD LS: UNKNOWN 408, BAD 0, SUSPECT 0
+[WARNING] : run 165099 : total non-GOOD LS: UNKNOWN 106, BAD 0, SUSPECT 0
+[WARNING] : run 165486 : total non-GOOD LS: UNKNOWN 102, BAD 0, SUSPECT 0
+[WARNING] : run 165487 : total non-GOOD LS: UNKNOWN 151, BAD 0, SUSPECT 0
+[WARNING] : run 165364 : total non-GOOD LS: UNKNOWN 1298, BAD 0, SUSPECT 0
+[WARNING] : run 165525 : total non-GOOD LS: UNKNOWN 32, BAD 0, SUSPECT 0
