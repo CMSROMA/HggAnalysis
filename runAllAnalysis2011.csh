@@ -1,6 +1,6 @@
 #!/bin/tcsh
 
-set data_json = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/jsonFiles/Golden_May10_withMissingEBMinus17_PromptCertified_UpTo_165525_DCSOnly_Upto165620.json"
+set data_json = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/jsonFiles/2010_Dec22_Golden_May10_withMissingEBMinus17_PromptCertified_UpTo_165525_DCSOnly_Upto165620.json"
 set location = "eth"
 set version = "v1"
 set run = 0
