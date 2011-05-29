@@ -1,0 +1,18 @@
+========================================
+Run the 2011 analysis reduction step:
+========================================
+runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile>
+
+Example:
+./runAllAnalysis2011.csh eth v1 1
+
+========================================
+Merge step
+========================================
+
+Once jobs are done:
+
+mergeAll2011.csh <version> <run if 1>
+
+Example:
+./mergeAll2011.csh v1 1
