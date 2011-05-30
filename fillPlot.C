@@ -59,24 +59,26 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(ptjet2<ptjet2cut) continue; //pt second jet
 
       //delteta
-      if(deltaetacut!=0)
+      if(deltaetacut!=0){
 	if(deltaetacut>0){
 	  if(TMath::Abs(deltaeta)<deltaetacut) continue;  // vbf selection 
 	}else{
 	  if(TMath::Abs(deltaeta)>-deltaetacut) continue;  // WZH selection
 	}
-      
+      }
+
       //zeppenfeld
       if(zeppencut!=0) 
 	if(TMath::Abs(zeppenjet)>zeppencut) continue; 
 
       //inv mass of jets
-      if(invmassjetcut!=0) 
+      if(invmassjetcut!=0){
 	if(invmassjetcut>0){
 	  if(invmassjet<invmassjetcut) continue; // vbf selection 
 	}else{
 	  if(TMath::Abs(invmassjet-85)>-invmassjetcut) continue; // WZH selection
 	}
+      }
 
       if(ebcat == 1) { // EB EE categories
 	if((TMath::Abs(etaphot1)>1.4442||TMath::Abs(etaphot2)>1.4442)) continue; 
@@ -86,8 +88,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       // r9 categories
       bool isr9phot1(0), isr9phot2(0);
-      if(TMath::Abs(etaphot1)<1.4442 && r9phot1>.93) isr9phot1 = 1;
-      if(TMath::Abs(etaphot2)<1.4442 && r9phot2>.93) isr9phot2 = 1;
+      if(TMath::Abs(etaphot1)<1.4442 && r9phot1>.94) isr9phot1 = 1;
+      if(TMath::Abs(etaphot2)<1.4442 && r9phot2>.94) isr9phot2 = 1;
       if(TMath::Abs(etaphot1)>1.4442 && r9phot1>.9) isr9phot1 = 1;
       if(TMath::Abs(etaphot2)>1.4442 && r9phot2>.9) isr9phot2 = 1;
       if(r9cat == 1) {
@@ -104,13 +106,23 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	pxlphot2 = !pid_haspixelseedphot2;
       }
 
-      idphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
-      idphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
+      if(cicselection>0) {
+	idphot1 = (idcicphot1 >= cicselection);
+	idphot2 = (idcicphot2 >= cicselection);
+      }else{	
+	idphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
+	idphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
+      }
 
       if(!cs){ // photon id no control sample
 
-	if(!(idphot1 && pxlphot1)) continue;
-	if(!(idphot2 && pxlphot2)) continue;
+	if(cicselection>0) {
+	  if(!(idphot1)) continue;
+	  if(!(idphot2)) continue;
+	}else{
+	  if(!(idphot1 && pxlphot1)) continue;
+	  if(!(idphot2 && pxlphot2)) continue;
+	}
 
       }else{ // photon id for control sample
 
@@ -202,6 +214,11 @@ void  fillPlot::Setcuts(double pt1, double pt2, double ptj1, double ptj2, double
   scalehove = isolscalehove;
   
 }
+
+void fillPlot::setCic(int cic) {
+  cicselection = cic;
+}
+
 
 bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scatrk, int scaecal, int scahcal, int scahove) {
 

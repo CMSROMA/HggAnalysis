@@ -821,7 +821,6 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    Long64_t nbytes = 0, nb = 0;
 
-
    //   JSON myjson("Cert_160404-163869_7TeV_May10ReReco_Collisions11_CMSSWConfig.txt");
    JSON* myjson=0;
    if (jsonFile)

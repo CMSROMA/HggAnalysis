@@ -21,13 +21,13 @@ inline double delta_phi(double phi1, double phi2) {
 
 // USE:
 //
-// .x finalize(data int lumi 2010, data int lumi 2011, pt1 cut, pt2 cut, ptj1 cut, ptj2 cut, deltae cut, zep cut, mjj cut, eb cat, r9 cat, trk isocut scale, ecal isocut scale, hcal isocut scale, h/e isocut scale)
+// .x finalize(data int lumi 2010, data int lumi 2011, pt1 cut, pt2 cut, ptj1 cut, ptj2 cut, deltae cut, zep cut, mjj cut, eb cat, r9 cat, trk isocut scale, cic selection, no pixel)
 // 
 // example:
 //
-// .x finalize.C(33,230,40,25,20,15,2.5,2.5,300, 100, 100, 100, 100) 
+// .x finalize.C(33,230,40,25,20,15,2.5,2.5,300,1,1,4,1) 
 
-vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int isolscaletrk = 100., int isolscaleecal = 100., int isolscalehcal = 100., int isolscalehove = 100., bool pixel = 1, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]"){
+vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int cic = 4, bool pixel = 1, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]", int isolscaletrk = 100., int isolscaleecal = 100., int isolscalehcal = 100., int isolscalehove = 100.){
 
 
   gROOT->SetStyle("Plain");
@@ -68,47 +68,54 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   mcnames[8] = "higgs WZH";
 
   // total data sample
-  TFile* data = new TFile("redntp.41xv7.preselection.v3/redntp_run2010-2011.root");    
+  //  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1_data.preselection.v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
+  //  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10_data.preselection.v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
+  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1_data.preselection.v1/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5.root");    
 
   TFile* mc_2010[9];
   TFile* mc_2011[9];
 
-  // box samples
-  mc_2010[0] = new TFile("redntp.39xv7.preselection.v2/redntp_DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6_00.root");
-  mc_2011[0] = new TFile("redntp.41xv7.preselection.v3/redntp_DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6_00.root");
-
-  // diphoton jets samples
-  mc_2010[1] = new TFile("redntp.39xv7.preselection.v2/redntp_DiPhotonJets_7TeV-madgraph.root");
-  mc_2011[1] = new TFile("redntp.41xv7.preselection.v3/redntp_DiPhotonJets_7TeV-madgraph.root");
-
-  // gjet samples
-  mc_2010[2] = new TFile("redntp.39xv7.preselection.v2/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
-  mc_2011[2] = new TFile("redntp.41xv7.preselection.v3/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
-
-  // qcd pt>40 samples
-  mc_2010[3] = new TFile("redntp.39xv7.preselection.v2/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
-  mc_2011[3] = new TFile("redntp.41xv7.preselection.v3/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
-
-  // qcd 30<pt<40 samples
-  mc_2010[4] = new TFile("redntp.39xv7.preselection.v2/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
-  mc_2011[4] = new TFile("redntp.41xv7.preselection.v3/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
+  if(int_exp_2010>0){
+    // box samples
+    mc_2010[0] = new TFile("redntp.39xv7.preselection.v2/redntp_DiPhotonBox_Pt25to250_TrackingParticles_7TeV-pythia6_00.root");
+    // diphoton jets samples
+    mc_2010[1] = new TFile("redntp.39xv7.preselection.v2/redntp_DiPhotonJets_7TeV-madgraph.root");
+    // gjet samples
+    mc_2010[2] = new TFile("redntp.39xv7.preselection.v2/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
+    // qcd pt>40 samples
+    mc_2010[3] = new TFile("redntp.39xv7.preselection.v2/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
+    // qcd 30<pt<40 samples
+    mc_2010[4] = new TFile("redntp.39xv7.preselection.v2/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6.root");
+    // drell yan samples
+    mc_2010[5] = new TFile("redntp.39xv7.preselection.v2/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.root"); 
+    // gluglu higgs samples 
+    mc_2010[6] = new TFile("redntp.39xv7.preselection.v2/redntp_GluGluToHToGG_M-115_7TeV-pythia6_00.root");
+    // vbf higgs samples 
+    mc_2010[7] = new TFile("redntp.39xv7.preselection.v2/redntp_VBF_HToGG_M-105_00.root");
+    // W/Z/TT H higgs samples 
+    mc_2010[8] = new TFile("redntp.39xv7.preselection.v2/redntp_WH_ZH_TTH_HToGG_M-115_00.root");
+  }
+  if(int_exp_2011>0){
+    // box samples
+    mc_2011[0] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DiPhotonBox_Pt25to250-41x_ntpv4.root");
+    // diphoton jets samples
+    mc_2011[1] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DiPhotonJets_7TeV-madgraph.root");
+    // gjet samples
+    mc_2011[2] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    // qcd pt>40 samples
+    mc_2011[3] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    // qcd 30<pt<40 samples
+    mc_2011[4] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    // drell yan samples
+    mc_2011[5] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
+    // gluglu higgs samples 
+    mc_2011[6] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_GluGluToHToGG_M-115-41x_ntpv4.root");
+    // vbf higgs samples 
+    mc_2011[7] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_VBF_HToGG_M-105-41x_ntpv4.root");
+    // W/Z/TT H higgs samples 
+    mc_2011[8] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1.preselection.v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
+  }
  
-   // drell yan samples
-  mc_2010[5] = new TFile("redntp.39xv7.preselection.v2/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.root"); 
-  mc_2011[5] = new TFile("redntp.41xv7.preselection.v3/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.root"); 
-
-  // gluglu higgs samples 
-  mc_2010[6] = new TFile("redntp.39xv7.preselection.v2/redntp_GluGluToHToGG_M-115_7TeV-pythia6_00.root");
-  mc_2011[6] = new TFile("redntp.41xv7.preselection.v3/redntp_GluGluToHToGG_M-115_7TeV-pythia6_00.root");
-
-  // vbf higgs samples 
-  mc_2010[7] = new TFile("redntp.39xv7.preselection.v2/redntp_VBF_HToGG_M-105_00.root");
-  mc_2011[7] = new TFile("redntp.41xv7.preselection.v3/redntp_VBF_HToGG_M-105-41x_ntpv1_00.root");
-
-  // W/Z/TT H higgs samples 
-  mc_2010[8] = new TFile("redntp.39xv7.preselection.v2/redntp_WH_ZH_TTH_HToGG_M-115_00.root");
-  mc_2011[8] = new TFile("redntp.41xv7.preselection.v3/redntp_WH_ZH_TTH_HToGG_M-115-41x_ntpv1_00.root");
-
   // cross sections and scaling
   double boosthiggs(15);
   double cross_mc[9];
@@ -125,15 +132,15 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // getting the number of original events in each sample (processed with CMSSW)
   int n_mc_2010[9], n_mc_2011[9];
   for(int i=0; i<9; i++){
-    n_mc_2010[i] = ((TH1D*)mc_2010[i]->Get("ptphotgen1"))->GetEntries();
-    n_mc_2011[i] = ((TH1D*)mc_2011[i]->Get("ptphotgen1"))->GetEntries();
+    if(int_exp_2010>0) n_mc_2010[i] = ((TH1D*)mc_2010[i]->Get("ptphotgen1"))->GetEntries();
+    if(int_exp_2011>0) n_mc_2011[i] = ((TH1D*)mc_2011[i]->Get("ptphotgen1"))->GetEntries();
   }
 
   // setting the scaling factor to actual lumi
   double scale_mc_2010[9], scale_mc_2011[9];
   for(int i=0; i<9; i++){
-    scale_mc_2010[i] = cross_mc[i] * int_exp_2010 / n_mc_2010[i];
-    scale_mc_2011[i] = cross_mc[i] * int_exp_2011 / n_mc_2011[i];
+    if(int_exp_2010>0) scale_mc_2010[i] = cross_mc[i] * int_exp_2010 / n_mc_2010[i];
+    if(int_exp_2011>0) scale_mc_2011[i] = cross_mc[i] * int_exp_2011 / n_mc_2011[i];
   }
 
   // char for output name
@@ -159,20 +166,27 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // creating the fillers and setting cuts
   fillPlot data_fill((TTree*)data->Get("AnaTree"), 1);
   data_fill.Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+  if(cic>0)
+    data_fill.setCic(cic);
+
   fillPlot* mc_2010_fill[9];
   fillPlot* mc_2011_fill[9];
 
   for (int i=0; i<9; i++){
-    mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"));
-    mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"));
-    mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-    mc_2011_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"));
+    if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"));
+    if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(cic>0){
+      if(int_exp_2010>0) mc_2010_fill[i]->setCic(cic);
+      if(int_exp_2011>0) mc_2011_fill[i]->setCic(cic);
+    }
   }
  
   // smear mc
   for (int i=0; i<9; i++){
-    mc_2010_fill[i]->DoSmearing(1.,0.0001);
-    mc_2011_fill[i]->DoSmearing(1.,0.0001);
+    if(int_exp_2010>0) mc_2010_fill[i]->DoSmearing(1.,0.0001);
+    if(int_exp_2011>0) mc_2011_fill[i]->DoSmearing(1.,0.0001);
   }
 
   // filling histograms
@@ -185,29 +199,29 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
-    cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
+    if(int_exp_2010>0) var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
-    cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
+    if(int_exp_2011>0) var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
   }
 
   // scale mc to equivalent lumi
   for (int i=0; i<9; i++){ 
-    var_mc_2010[i]->Scale(scale_mc_2010[i]);  
-    var_mc_2011[i]->Scale(scale_mc_2011[i]);  
+    if(int_exp_2010>0) var_mc_2010[i]->Scale(scale_mc_2010[i]);  
+    if(int_exp_2011>0) var_mc_2011[i]->Scale(scale_mc_2011[i]);  
   }
 
   // counting number of events passing selection (scaled)
   double num_mc_2010[9],num_mc_2011[9]; 
   for (int i=0; i<9; i++){ 
-    num_mc_2010[i]       = var_mc_2010[i]->Integral();  
-    num_mc_2011[i]       = var_mc_2011[i]->Integral();  
+    if(int_exp_2010>0) num_mc_2010[i] = var_mc_2010[i]->Integral();  
+    if(int_exp_2011>0) num_mc_2011[i] = var_mc_2011[i]->Integral();  
   }
 
   // add two QCD bins
-  var_mc_2010[3]->Add(var_mc_2010[4]);
-  var_mc_2011[3]->Add(var_mc_2011[4]);
+  if(int_exp_2010>0) var_mc_2010[3]->Add(var_mc_2010[4]);
+  if(int_exp_2011>0) var_mc_2011[3]->Add(var_mc_2011[4]);
   
   // scale control sample
   vardata->Sumw2();
@@ -219,11 +233,11 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   for (int i=1; i<nbin+1; i++){      
     for (int j=0; j<6; j++){            
       int offset(0);
-      if(j>0) offset = 2; // to add higgs contribution up
-      if(j>2) offset = 3; // to add qcd contribution up
+      if(j>0) offset = 2; // to add higgs contributions up
+      if(j>2) offset = 3; // to add qcd contributions up
       for (int k=0 ; k<9-j-offset; k++){ 
-	var[j]->SetBinContent(i,var_mc_2010[k]->GetBinContent(i) + var[j]->GetBinContent(i));
-	var[j]->SetBinContent(i,var_mc_2011[k]->GetBinContent(i) + var[j]->GetBinContent(i));
+	if(int_exp_2010>0) var[j]->SetBinContent(i,var_mc_2010[k]->GetBinContent(i) + var[j]->GetBinContent(i));
+	if(int_exp_2011>0) var[j]->SetBinContent(i,var_mc_2011[k]->GetBinContent(i) + var[j]->GetBinContent(i));
       }	
     }    
   }
@@ -274,26 +288,23 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   c0->SaveAs(name);
 
   //higgs only plot
-  var_mc_2010[6]->Add(var_mc_2011[6]);
-  var_mc_2010[6]->Add(var_mc_2010[7]);
-  var_mc_2010[6]->Add(var_mc_2011[7]);
-  var_mc_2010[6]->Add(var_mc_2010[8]);
-  var_mc_2010[6]->Add(var_mc_2011[8]);
+  var_mc_2011[6]->Add(var_mc_2011[7]);
+  var_mc_2011[6]->Add(var_mc_2011[8]);
   sprintf(ytitle,"%s%d%s","N_{ev}/",int(int_exp_2010+int_exp_2011),"pb^{-1}");
-  var_mc_2010[6]->SetXTitle(axis.c_str());
-  var_mc_2010[6]->SetYTitle(ytitle);
-  var_mc_2010[6]->SetTitle("");
-  var_mc_2010[6]->SetLineColor(kBlack);
-  var_mc_2010[6]->SetLineWidth(2);
-  var_mc_2010[6]->SetFillColor(kYellow);
-  var_mc_2010[6]->Draw();
+  var_mc_2011[6]->SetXTitle(axis.c_str());
+  var_mc_2011[6]->SetYTitle(ytitle);
+  var_mc_2011[6]->SetTitle("");
+  var_mc_2011[6]->SetLineColor(kBlack);
+  var_mc_2011[6]->SetLineWidth(2);
+  var_mc_2011[6]->SetFillColor(kYellow);
+  var_mc_2011[6]->Draw();
   sprintf(name,"%s%s%s%s%s","results_gg/higgs_",variable.c_str(),"_",allcut,".gif");
   c0->SaveAs(name);
   
   // some calculation for s/sqrt(b)
   sprintf(name,"%s%s%s%d%s","results_gg/optimalcut_",variable.c_str(),"_",eb,".txt");
-  double integralhiggs = var_mc_2010[6]->Integral(43,56);
-  double entrieshiggs =  var_mc_2010[6]->Integral(0,201);
+  double integralhiggs = var_mc_2011[6]->Integral(43,56);
+  double entrieshiggs =  var_mc_2011[6]->Integral(0,201);
   double integralbkg = var[1]->Integral(30,71)/3.;
   cout << "Fraction in signal box " << integralhiggs/entrieshiggs << endl;
   cout << "Number of signal events " << integralhiggs/boosthiggs << endl;
@@ -381,6 +392,17 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     leg2->Draw();
     gPad->RedrawAxis();
     sprintf(name,"%s%s%s%s%s","results_gg/datacs_rebin_",variable.c_str(),"_",allcut,".gif");
+    c0->SaveAs(name);
+    
+    double newmax(0);
+    for (int i=5;i<50;i++){
+      double tempmax = vardata->GetBinContent(i);
+      if(tempmax > newmax) newmax = tempmax;
+    }
+    vardata->SetAxisRange(100.,150.);
+    vardata->SetMaximum(newmax*1.3);
+    vardata->Draw("pe");
+    sprintf(name,"%s%s%s%s%s","results_gg/data_rebin_resize",variable.c_str(),"_",allcut,".gif");
     c0->SaveAs(name);
 
   }

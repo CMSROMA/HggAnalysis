@@ -33,6 +33,7 @@ public :
    int scaleecal;
    int scalehcal;
    int scalehove;
+   int cicselection;
 
    // bool to decide if we want to write output txt file
    bool writetxt;
@@ -85,6 +86,8 @@ public :
    Int_t           idtightnewpuEGphot2;
    Int_t           idhggtightnewpuEGphot1;
    Int_t           idhggtightnewpuEGphot2;
+   Int_t           idcicphot1;
+   Int_t           idcicphot2;
    Int_t           idlooseEGphot1;
    Int_t           idlooseEGphot2;
    Int_t           idtightEGphot1;
@@ -196,6 +199,8 @@ public :
    TBranch        *b_idtightnewpuEGphot2;   //!
    TBranch        *b_idhggtightnewpuEGphot1;   //!
    TBranch        *b_idhggtightnewpuEGphot2;   //!
+   TBranch        *b_idcicphot1;   //!
+   TBranch        *b_idcicphot2;   //!
    TBranch        *b_idlooseEGphot1;   //!
    TBranch        *b_idlooseEGphot2;   //!
    TBranch        *b_idtightEGphot1;   //!
@@ -274,6 +279,7 @@ public :
    virtual void     Setcuts(double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int isolscaletrk = 100, int isolscaleecal = 100, int isolscalehcal = 100, int isolscalehove = 100, bool pixelseedveto = 1);
    virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
+   virtual void     setCic(int cic=5);
    virtual void     Writetxt(bool value);
    virtual void     SetPuWeights(bool isData = 0);
    virtual void     DoSmearing(double mean, double spread);   
@@ -297,6 +303,7 @@ fillPlot::fillPlot(TTree *tree, bool isData)
    }
    Init(tree);
    writetxt = dosmear = 0;
+   cicselection = -1;
    SetPuWeights(isData);
 }
 
@@ -383,6 +390,8 @@ void fillPlot::Init(TTree *tree)
    fChain->SetBranchAddress("idtightnewpuEGphot2", &idtightnewpuEGphot2, &b_idtightnewpuEGphot2);
    fChain->SetBranchAddress("idhggtightnewpuEGphot1", &idhggtightnewpuEGphot1, &b_idhggtightnewpuEGphot1);
    fChain->SetBranchAddress("idhggtightnewpuEGphot2", &idhggtightnewpuEGphot2, &b_idhggtightnewpuEGphot2);
+   fChain->SetBranchAddress("idcicphot1", &idcicphot1, &b_idcicphot1);
+   fChain->SetBranchAddress("idcicphot2", &idcicphot2, &b_idcicphot2);
    fChain->SetBranchAddress("idlooseEGphot1", &idlooseEGphot1, &b_idlooseEGphot1);
    fChain->SetBranchAddress("idlooseEGphot2", &idlooseEGphot2, &b_idlooseEGphot2);
    fChain->SetBranchAddress("idtightEGphot1", &idtightEGphot1, &b_idtightEGphot1);
