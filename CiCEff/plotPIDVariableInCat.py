@@ -10,12 +10,13 @@ import math
                                
 gROOT.SetStyle("Plain")
 gStyle.SetOptTitle(0)
+gStyle.SetOptStat(0)
 #gROOT.SetBatch()
 
 variables=["isosumoet","isosumoetbad","trkisooet","sieie","hovere","r9","drtotk_25_99","pixel"]
 categories=["0","1","2","3"]
 #f=TFile("WJetsMADGRAPH_Wenu_preselected.root");
-f=TFile("redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6_00.root")
+f=TFile("../redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6_00.root")
 
 histogram = {} 
 for variable in variables:
@@ -34,7 +35,7 @@ for variable in variables:
     maximum=-9999.;
     maximumX=-9999.;
     minimumX=9999.;
-    leg=TLegend(0.55,0.48,0.99,0.999)
+    leg=TLegend(0.8,0.8,0.99,0.99)
     leg.SetFillColor(0)
     leg.SetBorderSize(0)
     for cat in categories:
@@ -51,8 +52,12 @@ for variable in variables:
             minimumX = histogram[histoName].GetXaxis().GetXmin()
     print maximum,maximumX,minimumX
     maximum=maximum*1.8
-    if (variable=="HoE"):
-        maximum=maximum*300.
+    if (variable=="isosumoet" or
+        variable == "isosumoetbad" or
+        variable == "trkisooet" or
+        variable ==  "hovere" or
+        variable == "drtotk_25_99"):
+        maximum=maximum*30.
     if (variable=="OneOverEMinusOneOverP"):
         minimumX=-0.04
         maximumX=0.04
@@ -79,13 +84,17 @@ for variable in variables:
         #                    histogram[histoName].GetXaxis().SetRangeUser(minimumX,maximumX)
         histogram[histoName].Draw("HSAME")
         i=i+1
-        if (variable == "HoE"):
+        if (variable=="isosumoet" or
+            variable == "isosumoetbad" or
+            variable == "trkisooet" or
+            variable ==  "hovere" or
+            variable == "drtotk_25_99"):
             c.SetLogy(1)
         else:
             c.SetLogy(0)
 
     leg.Draw()
-    c.SaveAs("results_gg/"+variable+".png")
+    c.SaveAs(variable+".png")
                                                                                                                                                                                                                                                                                                                                                                                         
                                                                                                                                                                                                                                                                                                                                                                                         
 
