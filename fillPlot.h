@@ -13,6 +13,8 @@
 #include <TFile.h>
 #include <TH1D.h>
 
+#include <string>
+
 class fillPlot {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -36,7 +38,7 @@ public :
    int cicselection;
 
    // bool to decide if we want to write output txt file
-   bool writetxt;
+   std::string writetxt;
    
    // bool for switching on smearing and smearing parameters
    bool dosmear;
@@ -280,7 +282,7 @@ public :
    virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual void     setCic(int cic=5);
-   virtual void     Writetxt(bool value);
+   virtual void     Writetxt(char * filename);
    virtual void     SetPuWeights(bool isData = 0);
    virtual void     DoSmearing(double mean, double spread);   
    virtual Bool_t   Notify();
@@ -302,7 +304,8 @@ fillPlot::fillPlot(TTree *tree, bool isData)
 
    }
    Init(tree);
-   writetxt = dosmear = 0;
+   writetxt = "";
+   dosmear = 0;
    cicselection = -1;
    SetPuWeights(isData);
 }

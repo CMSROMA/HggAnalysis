@@ -39,7 +39,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
    TH1D * tempplot = new TH1D(name.c_str(),name.c_str(),nbin,min,max);
    
    ofstream outfile;
-   if (writetxt) outfile.open("events.txt"); 
+   if (writetxt != "") 
+     outfile.open(writetxt.c_str()); 
 
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -49,8 +50,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       // analysis cuts
 
-      if((TMath::Abs(etaphot1)>1.4442&&TMath::Abs(etaphot1)<1.566)||(TMath::Abs(etaphot2)>1.4442&&TMath::Abs(etaphot2)<1.566)
-	 || TMath::Abs(etaphot1)>2.5 || TMath::Abs(etaphot2)>2.5) continue;  // acceptance
+      if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
+	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
 
       if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
@@ -81,17 +82,19 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       }
 
       if(ebcat == 1) { // EB EE categories
-	if((TMath::Abs(etaphot1)>1.4442||TMath::Abs(etaphot2)>1.4442)) continue; 
+	if((TMath::Abs(etascphot1)>1.4442||TMath::Abs(etascphot2)>1.4442)) continue; 
       } else if(ebcat == 0){
-	if((TMath::Abs(etaphot1)<1.4442&&TMath::Abs(etaphot2)<1.4442)) continue; 
+	if((TMath::Abs(etascphot1)<1.4442&&TMath::Abs(etascphot2)<1.4442)) continue; 
       }
 
       // r9 categories
       bool isr9phot1(0), isr9phot2(0);
-      if(TMath::Abs(etaphot1)<1.4442 && r9phot1>.94) isr9phot1 = 1;
-      if(TMath::Abs(etaphot2)<1.4442 && r9phot2>.94) isr9phot2 = 1;
-      if(TMath::Abs(etaphot1)>1.4442 && r9phot1>.9) isr9phot1 = 1;
-      if(TMath::Abs(etaphot2)>1.4442 && r9phot2>.9) isr9phot2 = 1;
+
+      if(TMath::Abs(etascphot1)<1.4442 && r9phot1>.94) isr9phot1 = 1;
+      if(TMath::Abs(etascphot2)<1.4442 && r9phot2>.94) isr9phot2 = 1;
+      if(TMath::Abs(etascphot1)>1.4442 && r9phot1>.94) isr9phot1 = 1;
+      if(TMath::Abs(etascphot2)>1.4442 && r9phot2>.94) isr9phot2 = 1;
+
       if(r9cat == 1) {
 	if(!isr9phot1 || !isr9phot2) continue;
       } else if (r9cat == 0){
@@ -106,13 +109,15 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	pxlphot2 = !pid_haspixelseedphot2;
       }
 
+
       if(cicselection>0) {
 	idphot1 = (idcicphot1 >= cicselection);
 	idphot2 = (idcicphot2 >= cicselection);
       }else{	
-	idphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
-	idphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
+	idphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
+	idphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
       }
+
 
       if(!cs){ // photon id no control sample
 
@@ -126,8 +131,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       }else{ // photon id for control sample
 
-	looseidphot1 = cutIDEG(ptphot1, etaphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
-	looseidphot2 = cutIDEG(ptphot2, etaphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+	looseidphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+	looseidphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
 
 	if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
 
@@ -185,12 +190,13 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       } 
 
       // write on file
-      if(writetxt) 
-	outfile << run << " " << event  << " " << lumi << " mass " << massgg<< endl;      
+      if(writetxt != "") 
+	outfile << "run " << run << "\tlumi "  << lumi << "\tevent " << event  << "\tmassgg " << massgg<< endl;      
 
    }
    
-   if(writetxt) outfile.close();
+   if(writetxt != "") 
+     outfile.close();
 
    return tempplot;
 
@@ -215,12 +221,13 @@ void  fillPlot::Setcuts(double pt1, double pt2, double ptj1, double ptj2, double
   
 }
 
+
 void fillPlot::setCic(int cic) {
   cicselection = cic;
 }
 
 
-bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scatrk, int scaecal, int scahcal, int scahove) {
+bool fillPlot::cutIDEG(double ptPhot, double etascphot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scatrk, int scaecal, int scahcal, int scahove) {
 
   double hovereiso_eb=           0.01725*double(scahove)/100.;
   double hovereiso_ee=           0.022  *double(scahove)/100.;
@@ -242,7 +249,7 @@ bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, d
   bool hoveiso; 
   bool setaeta; 
 
-  if(TMath::Abs(etaPhot) < 1.4442) {
+  if(TMath::Abs(etascphot) < 1.479) {
     ptiso = (pid_hlwTrackNoDz < ptPhot * trackiso_rel + 8.34071e-01 + 5.48136e-01*rhoPF - 1.5 + trackiso_abs_eb);
     ecaliso = (pid_jurECAL < ptPhot * ecaliso_rel + 1.58995 + 2.98677e-01*rhoPF - 2.0 + ecaliso_abs_eb );
     hcaliso = (pid_twrHCAL < ptPhot * hcaliso_rel + 1.49628 + 2.44899e-01*rhoPF - 2.0 + hcaliso_abs_eb );
@@ -256,7 +263,7 @@ bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, d
 
   setaeta = pid_etawid < setaetaEB;
 
-  if(TMath::Abs(etaPhot) > 1.4442) {
+  if(TMath::Abs(etascphot) > 1.479) {
     setaeta = pid_etawid < setaetaEE;
   }  
 
@@ -264,9 +271,9 @@ bool fillPlot::cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, d
   return (ptiso && hcaliso && ecaliso && hoveiso && setaeta);
 }
 
-void fillPlot::Writetxt(bool value)
+void fillPlot::Writetxt(char * filename)
 {
-  writetxt = value;
+  writetxt=std::string(filename);
 }
 
 void fillPlot::SetPuWeights(bool isData)

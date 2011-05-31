@@ -67,13 +67,22 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   mcnames[7] = "higgs VBF";
   mcnames[8] = "higgs WZH";
 
-  // total data sample
-  //  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1_data.preselection.v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
-  //  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10_data.preselection.v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
-  TFile* data = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1_data.preselection.v1/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5.root");    
-
   TFile* mc_2010[9];
   TFile* mc_2011[9];
+
+  TString redntpDir= "/shome/meridian/software/CMSSW423/src/Analysis/Higgs";
+
+  TString preselectionLevel;
+
+  if (cic>0)
+    preselectionLevel="cicloose";
+  else
+    preselectionLevel="preselection";
+
+  // total data sample
+  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
+  //  TFile* data = new TFile(redntpDir+"/redntp.41xv10_data."+preselectionLevel+".v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
+  //  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5.root");    
 
   if(int_exp_2010>0){
     // box samples
@@ -95,25 +104,26 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     // W/Z/TT H higgs samples 
     mc_2010[8] = new TFile("redntp.39xv7.preselection.v2/redntp_WH_ZH_TTH_HToGG_M-115_00.root");
   }
+
   if(int_exp_2011>0){
     // box samples
-    mc_2011[0] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DiPhotonBox_Pt25to250-41x_ntpv4.root");
+    mc_2011[0] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DiPhotonBox_Pt25to250-41x_ntpv4.root");
     // diphoton jets samples
-    mc_2011[1] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DiPhotonJets_7TeV-madgraph.root");
+    mc_2011[1] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DiPhotonJets_7TeV-madgraph.root");
     // gjet samples
-    mc_2011[2] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[2] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // qcd pt>40 samples
-    mc_2011[3] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[3] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // qcd 30<pt<40 samples
-    mc_2011[4] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[4] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // drell yan samples
-    mc_2011[5] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
+    mc_2011[5] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
     // gluglu higgs samples 
-    mc_2011[6] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_GluGluToHToGG_M-115-41x_ntpv4.root");
+    mc_2011[6] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6.root");
     // vbf higgs samples 
-    mc_2011[7] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.41xv10.preselection.v1/merged/redntp_VBF_HToGG_M-105-41x_ntpv4.root");
+    mc_2011[7] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_VBF_HToGG_M-115_7TeV-powheg-pythia6.root");
     // W/Z/TT H higgs samples 
-    mc_2011[8] = new TFile("/shome/meridian/software/CMSSW423/src/Analysis/Higgs/redntp.42xv1.preselection.v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
+    mc_2011[8] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
   }
  
   // cross sections and scaling
@@ -146,7 +156,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // char for output name
   char name[1000];
   char allcut[3000];
-  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",isolscaletrk,"_",isolscaleecal,"_",isolscalehcal,"_",isolscalehove,"_",pixel);
+  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",isolscaletrk,"_",isolscaleecal,"_",isolscalehcal,"_",isolscalehove,"_",pixel,"_",cic);
 
   // output root file
   sprintf(name,"%s%s%s%s%s","results_gg/histo_",variable.c_str(),"_",allcut,".root");
@@ -191,10 +201,11 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   // filling histograms
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
-  data_fill.Writetxt(1);
+  sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
+  data_fill.Writetxt(name);
   vardata = data_fill.Plot(variable,"data", nbin, min, max); 
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
-  data_fill.Writetxt(0);
+  //  data_fill.Writetxt(0);
   vardatacs = data_fill.Plot(variable,"datacs", nbin, min, max, 1); 
 
   for (int i=0; i<9; i++){ 
@@ -420,6 +431,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   outfile << "zeppencut : " << zep << endl;
   outfile << "invmassjetcut : " << mjj << endl;
   outfile << "pixelseedcut : " << pixel << endl;
+  outfile << "CiC level : " << cic << endl;
   outfile << "ebcat : " << eb << endl;
   outfile << "r9cat : " << r9 << endl;
   outfile << "scaletrk : " << isolscaletrk << endl;
