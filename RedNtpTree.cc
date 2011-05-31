@@ -4,6 +4,7 @@
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TMath.h>
+#include <TStopwatch.h>
 #include <iostream>
 #include <vector>
 #include <TLorentzVector.h>
@@ -496,11 +497,8 @@ void RedNtpTree::SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_
   }
 }
 
-
-int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
-
-  int cutlevelpassed = -1;
-
+void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
+{
   int photon_category = PhotonCategory(photon_index);
 
   float val_tkiso = pid_hlwTrack03BestRank[photon_index];
@@ -523,8 +521,66 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
   float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
   float val_trkisooet=(val_tkiso)*50./ptPhot[photon_index];
 
+  cic4_cut_isosumoet[photon_category]->Fill(val_isosumoet);
+  cic4_cut_isosumoetbad[photon_category]->Fill(val_isosumoetbad);
+  cic4_cut_trkisooet[photon_category]->Fill(val_trkisooet);
+  cic4_cut_sieie[photon_category]->Fill(val_sieie);
+  cic4_cut_hovere[photon_category]->Fill(val_hoe);
+  cic4_cut_r9[photon_category]->Fill(val_r9);
+  cic4_cut_drtotk_25_99[photon_category]->Fill(val_drtotk_25_99);
+  cic4_cut_pixel[photon_category]->Fill(val_pixel);
+
+}
+
+int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
+
+  int cutlevelpassed = -1;
+
+  int photon_category = PhotonCategory(photon_index);
+
+  float val_tkiso = pid_hlwTrack03BestRank[photon_index];
+  float val_ecaliso = pid_jurECAL03[photon_index];
+  float val_hcaliso = pid_twrHCAL[photon_index];
+  float val_ecalisobad = pid_jurECAL[photon_index];
+  float val_hcalisobad = pid_twrHCAL[photon_index];
+  float val_tkisobad = pid_hlwTrackWorstVtx[photon_index];
+  float val_sieie = pid_etawid[photon_index];
+  float val_hoe = pid_HoverE[photon_index];
+  float val_r9 = E9Phot[photon_index]/escRawPhot[photon_index];
+  float val_drtotk_25_99 = pid_deltaRToTrackPhot[photon_index];
+  float val_pixel = (float)hasPixelSeedPhot[photon_index];
+
+  float isosumconst = 0.;
+  float isosumconstbad = 0.;
+
+  float rhofacbad=0.52, rhofac=0.17;
+  float val_isosumoet=(val_tkiso+val_ecaliso+val_hcaliso+isosumconst-rhoPF*rhofac)*50./ptPhot[photon_index];
+  float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
+  float val_trkisooet=(val_tkiso)*50./ptPhot[photon_index];
+
   bool ph_passcut[phoNCUTLEVELS][8];
+  //   float variable[8];
+  //  float cut[8];
   for(int iCUTLEVEL=0;iCUTLEVEL!=(int)phoNCUTLEVELS;++iCUTLEVEL) {
+
+    //     variable[0]=val_isosumoet;
+    //     variable[1]=val_isosumoetbad;
+    //     variable[2]=val_trkisooet;
+    //     variable[3]=val_sieie;        
+    //     variable[4]=val_hoe;          
+    //     variable[5]=val_r9;           
+    //     variable[6]=val_drtotk_25_99; 
+    //     variable[7]=val_pixel;
+    
+    //     cut[0]=cic4_cut_lead_isosumoet[iCUTLEVEL][photon_category];
+    //     cut[1]=cic4_cut_lead_isosumoetbad[iCUTLEVEL][photon_category];
+    //     cut[2]=cic4_cut_lead_trkisooet[iCUTLEVEL][photon_category];
+    //     cut[3]=cic4_cut_lead_sieie[iCUTLEVEL][photon_category];        
+    //     cut[4]=cic4_cut_lead_hovere[iCUTLEVEL][photon_category];          
+    //     cut[5]=cic4_cut_lead_r9[iCUTLEVEL][photon_category];           
+    //     cut[6]=cic4_cut_lead_drtotk_25_99[iCUTLEVEL][photon_category]; 
+    //     cut[7]=cic4_cut_lead_pixel[iCUTLEVEL][photon_category];        
+
     ph_passcut[iCUTLEVEL][0] = (val_isosumoet        <=   cic4_cut_lead_isosumoet[iCUTLEVEL][photon_category]     );
     ph_passcut[iCUTLEVEL][1] = (val_isosumoetbad     <=   cic4_cut_lead_isosumoetbad[iCUTLEVEL][photon_category]  );
     ph_passcut[iCUTLEVEL][2] = (val_trkisooet        <=   cic4_cut_lead_trkisooet[iCUTLEVEL][photon_category]     );
@@ -536,6 +592,8 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
     bool ph_passcut_all = true;
     for(int icut=0;icut!=8;++icut) {
       ph_passcut_all = ph_passcut_all && ph_passcut[iCUTLEVEL][icut];
+      if (!ph_passcut[iCUTLEVEL][icut])
+	break;
     }
     if(ph_passcut_all) {
       if( cutlevelpassed != iCUTLEVEL - 1 ) {
@@ -684,7 +742,7 @@ bool RedNtpTree::cutIDele(int i, photonidelecuts const& pid, vector<bool> *vpass
 
   // Use photon supercluster energy (would be e5x5 if r9>0.93 otherwise)
   bool ptiso,ecaliso, hcaliso, hoveiso, setaeta, deta, dphi, minhits, dcot, dist;
-  if(TMath::Abs(etaPhot[i]) < 1.4442) {
+  if(TMath::Abs(etascPhot[i]) < 1.4442) {
     ptiso = pid_hlwTrackElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.trackiso_relEB;
     ecaliso = pid_jurECALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.ecaliso_relEB;
     hcaliso = pid_twrHCALElePhot[ieleassocPhot[i]] < ptPhot[i] * pid.hcaliso_relEB;
@@ -737,7 +795,7 @@ bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass, 
   bool setaeta = pid_etawid[i] < pid.setaetaEB;
 
   if(PU){
-    if(TMath::Abs(etaPhot[i]) < 1.4442) {
+    if(TMath::Abs(etascPhot[i]) < 1.4442) {
       //    ptiso = (pid_hlwTrack[i] < ptPhot[i] * pid.trackiso_rel + 1.08998 + 8.86335e-02*rhoPF - 1.5 + pid.trackiso_abs);
       ptiso = (pid_hlwTrackNoDz[i] < ptPhot[i] * pid.trackiso_rel + 8.34071e-01 + 5.48136e-01*rhoPF - 1.5 + pid.trackiso_abs);
       ecaliso = (pid_jurECAL[i] < ptPhot[i] * pid.ecaliso_rel + 1.58995 + 2.98677e-01*rhoPF - 2.0 + pid.ecaliso_abs );
@@ -752,7 +810,7 @@ bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass, 
     }
   }
 
-  if(TMath::Abs(etaPhot[i]) > 1.4442) {
+  if(TMath::Abs(etascPhot[i]) > 1.4442) {
     setaeta = pid_etawid[i] < pid.setaetaEE;
   }  
 
@@ -818,8 +876,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    if (fChain == 0) return;
 
    Long64_t nentries = fChain->GetEntriesFast();
+   //   Long64_t nentries = 10000;
 
    Long64_t nbytes = 0, nb = 0;
+
+   TStopwatch timer;
 
    //   JSON myjson("Cert_160404-163869_7TeV_May10ReReco_Collisions11_CMSSWConfig.txt");
    JSON* myjson=0;
@@ -1264,6 +1325,23 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
      }
    }
 
+   for (int icat=0;icat<phoCiC4NCATEGORIES;++icat)
+     {
+       TString catName="cat";
+       catName+=icat;
+       catName+="_";
+       
+       cic4_cut_isosumoet[icat]=new TH1F("isosumoet_"+catName,"isosumoet_"+catName,100,-1.,25.);
+       cic4_cut_isosumoetbad[icat]=new TH1F("isosumoetbad_"+catName,"isosumoetbad_"+catName,200,-1.,50.);
+       cic4_cut_trkisooet[icat]=new TH1F("trkisooet_"+catName,"trkisooet_"+catName,100,0.,10.);
+       cic4_cut_sieie[icat]=new TH1F("sieie_"+catName,"sieie_"+catName,200,0.,0.05);
+       cic4_cut_hovere[icat]=new TH1F("hovere_"+catName,"hovere_"+catName,100,0.,0.1);
+       cic4_cut_r9[icat]=new TH1F("r9_"+catName,"r9_"+catName,110,0.,1.1);
+       cic4_cut_drtotk_25_99[icat]=new TH1F("drtotk_25_99_"+catName,"drtotk_25_99_"+catName,100,0.,0.5);
+       cic4_cut_pixel[icat]=new TH1F("pixel_"+catName,"pixel_"+catName,20,-0.25,9.75);
+       
+     }
+
    //event based cuts
    double ptphot1cut = 50;
    double ptphot2cut = 30;
@@ -1282,6 +1360,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    int nprocessed = 0;
    int nredntp = 0;
+   timer.Start();
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
@@ -1430,7 +1509,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	vector<bool> idpass(7);
 	vector<bool> idpassele(9);
 	vector<bool> idpasseg(5);
-	
+
+
+	if (ptPhot[i]>25. && assh)
+	  FillPhotonCiCSelectionVariable(i);
+
 	// photon id used for preselection
 	string finder(selection);
 	bool preselection;
@@ -1506,7 +1589,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  ptphotassreco.Fill(ptPhot[i]);
 	  etaphotassreco.Fill(etaPhot[i]);
 	  if(ptPhot[i]>30) {
-	    if(etaPhot[i]<1.47){
+	    if(TMath::Abs(etascPhot[i])<1.47){
 	      hcalisoassphot_EB.Fill(hcalovecal04Phot[i]);
 	      ecalisoassphot_EB.Fill(ecaliso04Phot[i] / ePhot[i]);
 	      ptisoassphot_EB.Fill(ptiso035Phot[i] / ptPhot[i]);
@@ -1514,7 +1597,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	      sminminclusassphot_EB.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassphot_EB.Fill(sMajMajPhot[i]);
 	      alphaclusassphot_EB.Fill(alphaPhot[i]);
-	    }else if(etaPhot[i]<2.5){
+	    }else if(TMath::Abs(etascPhot[i])<2.5){
 	      hcalisoassphot_EE.Fill(hcalovecal04Phot[i]);
 	      ecalisoassphot_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
 	      ptisoassphot_EE.Fill(ptiso035Phot[i] / ptPhot[i]);
@@ -1545,7 +1628,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  ptphotjetreco.Fill(ptPhot[i]);
 	  etaphotjetreco.Fill(etaPhot[i]);
 	  if(ptPhot[i]>30) {
-	    if(etaPhot[i]<1.47){
+	    if(TMath::Abs(etascPhot[i])<1.47){
 	      hcalisoassjet_EB.Fill(hcalovecal04Phot[i]);
 	      ecalisoassjet_EB.Fill(ecaliso04Phot[i] / ePhot[i]);
 	      ptisoassjet_EB.Fill(ptiso035Phot[i] / ptPhot[i]);
@@ -1553,7 +1636,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	      sminminclusassjet_EB.Fill(sMinMinPhot[i]);
 	      smaxmaxclusassjet_EB.Fill(sMajMajPhot[i]);
 	      alphaclusassjet_EB.Fill(alphaPhot[i]);
-	    }else if(etaPhot[i]<2.5){
+	    }else if(TMath::Abs(etascPhot[i])<2.5){
 	      hcalisoassjet_EE.Fill(hcalovecal04Phot[i]);
 	      ecalisoassjet_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
 	      ptisoassjet_EE.Fill(ptiso035Phot[i] / ptPhot[i]);
@@ -1996,8 +2079,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 
    }
+   timer.Stop();
    cout << "Original number of events: " << NtotEvents << endl;
    cout << "Processed events:          " << nprocessed << endl; 
+   cout << "Processed events/s (CPU Time):          " << ((float)nprocessed)/timer.CpuTime() << endl; 
+   cout << "Processed events/s (Real Time):          " << ((float)nprocessed)/timer.RealTime() << endl; 
    cout << "Events in reduced ntuple:  " << nredntp << endl; 
 
    hOutputFile->Write() ;

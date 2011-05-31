@@ -9,6 +9,8 @@
 
 
 #include <TFile.h>
+#include <TH1F.h>
+#include <TMath.h>
 #include <TString.h>
 #include<vector>
 #include<string>
@@ -55,6 +57,7 @@ private:
    enum phoCiC6Categories { phoCiC6EBhighR9=0, phoCiC6EBmidR9, phoCiC6EBlowR9, phoCiC6EEhighR9, phoCiC6EEmidR9, phoCiC6EElowR9, phoCiC6NCATEGORIES };
    enum phoCiC4Categories { phoCiC4EBhighR9=0, phoCiC4EBlowR9, phoCiC4EEhighR9, phoCiC4EElowR9, phoCiC4NCATEGORIES };
    void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead);
+   void FillPhotonCiCSelectionVariable(int photon_index);
    float cic6_cut_lead_isosumoet[phoNCUTLEVELS][6];
    float cic6_cut_lead_isosumoetbad[phoNCUTLEVELS][6];
    float cic6_cut_lead_trkisooet[phoNCUTLEVELS][6];
@@ -89,6 +92,15 @@ private:
    float cic4_cut_sublead_drtotk_25_99[phoNCUTLEVELS][4];
    float cic4_cut_sublead_pixel[phoNCUTLEVELS][4];
 
+   TH1F* cic4_cut_isosumoet[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_isosumoetbad[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_trkisooet[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_sieie[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_hovere[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_r9[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_drtotk_25_99[phoCiC4NCATEGORIES];
+   TH1F* cic4_cut_pixel[phoCiC4NCATEGORIES];
+
    int   PhotonCiCSelectionLevel( int photon_index);
    //photon category functions (r9 and eta)
    int PhotonCategory(int photonindex) { 
@@ -101,7 +113,8 @@ private:
    }
    int PhotonEtaCategory(int photonindex) {
      if(photonindex < 0) return -1;
-     int etacat = (Int_t)(etascPhot[photonindex]>1.479);   // 0, 1 (barrel --> endcap)
+     //int etacat = (Int_t)(!isEBPhot[photonindex]);   // 0, 1 (barrel --> endcap)
+     int etacat = (Int_t)(TMath::Abs(etascPhot[photonindex])>1.479);   // 0, 1 (barrel --> endcap)
      return  etacat;
    }
 

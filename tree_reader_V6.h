@@ -67,9 +67,9 @@ public :
    Int_t           hasPixelSeedPhot[40];   //[nPhot]
    Int_t           hasMatchedPromptElePhot[40];   //[nPhot]
    Int_t           hasMatchedConvPhot[40];   //[nPhot]
-   Bool_t          isEBPhot;
-   Bool_t          isEEPhot;
-   Bool_t          isEBEEGapPhot;
+   Bool_t          isEBPhot[40];
+   Bool_t          isEEPhot[40];
+   Bool_t          isEBEEGapPhot[40];
    Bool_t          pid_isEM[40];   //[nPhot]
    Bool_t          pid_isLoose[40];   //[nPhot]
    Bool_t          pid_isTight[40];   //[nPhot]
