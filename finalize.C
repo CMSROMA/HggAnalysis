@@ -74,13 +74,15 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   TString preselectionLevel;
 
-  if (cic>0)
-    preselectionLevel="cicloose";
-  else
+   if (cic>0)
+     preselectionLevel="cicloose";
+   else
     preselectionLevel="preselection";
 
+  TString preselectionLevelCS="preselection";
   // total data sample
   TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
+  TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
   //  TFile* data = new TFile(redntpDir+"/redntp.41xv10_data."+preselectionLevel+".v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
   //  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5.root");    
 
@@ -183,9 +185,14 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   // creating the fillers and setting cuts
   fillPlot data_fill((TTree*)data->Get("AnaTree"), 1);
+  fillPlot datacs_fill((TTree*)datacs->Get("AnaTree"), 1);
   data_fill.Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+  datacs_fill.Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
   if(cic>0)
-    data_fill.setCic(cic);
+    {
+      data_fill.setCic(cic);
+      datacs_fill.setCic(cic);
+    }
 
   fillPlot* mc_2010_fill[9];
   fillPlot* mc_2011_fill[9];
@@ -202,27 +209,41 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   }
  
   // smear mc
-  for (int i=0; i<9; i++){
-    if(int_exp_2010>0) mc_2010_fill[i]->DoSmearing(1.,0.0001);
-    if(int_exp_2011>0) mc_2011_fill[i]->DoSmearing(1.,0.0001);
-  }
+//   for (int i=0; i<9; i++){
+//     if(int_exp_2010>0) mc_2010_fill[i]->DoSmearing(1.,0.0001);
+//     if(int_exp_2011>0) mc_2011_fill[i]->DoSmearing(1.,0.0001);
+//   }
 
   // filling histograms
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
   sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
   data_fill.Writetxt(name);
-  vardata->Add(data_fill.Plot(variable,"data", nbin, min, max));
-  cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
+  sprintf(name,"%s%s%s","results_gg/events_",allcut,".root");
+  data_fill.WriteRoot(name);
+  vardata = data_fill.Plot(variable,"data", nbin, min, max); 
+  std::cout << "Selected events on data " << vardata->GetEntries() << std::endl;
+  cout << "running over " << ((TTree*)datacs->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
+
   //  data_fill.Writetxt(0);
-  vardatacs->Add(data_fill.Plot(variable,"datacs", nbin, min, max, 1));
+  datacs_fill.Writetxt(name);
+  datacs_fill.WriteRoot(name);
+  vardatacs = datacs_fill.Plot(variable,"datacs", nbin, min, max, 1); 
+  std::cout << "Selected events on data cs " << vardatacs->GetEntries() << std::endl;
+
 
   for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
     if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    if(int_exp_2010>0) var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
+
+    if(int_exp_2010>0) var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2010>0) std::cout << "Selected events on mc2010 " << i << " " << var_mc_2010[i]->GetEntries() << std::endl;
+
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
     if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    if(int_exp_2011>0) var_mc_2011[i]->Add(mc_2011_fill[i]->Plot(variable, name, nbin, min, max));
+
+    if(int_exp_2011>0) var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2011>0) std::cout << "Selected events on mc2011 " << i << " " << var_mc_2011[i]->GetEntries() << std::endl;
+
   }
 
   // scale mc to equivalent lumi
@@ -245,9 +266,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   
   // scale control sample
   vardata->Sumw2();
+  vardatacs->Sumw2();
   double num_data =  vardata->Integral();
   double num_data_cs = vardatacs->Integral();  
-  vardatacs->Scale(num_data/num_data_cs); 
+  //  vardatacs->Scale(num_data/num_data_cs); 
 
   // stack histograms  
   for (int i=1; i<nbin+1; i++){      

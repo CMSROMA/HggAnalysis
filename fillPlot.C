@@ -5,6 +5,7 @@
 #include <TRandom3.h>
 #include <TCanvas.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 
 TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max, bool cs)
@@ -39,9 +40,30 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
    TH1D * tempplot = new TH1D(name.c_str(),name.c_str(),nbin,min,max);
    
    ofstream outfile;
-   if (writetxt != "") 
-     outfile.open(writetxt.c_str()); 
 
+   TFile* fOut=0;
+   TTree* myTree=0;
+
+   if (var == "massgg" && writeRoot != "")
+     {
+       string filename(writeRoot);
+       if (cs)
+	   filename+=".cs";
+
+       fOut=TFile::Open(filename.c_str(),"RECREATE"); 
+       fOut->cd();
+       myTree = new TTree("diPhotonEvents","");
+       TString treeVariables = "run/I:lumi/I:event/I:massgg/F";    
+       myTree->Branch("diPhotonEvents",&(tree_.run),treeVariables);
+     }
+
+   if (writetxt != "") 
+     {
+       string filename(writetxt);
+       if (cs)
+	   filename+=".cs";
+       outfile.open(filename.c_str()); 
+     }
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
@@ -56,8 +78,9 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
 
-      if(ptjet1<ptjet1cut) continue; //pt first jet
-      if(ptjet2<ptjet2cut) continue; //pt second jet
+
+      if(ptjet1cut>0 && ptjet1<ptjet1cut) continue; //pt first jet
+      if(ptjet2cut>0 && ptjet2<ptjet2cut) continue; //pt second jet
 
       //delteta
       if(deltaetacut!=0){
@@ -130,12 +153,18 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	}
 
       }else{ // photon id for control sample
-
-	looseidphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
-	looseidphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
-
-	if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
-
+	if(cicselection>0) {
+	  looseidphot1 = (idcicphot1 > 0 );
+	  looseidphot2 = (idcicphot2 > 0 );
+	  //	  if( !( (idphot1 && looseidphot2 && !idphot2) || (idphot2 && looseidphot1 && !idphot1) ) ) continue; 
+	  // Not perfect should be using the same electronVeto wrt CiC selection (now using matchedPromptEle veto)
+	  if( !( (idphot1 && !idphot2 && !pid_hasMatchedPromptElephot2) || (idphot2 && !idphot1 && !pid_hasMatchedPromptElephot1) ) ) continue; 
+	}else{
+	  looseidphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+	  looseidphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
+	  
+	  if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
+	}
       }
 
       // finding variable to be plotted
@@ -189,12 +218,25 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	cout << "Number of vtx outside the reweighting range N<20" << endl;
       } 
 
+      if (var == "massgg" && writeRoot != "")
+	{
+	  tree_.run=run;
+	  tree_.lumi=lumi;
+	  tree_.event=event;
+	  tree_.massgg=massgg;
+	  fOut->cd();
+	  myTree->Fill();
+	}
+
       // write on file
       if(writetxt != "") 
-	outfile << "run " << run << "\tlumi "  << lumi << "\tevent " << event  << "\tmassgg " << massgg<< endl;      
+	outfile << "run " << run << "\t lumi "  << std::setw(4) << lumi << "\t event " << std::setw(12) << event  << "\t massgg " << std::setprecision(6) << massgg << endl;      
 
    }
    
+   if (var == "massgg" && writeRoot != "")
+     fOut->Write();
+
    if(writetxt != "") 
      outfile.close();
 
@@ -274,6 +316,11 @@ bool fillPlot::cutIDEG(double ptPhot, double etascphot, double pid_hlwTrackNoDz,
 void fillPlot::Writetxt(char * filename)
 {
   writetxt=std::string(filename);
+}
+
+void fillPlot::WriteRoot(char * filename)
+{
+  writeRoot=std::string(filename);
 }
 
 void fillPlot::SetPuWeights(bool isData)

@@ -20,6 +20,15 @@ public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
+   struct diPhotonTree_structure_ {
+     int run;
+     int lumi;
+     int event;
+     float massgg;
+   };
+   
+   diPhotonTree_structure_ tree_;
+
    //Cuts values
    double ptphot1cut;
    double ptphot2cut;
@@ -39,6 +48,7 @@ public :
 
    // bool to decide if we want to write output txt file
    std::string writetxt;
+   std::string writeRoot;
    
    // bool for switching on smearing and smearing parameters
    bool dosmear;
@@ -283,6 +293,7 @@ public :
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual void     setCic(int cic=5);
    virtual void     Writetxt(char * filename);
+   virtual void     WriteRoot(char * filename);
    virtual void     SetPuWeights(bool isData = 0);
    virtual void     DoSmearing(double mean, double spread);   
    virtual Bool_t   Notify();
@@ -305,6 +316,7 @@ fillPlot::fillPlot(TTree *tree, bool isData)
    }
    Init(tree);
    writetxt = "";
+   writeRoot = "";
    dosmear = 0;
    cicselection = -1;
    SetPuWeights(isData);
