@@ -142,6 +142,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // getting the number of original events in each sample (processed with CMSSW)
   int n_mc_2010[9], n_mc_2011[9];
   for(int i=0; i<9; i++){
+    n_mc_2010[i] = n_mc_2011[i] = 0;
     if(int_exp_2010>0) n_mc_2010[i] = ((TH1D*)mc_2010[i]->Get("ptphotgen1"))->GetEntries();
     if(int_exp_2011>0) n_mc_2011[i] = ((TH1D*)mc_2011[i]->Get("ptphotgen1"))->GetEntries();
   }
@@ -149,6 +150,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // setting the scaling factor to actual lumi
   double scale_mc_2010[9], scale_mc_2011[9];
   for(int i=0; i<9; i++){
+    scale_mc_2010[i] = scale_mc_2011[i] = 0; 
     if(int_exp_2010>0) scale_mc_2010[i] = cross_mc[i] * int_exp_2010 / n_mc_2010[i];
     if(int_exp_2011>0) scale_mc_2011[i] = cross_mc[i] * int_exp_2011 / n_mc_2011[i];
   }
@@ -163,14 +165,20 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   TFile * hOutputFile   = new TFile(name, "RECREATE" ) ;
 
   // histograms needed by the machinery
-  TH1D* vardata;
-  TH1D* vardatacs;
+  TH1D* vardata = new TH1D("vardata","vardata",nbin,min,max);
+  TH1D* vardatacs = new TH1D("vardatacs","vardatacs",nbin,min,max);
   TH1D* var_mc_2010[9];
   TH1D* var_mc_2011[9];
   TH1D * var[6];
   for (int i=0; i<6; i++) {
     sprintf(name,"%s%d","var",i);
     var[i] = new TH1D(name,name,nbin,min,max);
+  }
+  for (int i=0; i<9; i++) {
+    sprintf(name,"%s%d","var_mc_2010_",i);
+    var_mc_2010[i] = new TH1D(name,name,nbin,min,max);
+    sprintf(name,"%s%d","var_mc_2011_",i);
+    var_mc_2011[i] = new TH1D(name,name,nbin,min,max);
   }
 
   // creating the fillers and setting cuts
@@ -183,8 +191,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   fillPlot* mc_2011_fill[9];
 
   for (int i=0; i<9; i++){
-    if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"));
-    if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"));
+    if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"), 1);
+    if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"), 1);
     if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
     if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
     if(cic>0){
@@ -203,18 +211,18 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
   sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
   data_fill.Writetxt(name);
-  vardata = data_fill.Plot(variable,"data", nbin, min, max); 
+  vardata->Add(data_fill.Plot(variable,"data", nbin, min, max));
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
   //  data_fill.Writetxt(0);
-  vardatacs = data_fill.Plot(variable,"datacs", nbin, min, max, 1); 
+  vardatacs->Add(data_fill.Plot(variable,"datacs", nbin, min, max, 1));
 
   for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
     if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    if(int_exp_2010>0) var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2010>0) var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
     if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-    if(int_exp_2011>0) var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2011>0) var_mc_2011[i]->Add(mc_2011_fill[i]->Plot(variable, name, nbin, min, max));
   }
 
   // scale mc to equivalent lumi
@@ -226,6 +234,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // counting number of events passing selection (scaled)
   double num_mc_2010[9],num_mc_2011[9]; 
   for (int i=0; i<9; i++){ 
+    num_mc_2010[i] = num_mc_2011[i] = 0;
     if(int_exp_2010>0) num_mc_2010[i] = var_mc_2010[i]->Integral();  
     if(int_exp_2011>0) num_mc_2011[i] = var_mc_2011[i]->Integral();  
   }
