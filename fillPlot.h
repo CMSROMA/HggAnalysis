@@ -164,6 +164,7 @@ public :
    Float_t         invmass2g1j;
    Float_t         invmass2g2j;
    Float_t         nvtx;
+   Int_t           npu;
    Float_t         met;
    Int_t           NtotEvents;
    Float_t         xsection;
@@ -277,6 +278,7 @@ public :
    TBranch        *b_invmass2g1j;   //!
    TBranch        *b_invmass2g2j;   //!
    TBranch        *b_nvtx;   //!
+   TBranch        *b_npu;   //!
    TBranch        *b_met;   //!
    TBranch        *b_NtotEvents;   //!
    TBranch        *b_xsection;   //!
@@ -294,7 +296,7 @@ public :
    virtual void     setCic(int cic=5);
    virtual void     Writetxt(char * filename);
    virtual void     WriteRoot(char * filename);
-   virtual void     SetPuWeights(bool isData = 0);
+   virtual void     SetPuWeights(bool isData = 0,std::string file = "");
    virtual void     DoSmearing(double mean, double spread);   
    virtual Bool_t   Notify();
 };
@@ -319,7 +321,7 @@ fillPlot::fillPlot(TTree *tree, bool isData)
    writeRoot = "";
    dosmear = 0;
    cicselection = -1;
-   SetPuWeights(isData);
+//   SetPuWeights(isData);
 }
 
 fillPlot::~fillPlot()
@@ -471,6 +473,7 @@ void fillPlot::Init(TTree *tree)
    fChain->SetBranchAddress("invmass2g1j", &invmass2g1j, &b_invmass2g1j);
    fChain->SetBranchAddress("invmass2g2j", &invmass2g2j, &b_invmass2g2j);
    fChain->SetBranchAddress("nvtx", &nvtx, &b_nvtx);
+   fChain->SetBranchAddress("npu", &npu, &b_npu);
    fChain->SetBranchAddress("met", &met, &b_met);
    fChain->SetBranchAddress("NtotEvents", &NtotEvents, &b_NtotEvents);
    fChain->SetBranchAddress("xsection", &xsection, &b_xsection);

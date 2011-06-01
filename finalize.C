@@ -202,6 +202,13 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"), 1);
     if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
     if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+
+    
+    if (int_exp_2011>0 && i<6)
+      mc_2011_fill[i]->SetPuWeights(0,"mc_41x_PUweight.root");
+    else if(int_exp_2011>0)
+      mc_2011_fill[i]->SetPuWeights(0,"mc_42x_PUweight.root");
+
     if(cic>0){
       if(int_exp_2010>0) mc_2010_fill[i]->setCic(cic);
       if(int_exp_2011>0) mc_2011_fill[i]->setCic(cic);

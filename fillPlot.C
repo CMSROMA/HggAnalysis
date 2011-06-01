@@ -211,11 +211,11 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       }
 
       // pu reweighting
-      if(nvtx<20) 
-	tempplot->Fill(variable, puweights_[nvtx]);
+      if(npu<22 && puweights_.size()>0) 
+	tempplot->Fill(variable, puweights_[npu]);
       else{
 	tempplot->Fill(variable);
-	cout << "Number of vtx outside the reweighting range N<20" << endl;
+	//	cout << "Event outside the reweighting range N<22" << endl;
       } 
 
       if (var == "massgg" && writeRoot != "")
@@ -323,20 +323,32 @@ void fillPlot::WriteRoot(char * filename)
   writeRoot=std::string(filename);
 }
 
-void fillPlot::SetPuWeights(bool isData)
+void fillPlot::SetPuWeights(bool isData,std::string puWeightFile)
 {
+  if (puWeightFile == "")
+    {
+      std::cout << "you need a weights file to use this" << std::endl;
+      return;
+    }
 
-  TFile *f_pu  = new TFile("nvtx.root","READ");
-  TH1F *puweights = 0;
-  puweights= (TH1F*) f_pu->Get("h1_MC_nvtx");
+  if (!isData)
+    std::cout << "Using file " << puWeightFile << " for PU reweighting" << std::endl;
 
- for (int i = 0; i<20; i++) {
-       
-   if( !isData ) puweights_.push_back(puweights->GetBinContent(i+1));
-   else puweights_.push_back(1);
-   //std::cout<<puweights_[i]<<std::endl;
-   }
-
+  TFile *f_pu  = new TFile(puWeightFile.c_str(),"READ");
+  TH1D *puweights = 0;
+  puweights= (TH1D*) f_pu->Get("weights");
+  if (!puweights)
+    {
+      std::cout << "weights histogram not found in file " << puWeightFile << std::endl;
+      return;
+    }
+  for (int i = 0; i<22; i++) {
+    
+    if( !isData ) puweights_.push_back(puweights->GetBinContent(i+1));
+    else puweights_.push_back(1.);
+    //std::cout<<puweights_[i]<<std::endl;
+  }
+  
 }
 
 void fillPlot::DoSmearing(double mean, double spread)
