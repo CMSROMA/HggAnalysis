@@ -20,17 +20,17 @@
   TH1F num3_sublead("num3_sublead","num3_sublead",70,30.,100.);
   TH1F num4_sublead("num4_sublead","num4_sublead",70,30.,100.);
 
-  AnaTree->Draw("ptphot1>>den_lead","abs(etascphot1)>1.5 && ptphot1>30. && abs(etascphot1)<2.5");
-  AnaTree->Draw("ptphot1>>num1_lead","abs(etascphot1)>1.5 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>0");
-  AnaTree->Draw("ptphot1>>num2_lead","abs(etascphot1)>1.5 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>1");
-  AnaTree->Draw("ptphot1>>num3_lead","abs(etascphot1)>1.5 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>2");
-  AnaTree->Draw("ptphot1>>num4_lead","abs(etascphot1)>1.5 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>3");
+  AnaTree->Draw("ptphot1>>den_lead","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5");
+  AnaTree->Draw("ptphot1>>num1_lead","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>0");
+  AnaTree->Draw("ptphot1>>num2_lead","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>1");
+  AnaTree->Draw("ptphot1>>num3_lead","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>2");
+  AnaTree->Draw("ptphot1>>num4_lead","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>3");
 
-  AnaTree->Draw("ptphot2>>den_sublead","abs(etascphot2)>1.5 && ptphot2>30. && abs(etascphot2)<2.5");
-  AnaTree->Draw("ptphot2>>num1_sublead","abs(etascphot2)>1.5 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>0");
-  AnaTree->Draw("ptphot2>>num2_sublead","abs(etascphot2)>1.5 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>1");
-  AnaTree->Draw("ptphot2>>num3_sublead","abs(etascphot2)>1.5 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>2");
-  AnaTree->Draw("ptphot2>>num4_sublead","abs(etascphot2)>1.5 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>3");
+  AnaTree->Draw("ptphot2>>den_sublead","abs(etascphot2)>1.566 && ptphot2>30. && abs(etascphot2)<2.5");
+  AnaTree->Draw("ptphot2>>num1_sublead","abs(etascphot2)>1.566 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>0");
+  AnaTree->Draw("ptphot2>>num2_sublead","abs(etascphot2)>1.566 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>1");
+  AnaTree->Draw("ptphot2>>num3_sublead","abs(etascphot2)>1.566 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>2");
+  AnaTree->Draw("ptphot2>>num4_sublead","abs(etascphot2)>1.566 && ptphot2>30. && abs(etascphot2)<2.5 && idcicphot2>3");
 
   TH1F* den= (TH1F*) den_lead.Clone("den");
   TH1F* num1=(TH1F*) num1_lead.Clone("num1");
@@ -96,13 +96,11 @@
   leg.Draw();
   c1->SaveAs("sublead_EE_CiC_eff.png");
 
-  std::cout << "Dividing" << std::endl;
   num1->Divide(den);
   num2->Divide(den);
   num3->Divide(den);
   num4->Divide(den);
 
-  std::cout << "Divided" << std::endl;
   a.Draw();
   num1->SetLineWidth(1.3);
   num1->Draw("SAME");
@@ -132,17 +130,17 @@
   TH1F num4_sublead("num4_sublead","num4_sublead",70,30.,100.);
 
 
-  AnaTree->Draw("ptphot1>>den_lead", "abs(etascphot1)<1.479 && ptphot1>30. ");
-  AnaTree->Draw("ptphot1>>num1_lead","abs(etascphot1)<1.479 && ptphot1>30.  && idcicphot1>0");
-  AnaTree->Draw("ptphot1>>num2_lead","abs(etascphot1)<1.479 && ptphot1>30.  && idcicphot1>1");
-  AnaTree->Draw("ptphot1>>num3_lead","abs(etascphot1)<1.479 && ptphot1>30.  && idcicphot1>2");
-  AnaTree->Draw("ptphot1>>num4_lead","abs(etascphot1)<1.479 && ptphot1>30.  && idcicphot1>3");
+  AnaTree->Draw("ptphot1>>den_lead", "abs(etascphot1)<1.4442 && ptphot1>30. ");
+  AnaTree->Draw("ptphot1>>num1_lead","abs(etascphot1)<1.4442 && ptphot1>30.  && idcicphot1>0");
+  AnaTree->Draw("ptphot1>>num2_lead","abs(etascphot1)<1.4442 && ptphot1>30.  && idcicphot1>1");
+  AnaTree->Draw("ptphot1>>num3_lead","abs(etascphot1)<1.4442 && ptphot1>30.  && idcicphot1>2");
+  AnaTree->Draw("ptphot1>>num4_lead","abs(etascphot1)<1.4442 && ptphot1>30.  && idcicphot1>3");
 
-  AnaTree->Draw("ptphot2>>den_sublead", "abs(etascphot2)<1.479 && ptphot2>30. ");
-  AnaTree->Draw("ptphot2>>num1_sublead","abs(etascphot2)<1.479 && ptphot2>30.  && idcicphot2>0");
-  AnaTree->Draw("ptphot2>>num2_sublead","abs(etascphot2)<1.479 && ptphot2>30.  && idcicphot2>1");
-  AnaTree->Draw("ptphot2>>num3_sublead","abs(etascphot2)<1.479 && ptphot2>30.  && idcicphot2>2");
-  AnaTree->Draw("ptphot2>>num4_sublead","abs(etascphot2)<1.479 && ptphot2>30.  && idcicphot2>3");
+  AnaTree->Draw("ptphot2>>den_sublead", "abs(etascphot2)<1.4442 && ptphot2>30. ");
+  AnaTree->Draw("ptphot2>>num1_sublead","abs(etascphot2)<1.4442 && ptphot2>30.  && idcicphot2>0");
+  AnaTree->Draw("ptphot2>>num2_sublead","abs(etascphot2)<1.4442 && ptphot2>30.  && idcicphot2>1");
+  AnaTree->Draw("ptphot2>>num3_sublead","abs(etascphot2)<1.4442 && ptphot2>30.  && idcicphot2>2");
+  AnaTree->Draw("ptphot2>>num4_sublead","abs(etascphot2)<1.4442 && ptphot2>30.  && idcicphot2>3");
 
   TH1F* den= (TH1F*) den_lead.Clone("den");
   TH1F* num1=(TH1F*) num1_lead.Clone("num1");
@@ -201,13 +199,11 @@
   leg.Draw();
   c1->SaveAs("sublead_EB_CiC_eff.png");
 
-  std::cout << "Dividing" << std::endl;
   num1->Divide(den);
   num2->Divide(den);
   num3->Divide(den);
   num4->Divide(den);
 
-  std::cout << "Divided" << std::endl;
   a.Draw();
   num1->SetLineWidth(1.3);
   num1->Draw("SAME");
@@ -223,4 +219,96 @@
 
   leg.Draw();
   c1->SaveAs("EB_CiC_eff.png");
+
+  TH1F  den_leadRhoPF( "den_leadRhoPF", "den_leadRhoPF",30,0.,10.);
+  TH1F num1_leadRhoPF("num1_leadRhoPF","num1_leadRhoPF",30,0.,10.);
+  TH1F num2_leadRhoPF("num2_leadRhoPF","num2_leadRhoPF",30,0.,10.);
+  TH1F num3_leadRhoPF("num3_leadRhoPF","num3_leadRhoPF",30,0.,10.);
+  TH1F num4_leadRhoPF("num4_leadRhoPF","num4_leadRhoPF",30,0.,10.);
+
+  AnaTree->Draw("rhoPF>>den_leadRhoPF","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5");
+  AnaTree->Draw("rhoPF>>num1_leadRhoPF","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>0");
+  AnaTree->Draw("rhoPF>>num2_leadRhoPF","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>1");
+  AnaTree->Draw("rhoPF>>num3_leadRhoPF","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>2");
+  AnaTree->Draw("rhoPF>>num4_leadRhoPF","abs(etascphot1)>1.566 && ptphot1>30. && abs(etascphot1)<2.5 && idcicphot1>3");
+
+  TH1F* den= (TH1F*) den_leadRhoPF.Clone("den");
+  TH1F* num1=(TH1F*) num1_leadRhoPF.Clone("num1");
+  TH1F* num2=(TH1F*) num2_leadRhoPF.Clone("num2");
+  TH1F* num3=(TH1F*) num3_leadRhoPF.Clone("num3");
+  TH1F* num4=(TH1F*) num4_leadRhoPF.Clone("num4");
+
+  num1_leadRhoPF.Divide(&den_leadRhoPF);
+  num2_leadRhoPF.Divide(&den_leadRhoPF);
+  num3_leadRhoPF.Divide(&den_leadRhoPF);
+  num4_leadRhoPF.Divide(&den_leadRhoPF);
+
+  TH2F aRho("aRho","aRho",10,0.,10.,10,0.4,1.);
+  aRho.Draw();
+  aRho.GetXaxis()->SetTitle("#rho [GeV]"); 
+
+  num1_leadRhoPF.SetLineWidth(1.3);
+  num1_leadRhoPF.Draw("SAME");
+  num2_leadRhoPF.SetLineWidth(1.3);
+  num2_leadRhoPF.SetLineColor(2);
+  num2_leadRhoPF.Draw("SAME");
+  num3_leadRhoPF.SetLineWidth(1.3);
+  num3_leadRhoPF.SetLineColor(3);
+  num3_leadRhoPF.Draw("SAME");
+  num4_leadRhoPF.SetLineWidth(1.3);
+  num4_leadRhoPF.SetLineColor(4);
+  num4_leadRhoPF.Draw("SAME");
+
+  TLegend leg1=TLegend(0.8,0.1,0.99,0.3);
+  leg1.SetFillColor(0);
+  leg1.SetBorderSize(0);
+  leg1.AddEntry(&num1_leadRhoPF,ciclevels[0],"l");
+  leg1.AddEntry(&num2_leadRhoPF,ciclevels[1],"l");
+  leg1.AddEntry(&num3_leadRhoPF,ciclevels[2],"l");
+  leg1.AddEntry(&num4_leadRhoPF,ciclevels[3],"l");
+  leg1.Draw();
+
+  c1->SaveAs("leadRhoPF_EE_CiC_eff.png");
+
+
+  TH1F  den_leadRhoPF( "den_leadRhoPF", "den_leadRhoPF",30,0.,10.);
+  TH1F num1_leadRhoPF("num1_leadRhoPF","num1_leadRhoPF",30,0.,10.);
+  TH1F num2_leadRhoPF("num2_leadRhoPF","num2_leadRhoPF",30,0.,10.);
+  TH1F num3_leadRhoPF("num3_leadRhoPF","num3_leadRhoPF",30,0.,10.);
+  TH1F num4_leadRhoPF("num4_leadRhoPF","num4_leadRhoPF",30,0.,10.);
+
+  AnaTree->Draw( "rhoPF>>den_leadRhoPF","ptphot1>30. && abs(etascphot1)<1.4442");
+  AnaTree->Draw("rhoPF>>num1_leadRhoPF","ptphot1>30. && abs(etascphot1)<1.4442 && idcicphot1>0");
+  AnaTree->Draw("rhoPF>>num2_leadRhoPF","ptphot1>30. && abs(etascphot1)<1.4442 && idcicphot1>1");
+  AnaTree->Draw("rhoPF>>num3_leadRhoPF","ptphot1>30. && abs(etascphot1)<1.4442 && idcicphot1>2");
+  AnaTree->Draw("rhoPF>>num4_leadRhoPF","ptphot1>30. && abs(etascphot1)<1.4442 && idcicphot1>3");
+
+  TH1F* den= (TH1F*) den_leadRhoPF.Clone("den");
+  TH1F* num1=(TH1F*) num1_leadRhoPF.Clone("num1");
+  TH1F* num2=(TH1F*) num2_leadRhoPF.Clone("num2");
+  TH1F* num3=(TH1F*) num3_leadRhoPF.Clone("num3");
+  TH1F* num4=(TH1F*) num4_leadRhoPF.Clone("num4");
+
+  num1_leadRhoPF.Divide(&den_leadRhoPF);
+  num2_leadRhoPF.Divide(&den_leadRhoPF);
+  num3_leadRhoPF.Divide(&den_leadRhoPF);
+  num4_leadRhoPF.Divide(&den_leadRhoPF);
+ 
+  aRho.Draw();
+  aRho.GetXaxis()->SetTitle("#rho [GeV]"); 
+
+  num1_leadRhoPF.SetLineWidth(1.3);
+  num1_leadRhoPF.Draw("SAME");
+  num2_leadRhoPF.SetLineWidth(1.3);
+  num2_leadRhoPF.SetLineColor(2);
+  num2_leadRhoPF.Draw("SAME");
+  num3_leadRhoPF.SetLineWidth(1.3);
+  num3_leadRhoPF.SetLineColor(3);
+  num3_leadRhoPF.Draw("SAME");
+  num4_leadRhoPF.SetLineWidth(1.3);
+  num4_leadRhoPF.SetLineColor(4);
+  num4_leadRhoPF.Draw("SAME");
+
+  leg1.Draw();
+  c1->SaveAs("leadRhoPF_EB_CiC_eff.png");
 }
