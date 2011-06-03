@@ -32,6 +32,8 @@ public :
    //Cuts values
    double ptphot1cut;
    double ptphot2cut;
+   double pthiggsmincut;
+   double pthiggsmaxcut;
    double ptjet1cut;
    double ptjet2cut;
    double deltaetacut;
@@ -290,7 +292,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Setcuts(double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int isolscaletrk = 100, int isolscaleecal = 100, int isolscalehcal = 100, int isolscalehove = 100, bool pixelseedveto = 1);
+   virtual void     Setcuts(double pt1=50, double pt2=30, double pthiggsmin=-100, double pthiggsmax=-100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int isolscaletrk = 100, int isolscaleecal = 100, int isolscalehcal = 100, int isolscalehove = 100, bool pixelseedveto = 1);
    virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual void     setCic(int cic=5);

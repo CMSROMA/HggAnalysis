@@ -27,7 +27,7 @@ inline double delta_phi(double phi1, double phi2) {
 //
 // .x finalize.C(33,230,40,25,20,15,2.5,2.5,300,1,1,4,1) 
 
-vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int cic = 4, bool pixel = 1, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]", int isolscaletrk = 100., int isolscaleecal = 100., int isolscalehcal = 100., int isolscalehove = 100.){
+vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double pthiggsmin = -100, double pthiggsmax = -100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int cic = 4, bool pixel = 1, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]", int isolscaletrk = 100., int isolscaleecal = 100., int isolscalehcal = 100., int isolscalehove = 100.){
 
 
   gROOT->SetStyle("Plain");
@@ -160,7 +160,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // char for output name
   char name[1000];
   char allcut[3000];
-  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",isolscaletrk,"_",isolscaleecal,"_",isolscalehcal,"_",isolscalehove,"_",pixel,"_",cic);
+  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",pthiggsmin,"_",pthiggsmax,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",isolscaletrk,"_",isolscaleecal,"_",isolscalehcal,"_",isolscalehove,"_",pixel,"_",cic);
 
   // output root file
   sprintf(name,"%s%s%s%s%s","results_gg/histo_",variable.c_str(),"_",allcut,".root");
@@ -186,8 +186,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // creating the fillers and setting cuts
   fillPlot data_fill((TTree*)data->Get("AnaTree"), 1);
   fillPlot datacs_fill((TTree*)datacs->Get("AnaTree"), 1);
-  data_fill.Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-  datacs_fill.Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+  data_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+  datacs_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
   if(cic>0)
     {
       data_fill.setCic(cic);
@@ -200,15 +200,15 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   for (int i=0; i<9; i++){
     if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"), 1);
     if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"), 1);
-    if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-    if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
 
-    
+    std::cout << "Setting PU for " << mcnames[i] << std::endl;
     if (int_exp_2011>0 && i<6)
       mc_2011_fill[i]->SetPuWeights(0,"mc_41x_PUweight.root");
     else if(int_exp_2011>0)
       mc_2011_fill[i]->SetPuWeights(0,"mc_42x_PUweight.root");
-
+    
     if(cic>0){
       if(int_exp_2010>0) mc_2010_fill[i]->setCic(cic);
       if(int_exp_2011>0) mc_2011_fill[i]->setCic(cic);
@@ -222,6 +222,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 //   }
 
   // filling histograms
+  std::cout << " ++++++++++++++ DATA ++++++++++++++++" << std::endl;
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
   sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
   data_fill.Writetxt(name);
@@ -237,19 +238,19 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   vardatacs = datacs_fill.Plot(variable,"datacs", nbin, min, max, 1); 
   std::cout << "Selected events on data cs " << vardatacs->GetEntries() << std::endl;
 
-
+  std::cout << " ++++++++++++++ MC ++++++++++++++++" << std::endl;
   for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
     if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
 
     if(int_exp_2010>0) var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
-    if(int_exp_2010>0) std::cout << "Selected events on mc2010 " << i << " " << var_mc_2010[i]->GetEntries() << std::endl;
+    if(int_exp_2010>0) std::cout << "Selected events on mc2010 " << name << " " << var_mc_2010[i]->GetEntries() << std::endl;
 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
     if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
 
     if(int_exp_2011>0) var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
-    if(int_exp_2011>0) std::cout << "Selected events on mc2011 " << i << " " << var_mc_2011[i]->GetEntries() << std::endl;
+    if(int_exp_2011>0) std::cout << "Selected events on mc2011 " << name << " " << var_mc_2011[i]->GetEntries() << std::endl;
 
   }
 
@@ -350,15 +351,21 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   sprintf(name,"%s%s%s%s%s","results_gg/higgs_",variable.c_str(),"_",allcut,".gif");
   c0->SaveAs(name);
   
+  double integralhiggs ;
+  double entrieshiggs ;
+  double integralbkg ;
   // some calculation for s/sqrt(b)
-  sprintf(name,"%s%s%s%d%s","results_gg/optimalcut_",variable.c_str(),"_",eb,".txt");
-  double integralhiggs = var_mc_2011[6]->Integral(43,56);
-  double entrieshiggs =  var_mc_2011[6]->Integral(0,201);
-  double integralbkg = var[1]->Integral(30,71)/3.;
-  cout << "Fraction in signal box " << integralhiggs/entrieshiggs << endl;
-  cout << "Number of signal events " << integralhiggs/boosthiggs << endl;
-  cout << "Number of bkg events " << integralbkg << endl;
-  cout << "S/sqrt(B) " << integralhiggs/boosthiggs/sqrt(integralbkg) << endl;
+  if (variable == "massgg")
+    {  
+      sprintf(name,"%s%s%s%d%s","results_gg/optimalcut_",variable.c_str(),"_",eb,".txt");
+      integralhiggs = var_mc_2011[6]->Integral(43,56);
+      entrieshiggs =  var_mc_2011[6]->Integral(0,201);
+      integralbkg = var[1]->Integral(30,71)/3.;
+      cout << "Fraction in signal box " << integralhiggs/entrieshiggs << endl;
+      cout << "Number of signal events " << integralhiggs/boosthiggs << endl;
+      cout << "Number of bkg events " << integralbkg << endl;
+      cout << "S/sqrt(B) " << integralhiggs/boosthiggs/sqrt(integralbkg) << endl;
+  }  
 
   // data only plot
   vardata->SetXTitle(axis.c_str());
@@ -374,7 +381,15 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // data overlaid to mc
   double themax =   vardata->GetMaximum();
   if(var[0]->GetMaximum()>max) themax = var[0]->GetMaximum();
-  vardata->SetMaximum(themax*1.1);
+  if (
+      variable == "etaphot1" || variable == "etaphot2" ||
+      variable == "phiphot1" || variable == "phiphot2" ||
+      variable == "etajet1" || variable == "etajet2" ||
+      variable == "phijet1" || variable == "phijet2"
+      )
+    vardata->SetMaximum(themax*2.0);
+  else
+    vardata->SetMaximum(themax*1.1);
   var[0]->Draw("same");
   var[1]->Draw("same");
   var[2]->Draw("same");
@@ -412,6 +427,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     var[0]->Rebin(4);
     themax = var[0]->GetMaximum();
     var[0]->SetMaximum(themax*1.1);
+    var[0]->SetMinimum(0.);
     var[0]->Draw();
     var[1]->Rebin(4);
     var[1]->Draw("same");
@@ -454,104 +470,109 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     sprintf(name,"%s%s%s%s%s","results_gg/data_rebin_resize",variable.c_str(),"_",allcut,".gif");
     c0->SaveAs(name);
 
-  }
+  
 
-  sprintf(name,"%s%s%s","results_gg/yields_",allcut,".txt");
-  ofstream outfile(name);  
-  outfile << "####################################" << endl;
-  outfile << "CUTS " << endl;
-  outfile << "####################################" << endl;
-  outfile << "ptphot1 : " << pt1 << endl;
-  outfile << "ptphot2 : " << pt2 << endl;
-  outfile << "ptjet1 : " << ptj1 << endl;
-  outfile << "ptjet2 : " << ptj2 << endl;
-  outfile << "deltaetacut : " << deltae << endl;
-  outfile << "zeppencut : " << zep << endl;
-  outfile << "invmassjetcut : " << mjj << endl;
-  outfile << "pixelseedcut : " << pixel << endl;
-  outfile << "CiC level : " << cic << endl;
-  outfile << "ebcat : " << eb << endl;
-  outfile << "r9cat : " << r9 << endl;
-  outfile << "scaletrk : " << isolscaletrk << endl;
-  outfile << "scaleecal : " << isolscaleecal << endl;
-  outfile << "scalehcal : " << isolscalehcal << endl;
-  outfile << "scalehove : " << isolscalehove << endl;
-  outfile << endl;
-  outfile << "####################################" << endl;
-  outfile << "N of generated events" << endl;
-  outfile << "####################################" << endl;
-  outfile << "# events hig_glu2010 =    " << n_mc_2010[6] << endl;
-  outfile << "# events hig_vbf2010 =    " << n_mc_2010[7] << endl;
-  outfile << "# events hig_wzt2010 =    " << n_mc_2010[8] << endl;
-  outfile << "# events dy_2010 =        " << n_mc_2010[5] << endl;
-  outfile << "# events box_2010 =       " << n_mc_2010[0] << endl;
-  outfile << "# events diphotjet_2010 = " << n_mc_2010[1] << endl;
-  outfile << "# events gjet_2010 =      " << n_mc_2010[2] << endl;
-  outfile << "# events qcd_2010 =       " << n_mc_2010[3] << endl;
-  outfile << "# events qcd2_2010 =      " << n_mc_2010[4] << endl;
-  outfile << "# events hig_2011 =       " << n_mc_2011[6] << endl;
-  outfile << "# events hig_vbf2011 =    " << n_mc_2011[7] << endl;
-  outfile << "# events hig_wzt2011 =    " << n_mc_2011[8] << endl;
-  outfile << "# events dy_2011 =        " << n_mc_2011[5] << endl;
-  outfile << "# events box_2011 =       " << n_mc_2011[0] << endl;
-  outfile << "# events diphotjet_2011 = " << n_mc_2011[1] << endl;
-  outfile << "# events gjet_2011 =      " << n_mc_2011[2] << endl;
-  outfile << "# events qcd_2011 =       " << n_mc_2011[3] << endl;
-  outfile << "# events qcd2_2011 =      " << n_mc_2011[4] << endl;
-  outfile << endl;
-  outfile << "####################################" << endl;
-  outfile << "N of selected events and eff." << endl;
-  outfile << "####################################" << endl; 
-  outfile << "ndata      = " << num_data << endl;
-  outfile << endl;
-
-  double num_bkg(0);
-  double num_mc_total[9], n_mc_total[9];
-  for (int i=0; i<9; i++){
-    if(i<6){
-      num_bkg += num_mc_2010[i];
-      num_bkg += num_mc_2011[i];
+    sprintf(name,"%s%s%s","results_gg/yields_",allcut,".txt");
+    ofstream outfile(name);  
+    outfile << "####################################" << endl;
+    outfile << "CUTS " << endl;
+    outfile << "####################################" << endl;
+    outfile << "ptphot1 : " << pt1 << endl;
+    outfile << "ptphot2 : " << pt2 << endl;
+    outfile << "ptjet1 : " << ptj1 << endl;
+    outfile << "ptjet2 : " << ptj2 << endl;
+    outfile << "deltaetacut : " << deltae << endl;
+    outfile << "zeppencut : " << zep << endl;
+    outfile << "invmassjetcut : " << mjj << endl;
+    outfile << "pixelseedcut : " << pixel << endl;
+    outfile << "CiC level : " << cic << endl;
+    outfile << "ebcat : " << eb << endl;
+    outfile << "r9cat : " << r9 << endl;
+    outfile << "scaletrk : " << isolscaletrk << endl;
+    outfile << "scaleecal : " << isolscaleecal << endl;
+    outfile << "scalehcal : " << isolscalehcal << endl;
+    outfile << "scalehove : " << isolscalehove << endl;
+    outfile << endl;
+    outfile << "####################################" << endl;
+    outfile << "N of generated events" << endl;
+    outfile << "####################################" << endl;
+    outfile << "# events hig_glu2010 =    " << n_mc_2010[6] << endl;
+    outfile << "# events hig_vbf2010 =    " << n_mc_2010[7] << endl;
+    outfile << "# events hig_wzt2010 =    " << n_mc_2010[8] << endl;
+    outfile << "# events dy_2010 =        " << n_mc_2010[5] << endl;
+    outfile << "# events box_2010 =       " << n_mc_2010[0] << endl;
+    outfile << "# events diphotjet_2010 = " << n_mc_2010[1] << endl;
+    outfile << "# events gjet_2010 =      " << n_mc_2010[2] << endl;
+    outfile << "# events qcd_2010 =       " << n_mc_2010[3] << endl;
+    outfile << "# events qcd2_2010 =      " << n_mc_2010[4] << endl;
+    outfile << "# events hig_2011 =       " << n_mc_2011[6] << endl;
+    outfile << "# events hig_vbf2011 =    " << n_mc_2011[7] << endl;
+    outfile << "# events hig_wzt2011 =    " << n_mc_2011[8] << endl;
+    outfile << "# events dy_2011 =        " << n_mc_2011[5] << endl;
+    outfile << "# events box_2011 =       " << n_mc_2011[0] << endl;
+    outfile << "# events diphotjet_2011 = " << n_mc_2011[1] << endl;
+    outfile << "# events gjet_2011 =      " << n_mc_2011[2] << endl;
+    outfile << "# events qcd_2011 =       " << n_mc_2011[3] << endl;
+    outfile << "# events qcd2_2011 =      " << n_mc_2011[4] << endl;
+    outfile << endl;
+    outfile << "####################################" << endl;
+    outfile << "N of selected events and eff." << endl;
+    outfile << "####################################" << endl; 
+    outfile << "ndata      = " << num_data << endl;
+    outfile << endl;
+    
+    double num_bkg(0);
+    double num_mc_total[9], n_mc_total[9];
+    for (int i=0; i<9; i++){
+      if(i<6){
+	num_bkg += num_mc_2010[i];
+	num_bkg += num_mc_2011[i];
+      }
+      num_mc_total[i] = num_mc_2010[i] + num_mc_2011[i];
+      n_mc_total[i] = n_mc_2010[i] * scale_mc_2010[i] + n_mc_2011[i] * scale_mc_2011[i];
     }
-    num_mc_total[i] = num_mc_2010[i] + num_mc_2011[i];
-    n_mc_total[i] = n_mc_2010[i] * scale_mc_2010[i] + n_mc_2011[i] * scale_mc_2011[i];
+    
+    outfile << "nallbkg    = " << num_bkg << endl;
+    outfile << "nhig glu   = " << num_mc_total[6] << endl;
+    outfile << "nhig vbf   = " << num_mc_total[7] << endl;
+    outfile << "nhig wzt   = " << num_mc_total[8] << endl;
+    outfile << "ndy        = " << num_mc_total[5] << endl;
+    outfile << "nbox       = " << num_mc_total[0] << endl;
+    outfile << "ndiphot    = " << num_mc_total[1] << endl;
+    outfile << "ngjet      = " << num_mc_total[2] << endl;
+    outfile << "nqcd40     = " << num_mc_total[3] << endl;
+    outfile << "nqcd30-40  = " << num_mc_total[4] << endl;
+    outfile << endl;
+    outfile << "eff nhig      = " << (num_mc_total[6] + num_mc_total[7] + num_mc_total[8]) 
+      / (n_mc_total[6] + n_mc_total[7] + n_mc_total[8]) << endl;
+    outfile << "eff nhig glu  = " << num_mc_total[6] / n_mc_total[6] << endl;
+    outfile << "eff nhig vbf  = " << num_mc_total[7] / n_mc_total[7] << endl;
+    outfile << "eff nhig wzt  = " << num_mc_total[8] / n_mc_total[8] << endl;
+    outfile << "eff ndy       = " << num_mc_total[5] / n_mc_total[5] << endl;
+    outfile << "eff nbox      = " << num_mc_total[0] / n_mc_total[0] << endl;
+    outfile << "eff ndiphot   = " << num_mc_total[1] / n_mc_total[1] << endl;
+    outfile << "eff ngjet     = " << num_mc_total[2] / n_mc_total[2] << endl;
+    outfile << "eff nqcd      = " << num_mc_total[3] / n_mc_total[3] << endl;
+    outfile << "eff nqcd30-40 = " << num_mc_total[4] / n_mc_total[4] << endl;
+    outfile << endl;
+    outfile.close();
+
   }
 
-  outfile << "nallbkg    = " << num_bkg << endl;
-  outfile << "nhig glu   = " << num_mc_total[6] << endl;
-  outfile << "nhig vbf   = " << num_mc_total[7] << endl;
-  outfile << "nhig wzt   = " << num_mc_total[8] << endl;
-  outfile << "ndy        = " << num_mc_total[5] << endl;
-  outfile << "nbox       = " << num_mc_total[0] << endl;
-  outfile << "ndiphot    = " << num_mc_total[1] << endl;
-  outfile << "ngjet      = " << num_mc_total[2] << endl;
-  outfile << "nqcd40     = " << num_mc_total[3] << endl;
-  outfile << "nqcd30-40  = " << num_mc_total[4] << endl;
-  outfile << endl;
-  outfile << "eff nhig      = " << (num_mc_total[6] + num_mc_total[7] + num_mc_total[8]) 
-                                   / (n_mc_total[6] + n_mc_total[7] + n_mc_total[8]) << endl;
-  outfile << "eff nhig glu  = " << num_mc_total[6] / n_mc_total[6] << endl;
-  outfile << "eff nhig vbf  = " << num_mc_total[7] / n_mc_total[7] << endl;
-  outfile << "eff nhig wzt  = " << num_mc_total[8] / n_mc_total[8] << endl;
-  outfile << "eff ndy       = " << num_mc_total[5] / n_mc_total[5] << endl;
-  outfile << "eff nbox      = " << num_mc_total[0] / n_mc_total[0] << endl;
-  outfile << "eff ndiphot   = " << num_mc_total[1] / n_mc_total[1] << endl;
-  outfile << "eff ngjet     = " << num_mc_total[2] / n_mc_total[2] << endl;
-  outfile << "eff nqcd      = " << num_mc_total[3] / n_mc_total[3] << endl;
-  outfile << "eff nqcd30-40 = " << num_mc_total[4] / n_mc_total[4] << endl;
-  outfile << endl;
 
-  outfile.close();
  
   hOutputFile->Write() ;
   hOutputFile->Close() ;
   hOutputFile->Delete();
 
   vector<double> values;
-  
-  values.push_back(integralhiggs);
-  values.push_back(integralbkg);
-  values.push_back(integralhiggs/sqrt(integralbkg));
-  
+
+  if (variable == "massgg"){
+    values.push_back(integralhiggs);
+    values.push_back(integralbkg);
+    values.push_back(integralhiggs/sqrt(integralbkg));
+  }
+
   return values;
 
 }

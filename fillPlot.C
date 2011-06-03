@@ -8,6 +8,8 @@
 #include <iomanip>
 #include <fstream>
 
+#define MAX_PU_REWEIGHT 22
+
 TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max, bool cs)
 {
 //   In a ROOT session, you can do:
@@ -77,6 +79,9 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
+
+      if(pthiggsmincut>0 && ptgg<pthiggsmincut) continue; //pt higgs min
+      if(pthiggsmaxcut>0 && ptgg>=pthiggsmaxcut) continue; //pt higgs max
 
 
       if(ptjet1cut>0 && ptjet1<ptjet1cut) continue; //pt first jet
@@ -186,6 +191,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       else if (var == "zeppenjet")  variable = zeppenjet;
       else if (var == "invmassjet")  variable = invmassjet;
       else if (var == "nvtx")  variable = nvtx;
+      else if (var == "npu")  variable = npu;
       else if (var == "met")  variable = met;
       else if (var == "pid_haspixelseedphot1")  variable = pid_haspixelseedphot1;
       else if (var == "pid_jurECALphot1")  variable = pid_jurECALphot1;
@@ -211,11 +217,12 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       }
 
       // pu reweighting
-      if(npu<22 && puweights_.size()>0) 
+      if(npu<MAX_PU_REWEIGHT && puweights_.size()>0) 
 	tempplot->Fill(variable, puweights_[npu]);
       else{
-	tempplot->Fill(variable);
-	//	cout << "Event outside the reweighting range N<22" << endl;
+	//Using weight 1. for DATA and for dataOutside reweighting window
+	tempplot->Fill(variable,1.);
+	//	cout << "Event outside the reweighting range N<MAX_PU_REWEIGHT" << endl;
       } 
 
       if (var == "massgg" && writeRoot != "")
@@ -244,10 +251,12 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
 }
 
-void  fillPlot::Setcuts(double pt1, double pt2, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, int isolscaletrk, int isolscaleecal, int isolscalehcal, int isolscalehove, bool pixelseedveto)
+void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, int isolscaletrk, int isolscaleecal, int isolscalehcal, int isolscalehove, bool pixelseedveto)
 {
   ptphot1cut = pt1;
   ptphot2cut = pt2;
+  pthiggsmincut = higgsptcutmin;
+  pthiggsmaxcut = higgsptcutmax;
   ptjet1cut = ptj1;
   ptjet2cut = ptj2;
   deltaetacut = deltae;
@@ -327,28 +336,46 @@ void fillPlot::SetPuWeights(bool isData,std::string puWeightFile)
 {
   if (puWeightFile == "")
     {
-      std::cout << "you need a weights file to use this" << std::endl;
+      std::cout << "you need a weights file to use this function" << std::endl;
       return;
     }
 
   if (!isData)
-    std::cout << "Using file " << puWeightFile << " for PU reweighting" << std::endl;
+    std::cout << "PU REWEIGHTING:: Using file " << puWeightFile << std::endl;
 
   TFile *f_pu  = new TFile(puWeightFile.c_str(),"READ");
+
   TH1D *puweights = 0;
+  TH1D *gen_pu = 0;
+
+  gen_pu= (TH1D*) f_pu->Get("generated_pu");
   puweights= (TH1D*) f_pu->Get("weights");
-  if (!puweights)
+
+  if (!puweights || !gen_pu)
     {
-      std::cout << "weights histogram not found in file " << puWeightFile << std::endl;
+      std::cout << "weights histograms  not found in file " << puWeightFile << std::endl;
       return;
     }
-  for (int i = 0; i<22; i++) {
+  
+  
+  TH1D* weightedPU= (TH1D*)gen_pu->Clone("weightedPU");
+  weightedPU->Multiply(puweights);
+  //Rescaling weights in order to preserve same integral of events
+  TH1D* weights= (TH1D*)puweights->Clone("rescaledWeights");
+  weights->Scale( gen_pu->Integral(1,MAX_PU_REWEIGHT) / weightedPU->Integral(1,MAX_PU_REWEIGHT) );
+		  
+  float sumPuWeights=0.;
+
+  for (int i = 0; i<MAX_PU_REWEIGHT; i++) {
+    float weight=1.;
+    if( !isData ) 
+	weight=weights->GetBinContent(i+1);
     
-    if( !isData ) puweights_.push_back(puweights->GetBinContent(i+1));
-    else puweights_.push_back(1.);
-    //std::cout<<puweights_[i]<<std::endl;
+    sumPuWeights+=weight;
+    puweights_.push_back(weight);
   }
   
+  //  std::cout << "weights sum is " << sumPuWeights << std::endl;
 }
 
 void fillPlot::DoSmearing(double mean, double spread)
