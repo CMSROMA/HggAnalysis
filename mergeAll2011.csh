@@ -17,7 +17,9 @@ set run = $2
 echo "run : $run "
 
 foreach class ( 41xv10  41xv10_data 42xv1 42xv1_data ) 
+#foreach class ( 42xv1_data ) 
     foreach preseltype ( preselection cicloose ) 
+#    foreach preseltype ( cicsuper ) 
 	set command="./mergeRedNtp.csh redntp.${class}.${preseltype}.${version} ${run}"
 	echo ${command}
 	if ( $run == 1 ) then

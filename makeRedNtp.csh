@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.20 2011/05/28 17:53:22 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.21 2011/05/29 13:44:30 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
@@ -95,7 +95,7 @@ else if ($location == "roma" ) then
   set prefix = ""
   if($run == 1) mkdir -p $outdir
 else if ($location == "eth" ) then
-  set queue = "all.q"
+  set queue = "short.q"
   set outdir = $outdir
   set prefix = ""
   if($run == 1) mkdir -p $outdir

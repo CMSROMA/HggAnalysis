@@ -516,7 +516,7 @@ void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
   float isosumconst = 0.;
   float isosumconstbad = 0.;
 
-  float rhofacbad=0.40, rhofac=0.05;
+  float rhofacbad=0.52, rhofac=0.17;
   float val_isosumoet=(val_tkiso+val_ecaliso+val_hcaliso+isosumconst-rhoPF*rhofac)*50./ptPhot[photon_index];
   float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
   float val_trkisooet=(val_tkiso)*50./ptPhot[photon_index];
@@ -553,6 +553,7 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
   float isosumconst = 0.;
   float isosumconstbad = 0.;
 
+  //PM 2011.05.30 Changed according to new values
   float rhofacbad=0.52, rhofac=0.17;
   float val_isosumoet=(val_tkiso+val_ecaliso+val_hcaliso+isosumconst-rhoPF*rhofac)*50./ptPhot[photon_index];
   float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
