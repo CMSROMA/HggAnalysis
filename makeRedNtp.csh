@@ -1,10 +1,10 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.21 2011/05/29 13:44:30 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.22 2011/06/03 14:44:14 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
 
-set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection)
+set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 
 
 if($#argv == 0 || $#argv < 5 || $#argv > 6 ) then

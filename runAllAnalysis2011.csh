@@ -28,10 +28,10 @@ if ($#argv > 3) then
   echo "json : ${data_json}"
 endif 
 
-foreach class ( 41xv10  41xv10_data 42xv1 42xv1_data ) 
-#foreach class ( 42xv1_data ) 
-    foreach preseltype ( preselection cicloose ) 
-#    foreach preseltype ( cicsuper ) 
+foreach class ( 41xv10  41xv10_data 42xv2 42xv1_data ) 
+#foreach class (  ) 
+#    foreach preseltype ( preselectionCS cicloose ) 
+    foreach preseltype ( preselectionCS ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
 	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} $data_json"
 	else

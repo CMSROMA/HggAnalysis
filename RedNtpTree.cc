@@ -1228,6 +1228,17 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    WP80id.dcotEE     =           0.02;
    WP80id.distEE     =           0.02;
 
+   photonidegcuts preselegid;
+   preselegid.hovereiso=           0.1;
+   preselegid.hcaliso_rel=         0.005;
+   preselegid.hcaliso_abs=         4.;
+   preselegid.ecaliso_rel=         0.012;
+   preselegid.ecaliso_abs=         6.;
+   preselegid.trackiso_rel=        0.002;
+   preselegid.trackiso_abs=        4.;
+   preselegid.setaetaEB=           0.014;
+   preselegid.setaetaEE=           0.035;
+
    photonidegcuts looseegid;
    looseegid.hovereiso=           0.05;
    looseegid.hcaliso_rel=         0.0025;
@@ -1527,6 +1538,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	else if (finder == "tighteg") preselection = cutIDEG(i, tightegid, &idpasseg);
 	else if (finder == "hggtighteg") preselection = cutIDEG(i, hggtightid, &idpasseg);
 	else if (finder == "preselection") preselection = cutIDpresel(i, preselid, &idpass);
+	else if (finder == "preselectionCS") preselection = cutIDEG(i, preselegid, &idpasseg);
 	else if (finder == "looseegpu") preselection = cutIDEG(i, looseegid, &idpasseg,1);
 	else if (finder == "tightegpu") preselection = cutIDEG(i, tightegid, &idpasseg,1);
 	else if (finder == "hggtightegpu") preselection = cutIDEG(i, hggtightid, &idpasseg,1);
@@ -1538,7 +1550,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	else if (finder == "mcass") preselection = mcID(i);
 	else {
 	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
-          cout << "Good options are: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass" << endl;
+          cout << "Good options are: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection preselectionCS cicloose cicmedium cictight cicsuper cichyper mcass" << endl;
           cout << "now exiting" << endl;
 	  exit(-1);
 	}
