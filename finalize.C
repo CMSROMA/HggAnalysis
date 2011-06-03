@@ -77,9 +77,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
    if (cic>0)
      preselectionLevel="cicloose";
    else
-    preselectionLevel="preselection";
+    preselectionLevel="preselectionCS";
 
-  TString preselectionLevelCS="preselection";
+  TString preselectionLevelCS="preselectionCS";
   // total data sample
   TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
   TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    

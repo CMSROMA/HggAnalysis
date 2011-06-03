@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: $
+# $Id: runPrepareList.csh,v 1.1 2011/06/03 14:43:59 meridian Exp $
 
 
 if( $#argv<2  ) then
@@ -18,6 +18,7 @@ set listdir = $1
 
 set srmdir = $2
 
+rm -rf ${list}/allFiles.txt
 mkdir -p ${listdir}
 lcg-ls "${srmdir}" | awk -F '/' '{print $NF}' | xargs -I {} lcg-ls "${srmdir}/{}" >> ${listdir}/allFiles.txt
 cd ${listdir}/
