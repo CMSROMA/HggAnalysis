@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.22 2011/06/03 14:44:14 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.23 2011/06/03 15:12:44 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
@@ -7,8 +7,8 @@ set castordir = /castor/cern.ch/user/d/delre/reduced/
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 
 
-if($#argv == 0 || $#argv < 5 || $#argv > 6 ) then
-  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile>"
+if($#argv == 0 || $#argv < 6 || $#argv > 7 ) then
+  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile> <puweight>"
   echo "        inlist: valid directory containing list files OR valid list file"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
@@ -76,6 +76,12 @@ if ($#argv > 5) then
   echo "json : $json "
 endif 
 
+set puweight = 0
+if ($#argv > 6) then
+  set puweight = $7
+  echo "puweight : $puweight "
+endif 
+
 echo "------   ready ro run at $location ------------------"
 
 # logfiles always stored locally
@@ -126,9 +132,9 @@ if(-f $listdir) then
    set logerrfile = "${logdir}/${sample}_err.txt"
    set listfile = "${listdir}/${sample}.list"
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight}"
    endif  
 
    echo "---------------------------"

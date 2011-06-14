@@ -26,13 +26,14 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 || argc>5 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile (optional)\n" 
+      if(argc < 3 || argc>6 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile (optional) puweight (optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
              << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass\n"
              << "   jsonfile: jsonfile used to select RUN/LS when looping over data"
+             << "   puweight: puweight for MC nPU reweighting"
              << endl;
         exit(-1);
       }
@@ -96,5 +97,8 @@ int main(int argc, char* argv[]) {
        tool.SetNtotXsection( ntot, myxsec );
        if (argc>4)
 	 tool.SetJsonFile(argv[4]);
+       if (argc>5)
+	 tool.SetPuWeights(argv[5]);
+
        tool.Loop(isGJetQCD, selection);
 }

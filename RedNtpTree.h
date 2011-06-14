@@ -26,6 +26,7 @@ public:
     virtual ~RedNtpTree();
     virtual void     Loop(int isgjetqcd=0, char* selection = "loose");
     void SetJsonFile(const char* json) { jsonFile = json; };
+    void SetPuWeights(std::string puWeightFile);
     void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
@@ -101,7 +102,7 @@ private:
    TH1F* cic4_cut_drtotk_25_99[phoCiC4NCATEGORIES];
    TH1F* cic4_cut_pixel[phoCiC4NCATEGORIES];
 
-   int   PhotonCiCSelectionLevel( int photon_index);
+   int   PhotonCiCSelectionLevel( int photon_index, bool electronVeto);
    //photon category functions (r9 and eta)
    int PhotonCategory(int photonindex) { 
      return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);
@@ -117,6 +118,10 @@ private:
      int etacat = (Int_t)(TMath::Abs(etascPhot[photonindex])>1.479);   // 0, 1 (barrel --> endcap)
      return  etacat;
    }
+
+
+   // vector of pu weights
+   std::vector<Double_t> puweights_;
 
    Float_t massgg;
    Float_t ptgg;
@@ -168,6 +173,8 @@ private:
    Int_t idhggtightnewpuEGphot2;
    Int_t idcicphot1;
    Int_t idcicphot2;
+   Int_t idcicnoelvetophot1;
+   Int_t idcicnoelvetophot2;
    Int_t idlooseEGphot1;
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;
@@ -228,6 +235,8 @@ private:
    Float_t   etascphot2;
    Float_t   phiscphot1;
    Float_t   phiscphot2;
+   Float_t   pu_weight;
+   Float_t   pt_weight;
 
 };
 #endif

@@ -8,6 +8,9 @@
 #include <iostream>
 #include <vector>
 #include <TLorentzVector.h>
+
+#define MAX_PU_REWEIGHT 22
+
 using std::cout;
 using std::endl;
 
@@ -301,24 +304,44 @@ void RedNtpTree::SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_
                               0.94,    0.90,       0.321,    0.94,    0.90,    0.282153,
                               98.9981,          99,   0.0216484,     96.2292,     97.1855,     96.2294,
                               1.5,         1.5,         1.5,         1.5,         1.5,         1.5 };
-                            float cic4_allcuts_temp_lead[] = { 
-                              3.77459,     2.18305,     1.76811,     1.30029,
-                              11.5519,     3.48306,     3.87394,     1.89038,
-                              3.47103,      2.1822,     2.26931,     1.43769,
-                              0.0105631,  0.00974116,   0.0282572,   0.0265096,
-                              0.0834648,   0.0821447,   0.0648449,   0.0476437,
-                              0.94,    0.355935,    0.94,    0.316358,
-                              98.9979,     1.94497,     96.2292,     96.2294,
+//                             float cic4_allcuts_temp_lead[] = { 
+//                               3.77459,     2.18305,     1.76811,     1.30029,
+//                               11.5519,     3.48306,     3.87394,     1.89038,
+//                               3.47103,      2.1822,     2.26931,     1.43769,
+//                               0.0105631,  0.00974116,   0.0282572,   0.0265096,
+//                               0.0834648,   0.0821447,   0.0648449,   0.0476437,
+//                               0.94,    0.355935,    0.94,    0.316358,
+//                               98.9979,     1.94497,     96.2292,     96.2294,
+//                               1.5,         1.5,         1.5,         1.5 };
+//                             float cic4_allcuts_temp_sublead[] = { 
+//                               3.77459,     2.18305,     1.76811,     1.30029,
+//                               11.5519,     3.48306,     3.87394,     1.89038,
+//                               3.47103,      2.1822,     2.26931,     1.43769,
+//                               0.0105631,  0.00974116,   0.0282572,   0.0265096,
+//                               0.0834648,   0.0821447,   0.0648449,   0.0476437,
+//                               0.94,    0.355935,    0.94,    0.316358,
+//                               98.9979,     1.94497,     96.2292,     96.2294,
+//                               1.5,         1.5,         1.5,         1.5 };
+			    //New agreed rounded numbers PM 2011.06.14
+			    float cic4_allcuts_temp_lead[] = {
+                              3.8,       2.2,      1.77,      1.29,
+                              11.7,       3.4,       3.9,      1.84,
+                              3.5,       2.2,       2.3,      1.45,
+                              0.0106,    0.0097,     0.028,     0.027,
+                              0.082,     0.062,     0.065,     0.048,
+                              0.94,      0.36,      0.94,      0.32,
+                              1,     0.062,      0.97,      0.97,
                               1.5,         1.5,         1.5,         1.5 };
-                            float cic4_allcuts_temp_sublead[] = { 
-                              3.77459,     2.18305,     1.76811,     1.30029,
-                              11.5519,     3.48306,     3.87394,     1.89038,
-                              3.47103,      2.1822,     2.26931,     1.43769,
-                              0.0105631,  0.00974116,   0.0282572,   0.0265096,
-                              0.0834648,   0.0821447,   0.0648449,   0.0476437,
-                              0.94,    0.355935,    0.94,    0.316358,
-                              98.9979,     1.94497,     96.2292,     96.2294,
+                            float cic4_allcuts_temp_sublead[] = {
+                              3.8,       2.2,      1.77,      1.29,
+                              11.7,       3.4,       3.9,      1.84,
+                              3.5,       2.2,       2.3,      1.45,
+                              0.0106,    0.0097,     0.028,     0.027,
+                              0.082,     0.062,     0.065,     0.048,
+                              0.94,      0.36,      0.94,      0.32,
+                              1,     0.062,      0.97,      0.97,
                               1.5,         1.5,         1.5,         1.5 };
+
                             for(int i=0;i!=ncuts*ncat_cic6;++i) { cic6_allcuts_lead[i]=cic6_allcuts_temp_lead[i];
                               cic6_allcuts_sublead[i]=cic6_allcuts_temp_sublead[i]; }
                               for(int i=0;i!=ncuts*ncat_cic4;++i) { cic4_allcuts_lead[i]=cic4_allcuts_temp_lead[i];
@@ -532,7 +555,7 @@ void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
 
 }
 
-int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
+int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto) {
 
   int cutlevelpassed = -1;
 
@@ -588,8 +611,8 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index ) {
     ph_passcut[iCUTLEVEL][3] = (val_sieie            <=   cic4_cut_lead_sieie[iCUTLEVEL][photon_category]         );
     ph_passcut[iCUTLEVEL][4] = (val_hoe              <=   cic4_cut_lead_hovere[iCUTLEVEL][photon_category]        );
     ph_passcut[iCUTLEVEL][5] = (val_r9             >=     cic4_cut_lead_r9[iCUTLEVEL][photon_category]            );// gt cut
-    ph_passcut[iCUTLEVEL][6] = (val_drtotk_25_99   >=     cic4_cut_lead_drtotk_25_99[iCUTLEVEL][photon_category]  );// gt cut
-    ph_passcut[iCUTLEVEL][7] = (val_pixel            <=   cic4_cut_lead_pixel[iCUTLEVEL][photon_category]         );
+    ph_passcut[iCUTLEVEL][6] = electronVeto ? (val_drtotk_25_99   >=     cic4_cut_lead_drtotk_25_99[iCUTLEVEL][photon_category]  ) : true;// gt cut
+    ph_passcut[iCUTLEVEL][7] = electronVeto ? (val_pixel            <=   cic4_cut_lead_pixel[iCUTLEVEL][photon_category]         ) : true;
     bool ph_passcut_all = true;
     for(int icut=0;icut!=8;++icut) {
       ph_passcut_all = ph_passcut_all && ph_passcut[iCUTLEVEL][icut];
@@ -1064,6 +1087,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    ana_tree->Branch("idhggtightnewpuEGphot2",&idhggtightnewpuEGphot2,"idhggtightnewpuEGphot2/I");
    ana_tree->Branch("idcicphot1",&idcicphot1,"idcicphot1/I");
    ana_tree->Branch("idcicphot2",&idcicphot2,"idcicphot2/I");
+   ana_tree->Branch("idcicnoelvetophot1",&idcicnoelvetophot1,"idcicnoelvetophot1/I");
+   ana_tree->Branch("idcicnoelvetophot2",&idcicnoelvetophot2,"idcicnoelvetophot2/I");
    ana_tree->Branch("idlooseEGphot1",&idlooseEGphot1,"idlooseEGphot1/I");
    ana_tree->Branch("idlooseEGphot2",&idlooseEGphot2,"idlooseEGphot2/I");
    ana_tree->Branch("idtightEGphot1",&idtightEGphot1,"idtightEGphot1/I");
@@ -1139,6 +1164,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    ana_tree->Branch("EquivLumi",&EquivLumi,"EquivLumi/F");
    ana_tree->Branch("SampleID",&SampleID,"SampleID/I");
 
+   ana_tree->Branch("pu_weight",&pu_weight,"pu_weight/F");
+   ana_tree->Branch("pt_weight",&pt_weight,"pt_weight/F");
 
    photonidcuts mediumid;
    mediumid.hcaliso_rel=         0.05;
@@ -1229,15 +1256,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    WP80id.distEE     =           0.02;
 
    photonidegcuts preselegid;
-   preselegid.hovereiso=           0.1;
+   preselegid.hovereiso=           0.15;
    preselegid.hcaliso_rel=         0.005;
-   preselegid.hcaliso_abs=         4.;
+   preselegid.hcaliso_abs=         10.;
    preselegid.ecaliso_rel=         0.012;
-   preselegid.ecaliso_abs=         6.;
+   preselegid.ecaliso_abs=         10.;
    preselegid.trackiso_rel=        0.002;
-   preselegid.trackiso_abs=        4.;
-   preselegid.setaetaEB=           0.014;
-   preselegid.setaetaEE=           0.035;
+   preselegid.trackiso_abs=        10.;
+   preselegid.setaetaEB=           0.017;
+   preselegid.setaetaEE=           0.04;
 
    photonidegcuts looseegid;
    looseegid.hovereiso=           0.05;
@@ -1379,17 +1406,18 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
       // json file event removal
-      if (myjson && !isMC) 
+      if (myjson && nMC>0) 
 	if (!myjson->isGoodLS(run,lbn))
 	  {
 	    //	    std::cout << "Event skipped " << run << " " << lbn << std::endl;
 	    continue;
 	  }
 
-
-      nprocessed++;
+      if (nMC>0)
+	nprocessed++;
+	
       if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
-
+      
       // print name of crrent file
       currfilename = TString(fChain->GetCurrentFile()->GetName());
       if(currfilename != foldname) {
@@ -1470,6 +1498,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       vector<bool> isophottightpueg;
       vector<bool> isophothggtightpu;
       vector<int>  isocic;
+      vector<int>  isocicnoelveto;
 
       TLorentzVector thehiggs;
       TLorentzVector thehiggsnewvtx;
@@ -1542,11 +1571,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	else if (finder == "looseegpu") preselection = cutIDEG(i, looseegid, &idpasseg,1);
 	else if (finder == "tightegpu") preselection = cutIDEG(i, tightegid, &idpasseg,1);
 	else if (finder == "hggtightegpu") preselection = cutIDEG(i, hggtightid, &idpasseg,1);
-	else if (finder == "cicloose") preselection = PhotonCiCSelectionLevel(i) >= 1;	
-	else if (finder == "cicmedium") preselection = PhotonCiCSelectionLevel(i) >= 2;	
-	else if (finder == "cictight") preselection = PhotonCiCSelectionLevel(i) >= 3;	
-	else if (finder == "cicsuper") preselection = PhotonCiCSelectionLevel(i) >= 4;	
-	else if (finder == "cichyper") preselection = PhotonCiCSelectionLevel(i) >= 5;	
+	else if (finder == "cicloose") preselection = PhotonCiCSelectionLevel(i,1) >= 1;	
+	else if (finder == "cicmedium") preselection = PhotonCiCSelectionLevel(i,1) >= 2;	
+	else if (finder == "cictight") preselection = PhotonCiCSelectionLevel(i,1) >= 3;	
+	else if (finder == "cicsuper") preselection = PhotonCiCSelectionLevel(i,1) >= 4;	
+	else if (finder == "cichyper") preselection = PhotonCiCSelectionLevel(i,1) >= 5;	
 	else if (finder == "mcass") preselection = mcID(i);
 	else {
 	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
@@ -1596,7 +1625,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	if(cutIDEG(i, hggtightid, &idpasseg, 1)) isophothggtightpu.push_back(1); 
 	else isophothggtightpu.push_back(0);  
 
-	isocic.push_back(PhotonCiCSelectionLevel(i));
+	isocic.push_back(PhotonCiCSelectionLevel(i,1));
+	isocicnoelveto.push_back(PhotonCiCSelectionLevel(i,0));
 
 	if( assp )	{
 	  ptphotassreco.Fill(ptPhot[i]);
@@ -1952,6 +1982,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	idhggtightnewpuEGphot2 = isophothggtightpu.at(firsttwoisophot.at(1));
 	idcicphot1 = isocic.at(firsttwoisophot.at(0));
 	idcicphot2 = isocic.at(firsttwoisophot.at(1));
+	idcicnoelvetophot1 = isocicnoelveto.at(firsttwoisophot.at(0));
+	idcicnoelvetophot2 = isocicnoelveto.at(firsttwoisophot.at(1));
 	idlooseEGphot1 = pid_isLoose[firsttwoisophot.at(0)];
 	idlooseEGphot2 = pid_isLoose[firsttwoisophot.at(1)];
 	idtightEGphot1 = pid_isTight[firsttwoisophot.at(0)];
@@ -2047,6 +2079,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	nvtx = nvertex;
 	npu = pu_n;
 
+	if(npu<MAX_PU_REWEIGHT && puweights_.size()>0 && nMC>0) 
+	  pu_weight = puweights_[npu];
+	else
+	  pu_weight = -1;
+
         runRN = run;
         eventRN = event;
         lumi = lbn;
@@ -2102,4 +2139,47 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    hOutputFile->Write() ;
    if (myjson)
      delete myjson;
+}
+
+void RedNtpTree::SetPuWeights(std::string puWeightFile)
+{
+  if (puWeightFile == "")
+    {
+      std::cout << "you need a weights file to use this function" << std::endl;
+      return;
+    }
+
+  std::cout << "PU REWEIGHTING:: Using file " << puWeightFile << std::endl;
+
+  TFile *f_pu  = new TFile(puWeightFile.c_str(),"READ");
+
+  TH1D *puweights = 0;
+  TH1D *gen_pu = 0;
+
+  gen_pu= (TH1D*) f_pu->Get("generated_pu");
+  puweights= (TH1D*) f_pu->Get("weights");
+
+  if (!puweights || !gen_pu)
+    {
+      std::cout << "weights histograms  not found in file " << puWeightFile << std::endl;
+      return;
+    }
+  
+  
+  TH1D* weightedPU= (TH1D*)gen_pu->Clone("weightedPU");
+  weightedPU->Multiply(puweights);
+  //Rescaling weights in order to preserve same integral of events
+  TH1D* weights= (TH1D*)puweights->Clone("rescaledWeights");
+  weights->Scale( gen_pu->Integral(1,MAX_PU_REWEIGHT) / weightedPU->Integral(1,MAX_PU_REWEIGHT) );
+		  
+  float sumPuWeights=0.;
+
+  for (int i = 0; i<MAX_PU_REWEIGHT; i++) {
+    float weight=1.;
+    weight=weights->GetBinContent(i+1);
+    sumPuWeights+=weight;
+    puweights_.push_back(weight);
+  }
+  
+  //  std::cout << "weights sum is " << sumPuWeights << std::endl;
 }
