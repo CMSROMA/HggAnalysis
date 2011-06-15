@@ -83,9 +83,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(pthiggsmincut>0 && ptgg<pthiggsmincut) continue; //pt higgs min
       if(pthiggsmaxcut>0 && ptgg>=pthiggsmaxcut) continue; //pt higgs max
 
-
-      if(ptjet1cut>0 && ptjet1<ptjet1cut) continue; //pt first jet
-      if(ptjet2cut>0 && ptjet2<ptjet2cut) continue; //pt second jet
+      if(ptjet1cut>0 && ptcorrjet1<ptjet1cut) continue; //pt first jet
+      if(ptjet2cut>0 && ptcorrjet2<ptjet2cut) continue; //pt second jet
 
       //delteta
       if(deltaetacut!=0){
@@ -158,6 +157,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	}
 
       }else{ // photon id for control sample
+
 	if(cicselection>0) {
 	  looseidphot1 = (idcicphot1 > 0 );
 	  looseidphot2 = (idcicphot2 > 0 );
@@ -170,6 +170,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	  
 	  if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
 	}
+
       }
 
       // finding variable to be plotted
@@ -177,8 +178,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if (var == "massgg")  variable = massgg;
       else if (var == "ptphot1")  variable = ptphot1;
       else if (var == "ptphot2")  variable = ptphot2;
-      else if (var == "ptjet1")  variable = ptjet1;
-      else if (var == "ptjet2")  variable = ptjet2;
+      else if (var == "ptjet1")  variable = ptcorrjet1;
+      else if (var == "ptjet2")  variable = ptcorrjet2;
       else if (var == "etajet1")  variable = etajet1;
       else if (var == "etajet2")  variable = etajet2;
       else if (var == "phijet1")  variable = phijet1;
@@ -235,7 +236,6 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	  myTree->Fill();
 	}
 
-      // write on file
       if(writetxt != "") 
 	outfile << "run " << run << "\t lumi "  << std::setw(4) << lumi << "\t event " << std::setw(12) << event  << "\t massgg " << std::setprecision(6) << massgg << endl;      
 

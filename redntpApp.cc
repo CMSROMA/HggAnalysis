@@ -95,7 +95,12 @@ int main(int argc, char* argv[]) {
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
-       if (argc>4)
+
+       char  jsonfile[100];
+       sprintf(jsonfile,argv[4]);
+       string finder2(jsonfile);
+
+       if (argc>4 && finder2 != "-1")
 	 tool.SetJsonFile(argv[4]);
        if (argc>5)
 	 tool.SetPuWeights(argv[5]);

@@ -74,9 +74,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   TString preselectionLevel;
 
-   if (cic>0)
-     preselectionLevel="cicloose";
-   else
+
+  if (cic>0)
+    preselectionLevel="cicloose";
+  else
     preselectionLevel="preselectionCS";
 
   TString preselectionLevelCS="preselectionCS";
@@ -121,11 +122,11 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     // drell yan samples
     mc_2011[5] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
     // gluglu higgs samples 
-    mc_2011[6] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6.root");
+    mc_2011[6] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6.root");
     // vbf higgs samples 
-    mc_2011[7] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_VBF_HToGG_M-115_7TeV-powheg-pythia6.root");
+    mc_2011[7] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_VBF_HToGG_M-115_7TeV-powheg-pythia6.root");
     // W/Z/TT H higgs samples 
-    mc_2011[8] = new TFile(redntpDir+"/redntp.42xv1."+preselectionLevel+".v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
+    mc_2011[8] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
   }
  
   // cross sections and scaling
@@ -139,7 +140,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   cross_mc[5] = 2321; // drell yan
   cross_mc[6] = 18.23 * 2.13e-03 * boosthiggs; // glu glu higgs
   cross_mc[7] = 1.332 * 2.13e-03 * boosthiggs; // vbf higgs
-  cross_mc[8] = (0.7546 + 0.4107 + 0.1106) * 2.13e-03 * boosthiggs; // WHtt higgs
+  cross_mc[8] = (0.7546 + 0.4107) * 2.13e-03 * boosthiggs; // WHtt higgs
 
   // getting the number of original events in each sample (processed with CMSSW)
   int n_mc_2010[9], n_mc_2011[9];
@@ -228,14 +229,14 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   data_fill.Writetxt(name);
   sprintf(name,"%s%s%s","results_gg/events_",allcut,".root");
   data_fill.WriteRoot(name);
-  vardata = data_fill.Plot(variable,"data", nbin, min, max); 
+  vardata->Add(data_fill.Plot(variable,"data", nbin, min, max)); 
   std::cout << "Selected events on data " << vardata->GetEntries() << std::endl;
   cout << "running over " << ((TTree*)datacs->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
 
   //  data_fill.Writetxt(0);
   datacs_fill.Writetxt(name);
   datacs_fill.WriteRoot(name);
-  vardatacs = datacs_fill.Plot(variable,"datacs", nbin, min, max, 1); 
+  vardatacs->Add(datacs_fill.Plot(variable,"datacs", nbin, min, max, 1)); 
   std::cout << "Selected events on data cs " << vardatacs->GetEntries() << std::endl;
 
   std::cout << " ++++++++++++++ MC ++++++++++++++++" << std::endl;
@@ -243,14 +244,15 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
     if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
 
-    if(int_exp_2010>0) var_mc_2010[i] = mc_2010_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2010>0) var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
     if(int_exp_2010>0) std::cout << "Selected events on mc2010 " << name << " " << var_mc_2010[i]->GetEntries() << std::endl;
 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
     if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
 
-    if(int_exp_2011>0) var_mc_2011[i] = mc_2011_fill[i]->Plot(variable, name, nbin, min, max);
+    if(int_exp_2011>0) var_mc_2011[i]->Add(mc_2011_fill[i]->Plot(variable, name, nbin, min, max));
     if(int_exp_2011>0) std::cout << "Selected events on mc2011 " << name << " " << var_mc_2011[i]->GetEntries() << std::endl;
+
 
   }
 
@@ -274,10 +276,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   
   // scale control sample
   vardata->Sumw2();
-  vardatacs->Sumw2();
+  //  vardatacs->Sumw2();
   double num_data =  vardata->Integral();
   double num_data_cs = vardatacs->Integral();  
-  //  vardatacs->Scale(num_data/num_data_cs); 
+  vardatacs->Scale(num_data/num_data_cs); 
 
   // stack histograms  
   for (int i=1; i<nbin+1; i++){      
@@ -380,7 +382,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   // data overlaid to mc
   double themax =   vardata->GetMaximum();
-  if(var[0]->GetMaximum()>max) themax = var[0]->GetMaximum();
+  if(var[0]->GetMaximum()>themax) themax = var[0]->GetMaximum();
   if (
       variable == "etaphot1" || variable == "etaphot2" ||
       variable == "phiphot1" || variable == "phiphot2" ||
@@ -404,11 +406,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   //data with control sample
   vardata->Draw("pe");
-  vardatacs->Scale(num_data/num_data_cs); 
   vardatacs->SetLineColor(46);
   vardatacs->SetFillColor(42);
   vardatacs->SetLineWidth(3);
-  vardatacs->Draw("same");
+  vardatacs->Draw("hsame");
   vardata->Draw("pesame");
   sprintf(name,"%s%s%s%s%s","results_gg/datacs_",variable.c_str(),"_",allcut,".gif");
   gPad->RedrawAxis();
@@ -426,6 +427,9 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   if (variable == "massgg"){
     var[0]->Rebin(4);
     themax = var[0]->GetMaximum();
+    vardata->Rebin(4);
+    cout << vardata->GetMaximum() << "   " << var[0]->GetMaximum() << endl;
+    if(themax < vardata->GetMaximum()) themax = vardata->GetMaximum();
     var[0]->SetMaximum(themax*1.1);
     var[0]->SetMinimum(0.);
     var[0]->Draw();
@@ -444,7 +448,6 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     sprintf(name,"%s%s%s%s%s","results_gg/mc_rebin_",variable.c_str(),"_",allcut,".gif");
     c0->SaveAs(name);
     
-    vardata->Rebin(4);
     vardata->Draw("pesame");
     sprintf(name,"%s%s%s%s%s","results_gg/data-mc_rebin_",variable.c_str(),"_",allcut,".gif");
     c0->SaveAs(name);
