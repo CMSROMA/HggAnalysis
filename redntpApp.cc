@@ -27,13 +27,13 @@ int main(int argc, char* argv[]) {
 
       //================ Parameters 
       if(argc < 3 || argc>6 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile (optional) puweight (optional)\n" 
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
              << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass\n"
-             << "   jsonfile: jsonfile used to select RUN/LS when looping over data"
-             << "   puweight: puweight for MC nPU reweighting"
+             << "   jsonfile: jsonfile used to select RUN/LS when looping over data. -1 if not used"
+             << "   puweight: puweight for MC nPU reweighting. -1 if not used"
              << endl;
         exit(-1);
       }
@@ -96,14 +96,14 @@ int main(int argc, char* argv[]) {
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
 
-       char jsonfile[100];
-       sprintf(jsonfile,argv[4]);
-       string finder2(jsonfile);
+       if (argc>4 && std::string(argv[4]) != "-1")
+ 	 tool.SetJsonFile(argv[4]);
 
-       if (argc>4 && finder2 != "-1")
-	 tool.SetJsonFile(argv[4]);
-       if (argc>5)
-	 tool.SetPuWeights(argv[5]);
+       if (argc>5 && std::string(argv[5]) != "-1")
+	 tool.SetPuWeights(std::string(argv[5]));
+
+       std::cout << "DONE with settings starting loop" << std::endl;
+
 
        tool.Loop(isGJetQCD, selection);
 }
