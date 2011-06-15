@@ -27,6 +27,7 @@ public:
     virtual void     Loop(int isgjetqcd=0, char* selection = "loose");
     void SetJsonFile(const char* json) { jsonFile = json; };
     void SetPuWeights(std::string puWeightFile);
+    void SetPtWeights(std::string ptWeightFile);
     void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
@@ -122,7 +123,8 @@ private:
 
    // vector of pu weights
    std::vector<Double_t> puweights_;
-
+   TH1D* ptweights_;
+   
    Float_t massgg;
    Float_t ptgg;
    Float_t massggnewvtx;
@@ -237,6 +239,7 @@ private:
    Float_t   phiscphot2;
    Float_t   pu_weight;
    Float_t   pt_weight;
-
+   
+   float weight;
 };
 #endif
