@@ -680,14 +680,14 @@ void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
   float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
   float val_trkisooet=(val_tkiso)*50./ptPhot[photon_index];
 
-  cic4_cut_isosumoet[photon_category]->Fill(val_isosumoet);
-  cic4_cut_isosumoetbad[photon_category]->Fill(val_isosumoetbad);
-  cic4_cut_trkisooet[photon_category]->Fill(val_trkisooet);
-  cic4_cut_sieie[photon_category]->Fill(val_sieie);
-  cic4_cut_hovere[photon_category]->Fill(val_hoe);
-  cic4_cut_r9[photon_category]->Fill(val_r9);
-  cic4_cut_drtotk_25_99[photon_category]->Fill(val_drtotk_25_99);
-  cic4_cut_pixel[photon_category]->Fill(val_pixel);
+  cic4_cut_isosumoet[photon_category]->Fill(val_isosumoet,pu_weight);
+  cic4_cut_isosumoetbad[photon_category]->Fill(val_isosumoetbad,pu_weight);
+  cic4_cut_trkisooet[photon_category]->Fill(val_trkisooet,pu_weight);
+  cic4_cut_sieie[photon_category]->Fill(val_sieie,pu_weight);
+  cic4_cut_hovere[photon_category]->Fill(val_hoe,pu_weight);
+  cic4_cut_r9[photon_category]->Fill(val_r9,pu_weight);
+  cic4_cut_drtotk_25_99[photon_category]->Fill(val_drtotk_25_99,pu_weight);
+  cic4_cut_pixel[photon_category]->Fill(val_pixel,pu_weight);
 
 }
 
@@ -1150,6 +1150,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    TH1D zeppenjetisoreco2("zeppenjetisoreco2","zeppenjetisoreco2", 100, -5.5,5.5);
    TH1D zeppenhiggsisoreco("zeppenhiggsisoreco","zeppenhiggsisoreco", 100, -5.5,5.5);
    TH1D dijetmassisoreco("dijetmassisoreco","dijetmassisoreco", 100, 50.,1500.);
+   TH1D npunorew("npunorew","npunorew", 25, -0.5,24.5);
+   TH1D npurew("npurew","npurew", 25, -0.5,24.5);
+   TH1D nvtxnorew("nvtxnorew","nvtxnorew", 25, -0.5,24.5);
+   TH1D nvtxrew("nvtxrew","nvtxrew", 25, -0.5,24.5);
 
    // isolation variables
    TH1D hcalisoassphot_EB("hcalisoassphot_EB","hcalisoassphot_EB",100,0.,1.);
@@ -1601,23 +1605,34 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       vector<int> firsttwogenphot = firsttwo(ptMC,&photassocMC);
       vector<int> firsttwohiggsgenphot = firsttwo(ptMC,&photassocMChiggs);
 
-      ptphotgen1.Fill(ptMC[firsttwogenphot.at(0)]);
-      ptphotgen2.Fill(ptMC[firsttwogenphot.at(1)]);
-      etaphotgen1.Fill(etaMC[firsttwogenphot.at(0)]);
-      etaphotgen2.Fill(etaMC[firsttwogenphot.at(1)]);
+      npu = pu_n;
+      if(npu<MAX_PU_REWEIGHT && puweights_.size()>0 && nMC>0) 
+	pu_weight = puweights_[npu];
+      else
+	pu_weight = 1;
+      
+      npunorew.Fill(npu);
+      npurew.Fill(npu,pu_weight);
+      nvtxnorew.Fill(nvertex);
+      nvtxrew.Fill(nvertex,pu_weight);
 
-      ptphothiggsgen1.Fill(ptMC[firsttwohiggsgenphot.at(0)]);
-      ptphothiggsgen2.Fill(ptMC[firsttwohiggsgenphot.at(1)]);
-      etaphothiggsgen1.Fill(etaMC[firsttwohiggsgenphot.at(0)]);
-      etaphothiggsgen2.Fill(etaMC[firsttwohiggsgenphot.at(1)]);
+      ptphotgen1.Fill(ptMC[firsttwogenphot.at(0)],pu_weight);
+      ptphotgen2.Fill(ptMC[firsttwogenphot.at(1)],pu_weight);
+      etaphotgen1.Fill(etaMC[firsttwogenphot.at(0)],pu_weight);
+      etaphotgen2.Fill(etaMC[firsttwogenphot.at(1)],pu_weight);
+
+      ptphothiggsgen1.Fill(ptMC[firsttwohiggsgenphot.at(0)],pu_weight);
+      ptphothiggsgen2.Fill(ptMC[firsttwohiggsgenphot.at(1)],pu_weight);
+      etaphothiggsgen1.Fill(etaMC[firsttwohiggsgenphot.at(0)],pu_weight);
+      etaphothiggsgen2.Fill(etaMC[firsttwohiggsgenphot.at(1)],pu_weight);
      
-      ptjetgen1.Fill(ptJetGen_akt5[0]);
-      ptjetgen2.Fill(ptJetGen_akt5[1]);
-      etajetgen1.Fill(etaJetGen_akt5[0]);
-      etajetgen2.Fill(etaJetGen_akt5[1]);
+      ptjetgen1.Fill(ptJetGen_akt5[0],pu_weight);
+      ptjetgen2.Fill(ptJetGen_akt5[1],pu_weight);
+      etajetgen1.Fill(etaJetGen_akt5[0],pu_weight);
+      etajetgen2.Fill(etaJetGen_akt5[1],pu_weight);
    
-      deltaetajetgen.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1]);
-      if(etaJetGen_akt5[0]*etaJetGen_akt5[1]<0) deltaetajetgencut.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1]);
+      deltaetajetgen.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],pu_weight);
+      if(etaJetGen_akt5[0]*etaJetGen_akt5[1]<0) deltaetajetgencut.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],pu_weight);
    
       vector<bool> assophothiggs;
       vector<bool> assophot;
@@ -1768,70 +1783,70 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	isocicnoelveto.push_back(PhotonCiCSelectionLevel(i,0));
 
 	if( assp )	{
-	  ptphotassreco.Fill(ptPhot[i]);
-	  etaphotassreco.Fill(etaPhot[i]);
+	  ptphotassreco.Fill(ptPhot[i],pu_weight);
+	  etaphotassreco.Fill(etaPhot[i],pu_weight);
 	  if(ptPhot[i]>30) {
 	    if(TMath::Abs(etascPhot[i])<1.47){
-	      hcalisoassphot_EB.Fill(hcalovecal04Phot[i]);
-	      ecalisoassphot_EB.Fill(ecaliso04Phot[i] / ePhot[i]);
-	      ptisoassphot_EB.Fill(ptiso035Phot[i] / ptPhot[i]);
-	      ntrkisoassphot_EB.Fill(ntrkiso035Phot[i]);
-	      sminminclusassphot_EB.Fill(sMinMinPhot[i]);
-	      smaxmaxclusassphot_EB.Fill(sMajMajPhot[i]);
-	      alphaclusassphot_EB.Fill(alphaPhot[i]);
+	      hcalisoassphot_EB.Fill(hcalovecal04Phot[i],pu_weight);
+	      ecalisoassphot_EB.Fill(ecaliso04Phot[i] / ePhot[i],pu_weight);
+	      ptisoassphot_EB.Fill(ptiso035Phot[i] / ptPhot[i],pu_weight);
+	      ntrkisoassphot_EB.Fill(ntrkiso035Phot[i],pu_weight);
+	      sminminclusassphot_EB.Fill(sMinMinPhot[i],pu_weight);
+	      smaxmaxclusassphot_EB.Fill(sMajMajPhot[i],pu_weight);
+	      alphaclusassphot_EB.Fill(alphaPhot[i],pu_weight);
 	    }else if(TMath::Abs(etascPhot[i])<2.5){
-	      hcalisoassphot_EE.Fill(hcalovecal04Phot[i]);
-	      ecalisoassphot_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
-	      ptisoassphot_EE.Fill(ptiso035Phot[i] / ptPhot[i]);
-	      ntrkisoassphot_EE.Fill(ntrkiso035Phot[i]);
-	      sminminclusassphot_EE.Fill(sMinMinPhot[i]);
-	      smaxmaxclusassphot_EE.Fill(sMajMajPhot[i]);	    
-	      alphaclusassphot_EE.Fill(alphaPhot[i]);
+	      hcalisoassphot_EE.Fill(hcalovecal04Phot[i],pu_weight);
+	      ecalisoassphot_EE.Fill(ecaliso04Phot[i] / ePhot[i],pu_weight);
+	      ptisoassphot_EE.Fill(ptiso035Phot[i] / ptPhot[i],pu_weight);
+	      ntrkisoassphot_EE.Fill(ntrkiso035Phot[i],pu_weight);
+	      sminminclusassphot_EE.Fill(sMinMinPhot[i],pu_weight);
+	      smaxmaxclusassphot_EE.Fill(sMajMajPhot[i],pu_weight);	    
+	      alphaclusassphot_EE.Fill(alphaPhot[i],pu_weight);
 	    }
           }
 	}
 	if( isophot.at(i) )	{
-	  ptphotisoreco.Fill(ptPhot[i]);
-	  etaphotisoreco.Fill(etaPhot[i]);
+	  ptphotisoreco.Fill(ptPhot[i],pu_weight);
+	  etaphotisoreco.Fill(etaPhot[i],pu_weight);
 	}
 	if( assp && isophot.at(i) )	{
-	  ptphotisoassreco.Fill(ptPhot[i]);
-	  etaphotisoassreco.Fill(etaPhot[i]);
+	  ptphotisoassreco.Fill(ptPhot[i],pu_weight);
+	  etaphotisoassreco.Fill(etaPhot[i],pu_weight);
 	}
 	if( !assp )	{
-	  ptphotnotassreco.Fill(ptPhot[i]);
-	  etaphotnotassreco.Fill(etaPhot[i]);
+	  ptphotnotassreco.Fill(ptPhot[i],pu_weight);
+	  etaphotnotassreco.Fill(etaPhot[i],pu_weight);
 	}
 	if( !assp && isophot.at(i) )	{
-	  ptphotisonotassreco.Fill(ptPhot[i]);
-	  etaphotisonotassreco.Fill(etaPhot[i]);
+	  ptphotisonotassreco.Fill(ptPhot[i],pu_weight);
+	  etaphotisonotassreco.Fill(etaPhot[i],pu_weight);
 	}
 	if( !assp )	{
-	  ptphotjetreco.Fill(ptPhot[i]);
-	  etaphotjetreco.Fill(etaPhot[i]);
+	  ptphotjetreco.Fill(ptPhot[i],pu_weight);
+	  etaphotjetreco.Fill(etaPhot[i],pu_weight);
 	  if(ptPhot[i]>30) {
 	    if(TMath::Abs(etascPhot[i])<1.47){
-	      hcalisoassjet_EB.Fill(hcalovecal04Phot[i]);
-	      ecalisoassjet_EB.Fill(ecaliso04Phot[i] / ePhot[i]);
-	      ptisoassjet_EB.Fill(ptiso035Phot[i] / ptPhot[i]);
-	      ntrkisoassjet_EB.Fill(ntrkiso035Phot[i]);
-	      sminminclusassjet_EB.Fill(sMinMinPhot[i]);
-	      smaxmaxclusassjet_EB.Fill(sMajMajPhot[i]);
-	      alphaclusassjet_EB.Fill(alphaPhot[i]);
+	      hcalisoassjet_EB.Fill(hcalovecal04Phot[i],pu_weight);
+	      ecalisoassjet_EB.Fill(ecaliso04Phot[i] / ePhot[i],pu_weight);
+	      ptisoassjet_EB.Fill(ptiso035Phot[i] / ptPhot[i],pu_weight);
+	      ntrkisoassjet_EB.Fill(ntrkiso035Phot[i],pu_weight);
+	      sminminclusassjet_EB.Fill(sMinMinPhot[i],pu_weight);
+	      smaxmaxclusassjet_EB.Fill(sMajMajPhot[i],pu_weight);
+	      alphaclusassjet_EB.Fill(alphaPhot[i],pu_weight);
 	    }else if(TMath::Abs(etascPhot[i])<2.5){
-	      hcalisoassjet_EE.Fill(hcalovecal04Phot[i]);
-	      ecalisoassjet_EE.Fill(ecaliso04Phot[i] / ePhot[i]);
-	      ptisoassjet_EE.Fill(ptiso035Phot[i] / ptPhot[i]);
-	      ntrkisoassjet_EE.Fill(ntrkiso035Phot[i]);
-	      sminminclusassjet_EE.Fill(sMinMinPhot[i]);
-	      smaxmaxclusassjet_EE.Fill(sMajMajPhot[i]);	    
-	      alphaclusassjet_EE.Fill(alphaPhot[i]);
+	      hcalisoassjet_EE.Fill(hcalovecal04Phot[i],pu_weight);
+	      ecalisoassjet_EE.Fill(ecaliso04Phot[i] / ePhot[i],pu_weight);
+	      ptisoassjet_EE.Fill(ptiso035Phot[i] / ptPhot[i],pu_weight);
+	      ntrkisoassjet_EE.Fill(ntrkiso035Phot[i],pu_weight);
+	      sminminclusassjet_EE.Fill(sMinMinPhot[i],pu_weight);
+	      smaxmaxclusassjet_EE.Fill(sMajMajPhot[i],pu_weight);	    
+	      alphaclusassjet_EE.Fill(alphaPhot[i],pu_weight);
 	    }
           }
 	}
 	if( assj && isophot.at(i) )	{
-	  ptphotisojetreco.Fill(ptPhot[i]);
-	  etaphotisojetreco.Fill(etaPhot[i]);
+	  ptphotisojetreco.Fill(ptPhot[i],pu_weight);
+	  etaphotisojetreco.Fill(etaPhot[i],pu_weight);
 	}
       }  
 
@@ -1890,13 +1905,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	TLorentzVector higgs = phot1 + phot2;
 	
-	higgsmasshiggsassreco.Fill(higgs.M());
-	pthiggshiggsassreco.Fill(higgs.Pt());
+	higgsmasshiggsassreco.Fill(higgs.M(),pu_weight);
+	pthiggshiggsassreco.Fill(higgs.Pt(),pu_weight);
   
-	ptphothiggsassreco1.Fill(phot1.Pt());
-	ptphothiggsassreco2.Fill(phot2.Pt());
-	etaphothiggsassreco1.Fill(etaPhot[firsttwohiggsassphot.at(0)]);
-	etaphothiggsassreco2.Fill(etaPhot[firsttwohiggsassphot.at(1)]);
+	ptphothiggsassreco1.Fill(phot1.Pt(),pu_weight);
+	ptphothiggsassreco2.Fill(phot2.Pt(),pu_weight);
+	etaphothiggsassreco1.Fill(etaPhot[firsttwohiggsassphot.at(0)],pu_weight);
+	etaphothiggsassreco2.Fill(etaPhot[firsttwohiggsassphot.at(1)],pu_weight);
 
       }
 
@@ -1913,13 +1928,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	higgsmass = higgs.M();
 	etahiggs = higgs.Eta();
 	
-	higgsmassassreco.Fill(higgs.M());
-	pthiggsassreco.Fill(higgs.Pt());
+	higgsmassassreco.Fill(higgs.M(),pu_weight);
+	pthiggsassreco.Fill(higgs.Pt(),pu_weight);
   
-	ptphotassreco1.Fill(phot1.Pt());
-	ptphotassreco2.Fill(phot2.Pt());
-	etaphotassreco1.Fill(etaPhot[firsttwoassphot.at(0)]);
-	etaphotassreco2.Fill(etaPhot[firsttwoassphot.at(1)]);
+	ptphotassreco1.Fill(phot1.Pt(),pu_weight);
+	ptphotassreco2.Fill(phot2.Pt(),pu_weight);
+	etaphotassreco1.Fill(etaPhot[firsttwoassphot.at(0)],pu_weight);
+	etaphotassreco2.Fill(etaPhot[firsttwoassphot.at(1)],pu_weight);
 
       }	
 
@@ -1939,14 +1954,14 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	etahiggsiso = higgs.Eta();
         higgspt = higgs.Pt();
 	
-	higgsmassisoreco.Fill(higgs.M());
-	higgsmassisorecofull.Fill(higgs.M());
-	pthiggsisoreco.Fill(higgs.Pt());
+	higgsmassisoreco.Fill(higgs.M(),pu_weight);
+	higgsmassisorecofull.Fill(higgs.M(),pu_weight);
+	pthiggsisoreco.Fill(higgs.Pt(),pu_weight);
   
-	ptphotisoreco1.Fill(phot1.Pt());
-	ptphotisoreco2.Fill(phot2.Pt());
-	etaphotisoreco1.Fill(etaPhot[firsttwoisophot.at(0)]);
-	etaphotisoreco2.Fill(etaPhot[firsttwoisophot.at(1)]);
+	ptphotisoreco1.Fill(phot1.Pt(),pu_weight);
+	ptphotisoreco2.Fill(phot2.Pt(),pu_weight);
+	etaphotisoreco1.Fill(etaPhot[firsttwoisophot.at(0)],pu_weight);
+	etaphotisoreco2.Fill(etaPhot[firsttwoisophot.at(1)],pu_weight);
 
 	// find best vtx
 	int bestrank(0);
@@ -1976,20 +1991,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if( firsttwohiggsassphot.at(0)>-1 && firsttwohiggsassphot.at(1)>-1 ) { 
 
 	if( firsttwonohiggsjet.at(0) > -1) {
-	  ptjethiggsassreco1.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(0)]);
-	  etajethiggsassreco1.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)]);
+	  ptjethiggsassreco1.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(0)],pu_weight);
+	  etajethiggsassreco1.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)],pu_weight);
 	}
 	if( firsttwonohiggsjet.at(1) > -1) {
-	  ptjethiggsassreco2.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(1)]);
-	  etajethiggsassreco2.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(1)]);
+	  ptjethiggsassreco2.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(1)],pu_weight);
+	  etajethiggsassreco2.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(1)],pu_weight);
 	}
 	if( firsttwonohiggsjet.at(0) > -1 && firsttwonohiggsjet.at(1) > -1) {
 	  deltaetajethiggsassreco.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)]-etaJet_pfakt5[firsttwonohiggsjet.at(1)]);
 	  double aveeta = (etaJet_pfakt5[firsttwonohiggsjet.at(0)]+etaJet_pfakt5[firsttwonohiggsjet.at(1)])/2;
 	  double zeppen1 = etaJet_pfakt5[firsttwonohiggsjet.at(0)] - aveeta;
 	  double zeppen2 = etaJet_pfakt5[firsttwonohiggsjet.at(1)] - aveeta;
-	  zeppenjethiggsassreco1.Fill(zeppen1);
-	  zeppenjethiggsassreco2.Fill(zeppen2);	
+	  zeppenjethiggsassreco1.Fill(zeppen1,pu_weight);
+	  zeppenjethiggsassreco2.Fill(zeppen2,pu_weight);	
 	}
 
       }
@@ -1999,12 +2014,12 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if( firsttwoassphot.at(0)>-1 && firsttwoassphot.at(1)>-1 ) { 
 
 	if( firsttwonoassjet.at(0) > -1) {
-	  ptjetassreco1.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(0)]);
-	  etajetassreco1.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]);
+	  ptjetassreco1.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(0)],pu_weight);
+	  etajetassreco1.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)],pu_weight);
 	}
 	if( firsttwonoassjet.at(1) > -1) {
-	  ptjetassreco2.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(1)]);
-	  etajetassreco2.Fill(etaJet_pfakt5[firsttwonoassjet.at(1)]);
+	  ptjetassreco2.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(1)],pu_weight);
+	  etajetassreco2.Fill(etaJet_pfakt5[firsttwonoassjet.at(1)]),pu_weight;
 	}
 	if( firsttwonoassjet.at(0) > -1 && firsttwonoassjet.at(1) > -1) {
 	  TLorentzVector jet1, jet2;	
@@ -2016,28 +2031,28 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  twojetsmass = sum.M();
 	  etatwojets = sum.Eta();
 	 
-	  deltaetajetassreco.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)]);
+	  deltaetajetassreco.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)],pu_weight);
 	  double aveeta = (etaJet_pfakt5[firsttwonoassjet.at(0)]+etaJet_pfakt5[firsttwonoassjet.at(1)])/2;
 	  double zeppen1 = etaJet_pfakt5[firsttwonoassjet.at(0)] - aveeta;
 	  double zeppen2 = etaJet_pfakt5[firsttwonoassjet.at(1)] - aveeta;
-	  zeppenjetassreco1.Fill(zeppen1);
-	  zeppenjetassreco2.Fill(zeppen2);	
+	  zeppenjetassreco1.Fill(zeppen1,pu_weight);
+	  zeppenjetassreco2.Fill(zeppen2,pu_weight);	
 	}
 
 	if(  ptCorrJet_pfakt5[firsttwonoassjet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoassjet.at(1)] > ptjet2cut 
 	    && ptPhot[firsttwoassphot.at(0)] > ptphot1cut && ptPhot[firsttwoassphot.at(1)] > ptphot2cut ){
 
 	  if(TMath::Abs(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)])>deltaetacut){
-	    higgsmasscutreco.Fill(higgsmass);
-	    if(isophot.at(firsttwoassphot.at(0)) && isophot.at(firsttwoassphot.at(1)))  higgsmassisorecocheck.Fill(higgsisomass);	    
+	    higgsmasscutreco.Fill(higgsmass,pu_weight);
+	    if(isophot.at(firsttwoassphot.at(0)) && isophot.at(firsttwoassphot.at(1)))  higgsmassisorecocheck.Fill(higgsisomass,pu_weight);	    
 	    double aveeta = (etaJet_pfakt5[firsttwonoassjet.at(0)]+etaJet_pfakt5[firsttwonoassjet.at(1)])/2;
 	    double zeppen = etahiggs - aveeta;
-	    zeppenhiggsassreco.Fill(zeppen);
+	    zeppenhiggsassreco.Fill(zeppen,pu_weight);
 	    if(TMath::Abs(zeppen)<zeppencut) {
-	      higgsmasscutzeppreco.Fill(higgsmass);
-	      dijetmassassreco.Fill(twojetsmass);
+	      higgsmasscutzeppreco.Fill(higgsmass,pu_weight);
+	      dijetmassassreco.Fill(twojetsmass,pu_weight);
 	      if(twojetsmass>250){
-		higgsmasscutzeppdijetreco.Fill(higgsmass);
+		higgsmasscutzeppdijetreco.Fill(higgsmass,pu_weight);
 	      }
 	    }
 	  }
@@ -2052,12 +2067,12 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  ) { 
 	
 	if( firsttwonoisojet.at(0) > -1) {
-	  ptjetisoreco1.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)]);
-	  etajetisoreco1.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]);
+	  ptjetisoreco1.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],pu_weight);
+	  etajetisoreco1.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)],pu_weight);
 	}
 	if( firsttwonoisojet.at(1) > -1) {
-	  ptjetisoreco2.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(1)]);
-	  etajetisoreco2.Fill(etaJet_pfakt5[firsttwonoisojet.at(1)]);
+	  ptjetisoreco2.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(1)],pu_weight);
+	  etajetisoreco2.Fill(etaJet_pfakt5[firsttwonoisojet.at(1)],pu_weight);
 	}
 	if( firsttwonoisojet.at(0) > -1 && firsttwonoisojet.at(1) > -1) {
 	  
@@ -2072,12 +2087,12 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  twojetsmassiso = sum.M();
 	  etatwojetsiso = sum.Eta();
 
-	  deltaetajetisoreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)]);
+	  deltaetajetisoreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)],pu_weight);
 	  double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
 	  double zeppen1 = etaJet_pfakt5[firsttwonoisojet.at(0)] - aveeta;
 	  double zeppen2 = etaJet_pfakt5[firsttwonoisojet.at(1)] - aveeta;
-	  zeppenjetisoreco1.Fill(zeppen1);
-	  zeppenjetisoreco2.Fill(zeppen2);	
+	  zeppenjetisoreco1.Fill(zeppen1,pu_weight);
+	  zeppenjetisoreco2.Fill(zeppen2,pu_weight);	
 	}
 
         nredntp++;
@@ -2216,12 +2231,6 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
 	met = epfMet;
 	nvtx = nvertex;
-	npu = pu_n;
-
-	if(npu<MAX_PU_REWEIGHT && puweights_.size()>0 && nMC>0) 
-	  pu_weight = puweights_[npu];
-	else
-	  pu_weight = -1;
 
         runRN = run;
         eventRN = event;
@@ -2236,29 +2245,29 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	ana_tree->Fill();
 
 	if(ptPhot[firsttwoisophot.at(0)] > ptphot1cut && ptPhot[firsttwoisophot.at(1)] > ptphot2cut){
-	  higgsmassjustisocutreco.Fill(higgsisomass);
-	  higgsmassjustisocutrecofull.Fill(higgsisomass);
+	  higgsmassjustisocutreco.Fill(higgsisomass,pu_weight);
+	  higgsmassjustisocutrecofull.Fill(higgsisomass,pu_weight);
 	}
 
 	if( ptCorrJet_pfakt5[firsttwonoisojet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoisojet.at(1)] > ptjet2cut 
 	    && ptPhot[firsttwoisophot.at(0)] > ptphot1cut && ptPhot[firsttwoisophot.at(1)] > ptphot2cut){
-	  higgsmassisojetptcutreco.Fill(higgsisomass);
-	  higgsmassisojetptcutrecofull.Fill(higgsisomass);
-	  deltaetajetreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)]);
+	  higgsmassisojetptcutreco.Fill(higgsisomass,pu_weight);
+	  higgsmassisojetptcutrecofull.Fill(higgsisomass,pu_weight);
+	  deltaetajetreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)],pu_weight);
 	  //	  double zeppen = higgsreco_pt - aveeta;
 	  if(TMath::Abs(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)])>deltaetacut){
-	    higgsmassisocutreco.Fill(higgsisomass);
-	    higgsmassisocutrecofull.Fill(higgsisomass);
+	    higgsmassisocutreco.Fill(higgsisomass,pu_weight);
+	    higgsmassisocutrecofull.Fill(higgsisomass,pu_weight);
 	    double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
 	    double zeppen = etahiggsiso - aveeta;
-	    zeppenhiggsisoreco.Fill(zeppen);
+	    zeppenhiggsisoreco.Fill(zeppen,pu_weight);
 	    if(TMath::Abs(zeppen)<zeppencut) {
-	      higgsmassisocutzeppreco.Fill(higgsisomass);
-	      higgsmassisocutzepprecofull.Fill(higgsisomass);
-	      dijetmassisoreco.Fill(twojetsmassiso);
+	      higgsmassisocutzeppreco.Fill(higgsisomass,pu_weight);
+	      higgsmassisocutzepprecofull.Fill(higgsisomass,pu_weight);
+	      dijetmassisoreco.Fill(twojetsmassiso,pu_weight);
 	      if(twojetsmassiso>dijetmasscut){
-		higgsmassisocutzeppdijetreco.Fill(higgsisomass);
-		higgsmassisocutzeppdijetrecofull.Fill(higgsisomass);
+		higgsmassisocutzeppdijetreco.Fill(higgsisomass,pu_weight);
+		higgsmassisocutzeppdijetrecofull.Fill(higgsisomass,pu_weight);
 	      }
 	    }
 	  }
