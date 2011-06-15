@@ -915,6 +915,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
      }
 
    // hOutputFile = new TFile("output.root" , "RECREATE" ) ;
+   hOutputFile->cd();   
    TH1D higgsmasshiggsassreco("higgsmasshiggsassreco","higgsmasshiggsassreco", 100, 100.,150.);
    TH1D higgsmassassreco("higgsmassassreco","higgsmassassreco", 100, 100.,150.);
    TH1D higgsmasscutreco("higgsmasscutreco","higgsmasscutreco", 100, 100.,150.);
@@ -2146,19 +2147,19 @@ void RedNtpTree::SetPuWeights(std::string puWeightFile)
   if (puWeightFile == "")
     {
       std::cout << "you need a weights file to use this function" << std::endl;
-      return;
+       return;
     }
-
+  
   std::cout << "PU REWEIGHTING:: Using file " << puWeightFile << std::endl;
-
+  
   TFile *f_pu  = new TFile(puWeightFile.c_str(),"READ");
-
+  
   TH1D *puweights = 0;
   TH1D *gen_pu = 0;
-
+  
   gen_pu= (TH1D*) f_pu->Get("generated_pu");
   puweights= (TH1D*) f_pu->Get("weights");
-
+  
   if (!puweights || !gen_pu)
     {
       std::cout << "weights histograms  not found in file " << puWeightFile << std::endl;
@@ -2171,9 +2172,9 @@ void RedNtpTree::SetPuWeights(std::string puWeightFile)
   //Rescaling weights in order to preserve same integral of events
   TH1D* weights= (TH1D*)puweights->Clone("rescaledWeights");
   weights->Scale( gen_pu->Integral(1,MAX_PU_REWEIGHT) / weightedPU->Integral(1,MAX_PU_REWEIGHT) );
-		  
+  
   float sumPuWeights=0.;
-
+  
   for (int i = 0; i<MAX_PU_REWEIGHT; i++) {
     float weight=1.;
     weight=weights->GetBinContent(i+1);
@@ -2181,5 +2182,5 @@ void RedNtpTree::SetPuWeights(std::string puWeightFile)
     puweights_.push_back(weight);
   }
   
-  //  std::cout << "weights sum is " << sumPuWeights << std::endl;
+  //std::cout << "weights sum is " << sumPuWeights << std::endl;
 }

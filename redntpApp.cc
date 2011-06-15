@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
 
-       char  jsonfile[100];
+       char jsonfile[100];
        sprintf(jsonfile,argv[4]);
        string finder2(jsonfile);
 
