@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.23 2011/06/03 15:12:44 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.24 2011/06/14 16:18:33 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/d/delre/reduced/
@@ -7,8 +7,8 @@ set castordir = /castor/cern.ch/user/d/delre/reduced/
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 
 
-if($#argv == 0 || $#argv < 6 || $#argv > 7 ) then
-  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile> <puweight>"
+if($#argv == 0 || $#argv < 5 || $#argv > 8 ) then
+  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile> <puweight> <ptweight>"
   echo "        inlist: valid directory containing list files OR valid list file"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
@@ -16,6 +16,8 @@ if($#argv == 0 || $#argv < 6 || $#argv > 7 ) then
   echo "        locations: cern roma eth"
   echo "        run: default=0  set to 1 to execute"
   echo "        jsonfile: optional json to select good RUN_LS"
+  echo "        puweight: optional file for puweight"
+  echo "        ptweight: optional file for ptweight"
   exit 0
 endif
 
@@ -70,16 +72,22 @@ if ($#argv > 4) then
   echo "run : $run "
 endif 
 
-set json = 0
+set json = -1
 if ($#argv > 5) then
   set json = $6
   echo "json : $json "
 endif 
 
-set puweight = 0
+set puweight = -1
 if ($#argv > 6) then
   set puweight = $7
   echo "puweight : $puweight "
+endif 
+
+set ptweight = -1
+if ($#argv > 7) then
+  set ptweight = $8
+  echo "ptweight : $ptweight "
 endif 
 
 echo "------   ready ro run at $location ------------------"
@@ -131,10 +139,18 @@ if(-f $listdir) then
    set logfile = "${logdir}/${sample}.txt"
    set logerrfile = "${logdir}/${sample}_err.txt"
    set listfile = "${listdir}/${sample}.list"
+   set ptweightFile = -1
+   if ( $ptweight !=  -1 ) then
+	if ( "`echo $sample | grep -i GluGlu`XXX" != "XXX" ) then
+	    set mass = `echo ${sample} | awk -F '-' '{print $2}'`
+	    set ptweightFile = `echo ${ptweight} | sed -e "s%MASSVALUE%${mass}%g"`
+	endif
+   endif
+
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
    endif  
 
    echo "---------------------------"
@@ -168,10 +184,18 @@ else if(-d $listdir) then
    #   continue
    #endif
 
+   set ptweightFile = -1
+   if ( $ptweight !=  -1 ) then
+	if ( "`echo $sample | grep -i GluGlu`XXX" != "XXX" ) then
+	    set mass = `echo ${sample} | awk -F '-' '{print $2}' | sed -e 's%\([0-9]*\).*%\1%g'`
+	    set ptweightFile = `echo ${ptweight} | sed -e "s%MASSVALUE%${mass}%g"`
+	endif
+   endif
+
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
    endif  
 
    echo "---------------------------"

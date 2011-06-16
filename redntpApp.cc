@@ -26,14 +26,15 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 || argc>6 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional)\n" 
+      if(argc < 3 || argc>7 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
              << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass\n"
              << "   jsonfile: jsonfile used to select RUN/LS when looping over data. -1 if not used"
              << "   puweight: puweight for MC nPU reweighting. -1 if not used"
+             << "   ptweight: ptweight for MC HiggsPt reweighting for GluGlu. -1 if not used"
              << endl;
         exit(-1);
       }
@@ -101,6 +102,9 @@ int main(int argc, char* argv[]) {
 
        if (argc>5 && std::string(argv[5]) != "-1")
 	 tool.SetPuWeights(std::string(argv[5]));
+
+       if (argc>6 && std::string(argv[6]) != "-1")
+	 tool.SetPtWeights(std::string(argv[6]));
 
        std::cout << "DONE with settings starting loop" << std::endl;
 

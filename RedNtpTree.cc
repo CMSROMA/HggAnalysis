@@ -1630,7 +1630,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    bin = Int_t((higgspt-ptweights_->GetXaxis()->GetXmin())/binsize) + 1;
 	  }
 	  // overflow protection: use overflow entry
-	  if(bin > ptweights_->GetNbinsX()) bin=ptweights_->GetNbinsX()+1;
+	  // FIXME weights overflow bin seems to be 0. Not really using overflow but weight of last available bin
+	  if(bin > ptweights_->GetNbinsX()) bin=ptweights_->GetNbinsX();
 
 // 	  std::cout <<" Bin Size "<< binsize <<std::endl;
 // 	  std::cout <<" Higgs Pt "<< higgspt <<std::endl;
@@ -1639,6 +1640,14 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	  // get KFactor
 	  pt_weight=  ptweights_->GetBinContent(bin);
+	  if (pt_weight==0)
+	    {
+	      std::cout <<"PTWEIGHT=0. THIS SHOULD NOT HAPPEN!!" << std::endl;
+	      std::cout <<"Bin Size "<< binsize <<std::endl;
+	      std::cout <<"Higgs Pt "<< higgspt <<std::endl;
+	      std::cout <<"Bin  "<< bin <<std::endl;
+	      std::cout <<"KFactor "<<   ptweights_->GetBinContent(bin) <<std::endl;
+	    }
 	}
       else
 	{
