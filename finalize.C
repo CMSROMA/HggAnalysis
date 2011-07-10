@@ -60,32 +60,39 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   mcnames[0] = "box";
   mcnames[1] = "diphoton";
   mcnames[2] = "gjet";
-  mcnames[3] = "qcd pt>40";
-  mcnames[4] = "qcd 30<pt<40";
+  mcnames[3] = "qcdpt>40";
+  mcnames[4] = "qcd30<pt<40";
   mcnames[5] = "dy";
-  mcnames[6] = "higgs gluglu";
-  mcnames[7] = "higgs VBF";
-  mcnames[8] = "higgs WZH";
+  mcnames[6] = "higgsgluglu";
+  mcnames[7] = "higgsVBF";
+  mcnames[8] = "higgsWZH";
 
   TFile* mc_2010[9];
   TFile* mc_2011[9];
+
+  TFile* mc_gluglu_2011[7];
+  TFile* mc_vbf_2011[7];
+  TFile* mc_wzh_2011[7];
+  TFile* mc_tth_2011[7];
+
+  int h_masses[7] = {100,105,110,115,120,130,140};
 
   TString redntpDir= "/shome/meridian/software/CMSSW423/src/Analysis/Higgs";
 
   TString preselectionLevel;
 
 
-  if (cic>0)
-    preselectionLevel="cicloose";
-  else
+//    if (cic>0)
+//      preselectionLevel="cicloose";
+//   else
     preselectionLevel="preselectionCS";
 
   TString preselectionLevelCS="preselectionCS";
   // total data sample
-  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
-  TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v1/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
+  //TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v2/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
+  TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
   //  TFile* data = new TFile(redntpDir+"/redntp.41xv10_data."+preselectionLevel+".v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
-  //  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v1/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5.root");    
+  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
 
   if(int_exp_2010>0){
     // box samples
@@ -110,25 +117,37 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   if(int_exp_2011>0){
     // box samples
-    mc_2011[0] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DiPhotonBox_Pt25to250-41x_ntpv4.root");
+    mc_2011[0] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_DiPhotonBox_Pt25to250-41x_ntpv4.root");
     // diphoton jets samples
-    mc_2011[1] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DiPhotonJets_7TeV-madgraph.root");
+    mc_2011[1] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_DiPhotonJets_7TeV-madgraph.root");
     // gjet samples
-    mc_2011[2] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[2] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // qcd pt>40 samples
-    mc_2011[3] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[3] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // qcd 30<pt<40 samples
-    mc_2011[4] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
+    mc_2011[4] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-41x_ntpv1.root");
     // drell yan samples
-    mc_2011[5] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v1/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
+    mc_2011[5] = new TFile(redntpDir+"/redntp.41xv10."+preselectionLevel+".v2/merged/redntp_DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-PU-winter-newtrkiso-41x_ntpv1.root");
     // gluglu higgs samples 
-    mc_2011[6] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6.root");
+    mc_2011[6] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_GluGluToHToGG_M-115_7TeV-powheg-pythia6.root");
     // vbf higgs samples 
-    mc_2011[7] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_VBF_HToGG_M-115_7TeV-powheg-pythia6.root");
+    mc_2011[7] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_VBF_HToGG_M-115_7TeV-powheg-pythia6.root");
     // W/Z/TT H higgs samples 
-    mc_2011[8] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v1/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
+    mc_2011[8] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_WH_ZH_HToGG_M-115_7TeV-pythia6.root");
   }
  
+  for (int i=0;i<7;i++){
+    char hmass[100]; sprintf(hmass,"%d",h_masses[i]);
+    // gluglu samples
+    mc_gluglu_2011[i] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_GluGluToHToGG_M-"+ hmass + "_7TeV-powheg-pythia6.root");
+    // vbf higgs samples 
+    mc_vbf_2011[i] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_VBF_HToGG_M-"+ hmass +"_7TeV-powheg-pythia6.root");
+    // W/Z H higgs samples 
+    mc_wzh_2011[i] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_WH_ZH_HToGG_M-"+ hmass +"_7TeV-pythia6.root");
+//     // TT H higgs samples 
+//     mc_tth_2011[i] = new TFile(redntpDir+"/redntp.42xv2."+preselectionLevel+".v2/merged/redntp_TTH_HToGG_M-"+ hmass +"_7TeV-pythia6.root");
+  }
+
   // cross sections and scaling
   double boosthiggs(15);
   double cross_mc[9];
@@ -143,11 +162,18 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   cross_mc[8] = (0.7546 + 0.4107) * 2.13e-03 * boosthiggs; // WHtt higgs
 
   // getting the number of original events in each sample (processed with CMSSW)
-  int n_mc_2010[9], n_mc_2011[9];
+  int n_mc_2010[9], n_mc_2011[9],n_gluglu_2011[7],n_vbf_2011[7],n_wzh_2011[7],n_tth_2011[7];
   for(int i=0; i<9; i++){
     n_mc_2010[i] = n_mc_2011[i] = 0;
     if(int_exp_2010>0) n_mc_2010[i] = ((TH1D*)mc_2010[i]->Get("ptphotgen1"))->GetEntries();
     if(int_exp_2011>0) n_mc_2011[i] = ((TH1D*)mc_2011[i]->Get("ptphotgen1"))->GetEntries();
+  }
+  for(int i=0; i<7; i++){
+    n_gluglu_2011[i] = n_vbf_2011[i] = n_wzh_2011[i] = n_tth_2011[i] = 0;
+    n_gluglu_2011[i] = ((TH1D*)mc_gluglu_2011[i]->Get("ptphotgen1"))->GetEntries();
+    n_vbf_2011[i] = ((TH1D*)mc_vbf_2011[i]->Get("ptphotgen1"))->GetEntries();
+    n_wzh_2011[i] = ((TH1D*)mc_wzh_2011[i]->Get("ptphotgen1"))->GetEntries();
+//     n_tth_2011[i] = ((TH1D*)mc_tth_2011[i]->Get("ptphotgen1"))->GetEntries();
   }
 
   // setting the scaling factor to actual lumi
@@ -172,6 +198,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   TH1D* vardatacs = new TH1D("vardatacs","vardatacs",nbin,min,max);
   TH1D* var_mc_2010[9];
   TH1D* var_mc_2011[9];
+  TH1D* var_gluglu_2011[7];
+  TH1D* var_vbf_2011[7];
+  TH1D* var_wzh_2011[7];
+  TH1D* var_tth_2011[7];
   TH1D * var[6];
   for (int i=0; i<6; i++) {
     sprintf(name,"%s%d","var",i);
@@ -183,6 +213,17 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     sprintf(name,"%s%d","var_mc_2011_",i);
     var_mc_2011[i] = new TH1D(name,name,nbin,min,max);
   }
+  for (int i=0; i<7; i++) {
+    sprintf(name,"%s%d","var_gluglu_2011_",h_masses[i]);
+    var_gluglu_2011[i] = new TH1D(name,name,nbin,min,max);
+    sprintf(name,"%s%d","var_vbf_2011_",h_masses[i]);
+    var_vbf_2011[i] = new TH1D(name,name,nbin,min,max);
+    sprintf(name,"%s%d","var_wzh_2011_",h_masses[i]);
+    var_wzh_2011[i] = new TH1D(name,name,nbin,min,max);
+//     sprintf(name,"%s%d","var_tth_2011_",h_masses[i]);
+//     var_tth_2011[i] = new TH1D(name,name,nbin,min,max);
+  }
+
 
   // creating the fillers and setting cuts
   fillPlot data_fill((TTree*)data->Get("AnaTree"), 1);
@@ -197,6 +238,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   fillPlot* mc_2010_fill[9];
   fillPlot* mc_2011_fill[9];
+  fillPlot* mc_gluglu_2011_fill[9];  
+  fillPlot* mc_vbf_2011_fill[9];  
+  fillPlot* mc_wzh_2011_fill[9];  
+  fillPlot* mc_tth_2011_fill[9];  
 
   for (int i=0; i<9; i++){
     if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"), 1);
@@ -204,11 +249,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
     if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
 
-    std::cout << "Setting PU for " << mcnames[i] << std::endl;
-    if (int_exp_2011>0 && i<6)
-      mc_2011_fill[i]->SetPuWeights(0,"mc_41x_PUweight.root");
-    else if(int_exp_2011>0)
-      mc_2011_fill[i]->SetPuWeights(0,"mc_42x_PUweight.root");
+    mc_2011_fill[i]->DoPuReweight();
+    mc_2011_fill[i]->DoPtReweight();
     
     if(cic>0){
       if(int_exp_2010>0) mc_2010_fill[i]->setCic(cic);
@@ -216,6 +258,28 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     }
   }
  
+  for (int i=0; i<7; i++){
+    mc_gluglu_2011_fill[i] = new fillPlot((TTree*)mc_gluglu_2011[i]->Get("AnaTree"), 1);
+    mc_vbf_2011_fill[i] = new fillPlot((TTree*)mc_vbf_2011[i]->Get("AnaTree"), 1);
+    mc_wzh_2011_fill[i] = new fillPlot((TTree*)mc_wzh_2011[i]->Get("AnaTree"), 1);
+//     mc_tth_2011_fill[i] = new fillPlot((TTree*)mc_tth_2011[i]->Get("AnaTree"), 1);
+    mc_gluglu_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    mc_vbf_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    mc_wzh_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+//     mc_tth_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    mc_gluglu_2011_fill[i]->DoPuReweight();
+    mc_vbf_2011_fill[i]->DoPuReweight();
+    mc_wzh_2011_fill[i]->DoPuReweight();
+//     mc_tth_2011_fill[i]->DoPuReweight();
+    mc_gluglu_2011_fill[i]->DoPtReweight();
+    mc_vbf_2011_fill[i]->DoPtReweight();
+    mc_wzh_2011_fill[i]->DoPtReweight();
+//     mc_tth_2011_fill[i]->DoPtReweight();
+    mc_gluglu_2011_fill[i]->setCic(cic);
+    mc_vbf_2011_fill[i]->setCic(cic);
+    mc_wzh_2011_fill[i]->setCic(cic);
+//     mc_tth_2011_fill[i]->setCic(cic);
+ }
   // smear mc
 //   for (int i=0; i<9; i++){
 //     if(int_exp_2010>0) mc_2010_fill[i]->DoSmearing(1.,0.0001);
@@ -225,36 +289,70 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // filling histograms
   std::cout << " ++++++++++++++ DATA ++++++++++++++++" << std::endl;
   cout << "running over " << ((TTree*)data->Get("AnaTree"))->GetEntries("") << " data events" <<  endl;
-  sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
-  data_fill.Writetxt(name);
-  sprintf(name,"%s%s%s","results_gg/events_",allcut,".root");
-  data_fill.WriteRoot(name);
+  if (variable == "massgg") {  
+    sprintf(name,"%s%s%s","results_gg/events_",allcut,".txt");
+    data_fill.Writetxt(name);
+    sprintf(name,"%s%s%s","results_gg/events_",allcut,".root");
+    data_fill.WriteRoot(name);
+  }
   vardata->Add(data_fill.Plot(variable,"data", nbin, min, max)); 
   std::cout << "Selected events on data " << vardata->GetEntries() << std::endl;
   cout << "running over " << ((TTree*)datacs->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
 
-  //  data_fill.Writetxt(0);
-  datacs_fill.Writetxt(name);
-  datacs_fill.WriteRoot(name);
+  if (variable == "massgg") {  
+    datacs_fill.Writetxt(name);
+    datacs_fill.WriteRoot(name);
+  }
   vardatacs->Add(datacs_fill.Plot(variable,"datacs", nbin, min, max, 1)); 
   std::cout << "Selected events on data cs " << vardatacs->GetEntries() << std::endl;
 
   std::cout << " ++++++++++++++ MC ++++++++++++++++" << std::endl;
   for (int i=0; i<9; i++){ 
     sprintf(name,"%s%s",mcnames[i].c_str()," 2010");
-    if(int_exp_2010>0) cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-
-    if(int_exp_2010>0) var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
-    if(int_exp_2010>0) std::cout << "Selected events on mc2010 " << name << " " << var_mc_2010[i]->GetEntries() << std::endl;
-
+    if(int_exp_2010>0) {
+      cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
+      sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_2010_",allcut,".root");
+      if (variable == "massgg") mc_2010_fill[i]->WriteRoot(name);
+      var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
+      std::cout << "Selected events on mc2010 " << name << " " << var_mc_2010[i]->GetEntries() << std::endl;
+    }
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
-    if(int_exp_2011>0) cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-
-    if(int_exp_2011>0) var_mc_2011[i]->Add(mc_2011_fill[i]->Plot(variable, name, nbin, min, max));
-    if(int_exp_2011>0) std::cout << "Selected events on mc2011 " << name << " " << var_mc_2011[i]->GetEntries() << std::endl;
-
+    if(int_exp_2011>0) {
+      cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
+      sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_2011_",allcut,".root");
+      if (variable == "massgg") mc_2011_fill[i]->WriteRoot(name);
+      var_mc_2011[i]->Add(mc_2011_fill[i]->Plot(variable, name, nbin, min, max));
+      std::cout << "Selected events on mc2011 " << name << " " << var_mc_2011[i]->GetEntries() << std::endl;
+    }
 
   }
+
+  std::cout << " ++++++++++++++ signal MC ++++++++++++++++" << std::endl;
+  for (int i=0; i<7; i++){ 
+    cout << "running over " << ((TTree*)mc_gluglu_2011[i]->Get("AnaTree"))->GetEntries("") << " gluglu M=" << h_masses[i] << " events" <<  endl; 
+    sprintf(name,"%s%d%s%s%s","results_gg/events_gluglu",h_masses[i],"_2011_",allcut,".root");
+    if (variable == "massgg") mc_gluglu_2011_fill[i]->WriteRoot(name);
+    var_gluglu_2011[i]->Add(mc_gluglu_2011_fill[i]->Plot(variable, name, nbin, min, max));
+    std::cout << "Selected events on mc2011 gluglu " << h_masses[i] << " " << var_gluglu_2011[i]->GetEntries() << std::endl;
+ 
+    cout << "running over " << ((TTree*)mc_vbf_2011[i]->Get("AnaTree"))->GetEntries("") << " vbf M=" << h_masses[i] << " events" <<  endl; 
+    sprintf(name,"%s%d%s%s%s","results_gg/events_vbf",h_masses[i],"_2011_",allcut,".root");
+    if (variable == "massgg") mc_vbf_2011_fill[i]->WriteRoot(name);
+    var_vbf_2011[i]->Add(mc_vbf_2011_fill[i]->Plot(variable, name, nbin, min, max));
+    std::cout << "Selected events on mc2011 vbf " << h_masses[i] << " " << var_vbf_2011[i]->GetEntries() << std::endl;
+
+    cout << "running over " << ((TTree*)mc_wzh_2011[i]->Get("AnaTree"))->GetEntries("") << " wzh M=" << h_masses[i] << " events" <<  endl; 
+    sprintf(name,"%s%d%s%s%s","results_gg/events_wzh",h_masses[i],"_2011_",allcut,".root");
+    if (variable == "massgg") mc_wzh_2011_fill[i]->WriteRoot(name);
+    var_wzh_2011[i]->Add(mc_wzh_2011_fill[i]->Plot(variable, name, nbin, min, max));
+    std::cout << "Selected events on mc2011 wzh " << h_masses[i] << " " << var_wzh_2011[i]->GetEntries() << std::endl;
+
+//     cout << "running over " << ((TTree*)mc_tth_2011[i]->Get("AnaTree"))->GetEntries("") << " tth M=" << h_masses[i] << " events" <<  endl; 
+//     sprintf(name,"%s%d%s%s%s","results_gg/events_tth",h_masses[i],"_2011_",allcut,".root");
+//     if (variable == "massgg") mc_tth_2011_fill[i]->WriteRoot(name);
+//     var_tth_2011[i]->Add(mc_tth_2011_fill[i]->Plot(variable, name, nbin, min, max));
+//     std::cout << "Selected events on mc2011 tth " << h_masses[i] << " " << var_tth_2011[i]->GetEntries() << std::endl;
+ }
 
   // scale mc to equivalent lumi
   for (int i=0; i<9; i++){ 
@@ -263,11 +361,18 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   }
 
   // counting number of events passing selection (scaled)
-  double num_mc_2010[9],num_mc_2011[9]; 
+  double num_mc_2010[9],num_mc_2011[9],num_gluglu_2011[7],num_vbf_2011[7],num_wzh_2011[7],num_tth_2011[7]; 
   for (int i=0; i<9; i++){ 
     num_mc_2010[i] = num_mc_2011[i] = 0;
     if(int_exp_2010>0) num_mc_2010[i] = var_mc_2010[i]->Integral();  
     if(int_exp_2011>0) num_mc_2011[i] = var_mc_2011[i]->Integral();  
+  }
+  for(int i=0; i<7; i++){
+    num_gluglu_2011[i] = num_vbf_2011[i] = num_wzh_2011[i] = num_tth_2011[i] = 0;
+    num_gluglu_2011[i] = num_gluglu_2011[i] = var_gluglu_2011[i]->Integral(); 
+    num_vbf_2011[i] = num_vbf_2011[i] = var_vbf_2011[i]->Integral(); 
+    num_wzh_2011[i] = num_wzh_2011[i] = var_wzh_2011[i]->Integral(); 
+//     num_tth_2011[i] = num_tth_2011[i] = var_tth_2011[i]->Integral(); 
   }
 
   // add two QCD bins
@@ -425,32 +530,32 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
 
   // additional plot with larger binnin (only for invariant mass)
   if (variable == "massgg"){
-    var[0]->Rebin(4);
-    themax = var[0]->GetMaximum();
-    vardata->Rebin(4);
-    cout << vardata->GetMaximum() << "   " << var[0]->GetMaximum() << endl;
-    if(themax < vardata->GetMaximum()) themax = vardata->GetMaximum();
-    var[0]->SetMaximum(themax*1.1);
-    var[0]->SetMinimum(0.);
-    var[0]->Draw();
-    var[1]->Rebin(4);
-    var[1]->Draw("same");
-    var[2]->Rebin(4);
-    var[2]->Draw("same");
-    var[3]->Rebin(4);
-    var[3]->Draw("same");
-    var[4]->Rebin(4);
-    var[4]->Draw("same");
-    var[5]->Rebin(4);
-    var[5]->Draw("same");
-    leg->Draw();
-    gPad->RedrawAxis();
-    sprintf(name,"%s%s%s%s%s","results_gg/mc_rebin_",variable.c_str(),"_",allcut,".gif");
-    c0->SaveAs(name);
+//     var[0]->Rebin(4);
+//     themax = var[0]->GetMaximum();
+//     vardata->Rebin(4);
+//     cout << vardata->GetMaximum() << "   " << var[0]->GetMaximum() << endl;
+//     if(themax < vardata->GetMaximum()) themax = vardata->GetMaximum();
+//     var[0]->SetMaximum(themax*1.1);
+//     var[0]->SetMinimum(0.);
+//     var[0]->Draw();
+//     var[1]->Rebin(4);
+//     var[1]->Draw("same");
+//     var[2]->Rebin(4);
+//     var[2]->Draw("same");
+//     var[3]->Rebin(4);
+//     var[3]->Draw("same");
+//     var[4]->Rebin(4);
+//     var[4]->Draw("same");
+//     var[5]->Rebin(4);
+//     var[5]->Draw("same");
+//     leg->Draw();
+//     gPad->RedrawAxis();
+//     sprintf(name,"%s%s%s%s%s","results_gg/mc_rebin_",variable.c_str(),"_",allcut,".gif");
+//     c0->SaveAs(name);
     
-    vardata->Draw("pesame");
-    sprintf(name,"%s%s%s%s%s","results_gg/data-mc_rebin_",variable.c_str(),"_",allcut,".gif");
-    c0->SaveAs(name);
+//     vardata->Draw("pesame");
+//     sprintf(name,"%s%s%s%s%s","results_gg/data-mc_rebin_",variable.c_str(),"_",allcut,".gif");
+//     c0->SaveAs(name);
 
     vardatacs->Rebin(4);
     vardata->SetMaximum(themax*1.1);
@@ -558,6 +663,12 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     outfile << "eff nqcd      = " << num_mc_total[3] / n_mc_total[3] << endl;
     outfile << "eff nqcd30-40 = " << num_mc_total[4] / n_mc_total[4] << endl;
     outfile << endl;
+    for(int i=0; i<7; i++){
+      outfile << "eff nhig gluglu "<< h_masses[i] << " = " << num_gluglu_2011[i] / n_gluglu_2011[i] << endl;
+      outfile << "eff nhig vbf    "<< h_masses[i] << " = " << num_vbf_2011[i] / n_vbf_2011[i] << endl;
+      outfile << "eff nhig wzh    "<< h_masses[i] << " = " << num_wzh_2011[i] / n_wzh_2011[i] << endl;
+//       outfile << "eff nhig tth    "<< h_masses[i] << " = " << num_tth_2011[i] / n_tth_2011[i] << endl;
+    }
     outfile.close();
 
   }

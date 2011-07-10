@@ -77,17 +77,15 @@ public :
    Float_t         pid_twrHCAL[40];   //[nPhot]
    Float_t         pid_HoverE[40];   //[nPhot]
    Float_t         pid_hlwTrack[40];   //[nPhot]
-   Float_t         pid_hlwTrackBestRank[40];   //[nPhot]
-   Float_t         pid_hlwTrackWorstVtx[40];   //[nPhot]
+   Float_t         pid_hlwTrackForCiC[40][30];
    Float_t         pid_hlwTrackNoDz[40];   //[nPhot]
    Float_t         pid_etawid[40];   //[nPhot]
    Float_t         pid_jurECAL03[40];   //[nPhot]
    Float_t         pid_twrHCAL03[40];   //[nPhot]
    Float_t         pid_hlwTrack03[40];   //[nPhot]
-   Float_t         pid_hlwTrack03BestRank[40];   //[nPhot]
-   Float_t         pid_hlwTrack03WorstVtx[40];   //[nPhot]
    Float_t         pid_hlwTrack03NoDz[40];   //[nPhot]
    Float_t         pid_deltaRToTrackPhot[40];   //[nPhot]
+   Float_t         pid_hlwTrack03ForCiC[40][30];
    Float_t         ptiso004Phot[40];   //[nPhot]
    Int_t           ntrkiso004Phot[40];   //[nPhot]
    Float_t         ptiso035Phot[40];   //[nPhot]
@@ -258,10 +256,13 @@ public :
    Float_t         vntracks[100];   //[nvertex]
    Float_t         vchi2[100];   //[nvertex]
    Float_t         vndof[100];   //[nvertex]
-   Float_t         vptbal[100];   //[nvertex]
-   Float_t         vptasym[100];   //[nvertex]
    Float_t         vlogsumpt2[100];   //[nvertex]
-   Int_t           vrank[100];   //[nvertex]
+   Int_t           nPreselPhotonPairs;
+   Float_t         indexPreselPhot1[6];   //[nPreselPhotonPairs]
+   Float_t         indexPreselPhot2[6];   //[nPreselPhotonPairs]
+   Int_t           vrankPhotonPairs[6];   //[nPreselPhotonPairs]
+   Float_t         vptbalPhotonPairs[6];   //[nPreselPhotonPairs]
+   Float_t         vptasymPhotonPairs[6];   //[nPreselPhotonPairs]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;
@@ -325,14 +326,12 @@ public :
    TBranch        *b_pid_HoverE;   //!
    TBranch        *b_pid_hlwTrack;   //!
    TBranch        *b_pid_hlwTrackBestRank;   //!
-   TBranch        *b_pid_hlwTrackWorstVtx;   //!
    TBranch        *b_pid_hlwTrackNoDz;   //!
    TBranch        *b_pid_etawid;   //!
    TBranch        *b_pid_jurECAL03;   //!
    TBranch        *b_pid_twrHCAL03;   //!
    TBranch        *b_pid_hlwTrack03;   //!
-   TBranch        *b_pid_hlwTrack03BestRank;   //!
-   TBranch        *b_pid_hlwTrack03WorstVtx;   //!
+   TBranch        *b_pid_hlwTrack03ForCiC;   //!
    TBranch        *b_pid_hlwTrack03NoDz;   //!
    TBranch        *b_pid_deltaRToTrackPhot;   //!
    TBranch        *b_ptiso004Phot;   //!
@@ -510,10 +509,13 @@ public :
    TBranch        *b_vntracks;   //!
    TBranch        *b_vchi2;   //!
    TBranch        *b_vndof;   //!
-   TBranch        *b_vptbal;   //!
-   TBranch        *b_vptasym;   //!
    TBranch        *b_vlogsumpt2;   //!
-   TBranch        *b_vrank;   //!
+   TBranch        *b_nPreselPhotonPairs;   //!
+   TBranch        *b_indexPreselPhot1;   //!
+   TBranch        *b_indexPreselPhot2;   //!
+   TBranch        *b_vrankPhotonPairs;   //!
+   TBranch        *b_vptbalPhotonPairs;   //!
+   TBranch        *b_vptasymPhotonPairs;   //!
    TBranch        *b_nHLT;   //!
    TBranch        *b_hltNamesLen;   //!
    TBranch        *b_HLTNames;   //!

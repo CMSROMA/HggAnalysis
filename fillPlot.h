@@ -25,6 +25,7 @@ public :
      int lumi;
      int event;
      float massgg;
+     float weight;
    };
    
    diPhotonTree_structure_ tree_;
@@ -53,7 +54,7 @@ public :
    std::string writeRoot;
    
    // bool for switching on smearing and smearing parameters
-   bool dosmear;
+   bool dosmear,dopureweight,doptreweight;
    double meansmear, spreadsmear;
 
    // vector of pu weights
@@ -65,6 +66,7 @@ public :
    Int_t           lumi;
    Float_t         rhoPF;
    Float_t         massgg;
+   Float_t         massggnewvtx;
    Float_t         ptgg;
    Float_t         ptphot1;
    Float_t         ptphot2;
@@ -172,13 +174,16 @@ public :
    Float_t         xsection;
    Float_t         EquivLumi;
    Int_t           SampleID;
+   Float_t         pu_weight;
+   Float_t         pt_weight;
 
    // List of branches
    TBranch        *b_run;   //!
    TBranch        *b_event;   //!
    TBranch        *b_lumi;   //!
    TBranch        *b_rhoPF;   //!
-   TBranch        *b_massgg;   //!
+   TBranch        *b_massgg;   //!                                                                                                                         
+   TBranch        *b_massggnewvtx;   //!
    TBranch        *b_ptgg;   //!
    TBranch        *b_ptphot1;   //!
    TBranch        *b_ptphot2;   //!
@@ -286,6 +291,8 @@ public :
    TBranch        *b_xsection;   //!
    TBranch        *b_EquivLumi;   //!
    TBranch        *b_SampleID;   //!
+   TBranch        *b_pu_weight;   //!
+   TBranch        *b_pt_weight;   //!
 
    fillPlot(TTree *tree=0, bool isData=0);
    virtual ~fillPlot();
@@ -300,6 +307,8 @@ public :
    virtual void     WriteRoot(char * filename);
    virtual void     SetPuWeights(bool isData = 0,std::string file = "");
    virtual void     DoSmearing(double mean, double spread);   
+   virtual void     DoPuReweight();   
+   virtual void     DoPtReweight();   
    virtual Bool_t   Notify();
 };
 
@@ -322,6 +331,8 @@ fillPlot::fillPlot(TTree *tree, bool isData)
    writetxt = "";
    writeRoot = "";
    dosmear = 0;
+   dopureweight = 0;
+   doptreweight = 0;
    cicselection = -1;
 //   SetPuWeights(isData);
 }
@@ -374,6 +385,7 @@ void fillPlot::Init(TTree *tree)
    fChain->SetBranchAddress("lumi", &lumi, &b_lumi);
    fChain->SetBranchAddress("rhoPF", &rhoPF, &b_rhoPF);
    fChain->SetBranchAddress("massgg", &massgg, &b_massgg);
+   fChain->SetBranchAddress("massggnewvtx", &massggnewvtx, &b_massggnewvtx);
    fChain->SetBranchAddress("ptgg", &ptgg, &b_ptgg);
    fChain->SetBranchAddress("ptphot1", &ptphot1, &b_ptphot1);
    fChain->SetBranchAddress("ptphot2", &ptphot2, &b_ptphot2);
@@ -481,6 +493,8 @@ void fillPlot::Init(TTree *tree)
    fChain->SetBranchAddress("xsection", &xsection, &b_xsection);
    fChain->SetBranchAddress("EquivLumi", &EquivLumi, &b_EquivLumi);
    fChain->SetBranchAddress("SampleID", &SampleID, &b_SampleID);
+   fChain->SetBranchAddress("pu_weight", &pu_weight, &b_pu_weight);
+   fChain->SetBranchAddress("pt_weight", &pt_weight, &b_pt_weight);
    Notify();
 }
 

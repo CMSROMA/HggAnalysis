@@ -55,7 +55,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
        fOut=TFile::Open(filename.c_str(),"RECREATE"); 
        fOut->cd();
        myTree = new TTree("diPhotonEvents","");
-       TString treeVariables = "run/I:lumi/I:event/I:massgg/F";    
+       TString treeVariables = "run/I:lumi/I:event/I:massgg/F:weight/F";    
        myTree->Branch("diPhotonEvents",&(tree_.run),treeVariables);
      }
 
@@ -175,7 +175,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       // finding variable to be plotted
       double variable(0);
-      if (var == "massgg")  variable = massgg;
+      if (var == "massgg")  variable = massggnewvtx;
       else if (var == "ptphot1")  variable = ptphot1;
       else if (var == "ptphot2")  variable = ptphot2;
       else if (var == "ptjet1")  variable = ptcorrjet1;
@@ -217,32 +217,33 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	variable *= smearing.Gaus(meansmear,spreadsmear);
       }
 
-      // pu reweighting
-      if(npu<MAX_PU_REWEIGHT && puweights_.size()>0) 
-	tempplot->Fill(variable, puweights_[npu]);
-      else{
-	//Using weight 1. for DATA and for dataOutside reweighting window
-	tempplot->Fill(variable,1.);
-	//	cout << "Event outside the reweighting range N<MAX_PU_REWEIGHT" << endl;
-      } 
+      // pu/pt reweighting
+      float weight(1);
+      if(dopureweight) weight *= pu_weight;
+      if(doptreweight) weight *= pt_weight;
+
+      tempplot->Fill(variable, weight);
 
       if (var == "massgg" && writeRoot != "")
 	{
 	  tree_.run=run;
 	  tree_.lumi=lumi;
 	  tree_.event=event;
-	  tree_.massgg=massgg;
+	  tree_.massgg=massggnewvtx;
+	  tree_.weight=weight;
 	  fOut->cd();
 	  myTree->Fill();
 	}
 
       if(writetxt != "") 
-	outfile << "run " << run << "\t lumi "  << std::setw(4) << lumi << "\t event " << std::setw(12) << event  << "\t massgg " << std::setprecision(6) << massgg << endl;      
+	outfile << "run " << run << "\t lumi "  << std::setw(4) << lumi << "\t event " << std::setw(12) << event  << "\t massgg " << std::setprecision(6) << massggnewvtx << endl;      
 
    }
    
-   if (var == "massgg" && writeRoot != "")
+   if (var == "massgg" && writeRoot != ""){
      fOut->Write();
+     delete fOut;
+   }
 
    if(writetxt != "") 
      outfile.close();
@@ -330,6 +331,14 @@ void fillPlot::Writetxt(char * filename)
 void fillPlot::WriteRoot(char * filename)
 {
   writeRoot=std::string(filename);
+}
+
+void fillPlot::DoPuReweight(){
+  dopureweight = 1;
+}
+
+void fillPlot::DoPtReweight(){
+  doptreweight = 1;
 }
 
 void fillPlot::SetPuWeights(bool isData,std::string puWeightFile)

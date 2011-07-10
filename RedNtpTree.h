@@ -59,7 +59,7 @@ private:
    enum phoCiC6Categories { phoCiC6EBhighR9=0, phoCiC6EBmidR9, phoCiC6EBlowR9, phoCiC6EEhighR9, phoCiC6EEmidR9, phoCiC6EElowR9, phoCiC6NCATEGORIES };
    enum phoCiC4Categories { phoCiC4EBhighR9=0, phoCiC4EBlowR9, phoCiC4EEhighR9, phoCiC4EElowR9, phoCiC4NCATEGORIES };
    void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead);
-   void FillPhotonCiCSelectionVariable(int photon_index);
+   void FillPhotonCiCSelectionVariable(int photon_index, int vtx_index);
    float cic6_cut_lead_isosumoet[phoNCUTLEVELS][6];
    float cic6_cut_lead_isosumoetbad[phoNCUTLEVELS][6];
    float cic6_cut_lead_trkisooet[phoNCUTLEVELS][6];
@@ -103,7 +103,7 @@ private:
    TH1F* cic4_cut_drtotk_25_99[phoCiC4NCATEGORIES];
    TH1F* cic4_cut_pixel[phoCiC4NCATEGORIES];
 
-   int   PhotonCiCSelectionLevel( int photon_index, bool electronVeto);
+   int   PhotonCiCSelectionLevel( int photon_index, bool electronVeto, int vertex_index);
    //photon category functions (r9 and eta)
    int PhotonCategory(int photonindex) { 
      return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);

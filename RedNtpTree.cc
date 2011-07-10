@@ -658,16 +658,18 @@ void RedNtpTree::SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_
   }
 }
 
-void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
+void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index, int vtx_index)
 {
   int photon_category = PhotonCategory(photon_index);
 
-  float val_tkiso = pid_hlwTrack03BestRank[photon_index];
+  float val_tkiso = pid_hlwTrack03ForCiC[photon_index][vtx_index];
   float val_ecaliso = pid_jurECAL03[photon_index];
   float val_hcaliso = pid_twrHCAL[photon_index];
   float val_ecalisobad = pid_jurECAL[photon_index];
   float val_hcalisobad = pid_twrHCAL[photon_index];
-  float val_tkisobad = pid_hlwTrackWorstVtx[photon_index];
+  float val_tkisobad = 0;
+  for(int j=0;j<nvertex;j++)
+    if(pid_hlwTrackForCiC[photon_index][j]>val_tkisobad) val_tkisobad = pid_hlwTrackForCiC[photon_index][j];
   float val_sieie = pid_etawid[photon_index];
   float val_hoe = pid_HoverE[photon_index];
   float val_r9 = E9Phot[photon_index]/escRawPhot[photon_index];
@@ -693,18 +695,20 @@ void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index)
 
 }
 
-int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto) {
+int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto, int vtx_index) {
 
   int cutlevelpassed = -1;
 
   int photon_category = PhotonCategory(photon_index);
 
-  float val_tkiso = pid_hlwTrack03BestRank[photon_index];
+  float val_tkiso = pid_hlwTrack03ForCiC[photon_index][vtx_index];
   float val_ecaliso = pid_jurECAL03[photon_index];
   float val_hcaliso = pid_twrHCAL[photon_index];
   float val_ecalisobad = pid_jurECAL[photon_index];
   float val_hcalisobad = pid_twrHCAL[photon_index];
-  float val_tkisobad = pid_hlwTrackWorstVtx[photon_index];
+  float val_tkisobad = 0;
+  for(int j=0;j<nvertex;j++)
+    if(pid_hlwTrackForCiC[photon_index][j]>val_tkisobad) val_tkisobad = pid_hlwTrackForCiC[photon_index][j];
   float val_sieie = pid_etawid[photon_index];
   float val_hoe = pid_HoverE[photon_index];
   float val_r9 = E9Phot[photon_index]/escRawPhot[photon_index];
@@ -1055,6 +1059,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    // hOutputFile = new TFile("output.root" , "RECREATE" ) ;
 
    hOutputFile->cd();   
+
+   TH1D Dvz("Dvz","Dvz", 200, -10.,10.);
+   TH1D Dvzbest("Dvzbest","Dvzbest", 200, -10.,10.);
 
    TH1D higgsmasshiggsassreco("higgsmasshiggsassreco","higgsmasshiggsassreco", 100, 100.,150.);
    TH1D higgsmassassreco("higgsmassassreco","higgsmassassreco", 100, 100.,150.);
@@ -1711,6 +1718,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	bool assj(0);
 	bool assjmc(0);
 
+	// TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//rhoPF = 0;
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	for(int j=0; j<nMC; j++){
 	  
@@ -1750,9 +1760,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	vector<bool> idpassele(9);
 	vector<bool> idpasseg(5);
 
+	Dvz.Fill(vz[0]-vzMC);
+	Dvzbest.Fill(vz[vrankPhotonPairs[0]]-vzMC);	
 
 	if (ptPhot[i]>25. && assh)
-	  FillPhotonCiCSelectionVariable(i);
+	  FillPhotonCiCSelectionVariable(i,vrankPhotonPairs[0]);
 
 	// photon id used for preselection
 	string finder(selection);
@@ -1770,11 +1782,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	else if (finder == "looseegpu") preselection = cutIDEG(i, looseegid, &idpasseg,1);
 	else if (finder == "tightegpu") preselection = cutIDEG(i, tightegid, &idpasseg,1);
 	else if (finder == "hggtightegpu") preselection = cutIDEG(i, hggtightid, &idpasseg,1);
-	else if (finder == "cicloose") preselection = PhotonCiCSelectionLevel(i,1) >= 1;	
-	else if (finder == "cicmedium") preselection = PhotonCiCSelectionLevel(i,1) >= 2;	
-	else if (finder == "cictight") preselection = PhotonCiCSelectionLevel(i,1) >= 3;	
-	else if (finder == "cicsuper") preselection = PhotonCiCSelectionLevel(i,1) >= 4;	
-	else if (finder == "cichyper") preselection = PhotonCiCSelectionLevel(i,1) >= 5;	
+	else if (finder == "cicloose") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 1;	
+	else if (finder == "cicmedium") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 2;	
+	else if (finder == "cictight") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 3;	
+	else if (finder == "cicsuper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 4;	
+	else if (finder == "cichyper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 5;	
 	else if (finder == "mcass") preselection = mcID(i);
 	else {
 	  cout << "NO SUCH " << selection << " PRESELECTION  AVAILABLE!!" << endl;
@@ -1824,8 +1836,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	if(cutIDEG(i, hggtightid, &idpasseg, 1)) isophothggtightpu.push_back(1); 
 	else isophothggtightpu.push_back(0);  
 
-	isocic.push_back(PhotonCiCSelectionLevel(i,1));
-	isocicnoelveto.push_back(PhotonCiCSelectionLevel(i,0));
+	isocic.push_back(PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]));
+	isocicnoelveto.push_back(PhotonCiCSelectionLevel(i,0,vrankPhotonPairs[0]));
 
 	if( assp )	{
 	  ptphotassreco.Fill(ptPhot[i],weight);
@@ -2008,18 +2020,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	etaphotisoreco1.Fill(etaPhot[firsttwoisophot.at(0)],weight);
 	etaphotisoreco2.Fill(etaPhot[firsttwoisophot.at(1)],weight);
 
-	// find best vtx
-	int bestrank(0);
-	for(int j=0; j<nvertex; j++)
-	  if(vrank[j] == 0) bestrank = j;
-	
 	// recalculate photon kin with best vtx
-	double xnew1 = xscPhot[firsttwoisophot.at(0)] - vx[bestrank];
-	double ynew1 = yscPhot[firsttwoisophot.at(0)] - vy[bestrank];
-	double znew1 = zscPhot[firsttwoisophot.at(0)] - vz[bestrank];
-	double xnew2 = xscPhot[firsttwoisophot.at(1)] - vx[bestrank];
-	double ynew2 = yscPhot[firsttwoisophot.at(1)] - vy[bestrank];
-	double znew2 = zscPhot[firsttwoisophot.at(1)] - vz[bestrank];
+	double xnew1 = xscPhot[firsttwoisophot.at(0)] - vx[vrankPhotonPairs[0]];
+	double ynew1 = yscPhot[firsttwoisophot.at(0)] - vy[vrankPhotonPairs[0]];
+	double znew1 = zscPhot[firsttwoisophot.at(0)] - vz[vrankPhotonPairs[0]];
+	double xnew2 = xscPhot[firsttwoisophot.at(1)] - vx[vrankPhotonPairs[0]];
+	double ynew2 = yscPhot[firsttwoisophot.at(1)] - vy[vrankPhotonPairs[0]];
+	double znew2 = zscPhot[firsttwoisophot.at(1)] - vz[vrankPhotonPairs[0]];
 	
 	phot1new.SetX(xnew1); phot1new.SetY(ynew1); phot1new.SetZ(znew1);  phot1new.SetRho(ePhot[firsttwoisophot.at(0)]);  phot1new.SetE(ePhot[firsttwoisophot.at(0)]);
  	phot2new.SetX(xnew2); phot2new.SetY(ynew2); phot2new.SetZ(znew2);  phot2new.SetRho(ePhot[firsttwoisophot.at(1)]);  phot2new.SetE(ePhot[firsttwoisophot.at(1)]);
