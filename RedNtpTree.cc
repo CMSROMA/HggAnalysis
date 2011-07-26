@@ -1609,7 +1609,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	if(TMath::Abs(pdgIdMC[i]) == 6 && TMath::Abs(pdgIdMC[motherIDMC[i]])<23)
 	  countertt++;
-
+	
+	if(pdgIdMC[i] == 22 && statusMC[i] == 1 && TMath::Abs(pdgIdMC[motherIDMC[i]])<21)
+	  counter++;
+ 
       }
       
       if(isgjetqcd && counter > 1) continue; 
