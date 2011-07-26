@@ -131,20 +131,13 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       // photon id
       bool idphot1(0), idphot2(0), looseidphot1(0), looseidphot2(0), pxlphot1(1), pxlphot2(1);
 
-      if(pixelseedcut) { 
-	pxlphot1 = !pid_haspixelseedphot1;
-	pxlphot2 = !pid_haspixelseedphot2;
-      }
-
-
-      if(cicselection>0) {
-	idphot1 = (idcicphot1 >= cicselection);
-	idphot2 = (idcicphot2 >= cicselection);
-      }else{	
-	idphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk, scaleecal, scalehcal, scalehove);
-	idphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk, scaleecal, scalehcal, scalehove);
-      }
-
+//       if(pixelseedcut) { 
+// 	pxlphot1 = !pid_haspixelseedphot1;
+// 	pxlphot2 = !pid_haspixelseedphot2;
+//       }
+      
+      idphot1 = (idcicphot1 >= cicselection);
+      idphot2 = (idcicphot2 >= cicselection);
 
       if(!cs){ // photon id no control sample
 
@@ -157,21 +150,16 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	}
 
       }else{ // photon id for control sample
-
-	if(cicselection>0) {
-	  looseidphot1 = (idcicphot1 > 0 );
-	  looseidphot2 = (idcicphot2 > 0 );
-	  //	  if( !( (idphot1 && looseidphot2 && !idphot2) || (idphot2 && looseidphot1 && !idphot1) ) ) continue; 
-	  // Not perfect should be using the same electronVeto wrt CiC selection (now using matchedPromptEle veto)
-	  if( !( (idphot1 && !idphot2 && !pid_hasMatchedPromptElephot2) || (idphot2 && !idphot1 && !pid_hasMatchedPromptElephot1) ) ) continue; 
-	}else{
-	  looseidphot1 = cutIDEG(ptphot1, etascphot1, pid_hlwTrackNoDzphot1, pid_jurECALphot1, pid_twrHCALphot1, pid_HoverEphot1, pid_etawidphot1, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
-	  looseidphot2 = cutIDEG(ptphot2, etascphot2, pid_hlwTrackNoDzphot2, pid_jurECALphot2, pid_twrHCALphot2, pid_HoverEphot2, pid_etawidphot2, scaletrk*10, scaleecal*10, scalehcal*10, scalehove*10);
-	  
-	  if( !( (idphot1 && pxlphot1 && looseidphot2 && !idphot2) || (idphot2 && pxlphot2 && looseidphot1 && !idphot1) ) ) continue;
-	}
+	
+	looseidphot1 = (idcicphot1 > 0 );
+	looseidphot2 = (idcicphot2 > 0 );
+	//	  if( !( (idphot1 && looseidphot2 && !idphot2) || (idphot2 && looseidphot1 && !idphot1) ) ) continue; 
+	// Not perfect should be using the same electronVeto wrt CiC selection (now using matchedPromptEle veto)
+	if( !( (idphot1 && !idphot2 && !pid_hasMatchedPromptElephot2) || (idphot2 && !idphot1 && !pid_hasMatchedPromptElephot1) ) ) continue; 
 
       }
+      
+      if(thirdcat && exclSel()) continue; 
 
       // finding variable to be plotted
       double variable(0);
@@ -206,6 +194,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       else if (var == "pid_HoverEphot2")  variable = pid_HoverEphot2;
       else if (var == "pid_hlwTrackNoDzphot2")  variable = pid_hlwTrackNoDzphot2;
       else if (var == "pid_etawidphot2")  variable = pid_etawidphot2;
+      else if (var == "idcicphot1")  variable = idcicphot1;
+      else if (var == "idcicphot2")  variable = idcicphot2;      
       else{
 	cout << "NO SUCH VARIABLE IMPLEMENTED!" << endl;
 	break;
@@ -252,7 +242,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
 }
 
-void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, int isolscaletrk, int isolscaleecal, int isolscalehcal, int isolscalehove, bool pixelseedveto)
+void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, bool third)
 {
   ptphot1cut = pt1;
   ptphot2cut = pt2;
@@ -263,16 +253,51 @@ void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double hig
   deltaetacut = deltae;
   zeppencut = zep;
   invmassjetcut = mjj;
-  pixelseedcut = pixelseedveto;
   ebcat = eb;
   r9cat = r9;
-  scaletrk = isolscaletrk;
-  scaleecal = isolscaleecal;
-  scalehcal = isolscalehcal;
-  scalehove = isolscalehove;
+  thirdcat = third;
   
 }
 
+bool fillPlot::exclSel(){
+
+  bool selvbf(1), selwzh(1);
+  float ptleadvbf=55.;
+  float ptsubleadvbf=25.;
+  float ptjetleadvbf=30.;
+  float ptjetsubleadvbf=20.;
+  float deltaetavbf=3.5;
+  float zeppenvbf=2.;
+  float mjjvbf=400.;
+
+  float ptleadwzh=65.;
+  float ptsubleadwzh=25.;
+  float ptjetleadwzh=35.;
+  float ptjetsubleadwzh=20.;
+  float deltaetawzh=-2.5;
+  float zeppenwzh=1.5;
+  float mjjwzh=-30.;
+
+  if(ptphot1<ptleadvbf) selvbf =0; //pt first photon
+  if(ptphot2<ptsubleadvbf) selvbf =0; //pt second photon
+  if(ptcorrjet1<ptjetleadvbf) selvbf =0; //pt first jet
+  if(ptcorrjet2<ptjetsubleadvbf) selvbf =0; //pt second jet
+  if(TMath::Abs(deltaeta)<deltaetavbf) selvbf =0;  // vbf selection 
+  if(TMath::Abs(zeppenjet)>zeppenvbf) selvbf =0; 
+  if(invmassjet<mjjvbf) selvbf =0; // vbf selection 
+
+  if(ptphot1<ptleadwzh) selwzh =0; //pt first photon
+  if(ptphot2<ptsubleadwzh) selwzh =0; //pt second photon
+  if(ptcorrjet1<ptjetleadwzh) selwzh =0; //pt first jet
+  if(ptcorrjet2<ptjetsubleadwzh) selwzh =0; //pt second jet
+  if(TMath::Abs(deltaeta)>deltaetawzh) selwzh =0;  // WZH selection
+  if(TMath::Abs(zeppenjet)>zeppenwzh) selwzh =0; 
+  if(TMath::Abs(invmassjet-85)>mjjwzh) selwzh =0; // WZH selection
+
+  if(selvbf || selwzh) return 1;
+  else return 0;
+
+}
 
 void fillPlot::setCic(int cic) {
   cicselection = cic;

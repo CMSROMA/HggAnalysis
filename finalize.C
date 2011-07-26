@@ -21,13 +21,13 @@ inline double delta_phi(double phi1, double phi2) {
 
 // USE:
 //
-// .x finalize(data int lumi 2010, data int lumi 2011, pt1 cut, pt2 cut, ptj1 cut, ptj2 cut, deltae cut, zep cut, mjj cut, eb cat, r9 cat, trk isocut scale, cic selection, no pixel)
+// .x finalize(data int lumi 2010, data int lumi 2011, pt1 cut, pt2 cut, ptj1 cut, ptj2 cut, deltae cut, zep cut, mjj cut, eb cat, r9 cat, cic selection)
 // 
 // example:
 //
 // .x finalize.C(33,230,40,25,20,15,2.5,2.5,300,1,1,4,1) 
 
-vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double pthiggsmin = -100, double pthiggsmax = -100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int cic = 4, bool pixel = 1, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]", int isolscaletrk = 100., int isolscaleecal = 100., int isolscalehcal = 100., int isolscalehove = 100.){
+vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50, double pt2=30, double pthiggsmin = -100, double pthiggsmax = -100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, int cic = 4, bool thirdcat = 0, string variable = "massgg", int nbin = 200, double min = 90, double max = 190, string axis = "m(#gamma#gamma)[GeV]"){
 
 
   gROOT->SetStyle("Plain");
@@ -90,9 +90,11 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   TString preselectionLevelCS="preselectionCS";
   // total data sample
   //TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v2/merged/redntp_Photon-Run2011A-DiPhoton-May10ReReco-v1.root");    
-  TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
+  //TFile* datacs = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevelCS+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
+  TFile* data = new TFile("42xv3_data_pre/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-DiPhoton-May10ReReco-v1.root");
   //  TFile* data = new TFile(redntpDir+"/redntp.41xv10_data."+preselectionLevel+".v1/merged/redntp_Run2011A-May7ReReco-v1-DiPhotonSkim.root");    
-  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
+  //  TFile* data = new TFile(redntpDir+"/redntp.42xv1_data."+preselectionLevel+".v2/merged/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-May10ReReco-v1.root");    
+  TFile* datacs = new TFile("42xv3_data_pre/redntp_Photon-Run2011A-PromptReco-v4-DiPhotonSkimOnFly-v5_DiPhoton-DiPhoton-May10ReReco-v1.root");    
 
   if(int_exp_2010>0){
     // box samples
@@ -149,7 +151,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   }
 
   // cross sections and scaling
-  double boosthiggs(15);
+  double boosthiggs(1);
   double cross_mc[9];
   cross_mc[0] = 12.37; // box
   cross_mc[1] = 134; // diphoton jets
@@ -187,7 +189,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // char for output name
   char name[1000];
   char allcut[3000];
-  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",pthiggsmin,"_",pthiggsmax,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",isolscaletrk,"_",isolscaleecal,"_",isolscalehcal,"_",isolscalehove,"_",pixel,"_",cic);
+  sprintf(allcut,"%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%3.1f%s%d%s%d%s%d%s%d",pt1,"_",pt2,"_",pthiggsmin,"_",pthiggsmax,"_",ptj1,"_",ptj2,"_",deltae,"_",zep,"_",mjj,"_",eb,"_",r9,"_",thirdcat,"_",cic);
 
   // output root file
   sprintf(name,"%s%s%s%s%s","results_gg/histo_",variable.c_str(),"_",allcut,".root");
@@ -228,8 +230,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   // creating the fillers and setting cuts
   fillPlot data_fill((TTree*)data->Get("AnaTree"), 1);
   fillPlot datacs_fill((TTree*)datacs->Get("AnaTree"), 1);
-  data_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-  datacs_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+  data_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
+  datacs_fill.Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
   if(cic>0)
     {
       data_fill.setCic(cic);
@@ -246,8 +248,8 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   for (int i=0; i<9; i++){
     if(int_exp_2010>0) mc_2010_fill[i] = new fillPlot((TTree*)mc_2010[i]->Get("AnaTree"), 1);
     if(int_exp_2011>0) mc_2011_fill[i] = new fillPlot((TTree*)mc_2011[i]->Get("AnaTree"), 1);
-    if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-    if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    if(int_exp_2010>0) mc_2010_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
+    if(int_exp_2011>0) mc_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
 
     mc_2011_fill[i]->DoPuReweight();
     mc_2011_fill[i]->DoPtReweight();
@@ -263,10 +265,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     mc_vbf_2011_fill[i] = new fillPlot((TTree*)mc_vbf_2011[i]->Get("AnaTree"), 1);
     mc_wzh_2011_fill[i] = new fillPlot((TTree*)mc_wzh_2011[i]->Get("AnaTree"), 1);
 //     mc_tth_2011_fill[i] = new fillPlot((TTree*)mc_tth_2011[i]->Get("AnaTree"), 1);
-    mc_gluglu_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-    mc_vbf_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-    mc_wzh_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
-//     mc_tth_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,isolscaletrk,isolscaleecal,isolscalehcal,isolscalehove,pixel);
+    mc_gluglu_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
+    mc_vbf_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
+    mc_wzh_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
+//     mc_tth_2011_fill[i]->Setcuts(pt1,pt2,pthiggsmin,pthiggsmax,ptj1,ptj2,deltae,zep,mjj,eb,r9,thirdcat);
     mc_gluglu_2011_fill[i]->DoPuReweight();
     mc_vbf_2011_fill[i]->DoPuReweight();
     mc_wzh_2011_fill[i]->DoPuReweight();
@@ -497,6 +499,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     vardata->SetMaximum(themax*2.0);
   else
     vardata->SetMaximum(themax*1.1);
+  vardata->SetMinimum(0);
   var[0]->Draw("same");
   var[1]->Draw("same");
   var[2]->Draw("same");
@@ -592,14 +595,10 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     outfile << "deltaetacut : " << deltae << endl;
     outfile << "zeppencut : " << zep << endl;
     outfile << "invmassjetcut : " << mjj << endl;
-    outfile << "pixelseedcut : " << pixel << endl;
     outfile << "CiC level : " << cic << endl;
     outfile << "ebcat : " << eb << endl;
     outfile << "r9cat : " << r9 << endl;
-    outfile << "scaletrk : " << isolscaletrk << endl;
-    outfile << "scaleecal : " << isolscaleecal << endl;
-    outfile << "scalehcal : " << isolscalehcal << endl;
-    outfile << "scalehove : " << isolscalehove << endl;
+    outfile << "thirdcat : " << thirdcat << endl;
     outfile << endl;
     outfile << "####################################" << endl;
     outfile << "N of generated events" << endl;
