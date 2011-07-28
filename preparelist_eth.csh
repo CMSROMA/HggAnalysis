@@ -1,32 +1,48 @@
 #!/bin/csh
-# $Id: prepareListeth.csh,v 1.4 2011/05/04 10:58:28 rahatlou Exp $
+# $Id: preparelist_eth.csh,v 1.1 2011/05/29 11:12:37 meridian Exp $
 
-if( $#argv<2  ) then
-  echo "usage:  prepareList.csh  <inputfile>   <listname>   [run if 1]"
+if( $#argv<3  ) then
+  echo "usage:  prepareList.csh  <inputfile> <listname> <location>  [run if 1]"
   exit 0
 endif
 
 set run = 0
 if( $#argv>2 ) then
-  set run = $3
+  set run = $4
 endif
 
 set infile = $1
 
 set listname = $2
 
+set location = $3
+
 # num of files per list file
 set filexlist  = 20
 
+set prepend=""
+
+if ( $location == "cern" ) then
+  set prepend=""
+else if ( $location == "xrootd" ) then
+  set prepend="root://pccmsrm23.cern.ch:1094/"
+else if ( $location == "eth" ) then
+  set prepend="dcap://t3se01.psi.ch/"
+endif 
+
 #set prepend="dcap://cmsrm-se01.roma1.infn.it"
-set prepend="dcap://t3se01.psi.ch/"
+
  
 #set files = ( `/bin/ls -1 $indir` )
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "Working on dataset $listname"
+echo "Working on dataset $listname" 
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-set files = ( `cat $infile | grep $listname` )
 
+if ($location != "xrootd" ) then
+    set files = ( `cat $infile | grep $listname` )
+else
+    set files = ( `cat $infile | grep $listname | sed -e "s%/xrootdfs%%g"` )
+endif
 
 
 set tmpfile = /tmp/tmpfilelist.${listname}

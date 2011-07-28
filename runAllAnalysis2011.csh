@@ -1,9 +1,9 @@
 #!/bin/tcsh
 
-set data_json = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/jsonFiles/2010_Dec22_Golden_May10_withMissingEBMinus17_PromptCertified_UpTo_165525_DCSOnly_Upto165620.json"
-set puweight_41x = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/mc_41x_PUweight.root"
-set puweight_42x = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/mc_42x_PUweight.root"
-set ptweightfile_template = "/shome/meridian/software/CMSSW423/src/Analysis/Higgs/kfactors/Kfactors_MASSVALUE_AllScales.root"
+set data_json = "`pwd`/jsonFiles/Cert_160404-163869_May10ReReco_163870-167913_7TeV_PromptReco_Collisions11_JSON.txt"
+set puweight_41x = "`pwd`/mc_41x_PUweight.root"
+set puweight_42x = "`pwd`/mc_42x_PUweight.root"
+set ptweightfile_template = "`pwd`/kfactors/Kfactors_MASSVALUE_AllScales.root"
 
 set location = "eth"
 set version = "v1"
@@ -46,10 +46,11 @@ if ($#argv > 5) then
   echo "pt weight: ${ptweight}"
 endif 
 
-foreach class ( 41xv10  41xv10_data 42xv2 42xv1_data ) 
+#foreach class ( 42xv3_data 42xv3 ) 
+foreach class ( 42xv3 ) 
 #foreach class ( 42xv2 ) 
+#    foreach preseltype ( cicloose ) 
     foreach preseltype ( preselectionCS cicloose ) 
-#    foreach preseltype ( preselectionCS ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
 	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} $data_json -1 -1"
 	else 

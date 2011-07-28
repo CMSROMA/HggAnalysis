@@ -1,8 +1,8 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.24 2011/06/14 16:18:33 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.25 2011/06/16 16:38:04 meridian Exp $
 
 # change if needed
-set castordir = /castor/cern.ch/user/d/delre/reduced/
+set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
 
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 
@@ -100,7 +100,7 @@ if($run == 1) mkdir -p $logdir
 if ($location == "cern" ) then
   set queue = 8nh
   set outdir = $castordir/$outdir
-  set prefix = "rfio:"
+  set prefix = ""
   if($run == 1) rfmkdir $outdir
   echo "$outdir created on castor"
 else if ($location == "roma" ) then
@@ -148,9 +148,9 @@ if(-f $listdir) then
    endif
 
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
    endif  
 
    echo "---------------------------"
@@ -193,9 +193,9 @@ else if(-d $listdir) then
    endif
 
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} cd ${PWD}; ${app} ${listdir}/${sample}.list ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
    endif  
 
    echo "---------------------------"
