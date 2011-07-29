@@ -1,7 +1,22 @@
 ========================================
+Preliminary steps to be run at CERN
+========================================
+stageDir.csh <castor dir>  (has to be done for data and MC dirs)
+transferXrootd.csh <castor dir> <xroot dir> <paralllism suggested value 5> (has to be done for data and MC dirs)
+
+=============
+Prepare list
+=============
+(has to be done for data and MC)
+ ./runPrepareList.csh list.42xv3_data /castor/cern.ch/cms/store/user/meridian/data/42xv3 cern 1
+ ./runPrepareList.csh list.42xv3 /castor/cern.ch/cms/store/user/meridian/MC/42xv3 cern 1
+
+if you want to create xrootd lists use xrootd as location (after having transferred all files to xrootd)
+
+========================================
 Run the 2011 analysis reduction step:
 ========================================
-runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile>
+runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <use puweight=1> < use ptweight=1 for gg->H >
 
 Example:
 ./runAllAnalysis2011.csh eth v1 1
