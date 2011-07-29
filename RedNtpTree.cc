@@ -17,7 +17,7 @@ using std::cout;
 using std::endl;
 
 
-RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree), jsonFile(0) , ptweights_(0)
+RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree), jsonFile(0) , ptweights_(0), scaleCorrections_(0)
 {  
   hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
   // must be set by the user 
@@ -25,6 +25,7 @@ RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tre
   xsection = -1.;
   NtotEvents = -1;
   SampleID = -1;
+  gen_=new TRandom3(0);
 }
 
 
@@ -1570,6 +1571,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
       if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
       
+      if (scaleCorrections_)
+	correctPhotons();
+      
       // print name of crrent file
       currfilename = TString(fChain->GetCurrentFile()->GetName());
       if(currfilename != foldname) {
@@ -2481,5 +2485,31 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
     {
       std::cout << "weights histograms  not found in file " << ptWeightFile << std::endl;
       return;
+    }
+}
+
+void RedNtpTree::correctPhotons()
+{
+  for (int iPho=0;iPho<nPhot;++iPho)
+    {
+      bool isEBPho=(fabs(etascPhot[iPho])<1.479);
+      float R9Pho=E9Phot[iPho]/escRawPhot[iPho];
+      float scaleCorrection=scaleCorrections_->getScaleOffset(run,scaleCorrections_->category(isEBPho,R9Pho));
+      float smearing=scaleCorrections_->getSmearing(run,scaleCorrections_->category(isEBPho,R9Pho));
+      //      std::cout << scaleCorrection << "," << smearing << " run " << run << " isEB " << isEBPho << " R9 " << R9Pho << std::endl;
+
+      //In  MC apply smearing as energy correction
+      if (nMC>0)
+	scaleCorrection=gen_->Gaus(1.,smearing);
+
+      //energies correction
+      ptPhot[iPho]=ptPhot[iPho]*scaleCorrection;   //[nPhot]
+      ePhot[iPho]=ePhot[iPho]*scaleCorrection;   //[nPhot]
+      escPhot[iPho]=escPhot[iPho]*scaleCorrection;   //[nPhot]
+      escRawPhot[iPho]=escRawPhot[iPho]*scaleCorrection;   //[nPhot]
+      eseedPhot[iPho]=eseedPhot[iPho]*scaleCorrection;   //[nPhot]
+      E1Phot[iPho]=E1Phot[iPho]*scaleCorrection;   //[nPhot]
+      E9Phot[iPho]=E9Phot[iPho]*scaleCorrection;   //[nPhot]
+      E25Phot[iPho]=E25Phot[iPho]*scaleCorrection;   //[nPhot]
     }
 }

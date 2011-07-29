@@ -21,13 +21,16 @@
 #include "IsGJet.h"
 #include "CrossSection.h"
 
+#include "EnergyScaleCorrection.h"
+#include "EnergyScaleCorrectionSet.h"
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 || argc>7 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional)\n" 
+      if(argc < 3 || argc>8 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
@@ -105,6 +108,16 @@ int main(int argc, char* argv[]) {
 
        if (argc>6 && std::string(argv[6]) != "-1")
 	 tool.SetPtWeights(std::string(argv[6]));
+
+       if (argc>7 && std::string(argv[7]) != "-1")
+	 {
+	   EnergyScaleCorrection::energyScaleParameters scaleCorrections;
+	   scaleCorrections.parameterSetName="";
+	   TString scaleCorrectionSet(argv[7]);
+	   fillCorrections(scaleCorrectionSet,scaleCorrections); 
+	   if (scaleCorrections.parameterSetName!="")
+	     tool.setEnergyScaleCorrections(scaleCorrections);
+	 }
 
        std::cout << "DONE with settings starting loop" << std::endl;
 

@@ -6,17 +6,20 @@
 //#include "tree_reader_V3.h"
 #include "tree_reader_V6.h"
 #include "PhotonIdCuts.h"
+#include "EnergyScaleCorrection.h"
 
 
 #include <TFile.h>
 #include <TH1F.h>
 #include <TMath.h>
+#include <TRandom3.h>
 #include <TString.h>
 #include<vector>
 #include<string>
 using std::string;
 using std::vector;
 
+static EnergyScaleCorrection::energyScaleParameters noScaleCorrection;
 
 class RedNtpTree : public tree_reader_V6 {
 
@@ -33,11 +36,17 @@ public:
       xsection = xsec;
       EquivLumi = ntot/xsec;
    }
-
+   void setEnergyScaleCorrections(EnergyScaleCorrection::energyScaleParameters& scaleCorrections=noScaleCorrection)
+   {
+     std::cout << "Constructing new Scale Corrections Of Type " << scaleCorrections.parameterSetName << std::endl;
+     scaleCorrections_=new EnergyScaleCorrection(scaleCorrections);
+   }
 
 private:
    TFile* hOutputFile ;
    TTree * ana_tree ;
+
+   TRandom3* gen_;
 
    const char* jsonFile;
    
@@ -53,6 +62,7 @@ private:
    bool cutIDpresel(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
    bool mcID(int i); 
+   void correctPhotons();
 
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
@@ -60,6 +70,7 @@ private:
    enum phoCiC4Categories { phoCiC4EBhighR9=0, phoCiC4EBlowR9, phoCiC4EEhighR9, phoCiC4EElowR9, phoCiC4NCATEGORIES };
    void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead);
    void FillPhotonCiCSelectionVariable(int photon_index, int vtx_index);
+
    float cic6_cut_lead_isosumoet[phoNCUTLEVELS][6];
    float cic6_cut_lead_isosumoetbad[phoNCUTLEVELS][6];
    float cic6_cut_lead_trkisooet[phoNCUTLEVELS][6];
@@ -121,9 +132,12 @@ private:
    }
 
 
+
    // vector of pu weights
    std::vector<Double_t> puweights_;
    TH1D* ptweights_;
+
+   EnergyScaleCorrection* scaleCorrections_;
    
    Float_t massgg;
    Float_t ptgg;
