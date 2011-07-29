@@ -1616,7 +1616,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       }
       
       if(isgjetqcd && counter > 1) continue; 
-      if(ishiggsev && countertt>0) continue; 
+      //      To be used only when ttH is not produced separately  
+      //      if(ishiggsev && countertt>0) continue; 
 
       vector<int> firsttwogenphot = firsttwo(ptMC,&photassocMC);
       vector<int> firsttwohiggsgenphot = firsttwo(ptMC,&photassocMChiggs);
