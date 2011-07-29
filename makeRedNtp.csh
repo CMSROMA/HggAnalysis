@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.25 2011/06/16 16:38:04 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.26 2011/07/28 17:53:48 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
@@ -7,8 +7,8 @@ set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 
 
-if($#argv == 0 || $#argv < 5 || $#argv > 8 ) then
-  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile> <puweight> <ptweight>"
+if($#argv == 0 || $#argv < 5 || $#argv > 9 ) then
+  echo "usage:  makeRedNtp.csh  <inlist>  <outdir>  <pre-selection>  <location>  <run if 1> <jsonfile> <puweight> <ptweight> <energy correction/smearing>"
   echo "        inlist: valid directory containing list files OR valid list file"
   echo "        outdir: will be created in current directory in rome or on castor at cern"
   echo "                check |castordir| at the beginning of script"
@@ -90,6 +90,12 @@ if ($#argv > 7) then
   echo "ptweight : $ptweight "
 endif 
 
+set energyCorrection = -1
+if ($#argv > 8) then
+  set energyCorrection = $9
+  echo "energyCorrection: ${energyCorrection}"
+endif 
+
 echo "------   ready ro run at $location ------------------"
 
 # logfiles always stored locally
@@ -148,9 +154,9 @@ if(-f $listdir) then
    endif
 
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight} ${energyCorrection}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweight} ${energyCorrection}"
    endif  
 
    echo "---------------------------"
@@ -193,9 +199,9 @@ else if(-d $listdir) then
    endif
 
    if ($location == "cern" || $location == "roma") then  
-     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
+     set command = "bsub -q ${queue} -o $logfile -J ${jobname} script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile} ${energyCorrection}"
    else if ($location == "eth" ) then
-     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile}"
+     set command = "qsub -q ${queue} -o $logfile -e $logerrfile script.sh ${PWD} ${PWD}/${listfile} ${rootfile} ${selection} ${json} ${puweight} ${ptweightFile} ${energyCorrection}"
    endif  
 
    echo "---------------------------"

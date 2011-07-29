@@ -9,8 +9,8 @@ set location = "eth"
 set version = "v1"
 set run = 0
 
-if($#argv == 0 || $#argv < 3 || $#argv > 6 ) then
-  echo "usage:  runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <pureweight> <ptweight>"
+if($#argv == 0 || $#argv < 3 || $#argv > 7 ) then
+  echo "usage:  runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <pureweight> <ptweight> <energy correction/smearing> "
   echo "        locations: cern roma eth"
   echo "        version: version string for redntp"
   echo "        run: default=0  set to 1 to execute"
@@ -46,13 +46,19 @@ if ($#argv > 5) then
   echo "pt weight: ${ptweight}"
 endif 
 
+set energyCorrection = -1
+if ($#argv > 6) then
+  set energyCorrection = $7
+  echo "energyCorrection: ${energyCorrection}"
+endif 
+
 foreach class ( 42xv3_data 42xv3 ) 
 #foreach class ( 42xv3 ) 
 #foreach class ( 42xv2 ) 
 #    foreach preseltype ( cicloose ) 
     foreach preseltype ( preselectionCS cicloose ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} $data_json -1 -1"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
 	else 
 	    if ( $puweight !=  -1 ) then
 		if ( "`echo ${class} | grep 41x`XXX" != "XXX" ) then
@@ -69,7 +75,7 @@ foreach class ( 42xv3_data 42xv3 )
 	    else
 		set ptweightFile = -1
 	    endif
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile}"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile} ${energyCorrection}"
 	endif
 	echo ${command}
 	if ( $run == 1 ) then

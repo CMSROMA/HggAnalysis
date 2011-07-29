@@ -16,10 +16,11 @@ if you want to create xrootd lists use xrootd as location (after having transfer
 ========================================
 Run the 2011 analysis reduction step:
 ========================================
-runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <use puweight=1> < use ptweight=1 for gg->H >
+runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <use puweight=1> < use ptweight=1 for gg->H > <energy correction/smearings>
 
-Example:
-./runAllAnalysis2011.csh eth v1 1
+Possible values for energy corrections (look @ EnergyScaleCorrectionSet.h):
+May10PromptV4
+Jul05
 
 ========================================
 Merge step
