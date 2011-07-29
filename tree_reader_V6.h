@@ -36,13 +36,13 @@ public :
    Float_t         rhoPF;
    Float_t         rhoCalo;
    Int_t           nMC;
-   Int_t           pdgIdMC[150];   //[nMC]
-   Int_t           statusMC[150];   //[nMC]
-   Int_t           motherIDMC[150];   //[nMC]
-   Float_t         ptMC [150];   //[nMC]
-   Float_t         eMC  [150];   //[nMC]
-   Float_t         etaMC[150];   //[nMC]
-   Float_t         phiMC[150];   //[nMC]
+   Int_t           pdgIdMC[500];   //[nMC]
+   Int_t           statusMC[500];   //[nMC]
+   Int_t           motherIDMC[500];   //[nMC]
+   Float_t         ptMC [500];   //[nMC]
+   Float_t         eMC  [500];   //[nMC]
+   Float_t         etaMC[500];   //[nMC]
+   Float_t         phiMC[500];   //[nMC]
    Int_t           pu_n;
    Float_t         pu_zpos[50];   //[pu_n]
    Float_t         pu_sumpt_lowpt[50];   //[pu_n]
@@ -56,9 +56,9 @@ public :
    Float_t         escRawPhot  [40];   //[nPhot]
    Float_t         etascPhot  [40];   //[nPhot]
    Float_t         phiscPhot  [40];   //[nPhot]
-   Float_t         xscPhot  [7];   //[nPhot]
-   Float_t         yscPhot  [7];   //[nPhot]
-   Float_t         zscPhot  [7];   //[nPhot]
+   Float_t         xscPhot  [40];   //[nPhot]
+   Float_t         yscPhot  [40];   //[nPhot]
+   Float_t         zscPhot  [40];   //[nPhot]
    Float_t         eseedPhot  [40];   //[nPhot]
    Float_t         etaPhot[40];   //[nPhot]
    Float_t         phiPhot[40];   //[nPhot]
@@ -258,11 +258,11 @@ public :
    Float_t         vndof[100];   //[nvertex]
    Float_t         vlogsumpt2[100];   //[nvertex]
    Int_t           nPreselPhotonPairs;
-   Float_t         indexPreselPhot1[6];   //[nPreselPhotonPairs]
-   Float_t         indexPreselPhot2[6];   //[nPreselPhotonPairs]
-   Int_t           vrankPhotonPairs[6];   //[nPreselPhotonPairs]
-   Float_t         vptbalPhotonPairs[6];   //[nPreselPhotonPairs]
-   Float_t         vptasymPhotonPairs[6];   //[nPreselPhotonPairs]
+   Float_t         indexPreselPhot1[20];   //[nPreselPhotonPairs]
+   Float_t         indexPreselPhot2[20];   //[nPreselPhotonPairs]
+   Int_t           vrankPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vptbalPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vptasymPhotonPairs[20];   //[nPreselPhotonPairs]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;
