@@ -1,7 +1,7 @@
 #!/bin/bash
 
 domain=`dnsdomainname`
-redirector=pccmsrm23.cern.ch:1094//u2/xrootd
+
 
 if [ "$domain" == "psi.ch" ]; then
     . $HOME/.bash_profile
@@ -14,6 +14,7 @@ cd $1
 eval `scramv1 runtime -sh`
 
 if [ "$domain" == "cern.ch" ]; then
+    redirector=pccmsrm23.cern.ch:1094//u2/xrootd
     castordir=`dirname $3`
     filename=`basename $3`
     rfmkdir ${castordir}
@@ -33,7 +34,6 @@ if [ "$domain" == "cern.ch" ]; then
     cd -
 fi
 echo dir is $CMSSW_BASE file is $1 $2 $3 $4 $5 $6 $7
-
 ${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 $5 $6 $7
 exit_stat=$?
 
