@@ -1,57 +1,86 @@
 #!/bin/csh
-# $Id: prepareList.csh,v 1.4 2011/05/04 10:58:28 rahatlou Exp $
+# $Id: preparelist_eth.csh,v 1.2 2011/07/28 17:53:48 meridian Exp $
 
-if( $#argv<2  ) then
-  echo "usage:  prepareList.csh  <valid directory>   <listname>   [run if 1]"
+if( $#argv<3  ) then
+  echo "usage:  prepareList.csh  <inputfile> <listname> <location>  [run if 1]"
   exit 0
 endif
 
 set run = 0
 if( $#argv>2 ) then
-  set run = $3
+  set run = $4
 endif
 
-set indir = $1
-if( ! -d $indir ) then
-  echo "invalid directory <$indir>"
-#  exit -1
-endif
+set infile = $1
 
 set listname = $2
 
+set location = $3
+
 # num of files per list file
-set filexlist  = 10
+set filexlist  = 20
+
+set prepend=""
+
+if ( $location == "cern" ) then
+  set prepend=""
+else if ( $location == "xrootd" ) then
+  set prepend="root://pccmsrm23.cern.ch:1094/"
+else if ( $location == "eth" ) then
+  set prepend="dcap://t3se01.psi.ch/"
+endif 
 
 #set prepend="dcap://cmsrm-se01.roma1.infn.it"
-set prepend="dcap://t3se01.psi.ch"
+
  
 #set files = ( `/bin/ls -1 $indir` )
-set files = ( `lcg-ls $indir` )
+echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "Working on dataset $listname" 
+echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+if ($location != "xrootd" ) then
+    set files = ( `cat $infile | grep $listname` )
+else
+    set files = ( `cat $infile | grep $listname | sed -e "s%/xrootdfs%%g"` )
+endif
 
 
-echo "# of root files in directory: $#files"
-echo "# of files per list: $filexlist"
-
-set tmpfile = /tmp/tmpfilelist
+set tmpfile = /tmp/tmpfilelist.${listname}
 rm -Rf $tmpfile
 touch $tmpfile
 
 foreach i ( $files )
-#  echo "$prepend/$indir/$i" >> $tmpfile
-  echo "$prepend/$i" >> $tmpfile
+    echo ${prepend}$i >> ${tmpfile}
 end
+
+set unifile =  /tmp/uniq.${listname}.files
+# Removing duplicates and using the last file (according to order in the inputfile) for a given jobId
+awk 'BEGIN{FS="output_"}{ split($2,jobId,"_"); sum[jobId[1]]++;line[jobId[1]]=$0}END{for(i in sum) print line[i];}' ${tmpfile} | sort -n >! ${unifile}.tmp
+
+#rm -Rf  ${unifile}.tmp
+#sort $tmpfile | uniq -w 4 | awk -F: '{print $2":"$3}' > ${unifile}.tmp
 
 set suffixlen = 2
 
-split -l $filexlist -d -a $suffixlen  $tmpfile  ${listname}_
+split -l $filexlist -d -a $suffixlen  ${unifile}.tmp  ${listname}_
+
+set uniqfiles=`wc -l ${unifile}.tmp`
+
+echo "# of root files in directory: $#files"
+echo "# of uniq files in directory: ${uniqfiles}"
+echo "# of files per list: $filexlist"
 
 foreach i ( ${listname}_?? )
   mv $i ${i}.list
   echo "new list:   ${i}.list"
 end
 
+
+
 if( $run != 1 ) then
-  rm -Rf ${listname}_???.list
+  rm -rf ${listname}_*.list
 endif
 
-rm -Rf $tmpfile
+
+#rm -Rf $tmpfile
+

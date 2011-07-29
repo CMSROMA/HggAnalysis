@@ -22,7 +22,7 @@ if [ "$domain" == "cern.ch" ]; then
     export LD_PRELOAD=${XROOTLIB}/libXrdPosixPreload.so 
     echo "Creating dir  xroot://${redirector}/${xrootdir}" 
     mkdir xroot://${redirector}/${xrootdir}
-#    env --unset=LD_PRELOAD
+    unset LD_PRELOAD
     echo "Output ${filename} will be copied in directory ${castordir} and in xroot://${redirector}/${xrootdir}"
 else
     filename=$2
@@ -35,9 +35,27 @@ fi
 echo dir is $CMSSW_BASE file is $1 $2 $3 $4 $5 $6 $7
 
 ${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 $5 $6 $7
+exit_stat=$?
+
+if [ "$domain" == "cern.ch" ]; then
+    if [ ${exit_stat} != 0 ]; then
+	echo `date` ${xrootdir}/${filename} ${exit_stat} >> $1/log/runerror.jobs
+    else
+	echo `date` ${xrootdir}/${filename} >> $1/log/runsuccess.jobs
+    fi
+fi
 
 if [ "$domain" == "cern.ch" ]; then
     rfcp ${filename} ${castordir}/${filename}
+    exit_stat=$?
     export LD_PRELOAD=${XROOTLIB}/libXrdPosixPreload.so 
     cp ${filename} xroot://${redirector}/${xrootdir}/${filename}
+    exit_stat1=$?
+    if [ ${exit_stat} != 0 ]; then
+	echo `date` ${xrootdir}/${filename} ${exit_stat} >> $1/log/castorcopyerror.jobs
+    elif [ ${exit_stat1} != 0 ]; then
+	echo `date` ${xrootdir}/${filename} ${exit_stat1} >> $1/log/xrootcopyerror.jobs
+    else
+	echo `date` ${xrootdir}/${filename} >> $1/log/copysuccess.jobs
+    fi
 fi

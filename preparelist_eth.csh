@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: preparelist_eth.csh,v 1.1 2011/05/29 11:12:37 meridian Exp $
+# $Id: preparelist_eth.csh,v 1.2 2011/07/28 17:53:48 meridian Exp $
 
 if( $#argv<3  ) then
   echo "usage:  prepareList.csh  <inputfile> <listname> <location>  [run if 1]"
@@ -50,7 +50,7 @@ rm -Rf $tmpfile
 touch $tmpfile
 
 foreach i ( $files )
-    echo $prepend/$i >> ${tmpfile}
+    echo ${prepend}$i >> ${tmpfile}
 end
 
 set unifile =  /tmp/uniq.${listname}.files
