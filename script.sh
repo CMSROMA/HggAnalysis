@@ -40,6 +40,7 @@ exit_stat=$?
 if [ "$domain" == "cern.ch" ]; then
     if [ ${exit_stat} != 0 ]; then
 	echo `date` ${xrootdir}/${filename} ${exit_stat} >> $1/log/runerror.jobs
+	exit ${exit_stat}
     else
 	echo `date` ${xrootdir}/${filename} >> $1/log/runsuccess.jobs
     fi
