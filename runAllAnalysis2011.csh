@@ -58,7 +58,7 @@ foreach class ( 42xv3_data 42xv3 )
 #    foreach preseltype ( cicloose ) 
     foreach preseltype ( preselectionCS cicloose ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrection}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
 	else 
 	    if ( $puweight !=  -1 ) then
 		if ( "`echo ${class} | grep 41x`XXX" != "XXX" ) then
@@ -75,7 +75,7 @@ foreach class ( 42xv3_data 42xv3 )
 	    else
 		set ptweightFile = -1
 	    endif
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile} ${energyCorrection}"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrection}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile} ${energyCorrection}"
 	endif
 	echo ${command}
 	if ( $run == 1 ) then
