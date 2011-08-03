@@ -1694,6 +1694,40 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       deltaetajetgen.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],weight);
       if(etaJetGen_akt5[0]*etaJetGen_akt5[1]<0) deltaetajetgencut.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],weight);
    
+      // skip events where the number of jets, photons, and vertexes is above the maximum allowed value
+      if (nPhot>30) {
+	cout << "number of photons = " << nPhot << " and above threshold of 30; skipping" << endl;
+	continue;
+      }
+      if (nJet_akt5 > 200) {
+	cout << "number of nJet_akt5 = " << nJet_akt5 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nJet_akt7 > 200) {
+	cout << "number of nJet_akt7 = " << nJet_akt7 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nJet_pfakt5 > 200) {
+	cout << "number of nJet_pfakt5 = " << nJet_pfakt5 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nJet_pfakt7 > 200) {
+	cout << "number of nJet_pfakt7 = " << nJet_pfakt7 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nJetGen_akt5 > 200) {
+	cout << "number of nJetGen_akt5 = " << nJetGen_akt5 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nJetGen_akt7 > 200) {
+	cout << "number of nJetGen_akt7 = " << nJetGen_akt7 << " and above threshold of 200; skipping" << endl;
+	continue;
+      }
+      if (nvertex > 30) {
+	cout << "number of nvertex = " << nvertex << " and above threshold of 30; skipping" << endl;
+	continue;
+      }
+
       vector<bool> assophothiggs;
       vector<bool> assophot;
       vector<bool> jetphot;
