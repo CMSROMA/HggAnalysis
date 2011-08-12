@@ -1,8 +1,8 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.26 2011/07/28 17:53:48 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.27 2011/07/29 17:31:42 meridian Exp $
 
 # change if needed
-set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
+set castordir = /castor/cern.ch/user/d/delre/Higgs/reduced
 
 set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicmedium cictight cicsuper cichyper mcass preselection preselectionCS)
 

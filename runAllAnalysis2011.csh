@@ -52,8 +52,8 @@ if ($#argv > 6) then
   echo "energyCorrection: ${energyCorrection}"
 endif 
 
-foreach class ( 42xv3_data 42xv3 ) 
-#foreach class ( 42xv3 ) 
+#foreach class ( 42xv3_data 42xv3 ) 
+foreach class ( 41xv11 ) 
 #foreach class ( 42xv2 ) 
 #    foreach preseltype ( cicloose ) 
     foreach preseltype ( preselectionCS cicloose ) 

@@ -16,14 +16,12 @@ echo "version : $version "
 set run = $2
 echo "run : $run "
 
-foreach class ( 41xv10  41xv10_data 42xv1 42xv1_data ) 
+foreach class ( 42xv3 42xv3_data ) 
 #foreach class ( 42xv1_data ) 
-    foreach preseltype ( preselection cicloose ) 
+    foreach preseltype ( preselectionCS ) 
 #    foreach preseltype ( cicsuper ) 
 	set command="./mergeRedNtp.csh redntp.${class}.${preseltype}.${version} ${run}"
 	echo ${command}
-	if ( $run == 1 ) then
-	   ${command}
-	endif
+	${command}
     end
 end
