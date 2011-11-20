@@ -1,8 +1,8 @@
 #!/bin/tcsh
 
-set data_json = "`pwd`/jsonFiles/Cert_160404-163869_May10ReReco_163870-167913_7TeV_PromptReco_Collisions11_JSON.txt"
+set data_json = "`pwd`/jsonFiles/Cert_160404-180252_7TeV_All2011_v3.txt"
 set puweight_41x = "`pwd`/mc_41x_PUweight.root"
-set puweight_42x = "`pwd`/mc_42x_PUweight.root"
+set puweight_42x = "`pwd`/RUN2011_0100_73500.weights.root"
 set ptweightfile_template = "`pwd`/kfactors/Kfactors_MASSVALUE_AllScales.root"
 
 set location = "eth"
@@ -49,16 +49,17 @@ endif
 set energyCorrection = -1
 if ($#argv > 6) then
   set energyCorrection = $7
+  set energyCorrectionName = `basename ${energyCorrection} .dat`
   echo "energyCorrection: ${energyCorrection}"
 endif 
 
-#foreach class ( 42xv3_data 42xv3 ) 
-foreach class ( 41xv11 ) 
-#foreach class ( 42xv2 ) 
+#foreach class ( 42xv3_data_2  ) 
+#foreach class ( 41xv11 ) 
+foreach class ( 42xv4_data 42xv4 ) 
 #    foreach preseltype ( cicloose ) 
-    foreach preseltype ( preselectionCS cicloose ) 
+    foreach preseltype ( cicloosenoeleveto ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrection}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrectionName}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
 	else 
 	    if ( $puweight !=  -1 ) then
 		if ( "`echo ${class} | grep 41x`XXX" != "XXX" ) then
@@ -75,7 +76,7 @@ foreach class ( 41xv11 )
 	    else
 		set ptweightFile = -1
 	    endif
-	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrection}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile} ${energyCorrection}"
+	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrectionName}.${version} ${preseltype} ${location} ${run} -1 ${puweightFile} ${ptweightFile} ${energyCorrection}.MC"
 	endif
 	echo ${command}
 	if ( $run == 1 ) then

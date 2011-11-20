@@ -4,7 +4,7 @@
 //#include "higgsanal_tree_V1.h"
 //#include "tree_reader_V2.h"
 //#include "tree_reader_V3.h"
-#include "tree_reader_V6.h"
+#include "tree_reader_V7.h"
 #include "PhotonIdCuts.h"
 #include "EnergyScaleCorrection.h"
 
@@ -19,9 +19,7 @@
 using std::string;
 using std::vector;
 
-static EnergyScaleCorrection::energyScaleParameters noScaleCorrection;
-
-class RedNtpTree : public tree_reader_V6 {
+class RedNtpTree : public tree_reader_V7 {
 
 public:
   
@@ -36,10 +34,11 @@ public:
       xsection = xsec;
       EquivLumi = ntot/xsec;
    }
-   void setEnergyScaleCorrections(EnergyScaleCorrection::energyScaleParameters& scaleCorrections=noScaleCorrection)
+    void setEnergyScaleCorrections(TString correctionFile, TString correctionType)
    {
-     std::cout << "Constructing new Scale Corrections Of Type " << scaleCorrections.parameterSetName << std::endl;
-     scaleCorrections_=new EnergyScaleCorrection(scaleCorrections);
+     std::cout << "Constructing new Scale Corrections Of Type " << correctionType<< std::endl;
+     std::cout << "Constructing new Scale Corrections from file " << correctionFile << std::endl;
+     scaleCorrections_=new EnergyScaleCorrection(correctionFile,correctionType);
    }
 
 private:
@@ -62,7 +61,7 @@ private:
    bool cutIDpresel(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
    bool mcID(int i); 
-   void correctPhotons();
+   void correctPhotons(bool energyRegression);
 
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
