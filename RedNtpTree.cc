@@ -11,13 +11,13 @@
 #include <vector>
 #include <TLorentzVector.h>
 
-#define MAX_PU_REWEIGHT 22
+#define MAX_PU_REWEIGHT 40
 
 using std::cout;
 using std::endl;
 
 
-RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V6(tree), jsonFile(0) , ptweights_(0), scaleCorrections_(0)
+RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V7(tree), jsonFile(0) , ptweights_(0), scaleCorrections_(0)
 {  
   hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
   // must be set by the user 
@@ -1572,7 +1572,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
       
       if (scaleCorrections_)
-	correctPhotons();
+	correctPhotons(true);
       
       // print name of crrent file
       currfilename = TString(fChain->GetCurrentFile()->GetName());
@@ -1723,8 +1723,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	cout << "number of nJetGen_akt7 = " << nJetGen_akt7 << " and above threshold of 200; skipping" << endl;
 	continue;
       }
-      if (nvertex > 30) {
-	cout << "number of nvertex = " << nvertex << " and above threshold of 30; skipping" << endl;
+      if (nvertex > 40) {
+	cout << "number of nvertex = " << nvertex << " and above threshold of 40; skipping" << endl;
 	continue;
       }
 
@@ -1825,6 +1825,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	else if (finder == "tightegpu") preselection = cutIDEG(i, tightegid, &idpasseg,1);
 	else if (finder == "hggtightegpu") preselection = cutIDEG(i, hggtightid, &idpasseg,1);
 	else if (finder == "cicloose") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 1;	
+	else if (finder == "cicloosenoeleveto") preselection = PhotonCiCSelectionLevel(i,0,vrankPhotonPairs[0]) >= 1;	
 	else if (finder == "cicmedium") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 2;	
 	else if (finder == "cictight") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 3;	
 	else if (finder == "cicsuper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0]) >= 4;	
@@ -2522,14 +2523,14 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
     }
 }
 
-void RedNtpTree::correctPhotons()
+void RedNtpTree::correctPhotons(bool energyRegression)
 {
   for (int iPho=0;iPho<nPhot;++iPho)
     {
       bool isEBPho=(fabs(etascPhot[iPho])<1.479);
       float R9Pho=E9Phot[iPho]/escRawPhot[iPho];
-      float scaleCorrection=scaleCorrections_->getScaleOffset(run,scaleCorrections_->category(isEBPho,R9Pho));
-      float smearing=scaleCorrections_->getSmearing(run,scaleCorrections_->category(isEBPho,R9Pho));
+      float scaleCorrection=scaleCorrections_->getScaleOffset(run,isEBPho,R9Pho,fabs(etascPhot[iPho]));
+      float smearing=scaleCorrections_->getSmearing(run,isEBPho,R9Pho,fabs(etascPhot[iPho]));
       //      std::cout << scaleCorrection << "," << smearing << " run " << run << " isEB " << isEBPho << " R9 " << R9Pho << std::endl;
 
       //In  MC apply smearing as energy correction
@@ -2537,8 +2538,16 @@ void RedNtpTree::correctPhotons()
 	scaleCorrection=gen_->Gaus(1.,smearing);
 
       //energies correction
-      ptPhot[iPho]=ptPhot[iPho]*scaleCorrection;   //[nPhot]
-      ePhot[iPho]=ePhot[iPho]*scaleCorrection;   //[nPhot]
+      if (!energyRegression)
+	{
+	  ptPhot[iPho]=ptPhot[iPho]*scaleCorrection;   //[nPhot]
+	  ePhot[iPho]=ePhot[iPho]*scaleCorrection;   //[nPhot]
+	}
+      else
+	{
+	  ptPhot[iPho]=escRegrPhot[iPho]/TMath::CosH(etaPhot[iPho])*scaleCorrection;   //[nPhot]
+	  ePhot[iPho]=escRegrPhot[iPho]*scaleCorrection;   //[nPhot]
+	}
       escPhot[iPho]=escPhot[iPho]*scaleCorrection;   //[nPhot]
       escRawPhot[iPho]=escRawPhot[iPho]*scaleCorrection;   //[nPhot]
       eseedPhot[iPho]=eseedPhot[iPho]*scaleCorrection;   //[nPhot]

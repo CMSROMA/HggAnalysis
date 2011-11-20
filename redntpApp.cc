@@ -22,7 +22,7 @@
 #include "CrossSection.h"
 
 #include "EnergyScaleCorrection.h"
-#include "EnergyScaleCorrectionSet.h"
+//#include "EnergyScaleCorrectionSet.h"
 
 using namespace std;
 
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
-             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicmedium cictight cicsuper cichyper mcass\n"
+             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicloosenoeleveto cicmedium cictight cicsuper cichyper mcass\n"
              << "   jsonfile: jsonfile used to select RUN/LS when looping over data. -1 if not used"
              << "   puweight: puweight for MC nPU reweighting. -1 if not used"
              << "   ptweight: ptweight for MC HiggsPt reweighting for GluGlu. -1 if not used"
@@ -111,12 +111,12 @@ int main(int argc, char* argv[]) {
 
        if (argc>7 && std::string(argv[7]) != "-1")
 	 {
-	   EnergyScaleCorrection::energyScaleParameters scaleCorrections;
-	   scaleCorrections.parameterSetName="";
-	   TString scaleCorrectionSet(argv[7]);
-	   fillCorrections(scaleCorrectionSet,scaleCorrections); 
-	   if (scaleCorrections.parameterSetName!="")
-	     tool.setEnergyScaleCorrections(scaleCorrections);
+	   //	   EnergyScaleCorrection::energyScaleParameters scaleCorrections;
+	   //scaleCorrections.parameterSetName="";
+	   TString scaleCorrectionFile(argv[7]);
+	   //	   fillCorrections(scaleCorrectionSet,scaleCorrections); 
+	   if (scaleCorrectionFile!="")
+	     tool.setEnergyScaleCorrections(scaleCorrectionFile,"Hgg_eta_R9");
 	 }
 
        std::cout << "DONE with settings starting loop" << std::endl;
