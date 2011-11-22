@@ -224,6 +224,110 @@ void fillCorrections(TString& escaleCorrections,EnergyScaleCorrection::energySca
 
       scaleCorrections.scale_offset_byrun.push_back(energyCorrection_0);
     }
+  else if (escaleCorrections.CompareTo("LP11") == 0 )
+    {
+      std::cout << "Initializing LP11 corrections" << std::endl;
+
+      scaleCorrections.n_categories=4;
+      scaleCorrections.categoryType="2CatR9_EBEE";
+      scaleCorrections.parameterSetName="LP11";
+
+      EnergyScaleOffset energyCorrection_MC(0,10);
+      //EB
+      energyCorrection_MC.scale_offset["EBHighR9"]=1;
+      energyCorrection_MC.scale_offset_error["EBHighR9"]=0.;
+      energyCorrection_MC.scale_offset["EBLowR9"]=1.0;
+      energyCorrection_MC.scale_offset_error["EBLowR9"]=0.0;
+      //EE	       MC
+      energyCorrection_MC.scale_offset["EEHighR9"]=1.0;
+      energyCorrection_MC.scale_offset_error["EEHighR9"]=0.0;
+      energyCorrection_MC.scale_offset["EELowR9"]=1.0;
+      energyCorrection_MC.scale_offset_error["EELowR9"]=0.;
+
+      energyCorrection_MC.smearing["EBHighR9"]=0.0100;
+      energyCorrection_MC.smearing_error["EBHighR9"]=0.0020;
+      energyCorrection_MC.smearing["EBLowR9"]=0.0170;
+      energyCorrection_MC.smearing_error["EBLowR9"]=0.0042;
+      //EE	       MC
+      energyCorrection_MC.smearing["EEHighR9"]=0.0303;
+      energyCorrection_MC.smearing_error["EEHighR9"]=0.0050;
+      energyCorrection_MC.smearing["EELowR9"]=0.0296;
+      energyCorrection_MC.smearing_error["EELowR9"]=0.0042;
+
+      scaleCorrections.scale_offset_byrun.push_back(energyCorrection_MC);      
+      // RunRange 160404 - 163869
+      EnergyScaleOffset energyCorrection_0(160404,167913);
+      //EB
+      energyCorrection_0.scale_offset["EBHighR9"]=1-0.0003;
+      energyCorrection_0.scale_offset_error["EBHighR9"]=0.0006;
+      energyCorrection_0.scale_offset["EBLowR9"]=1.0+0.0054;
+      energyCorrection_0.scale_offset_error["EBLowR9"]=0.0034;
+      //EE
+      energyCorrection_0.scale_offset["EEHighR9"]=1.0-0.0003;
+      energyCorrection_0.scale_offset_error["EEHighR9"]=0.0026;
+      energyCorrection_0.scale_offset["EELowR9"]=1.0+0.0024;
+      energyCorrection_0.scale_offset_error["EELowR9"]=0.0026;
+
+      energyCorrection_0.smearing["EBHighR9"]=0.0092;
+      energyCorrection_0.smearing_error["EBHighR9"]=0.0020;
+      energyCorrection_0.smearing["EBLowR9"]=0.0170;
+      energyCorrection_0.smearing_error["EBLowR9"]=0.0042;
+      //EE	       0
+      energyCorrection_0.smearing["EEHighR9"]=0.0292;
+      energyCorrection_0.smearing_error["EEHighR9"]=0.0050;
+      energyCorrection_0.smearing["EELowR9"]=0.0289;
+      energyCorrection_0.smearing_error["EELowR9"]=0.0042;
+
+      scaleCorrections.scale_offset_byrun.push_back(energyCorrection_0);
+
+      EnergyScaleOffset energyCorrection_1(167914,172619);
+      //EB
+      energyCorrection_1.scale_offset["EBHighR9"]=1.0+0.0020;
+      energyCorrection_1.scale_offset_error["EBHighR9"]=0.0005;
+      energyCorrection_1.scale_offset["EBLowR9"]=1.0+0.0081;
+      energyCorrection_1.scale_offset_error["EBLowR9"]=0.0033;
+      //EE	       1
+      energyCorrection_1.scale_offset["EEHighR9"]=1.0-0.0109;
+      energyCorrection_1.scale_offset_error["EEHighR9"]=0.0010;
+      energyCorrection_1.scale_offset["EELowR9"]=1.0-0.0043;
+      energyCorrection_1.scale_offset_error["EELowR9"]=0.0026;
+
+      energyCorrection_1.smearing["EBHighR9"]=0.0092;
+      energyCorrection_1.smearing_error["EBHighR9"]=0.0020;
+      energyCorrection_1.smearing["EBLowR9"]=0.0170;
+      energyCorrection_1.smearing_error["EBLowR9"]=0.0042;
+      //EE	       1
+      energyCorrection_1.smearing["EEHighR9"]=0.0292;
+      energyCorrection_1.smearing_error["EEHighR9"]=0.0050;
+      energyCorrection_1.smearing["EELowR9"]=0.0289;
+      energyCorrection_1.smearing_error["EELowR9"]=0.0042;
+
+      scaleCorrections.scale_offset_byrun.push_back(energyCorrection_1);
+
+      EnergyScaleOffset energyCorrection_2(172620,172802);
+      //EB
+      energyCorrection_2.scale_offset["EBHighR9"]=1.0+0.0035;
+      energyCorrection_2.scale_offset_error["EBHighR9"]=0.0005;
+      energyCorrection_2.scale_offset["EBLowR9"]=1.0+0.0097;
+      energyCorrection_2.scale_offset_error["EBLowR9"]=0.0033;
+      //EE	       2
+      energyCorrection_2.scale_offset["EEHighR9"]=1.0-0.0215;
+      energyCorrection_2.scale_offset_error["EEHighR9"]=0.0023;
+      energyCorrection_2.scale_offset["EELowR9"]=1.0-0.0158;
+      energyCorrection_2.scale_offset_error["EELowR9"]=0.0030;
+
+      energyCorrection_2.smearing["EBHighR9"]=0.0092;
+      energyCorrection_2.smearing_error["EBHighR9"]=0.0020;
+      energyCorrection_2.smearing["EBLowR9"]=0.0170;
+      energyCorrection_2.smearing_error["EBLowR9"]=0.0042;
+      //EE	       2
+      energyCorrection_2.smearing["EEHighR9"]=0.0292;
+      energyCorrection_2.smearing_error["EEHighR9"]=0.0050;
+      energyCorrection_2.smearing["EELowR9"]=0.0289;
+      energyCorrection_2.smearing_error["EELowR9"]=0.0042;
+
+      scaleCorrections.scale_offset_byrun.push_back(energyCorrection_2);
+    }
   else if (escaleCorrections.CompareTo("noCalib") == 0 )
     {
       std::cout << "Not applying any ad-hoc scale corrections" << std::endl;

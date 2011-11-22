@@ -17,6 +17,14 @@
 using std::vector;
 using std::string;
 
+#define SMALL_VERTEX_VECTOR
+
+#ifdef SMALL_VERTEX_VECTOR
+#define VECTOR_ARRAY_SIZE 30
+#else
+#define VECTOR_ARRAY_SIZE 100
+#endif
+
 class tree_reader_V7 {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -81,7 +89,7 @@ public :
    Float_t         pid_twrHCAL[40];   //[nPhot]
    Float_t         pid_HoverE[40];   //[nPhot]
    Float_t         pid_hlwTrack[40];   //[nPhot]
-   Float_t         pid_hlwTrackForCiC[40][100];
+   Float_t         pid_hlwTrackForCiC[40][VECTOR_ARRAY_SIZE];
    Float_t         pid_hlwTrackNoDz[40];   //[nPhot]
    Float_t         pid_etawid[40];   //[nPhot]
    Float_t         pid_jurECAL03[40];   //[nPhot]
@@ -89,7 +97,7 @@ public :
    Float_t         pid_hlwTrack03[40];   //[nPhot]
    Float_t         pid_hlwTrack03NoDz[40];   //[nPhot]
    Float_t         pid_deltaRToTrackPhot[40];   //[nPhot]
-   Float_t         pid_hlwTrack03ForCiC[40][100];
+   Float_t         pid_hlwTrack03ForCiC[40][VECTOR_ARRAY_SIZE];
    Float_t         ptiso004Phot[40];   //[nPhot]
    Int_t           ntrkiso004Phot[40];   //[nPhot]
    Float_t         ptiso035Phot[40];   //[nPhot]

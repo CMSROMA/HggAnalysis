@@ -11,7 +11,11 @@
 #include <vector>
 #include <TLorentzVector.h>
 
+#ifdef SMALL_VERTEX_VECTOR
+#define MAX_PU_REWEIGHT 30
+#else
 #define MAX_PU_REWEIGHT 40
+#endif
 
 using std::cout;
 using std::endl;
@@ -1723,8 +1727,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	cout << "number of nJetGen_akt7 = " << nJetGen_akt7 << " and above threshold of 200; skipping" << endl;
 	continue;
       }
-      if (nvertex > 40) {
-	cout << "number of nvertex = " << nvertex << " and above threshold of 40; skipping" << endl;
+      if (nvertex > MAX_PU_REWEIGHT) {
+	cout << "number of nvertex = " << nvertex << " and above threshold of " << MAX_PU_REWEIGHT << "; skipping" << endl;
 	continue;
       }
 

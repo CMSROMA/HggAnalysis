@@ -1,3 +1,8 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+tree_reader_v7.h have a define to establish the maximum number of vertices (hardcoded in big ntuples)
+use #define SMALL_VERTEX_VECTOR to tun on old big ntuples (before 42xv4_b)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 ========================================
 Preliminary steps to be run at CERN
 ========================================

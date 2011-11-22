@@ -28,10 +28,10 @@ if ($#argv > 3) then
   echo "energyCorrection: ${energyCorrection}"
 endif 
 
-foreach class ( 42xv4 42xv4_data ) 
+foreach class ( 42xv4_data ) 
 #foreach class ( 42xv1_data ) 
-#    foreach preseltype ( preselectionCS cicloose ) 
-    foreach preseltype ( cicloosenoeleveto ) 
+    foreach preseltype ( preselectionCS cicloose cicloosenoeleveto) 
+#    foreach preseltype ( cicloosenoeleveto ) 
 #    foreach preseltype ( cicsuper ) 
 	set command="./mergeRedNtp.csh ${indir}/redntp.${class}.${preseltype}.${energyCorrection}.${version} ${run}"
 	echo ${command}

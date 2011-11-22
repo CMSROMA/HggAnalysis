@@ -55,9 +55,9 @@ endif
 
 #foreach class ( 42xv3_data_2  ) 
 #foreach class ( 41xv11 ) 
-foreach class ( 42xv4_data 42xv4 ) 
-#    foreach preseltype ( cicloose ) 
-    foreach preseltype ( cicloosenoeleveto ) 
+foreach class ( 42xv4 42xv4_data ) 
+    foreach preseltype ( cicloose preselectionCS ) 
+#    foreach preseltype ( mcass ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
 	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrectionName}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
 	else 
