@@ -49,30 +49,29 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
    if (var == "massgg" && writeRoot != "")
      {
        string filename(writeRoot);
-       if (cs)
-	   filename+=".cs";
-
        fOut=TFile::Open(filename.c_str(),"RECREATE"); 
        fOut->cd();
        myTree = new TTree("diPhotonEvents","");
-       TString treeVariables = "run/I:lumi/I:event/I:massgg/F:weight/F";    
+       TString treeVariables = "run/I:lumi/I:event/I:massggnewvtx/F:weight/F";    
        myTree->Branch("diPhotonEvents",&(tree_.run),treeVariables);
      }
 
    if (writetxt != "") 
      {
        string filename(writetxt);
-       if (cs)
-	   filename+=".cs";
        outfile.open(filename.c_str()); 
      }
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
+
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
 
       // analysis cuts
+
+      if(massggnewvtx<90 || massggnewvtx>190) continue;
+      //if(massggnewvtx<100 || massggnewvtx>180) continue;
 
       if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
 	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
@@ -80,12 +79,19 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
 
+// TEMPPPP
+
+//       if(ptphot1<ptphot1cut* massggnewvtx/100.) continue; //pt first photon
+//       if(ptphot2<ptphot2cut* massggnewvtx/100.) continue; //pt second photon
+
       if(pthiggsmincut>0 && ptgg<pthiggsmincut) continue; //pt higgs min
       if(pthiggsmaxcut>0 && ptgg>=pthiggsmaxcut) continue; //pt higgs max
 
-      if(ptjet1cut>0 && ptcorrjet1<ptjet1cut) continue; //pt first jet
-      if(ptjet2cut>0 && ptcorrjet2<ptjet2cut) continue; //pt second jet
 
+      if(ptjet1cut>0 && (ptcorrjet1<ptjet1cut || TMath::Abs(etajet1)>4.7)) continue; //pt first jet
+      if(ptjet2cut>0 && (ptcorrjet2<ptjet2cut || TMath::Abs(etajet2)>4.7)) continue; //pt second jet
+
+ 
       //delteta
       if(deltaetacut!=0){
 	if(deltaetacut>0){
@@ -95,9 +101,11 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	}
       }
 
+
       //zeppenfeld
       if(zeppencut!=0) 
 	if(TMath::Abs(zeppenjet)>zeppencut) continue; 
+
 
       //inv mass of jets
       if(invmassjetcut!=0){
@@ -107,6 +115,11 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	  if(TMath::Abs(invmassjet-85)>-invmassjetcut) continue; // WZH selection
 	}
       }
+
+     //deltaphi
+      if(deltaphicut!=0)
+	if(TMath::Abs(deltaphi)<deltaphicut) continue;  // vbf selection 
+
 
       if(ebcat == 1) { // EB EE categories
 	if((TMath::Abs(etascphot1)>1.4442||TMath::Abs(etascphot2)>1.4442)) continue; 
@@ -158,7 +171,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	if( !( (idphot1 && !idphot2 && !pid_hasMatchedPromptElephot2) || (idphot2 && !idphot1 && !pid_hasMatchedPromptElephot1) ) ) continue; 
 
       }
-      
+
       if(thirdcat && exclSel()) continue; 
 
       // finding variable to be plotted
@@ -168,20 +181,24 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       else if (var == "ptphot2")  variable = ptphot2;
       else if (var == "ptjet1")  variable = ptcorrjet1;
       else if (var == "ptjet2")  variable = ptcorrjet2;
-      else if (var == "etajet1")  variable = etajet1;
-      else if (var == "etajet2")  variable = etajet2;
+      else if (var == "etajet1")  variable = TMath::Abs(etajet1);
+      else if (var == "etajet2")  variable = TMath::Abs(etajet2);
       else if (var == "phijet1")  variable = phijet1;
       else if (var == "phijet2")  variable = phijet2;
-      else if (var == "etaphot1")  variable = etaphot1;
-      else if (var == "etaphot2")  variable = etaphot2;
+      else if (var == "etaphot1")  variable = TMath::Abs(etaphot1);
+      else if (var == "etaphot2")  variable = TMath::Abs(etaphot2);
       else if (var == "phiphot1")  variable = phiphot1;
       else if (var == "phiphot2")  variable = phiphot2;
-      else if (var == "deltaeta")  variable = deltaeta;
-      else if (var == "zeppenjet")  variable = zeppenjet;
+      else if (var == "deltaeta")  variable = TMath::Abs(deltaeta);
+      else if (var == "deltaphi")  variable = TMath::Abs(deltaphi);
+      else if (var == "zeppenjet")  variable = TMath::Abs(zeppenjet);
       else if (var == "invmassjet")  variable = invmassjet;
+//       else if (var == "deltaeta")  variable = deltaeta;
+//       else if (var == "zeppenjet")  variable = zeppenjet;
       else if (var == "nvtx")  variable = nvtx;
       else if (var == "npu")  variable = npu;
       else if (var == "met")  variable = met;
+      else if (var == "ptgg")  variable = ptgg;
       else if (var == "pid_haspixelseedphot1")  variable = pid_haspixelseedphot1;
       else if (var == "pid_jurECALphot1")  variable = pid_jurECALphot1;
       else if (var == "pid_twrHCALphot1")  variable = pid_twrHCALphot1;
@@ -201,11 +218,11 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 	break;
       }
 
-      // energy smearing
-      if(dosmear){
-	TRandom3 smearing(565656);
-	variable *= smearing.Gaus(meansmear,spreadsmear);
-      }
+//       // energy smearing
+//       if(dosmear){
+// 	TRandom3 smearing(565656);
+// 	variable *= smearing.Gaus(meansmear,spreadsmear);
+//       }
 
       // pu/pt reweighting
       float weight(1);
@@ -213,7 +230,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(doptreweight) weight *= pt_weight;
 
       tempplot->Fill(variable, weight);
-
+      
       if (var == "massgg" && writeRoot != "")
 	{
 	  tree_.run=run;
@@ -242,7 +259,7 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
 }
 
-void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, int eb, int r9, bool third)
+void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, double deltap, int eb, int r9, bool third)
 {
   ptphot1cut = pt1;
   ptphot2cut = pt2;
@@ -251,6 +268,7 @@ void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double hig
   ptjet1cut = ptj1;
   ptjet2cut = ptj2;
   deltaetacut = deltae;
+  deltaphicut = deltap;
   zeppencut = zep;
   invmassjetcut = mjj;
   ebcat = eb;

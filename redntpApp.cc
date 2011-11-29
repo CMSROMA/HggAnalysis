@@ -29,8 +29,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 || argc>8 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional)\n" 
+      if(argc < 3 || argc>11 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional) doPDFrew(optional) systJets(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
@@ -38,6 +38,10 @@ int main(int argc, char* argv[]) {
              << "   jsonfile: jsonfile used to select RUN/LS when looping over data. -1 if not used"
              << "   puweight: puweight for MC nPU reweighting. -1 if not used"
              << "   ptweight: ptweight for MC HiggsPt reweighting for GluGlu. -1 if not used"
+             << "   scalCorrection: ...."
+             << "   doPDFrew: if 1 it dumps info for PDF systematics "
+             << "   systJet: if !=-1 file to perform JEC uncerntainties "
+             << "   typesystJet: type of jet syst to perform 1=+1sigma JEC, 2=-1sigma JEC, 3=+10% JER,  4=-10% JER  "
              << endl;
         exit(-1);
       }
@@ -119,6 +123,17 @@ int main(int argc, char* argv[]) {
 	     tool.setEnergyScaleCorrections(scaleCorrectionFile,"Hgg_eta_R9");
 	 }
 
+       if (argc>8 && std::string(argv[8]) != "-1")
+	 tool.DoPDFWeighting();
+
+       if (argc>9 && std::string(argv[9]) != "-1" && argc>10 && std::string(argv[9]) != "-1"){
+	 TString scaleJetSysFile(argv[9]);
+	 TString stringtypesyst(argv[10]);
+	 char* endptr;
+	 int typesyst = strtol (stringtypesyst, &endptr, 0);
+	 tool.setJetSystematics(scaleJetSysFile,typesyst);;
+       }
+ 
        std::cout << "DONE with settings starting loop" << std::endl;
 
 

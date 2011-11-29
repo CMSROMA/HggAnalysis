@@ -38,6 +38,7 @@ public :
    double ptjet1cut;
    double ptjet2cut;
    double deltaetacut;
+   double deltaphicut;
    double zeppencut;
    double invmassjetcut;
    int ebcat;
@@ -163,6 +164,8 @@ public :
    Float_t         phijet1;
    Float_t         phijet2;
    Float_t         deltaeta;
+   Float_t         deltaphi;
+   Float_t         deltaphinewvtx;
    Float_t         zeppenjet;
    Float_t         invmassjet;
    Float_t         invmass2g1j;
@@ -280,6 +283,8 @@ public :
    TBranch        *b_phijet1;   //!
    TBranch        *b_phijet2;   //!
    TBranch        *b_deltaeta;   //!
+   TBranch        *b_deltaphi;   //!
+   TBranch        *b_deltaphinewvtx;   //!
    TBranch        *b_zeppenjet;   //!
    TBranch        *b_invmassjet;   //!
    TBranch        *b_invmass2g1j;   //!
@@ -299,7 +304,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Setcuts(double pt1=50, double pt2=30, double pthiggsmin=-100, double pthiggsmax=-100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, int eb = 1, int r9 = 1, bool thirdcat = 0);
+   virtual void     Setcuts(double pt1=50, double pt2=30, double pthiggsmin=-100, double pthiggsmax=-100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, double deltap=2.6, int eb = 1, int r9 = 1, bool thirdcat = 0);
    virtual TH1D*    Plot(string var, string name, int nbin=200, double min=90, double max=190, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual bool     exclSel();   
@@ -340,8 +345,9 @@ fillPlot::fillPlot(TTree *tree, bool isData)
 
 fillPlot::~fillPlot()
 {
+
    if (!fChain) return;
-   //   delete fChain->GetCurrentFile();
+   //   delete fChain->GetCurrentFile();   
 }
 
 Int_t fillPlot::GetEntry(Long64_t entry)
@@ -483,6 +489,8 @@ void fillPlot::Init(TTree *tree)
    fChain->SetBranchAddress("phijet1", &phijet1, &b_phijet1);
    fChain->SetBranchAddress("phijet2", &phijet2, &b_phijet2);
    fChain->SetBranchAddress("deltaeta", &deltaeta, &b_deltaeta);
+   fChain->SetBranchAddress("deltaphi", &deltaphi, &b_deltaphi);
+   fChain->SetBranchAddress("deltaphinewvtx", &deltaphinewvtx, &b_deltaphinewvtx);
    fChain->SetBranchAddress("zeppenjet", &zeppenjet, &b_zeppenjet);
    fChain->SetBranchAddress("invmassjet", &invmassjet, &b_invmassjet);
    fChain->SetBranchAddress("invmass2g1j", &invmass2g1j, &b_invmass2g1j);

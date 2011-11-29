@@ -30,6 +30,7 @@ RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V7(tre
   NtotEvents = -1;
   SampleID = -1;
   gen_=new TRandom3(0);
+  doPDFweight = 0;
 }
 
 
@@ -1067,6 +1068,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    TH1D Dvz("Dvz","Dvz", 200, -10.,10.);
    TH1D Dvzbest("Dvzbest","Dvzbest", 200, -10.,10.);
+   TH2D JECunc("JECunc","JECunc", 100, 0.,200.,100,0.,0.2);
+   TH1D JECresovbf("JECresovbf","JECresovbf", 100, -0.5,0.5);
+   TH1D JECresovh("JECresovh","JECresovh", 100, -0.5,0.5);
+
+   TH1D nPDFweight1("nPDFweight1","nPDFweight1", 150, 0.,150.);
+   TH1D nPDFweight2("nPDFweight2","nPDFweight2", 150, 0.,150.);
+   TH1D nPDFweight3("nPDFweight3","nPDFweight3", 150, 0.,150.);
+   TH1D nPDFweight4("nPDFweight4","nPDFweight4", 150, 0.,150.);
+   TH1D nPDFweight5("nPDFweight5","nPDFweight5", 150, 0.,150.);
+   TH1D nPDFweight6("nPDFweight6","nPDFweight6", 150, 0.,150.);
+   TH1D nPDFweight7("nPDFweight7","nPDFweight7", 150, 0.,150.);
+   TH1D nPDFweight8("nPDFweight8","nPDFweight8", 150, 0.,150.);
+   TH1D nPDFweight9("nPDFweight9","nPDFweight9", 150, 0.,150.);
+   TH1D nPDFweight10("nPDFweight10","nPDFweight10",150, 0.,150.);
 
    TH1D higgsmasshiggsassreco("higgsmasshiggsassreco","higgsmasshiggsassreco", 100, 100.,150.);
    TH1D higgsmassassreco("higgsmassassreco","higgsmassassreco", 100, 100.,150.);
@@ -1164,6 +1179,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    TH1D zeppenjetisoreco2("zeppenjetisoreco2","zeppenjetisoreco2", 100, -5.5,5.5);
    TH1D zeppenhiggsisoreco("zeppenhiggsisoreco","zeppenhiggsisoreco", 100, -5.5,5.5);
    TH1D dijetmassisoreco("dijetmassisoreco","dijetmassisoreco", 100, 50.,1500.);
+   TH1D invmassjetgen("invmassjetgen","invmassjetgen", 100, 0.,170.);
    TH1D npunorew("npunorew","npunorew", 25, -0.5,24.5);
    TH1D npurew("npurew","npurew", 25, -0.5,24.5);
    TH1D nvtxnorew("nvtxnorew","nvtxnorew", 25, -0.5,24.5);
@@ -1310,6 +1326,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    ana_tree->Branch("phijet2",&phijet2,"phijet2/F");
    ana_tree->Branch("deltaeta",&deltaeta,"deltaeta/F");
    ana_tree->Branch("zeppenjet",&zeppenjet,"zeppenjet/F");
+   ana_tree->Branch("deltaphi",&deltaphi,"deltaphi/F");
+   ana_tree->Branch("deltaphinewvtx",&deltaphinewvtx,"deltaphinewvtx/F");
    ana_tree->Branch("invmassjet",&invmassjet,"invmassjet/F");
    ana_tree->Branch("invmass2g1j",&invmass2g1j,"invmass2g1j/F");
    ana_tree->Branch("invmass2g2j",&invmass2g2j,"invmass2g2j/F");
@@ -1323,6 +1341,29 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    ana_tree->Branch("pu_weight",&pu_weight,"pu_weight/F");
    ana_tree->Branch("pt_weight",&pt_weight,"pt_weight/F");
+
+   if(doPDFweight){
+     ana_tree->Branch("nWeightsPDF1",&nWeightsPDF1,"nWeightsPDF1/I");
+     ana_tree->Branch("nWeightsPDF2",&nWeightsPDF2,"nWeightsPDF2/I");
+     ana_tree->Branch("nWeightsPDF3",&nWeightsPDF3,"nWeightsPDF3/I");
+     ana_tree->Branch("nWeightsPDF4",&nWeightsPDF4,"nWeightsPDF4/I");
+     ana_tree->Branch("nWeightsPDF5",&nWeightsPDF5,"nWeightsPDF5/I");
+     ana_tree->Branch("nWeightsPDF6",&nWeightsPDF6,"nWeightsPDF6/I");
+     ana_tree->Branch("nWeightsPDF7",&nWeightsPDF7,"nWeightsPDF7/I");
+     ana_tree->Branch("nWeightsPDF8",&nWeightsPDF8,"nWeightsPDF8/I");
+     ana_tree->Branch("nWeightsPDF9",&nWeightsPDF9,"nWeightsPDF9/I");
+     ana_tree->Branch("nWeightsPDF10",&nWeightsPDF10,"nWeightsPDF10/I");
+     ana_tree->Branch("PDFweight1",&PDFweight1,"PDFweight1[nWeightsPDF1]/F");
+     ana_tree->Branch("PDFweight2",&PDFweight2,"PDFweight2[nWeightsPDF2]/F");
+     ana_tree->Branch("PDFweight3",&PDFweight3,"PDFweight3[nWeightsPDF3]/F");
+     ana_tree->Branch("PDFweight4",&PDFweight4,"PDFweight4[nWeightsPDF4]/F");
+     ana_tree->Branch("PDFweight5",&PDFweight5,"PDFweight5[nWeightsPDF5]/F");
+     ana_tree->Branch("PDFweight6",&PDFweight6,"PDFweight6[nWeightsPDF6]/F");
+     ana_tree->Branch("PDFweight7",&PDFweight7,"PDFweight7[nWeightsPDF7]/F");
+     ana_tree->Branch("PDFweight8",&PDFweight8,"PDFweight8[nWeightsPDF8]/F");
+     ana_tree->Branch("PDFweight9",&PDFweight9,"PDFweight9[nWeightsPDF9]/F");
+     ana_tree->Branch("PDFweight10",&PDFweight10,"PDFweight10[nWeightsPDF10]/F");
+   }
 
    photonidcuts mediumid;
    mediumid.hcaliso_rel=         0.05;
@@ -1569,8 +1610,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    //	    std::cout << "Event skipped " << run << " " << lbn << std::endl;
 	    continue;
 	  }
-
-      
+    
       nprocessed++;
 	
       if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
@@ -1578,6 +1618,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       if (scaleCorrections_)
 	correctPhotons(true);
       
+      if (jetsyst_ && typejetsyst_>0 && typejetsyst_<5){
+	if(typejetsyst_ == 1) correctJets(1,0);
+	if(typejetsyst_ == 2) correctJets(-1,0);
+	if(typejetsyst_ == 3) correctJets(0,0.1);
+	if(typejetsyst_ == 4) correctJets(0,-0.1);
+      }
+
       // print name of crrent file
       currfilename = TString(fChain->GetCurrentFile()->GetName());
       if(currfilename != foldname) {
@@ -1588,9 +1635,31 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
               << endl;
          foldname = currfilename;
       }
+      
+      // fill histos for PDF studies
+      for(int iy=0; iy<nWeightsPDF[0] ; iy++)
+ 	nPDFweight1.Fill(iy,pdfWeight[0][iy]);
+      for(int iy=0; iy<nWeightsPDF[1] ; iy++)
+ 	nPDFweight2.Fill(iy,pdfWeight[1][iy]);
+      for(int iy=0; iy<nWeightsPDF[2] ; iy++)
+ 	nPDFweight3.Fill(iy,pdfWeight[2][iy]);
+      for(int iy=0; iy<nWeightsPDF[3] ; iy++)
+        nPDFweight4.Fill(iy,pdfWeight[3][iy]);
+      for(int iy=0; iy<nWeightsPDF[4] ; iy++)
+        nPDFweight5.Fill(iy,pdfWeight[4][iy]);
+      for(int iy=0; iy<nWeightsPDF[5] ; iy++)
+        nPDFweight6.Fill(iy,pdfWeight[5][iy]);
+      for(int iy=0; iy<nWeightsPDF[6] ; iy++)
+        nPDFweight7.Fill(iy,pdfWeight[6][iy]);
+      for(int iy=0; iy<nWeightsPDF[7] ; iy++)
+        nPDFweight8.Fill(iy,pdfWeight[7][iy]);
+      for(int iy=0; iy<nWeightsPDF[8] ; iy++)
+        nPDFweight9.Fill(iy,pdfWeight[8][iy]);
+      for(int iy=0; iy<nWeightsPDF[9] ; iy++)
+        nPDFweight10.Fill(iy,pdfWeight[9][iy]);
 
       vector<bool> photassocMC, photassocMChiggs;
-      
+   
       int counter(0), countertt(0), ishiggsev(0);
 
       int higgsId=-1;
@@ -1600,7 +1669,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    ishiggsev=1;
 	    higgsId=i;
 	  }
-      
+   
       for(int i=0; i<nMC; i++){      
 
 	if(pdgIdMC[i] == 22 && statusMC[i] == 3){
@@ -1620,9 +1689,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	if(pdgIdMC[i] == 22 && statusMC[i] == 1 && TMath::Abs(pdgIdMC[motherIDMC[i]])<21)
 	  counter++;
- 
+
       }
-      
+   
       if(isgjetqcd && counter > 1) continue; 
       //      To be used only when ttH is not produced separately  
       //      if(ishiggsev && countertt>0) continue; 
@@ -1674,7 +1743,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
 
       weight=pu_weight*pt_weight;
-      
+   
       npunorew.Fill(npu);
       npurew.Fill(npu,weight);
       nvtxnorew.Fill(nvertex);
@@ -1689,15 +1758,24 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       ptphothiggsgen2.Fill(ptMC[firsttwohiggsgenphot.at(1)],weight);
       etaphothiggsgen1.Fill(etaMC[firsttwohiggsgenphot.at(0)],weight);
       etaphothiggsgen2.Fill(etaMC[firsttwohiggsgenphot.at(1)],weight);
-     
+  
+
+      TLorentzVector jetgen1, jetgen2;	
+      jetgen1.SetPtEtaPhiE(ptJetGen_akt5[0],etaJetGen_akt5[0],phiJetGen_akt5[0],eJetGen_akt5[0]);
+      jetgen2.SetPtEtaPhiE(ptJetGen_akt5[1],etaJetGen_akt5[1],phiJetGen_akt5[1],eJetGen_akt5[1]);
+      
+      TLorentzVector sumgen = jetgen1 + jetgen2;
+
       ptjetgen1.Fill(ptJetGen_akt5[0],weight);
       ptjetgen2.Fill(ptJetGen_akt5[1],weight);
       etajetgen1.Fill(etaJetGen_akt5[0],weight);
       etajetgen2.Fill(etaJetGen_akt5[1],weight);
-   
-      deltaetajetgen.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],weight);
+      if(ptJetGen_akt5[0]>20 && ptJetGen_akt5[1]>20){
+	invmassjetgen.Fill(sumgen.M(),weight);
+	deltaetajetgen.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],weight);
+      }
       if(etaJetGen_akt5[0]*etaJetGen_akt5[1]<0) deltaetajetgencut.Fill(etaJetGen_akt5[0]-etaJetGen_akt5[1],weight);
-   
+
       // skip events where the number of jets, photons, and vertexes is above the maximum allowed value
       if (nPhot>30) {
 	cout << "number of photons = " << nPhot << " and above threshold of 30; skipping" << endl;
@@ -1758,7 +1836,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       TLorentzVector thejet2;
 
       for(int i=0; i<nPhot; i++){
-     
+  
 	bool assh(0);
 	bool assp(0);
 	bool assj(0);
@@ -1790,7 +1868,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  double DR = sqrt(delta_eta(etaPhot[i],etaJetGen_akt5[j])*delta_eta(etaPhot[i],etaJetGen_akt5[j]) + 
 			   delta_phi(phiPhot[i],phiJetGen_akt5[j])*delta_phi(phiPhot[i],phiJetGen_akt5[j]) ) ;
 	  if(DR < .1) assj = 1; 
-       
+    
 	}
 
 	if(assh) assophothiggs.push_back(1);
@@ -1855,10 +1933,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
         if(cutIDcs(i, looseid, &idpass)) isophotloosecs.push_back(1);  
         else isophotloosecs.push_back(0);   
- 
+
         if(cutIDcs(i, mediumid, &idpass)) isophotmediumcs.push_back(1);  
         else isophotmediumcs.push_back(0);   
- 
+
 	if(cutIDEG(i, isemid, &idpasseg)) isophotemeg.push_back(1); 
         else isophotemeg.push_back(0);  
 
@@ -1957,7 +2035,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       vector<int> firsttwohiggsassphot = firsttwo(ptPhot,&assophothiggs);
       vector<int> firsttwoassphot = firsttwo(ptPhot,&assophot);
       vector<int> firsttwoisophot = firsttwo(ptPhot,&isophot);      
-      
+   
       vector<bool> jetnohiggsphot;
       vector<bool> jetnoassphot;
       vector<bool> jetnoisophot;
@@ -1967,11 +2045,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	bool assh(0);
 	bool assp(0);
 	bool assi(0);
-
+	
 	double DR;
-
+	
 	for(int k=0; k<2; k++){
-
+	  
 	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)]) + 
 		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)]) ) ;
 	  if( DR < .5 ) assh = 1; 
@@ -1983,18 +2061,22 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)]) + 
 		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)]) ) ;
 	  if( DR < .5 ) assi = 1; 
-
+	  
 	}
+	
+	bool goodetajet(0);
 
-	if(!assh) jetnohiggsphot.push_back(1);
+	if(TMath::Abs(etaJet_pfakt5[i]) < 4.7) goodetajet = 1;
+ 
+	if(!assh && goodetajet) jetnohiggsphot.push_back(1);
 	else jetnohiggsphot.push_back(0); 
-
-	if(!assp) jetnoassphot.push_back(1); 
-        else jetnoassphot.push_back(0);  
-
-	if(!assi) jetnoisophot.push_back(1); 
-        else jetnoisophot.push_back(0);  
-
+	
+	if(!assp && goodetajet) jetnoassphot.push_back(1); 
+	else jetnoassphot.push_back(0);  
+	
+	if(!assi && goodetajet) jetnoisophot.push_back(1); 
+	else jetnoisophot.push_back(0);  
+	  
       }
 
       vector<int> firsttwonohiggsjet = firsttwo(ptCorrJet_pfakt5,&jetnohiggsphot);
@@ -2011,7 +2093,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	higgsmasshiggsassreco.Fill(higgs.M(),weight);
 	pthiggshiggsassreco.Fill(higgs.Pt(),weight);
-  
+
 	ptphothiggsassreco1.Fill(phot1.Pt(),weight);
 	ptphothiggsassreco2.Fill(phot2.Pt(),weight);
 	etaphothiggsassreco1.Fill(etaPhot[firsttwohiggsassphot.at(0)],weight);
@@ -2034,7 +2116,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	higgsmassassreco.Fill(higgs.M(),weight);
 	pthiggsassreco.Fill(higgs.Pt(),weight);
-  
+
 	ptphotassreco1.Fill(phot1.Pt(),weight);
 	ptphotassreco2.Fill(phot2.Pt(),weight);
 	etaphotassreco1.Fill(etaPhot[firsttwoassphot.at(0)],weight);
@@ -2042,8 +2124,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
       }	
 
-      double higgsisomass(0), etahiggsiso(-999), higgspt(-999.);
-      double higgsisomassnewvtx(0), etahiggsisonewvtx(-999), higgsptnewvtx(-999.);
+      double higgsisomass(0), phihiggsiso(-999), etahiggsiso(-999), higgspt(-999.);
+      double higgsisomassnewvtx(0), phihiggsisonewvtx(-999), etahiggsisonewvtx(-999), higgsptnewvtx(-999.);
 
       if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 ) { 
 
@@ -2053,15 +2135,16 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	TLorentzVector higgs = phot1 + phot2;
 	thehiggs = phot1 + phot2;
- 
+
 	higgsisomass = higgs.M();
 	etahiggsiso = higgs.Eta();
+	phihiggsiso = higgs.Phi();
         higgspt = higgs.Pt();
 	
 	higgsmassisoreco.Fill(higgs.M(),weight);
 	higgsmassisorecofull.Fill(higgs.M(),weight);
 	pthiggsisoreco.Fill(higgs.Pt(),weight);
-  
+
 	ptphotisoreco1.Fill(phot1.Pt(),weight);
 	ptphotisoreco2.Fill(phot2.Pt(),weight);
 	etaphotisoreco1.Fill(etaPhot[firsttwoisophot.at(0)],weight);
@@ -2080,10 +2163,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	TLorentzVector higgsnew = phot1new + phot2new;
 	thehiggsnewvtx = phot1new + phot2new;
- 
+
 	higgsisomassnewvtx = higgsnew.M();
 	etahiggsisonewvtx = higgsnew.Eta();
-        higgsptnewvtx = higgsnew.Pt();
+  	phihiggsisonewvtx = higgsnew.Phi();
+	higgsptnewvtx = higgsnew.Pt();
 
       }	
 
@@ -2107,8 +2191,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
 
       }
-      
-      double twojetsmass(0), etatwojets(-999);
+   
+      double twojetsmass(0), etatwojets(-999), phitwojets(-999);
 
       if( firsttwoassphot.at(0)>-1 && firsttwoassphot.at(1)>-1 ) { 
 
@@ -2159,8 +2243,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
       }
 
-      double twojetsmassiso(0), etatwojetsiso(-999);
-      
+      double twojetsmassiso(0), etatwojetsiso(-999), phitwojetsiso(-999);
+   
       if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 
 	  && ptPhot[firsttwoisophot.at(0)]>20 && ptPhot[firsttwoisophot.at(1)]>20
 	  ) { 
@@ -2185,7 +2269,23 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	  twojetsmassiso = sum.M();
 	  etatwojetsiso = sum.Eta();
+	  phitwojetsiso = sum.Phi();
+	  
+	  if(jetsyst_) 
+	    JECunc.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],jetsyst_->getJESUncertainty(etaJet_pfakt5[firsttwonoisojet.at(0)],ptCorrJet_pfakt5[firsttwonoisojet.at(0)]));
 
+	  int assjj(-999);
+	  for(int j=0; j<nJetGen_akt5; j++){	
+	    double DR = sqrt(delta_eta(etaJet_pfakt5[firsttwonoisojet.at(0)],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[firsttwonoisojet.at(0)],etaJetGen_akt5[j]) + 
+			     delta_phi(phiJet_pfakt5[firsttwonoisojet.at(0)],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[firsttwonoisojet.at(0)],phiJetGen_akt5[j]) ) ;
+	    if(DR < .1 && (TMath::Abs(ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < 0.5)) assjj = j; 
+	  }
+	  if(assjj>-1 && ptCorrJet_pfakt5[firsttwonoisojet.at(0)]>30. && ptCorrJet_pfakt5[firsttwonoisojet.at(1)]>20 ){
+	    if(TMath::Abs(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)])>2.5)
+	      JECresovbf.Fill((ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
+	    else
+	      JECresovh.Fill((ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
+	  }
 	  deltaetajetisoreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)],weight);
 	  double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
 	  double zeppen1 = etaJet_pfakt5[firsttwonoisojet.at(0)] - aveeta;
@@ -2195,6 +2295,40 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
 
         nredntp++;
+
+ 	if(doPDFweight){
+  	  nWeightsPDF1 = nWeightsPDF[0];
+ 	  nWeightsPDF2 = nWeightsPDF[1];
+ 	  nWeightsPDF3 = nWeightsPDF[2];
+ 	  nWeightsPDF4 = nWeightsPDF[3];
+          nWeightsPDF5 = nWeightsPDF[4];
+          nWeightsPDF6 = nWeightsPDF[5];
+          nWeightsPDF7 = nWeightsPDF[6];
+          nWeightsPDF8 = nWeightsPDF[7];
+          nWeightsPDF9 = nWeightsPDF[8];
+          nWeightsPDF10 = nWeightsPDF[9];
+  	  for(int iy=0; iy<nWeightsPDF[0] ; iy++)
+	    PDFweight1[iy] = pdfWeight[0][iy];
+ 	  for(int iy=0; iy<nWeightsPDF[1] ; iy++)
+ 	    PDFweight2[iy] = pdfWeight[1][iy];
+ 	  for(int iy=0; iy<nWeightsPDF[2] ; iy++)
+ 	    PDFweight3[iy] = pdfWeight[2][iy];		
+          for(int iy=0; iy<nWeightsPDF[3] ; iy++)
+            PDFweight4[iy] = pdfWeight[3][iy];
+          for(int iy=0; iy<nWeightsPDF[4] ; iy++)
+            PDFweight5[iy] = pdfWeight[4][iy];
+          for(int iy=0; iy<nWeightsPDF[5] ; iy++)
+            PDFweight6[iy] = pdfWeight[5][iy];
+          for(int iy=0; iy<nWeightsPDF[6] ; iy++)
+            PDFweight7[iy] = pdfWeight[6][iy];
+          for(int iy=0; iy<nWeightsPDF[7] ; iy++)
+            PDFweight8[iy] = pdfWeight[7][iy];
+          for(int iy=0; iy<nWeightsPDF[8] ; iy++)
+            PDFweight9[iy] = pdfWeight[8][iy];
+          for(int iy=0; iy<nWeightsPDF[9] ; iy++)
+            PDFweight10[iy] = pdfWeight[9][iy];
+	}
+
 	massgg = higgsisomass;
 	ptgg = higgspt;
 	massggnewvtx = higgsisomassnewvtx;
@@ -2327,7 +2461,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
 	  zeppenjet = etahiggsiso - aveeta;
 	  invmassjet = twojetsmassiso;
-	}
+	  deltaphi = delta_phi(phihiggsiso,phitwojetsiso);
+	  deltaphinewvtx = delta_phi(phihiggsisonewvtx,phitwojetsiso);
+	}else{
+	  deltaeta = -999.;
+	  zeppenjet = -999.;
+	  invmassjet = -999.;
+	  deltaphi = -999.;
+	  deltaphinewvtx = -999.;
+	}	  
 	met = epfMet;
 	nvtx = nvertex;
 
@@ -2374,6 +2516,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
       }
 
+	
 
    }
    timer.Stop();
@@ -2382,7 +2525,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    cout << "Processed events/s (CPU Time):          " << ((float)nprocessed)/timer.CpuTime() << endl; 
    cout << "Processed events/s (Real Time):          " << ((float)nprocessed)/timer.RealTime() << endl; 
    cout << "Events in reduced ntuple:  " << nredntp << endl; 
-
+   
    hOutputFile->Write() ;
    if (myjson)
      delete myjson;
@@ -2527,6 +2670,37 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
     }
 }
 
+void RedNtpTree::correctJets(int shift, float smear)
+{
+
+  for(int i=0; i<nJet_pfakt5; i++){
+    
+    ptCorrJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
+    ptJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
+    eJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],eJet_pfakt5[i]);
+    
+    if(smear){
+      
+      int ass(-999);
+      for(int j=0; j<nJetGen_akt5; j++){	
+	double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) + 
+			 delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
+	if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = j; 
+      }
+      
+      if(ass>-1){
+	double scaling = (ptJetGen_akt5[ass] + (1 + smear) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass]))/ptCorrJet_pfakt5[i];
+	ptCorrJet_pfakt5[i] *= scaling;
+	ptJet_pfakt5[i] *= scaling;
+	eJet_pfakt5[i] *= scaling;
+      }      
+
+    }
+
+  }
+
+}
+
 void RedNtpTree::correctPhotons(bool energyRegression)
 {
   for (int iPho=0;iPho<nPhot;++iPho)
@@ -2559,4 +2733,12 @@ void RedNtpTree::correctPhotons(bool energyRegression)
       E9Phot[iPho]=E9Phot[iPho]*scaleCorrection;   //[nPhot]
       E25Phot[iPho]=E25Phot[iPho]*scaleCorrection;   //[nPhot]
     }
+}
+
+void RedNtpTree::DoPDFWeighting()
+{
+  
+  doPDFweight = 1;
+  std::cout << "writing weights for PDF systematics out " << std::endl;
+  
 }

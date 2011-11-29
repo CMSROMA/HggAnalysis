@@ -7,6 +7,7 @@
 #include "tree_reader_V7.h"
 #include "PhotonIdCuts.h"
 #include "EnergyScaleCorrection.h"
+#include "JetScaleSystematics.h"
 
 
 #include <TFile.h>
@@ -29,6 +30,7 @@ public:
     void SetJsonFile(const char* json) { jsonFile = json; };
     void SetPuWeights(std::string puWeightFile);
     void SetPtWeights(std::string ptWeightFile);
+    void DoPDFWeighting();
     void SetNtotXsection(int ntot, float xsec) {
       NtotEvents = ntot;
       xsection = xsec;
@@ -39,6 +41,13 @@ public:
      std::cout << "Constructing new Scale Corrections Of Type " << correctionType<< std::endl;
      std::cout << "Constructing new Scale Corrections from file " << correctionFile << std::endl;
      scaleCorrections_=new EnergyScaleCorrection(correctionFile,correctionType);
+   }
+    void setJetSystematics(TString correctionFile, float typesyst)
+   {
+     std::cout << "Constructing JEC systematics from file " << correctionFile << std::endl;
+     std::cout << "Type of JEC systematics " << typesyst << std::endl;
+     jetsyst_=new JetScaleSystematics(correctionFile);
+     typejetsyst_=typesyst;
    }
 
 private:
@@ -53,6 +62,7 @@ private:
    Int_t  NtotEvents;
    float xsection;
    float EquivLumi;
+   bool doPDFweight;
 
    virtual vector<int>    firsttwo(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
@@ -62,6 +72,7 @@ private:
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
    bool mcID(int i); 
    void correctPhotons(bool energyRegression);
+   void correctJets(int scale, float smear);
 
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
@@ -137,7 +148,9 @@ private:
    TH1D* ptweights_;
 
    EnergyScaleCorrection* scaleCorrections_;
-   
+   JetScaleSystematics* jetsyst_;
+   Float_t typejetsyst_;
+ 
    Float_t massgg;
    Float_t ptgg;
    Float_t massggnewvtx;
@@ -164,6 +177,8 @@ private:
    Float_t phijet2;
    Float_t deltaeta;
    Float_t zeppenjet;
+   Float_t deltaphi;
+   Float_t deltaphinewvtx;
    Float_t invmassjet;
    Float_t invmass2g1j;
    Float_t invmass2g2j;
@@ -252,7 +267,28 @@ private:
    Float_t   phiscphot2;
    Float_t   pu_weight;
    Float_t   pt_weight;
-   
+
+   Int_t nWeightsPDF1;
+   Int_t nWeightsPDF2;
+   Int_t nWeightsPDF3;
+   Int_t nWeightsPDF4;
+   Int_t nWeightsPDF5;
+   Int_t nWeightsPDF6;
+   Int_t nWeightsPDF7;
+   Int_t nWeightsPDF8;
+   Int_t nWeightsPDF9;
+   Int_t nWeightsPDF10;
+   Float_t PDFweight1[150];
+   Float_t PDFweight2[150];
+   Float_t PDFweight3[150];
+   Float_t PDFweight4[150];
+   Float_t PDFweight5[150];
+   Float_t PDFweight6[150];
+   Float_t PDFweight7[150];
+   Float_t PDFweight8[150];
+   Float_t PDFweight9[150];
+   Float_t PDFweight10[150];
+
    float weight;
 };
 #endif
