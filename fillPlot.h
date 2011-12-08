@@ -24,7 +24,9 @@ public :
      int run;
      int lumi;
      int event;
-     float massgg;
+     float ptgg;
+     int ebeb;
+     float massggnewvtx;
      float weight;
    };
    
@@ -60,6 +62,8 @@ public :
 
    // vector of pu weights
    std::vector<Double_t> puweights_;
+
+   double weights_[15][15];
 
    // Declaration of leaf types
    Int_t           run;
@@ -301,6 +305,7 @@ public :
 
    fillPlot(TTree *tree=0, bool isData=0);
    virtual ~fillPlot();
+   virtual void     getweights();
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);

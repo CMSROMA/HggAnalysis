@@ -368,7 +368,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
     if(int_exp_2010>0) {
       cout << "running over " << ((TTree*)mc_2010[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
       sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_2010_",allcut,".root");
-      if (variable == "massgg") mc_2010_fill[i]->WriteRoot(name);
+      //      if (variable == "massgg") mc_2010_fill[i]->WriteRoot(name);
       var_mc_2010[i]->Add(mc_2010_fill[i]->Plot(variable, name, nbin, min, max));
       std::cout << "Selected events on mc2010 " << name << " " << var_mc_2010[i]->GetEntries() << std::endl;
     }
@@ -377,7 +377,7 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
       cout << "running over " << ((TTree*)mc_2011[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
       sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_2011_",allcut,".root");
       if (variable == "massgg") {
-	mc_2011_fill[i]->WriteRoot(name);
+	//	mc_2011_fill[i]->WriteRoot(name);
 // 	sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_2011_",allcut,".txt");
 // 	if(i==7) mc_2011_fill[i]->Writetxt(name);
       }
@@ -391,19 +391,19 @@ vector <double> finalize(double int_exp_2010, double int_exp_2011, double pt1=50
   for (int i=0; i<7; i++){ 
     cout << "running over " << ((TTree*)mc_gluglu_2011[i]->Get("AnaTree"))->GetEntries("") << " gluglu M=" << h_masses[i] << " events" <<  endl; 
     sprintf(name,"%s%d%s%s%s","results_gg/events_gluglu",h_masses[i],"_2011_",allcut,".root");
-    if (variable == "massgg") mc_gluglu_2011_fill[i]->WriteRoot(name);
+    //    if (variable == "massgg") mc_gluglu_2011_fill[i]->WriteRoot(name);
     var_gluglu_2011[i]->Add(mc_gluglu_2011_fill[i]->Plot(variable, name, nbin, min, max));
     std::cout << "Selected events on mc2011 gluglu " << h_masses[i] << " " << var_gluglu_2011[i]->GetEntries() << std::endl;
  
     cout << "running over " << ((TTree*)mc_vbf_2011[i]->Get("AnaTree"))->GetEntries("") << " vbf M=" << h_masses[i] << " events" <<  endl; 
     sprintf(name,"%s%d%s%s%s","results_gg/events_vbf",h_masses[i],"_2011_",allcut,".root");
-    if (variable == "massgg") mc_vbf_2011_fill[i]->WriteRoot(name);
+    //    if (variable == "massgg") mc_vbf_2011_fill[i]->WriteRoot(name);
     var_vbf_2011[i]->Add(mc_vbf_2011_fill[i]->Plot(variable, name, nbin, min, max));
     std::cout << "Selected events on mc2011 vbf " << h_masses[i] << " " << var_vbf_2011[i]->GetEntries() << std::endl;
 
     cout << "running over " << ((TTree*)mc_wzh_2011[i]->Get("AnaTree"))->GetEntries("") << " wzh M=" << h_masses[i] << " events" <<  endl; 
     sprintf(name,"%s%d%s%s%s","results_gg/events_wzh",h_masses[i],"_2011_",allcut,".root");
-    if (variable == "massgg") mc_wzh_2011_fill[i]->WriteRoot(name);
+    //    if (variable == "massgg") mc_wzh_2011_fill[i]->WriteRoot(name);
     var_wzh_2011[i]->Add(mc_wzh_2011_fill[i]->Plot(variable, name, nbin, min, max));
     std::cout << "Selected events on mc2011 wzh " << h_masses[i] << " " << var_wzh_2011[i]->GetEntries() << std::endl;
 

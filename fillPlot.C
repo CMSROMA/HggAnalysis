@@ -46,13 +46,15 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
    TFile* fOut=0;
    TTree* myTree=0;
 
+   if(cs) getweights();
+
    if (var == "massgg" && writeRoot != "")
      {
        string filename(writeRoot);
        fOut=TFile::Open(filename.c_str(),"RECREATE"); 
        fOut->cd();
        myTree = new TTree("diPhotonEvents","");
-       TString treeVariables = "run/I:lumi/I:event/I:massggnewvtx/F:weight/F";    
+       TString treeVariables = "run/I:lumi/I:event/I:ptgg/F:ebeb/I:massggnewvtx/F:weight/F";    
        myTree->Branch("diPhotonEvents",&(tree_.run),treeVariables);
      }
 
@@ -76,13 +78,13 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
 	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
 
-      if(ptphot1<ptphot1cut) continue; //pt first photon
+      //      if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
 
 // TEMPPPP
 
-//       if(ptphot1<ptphot1cut* massggnewvtx/100.) continue; //pt first photon
-//       if(ptphot2<ptphot2cut* massggnewvtx/100.) continue; //pt second photon
+      if(ptphot1<ptphot1cut* massggnewvtx/120.) continue; //pt first photon
+//       if(ptphot2<ptphot2cut* massggnewvtx/120.) continue; //pt second photon
 
       if(pthiggsmincut>0 && ptgg<pthiggsmincut) continue; //pt higgs min
       if(pthiggsmaxcut>0 && ptgg>=pthiggsmaxcut) continue; //pt higgs max
@@ -119,7 +121,6 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
      //deltaphi
       if(deltaphicut!=0)
 	if(TMath::Abs(deltaphi)<deltaphicut) continue;  // vbf selection 
-
 
       if(ebcat == 1) { // EB EE categories
 	if((TMath::Abs(etascphot1)>1.4442||TMath::Abs(etascphot2)>1.4442)) continue; 
@@ -229,15 +230,34 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(dopureweight) weight *= pu_weight;
       if(doptreweight) weight *= pt_weight;
 
+      double minptsublead(25), maxptsublead(100);
+      double minptlead(40), maxptlead(160);
+      double sizex = (maxptsublead - minptsublead)/15.;
+      double sizey = (maxptlead - minptlead)/15.;
+      int i = int((ptphot2-minptsublead)/sizex);
+      int j = int((ptphot1-minptlead)/sizey);
+      if(i<0) i=0;
+      if(j>14) j=14;
+      if(i<0) i=0;
+      if(j>19) j=19;
+ 
+      if(cs) 
+	if(i>-1 && i<16 && j>-1 && j<20) weight *= weights_[i][j];
+    
+      int ebeb(0);
+      if((TMath::Abs(etascphot1)<1.4442&&TMath::Abs(etascphot2)<1.4442)) ebeb = 1;	
+
       tempplot->Fill(variable, weight);
       
       if (var == "massgg" && writeRoot != "")
 	{
 	  tree_.run=run;
-	  tree_.lumi=lumi;
+ 	  tree_.lumi=lumi;
 	  tree_.event=event;
-	  tree_.massgg=massggnewvtx;
-	  tree_.weight=weight;
+ 	  tree_.ptgg=ptgg;
+	  tree_.ebeb=ebeb;
+ 	  tree_.massggnewvtx=massggnewvtx;
+ 	  tree_.weight=weight;
 	  fOut->cd();
 	  myTree->Fill();
 	}
@@ -435,4 +455,28 @@ void fillPlot::DoSmearing(double mean, double spread)
   dosmear = 1;
   meansmear = mean;
   spreadsmear = spread;
+}
+
+
+
+void fillPlot::getweights()
+{
+
+  TFile *f  = new TFile("ptreweight.root","READ");
+
+  TH1D *puweights = 0;
+  
+  puweights= (TH1D*) f->Get("pt2d");
+
+ for (int i = 0; i<15; i++) {
+    for (int j = 0; j<20; j++) {
+      float weight=1.;
+      weight=puweights->GetBinContent(i+1,j+1);
+      weights_[i][j] =  weight;
+      cout << i << "  " << "  " << j << "   " << weight << endl; 
+    }
+  }
+  
+  //std::cout << "weights sum is " << sumPuWeights << std::endl;
+
 }
