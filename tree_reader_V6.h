@@ -26,6 +26,13 @@ public :
    Float_t         genpt;
    Int_t           genProcessId;
    Float_t         genQScale;
+   Double_t        qPDF;
+   Double_t        x1PDF;
+   Double_t        x2PDF;
+   Double_t        id1PDF;
+   Double_t        id2PDF;
+   Int_t           nWeightsPDF[10];
+   Double_t        pdfWeight[10][150];
    Bool_t          isMC;
    Int_t           store;
    Int_t           lbn;
@@ -274,6 +281,13 @@ public :
    TBranch        *b_genpt;   //!
    TBranch        *b_genProcessId;   //!
    TBranch        *b_genQScale;   //!
+   TBranch        *b_qPDF;   //!
+   TBranch        *b_x1PDF;   //!
+   TBranch        *b_x2PDF;   //!
+   TBranch        *b_id1PDF;   //!
+   TBranch        *b_id2PDF;   //!
+   TBranch        *b_nWeightsPDF;   //!
+   TBranch        *b_pdfWeight;   //!
    TBranch        *b_isMC;   //!
    TBranch        *b_store;   //!
    TBranch        *b_lbn;   //!

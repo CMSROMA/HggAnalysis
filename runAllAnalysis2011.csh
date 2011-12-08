@@ -55,7 +55,7 @@ endif
 
 #foreach class ( 42xv3_data_2  ) 
 #foreach class ( 41xv11 ) 
-foreach class ( 42xv4 42xv4_data ) 
+foreach class ( 42xv4 42xv4_data_new ) 
     foreach preseltype ( cicloose preselectionCS ) 
 #    foreach preseltype ( mcass ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then

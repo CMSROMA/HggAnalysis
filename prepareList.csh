@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: preparelist_eth.csh,v 1.2 2011/07/28 17:53:48 meridian Exp $
+# $Id: prepareList.csh,v 1.6 2011/07/29 09:16:48 meridian Exp $
 
 if( $#argv<3  ) then
   echo "usage:  prepareList.csh  <inputfile> <listname> <location>  [run if 1]"
@@ -63,6 +63,8 @@ awk 'BEGIN{FS="output_"}{ split($2,jobId,"_"); sum[jobId[1]]++;line[jobId[1]]=$0
 set suffixlen = 2
 
 split -l $filexlist -d -a $suffixlen  ${unifile}.tmp  ${listname}_
+
+echo split -l $filexlist -d -a $suffixlen  ${unifile}.tmp  ${listname}_
 
 set uniqfiles=`wc -l ${unifile}.tmp`
 

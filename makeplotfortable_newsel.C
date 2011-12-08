@@ -16,8 +16,6 @@
   float deltaetavbf=3.5;
   float zeppenvbf=2.5;
   float mjjvbf=350.;
-//   float zeppenvbf=2.;
-//   float mjjvbf=400.;
   float deltaphivbf=2.6;
 
   float ptleadwzh=60.;
@@ -41,17 +39,15 @@
      \_____|_|\_____|
 
   */                 
-  
-//   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphivbf,-1,-1,ciclevel,0, "massgg",40,100,180);
 
-//   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-//   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,-100000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-// //   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-// //   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,0,0,mjjvbf,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-// //   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,0,mjjvbf,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-  finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-  finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-  finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,0,-1,-1,ciclevel,0, "massgg",40,100,180);
+   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphivbf,-1,-1,ciclevel,0, "massgg",50,90,190);
+
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,-100000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,0,0,mjjvbf,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,0,mjjvbf,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,0,-1,-1,ciclevel,0, "massgg",50,90,190);
 
 
 //    finalize(lumi2010,lumi2011,-10000,ptsubleadvbf,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "ptphot1",10,45.,145.,"p_{T}(#gamma1)[GeV]");
@@ -66,13 +62,13 @@
 //    finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,0,0,-10000,0,-1,-1,ciclevel,0, "etajet2",35,0.,7.,"|#eta|(jet2)");
 
 
- //   finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, ptjetleadwzh,ptjetsubleadwzh,deltaetawzh,zeppenwzh,mjjwzh,0,-1,-1,ciclevel,0, "massgg",40,100,180);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, ptjetleadwzh,ptjetsubleadwzh,deltaetawzh,zeppenwzh,mjjwzh,0,-1,-1,ciclevel,0, "massgg",50,90,190);
 
-//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,0,0,mjjwzh,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,deltaetawzh,0,mjjwzh,0,-1,-1,ciclevel,0, "massgg",40,100,180);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,0,0,mjjwzh,0,-1,-1,ciclevel,0, "massgg",50,90,190);
+//    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000,  ptjetleadwzh,ptjetsubleadwzh,deltaetawzh,0,mjjwzh,0,-1,-1,ciclevel,0, "massgg",50,90,190);
 
 //    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "ptjet1",50,10.,200.,"p_{T}(jet1)[GeV]");
 //    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, ptjetleadwzh,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "ptjet2",50,10.,200.,"p_{T}(jet2)[GeV]");
@@ -80,10 +76,6 @@
 //    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, ptjetleadwzh,ptjetsubleadwzh,deltaetawzh,0,mjjwzh,0,-1,-1,ciclevel,0, "zeppenjet",32,0.,8.,"zeppen");
 //    finalize(lumi2010,lumi2011,ptleadwzh,ptsubleadwzh,-10000, -10000, ptjetleadwzh,ptjetsubleadwzh,0,0,-10000,0,-1,-1,ciclevel,0, "invmassjet",20,40.,140.,"m(jj)[GeV]");
 
-//    finalize(lumi2010,lumi2011,40,30,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",40,100,180);
-
-//   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphivbf,-1,-1,ciclevel,0, "nvtx",15,0,30);
-//   finalize(lumi2010,lumi2011,ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,0,-100000,0,-1,-1,ciclevel,0, "nvtx",15,0,30);
-
+//    finalize(lumi2010,lumi2011,40,30,-10000, -10000, -100000,-10000,0,0,-10000,0,-1,-1,ciclevel,0, "massgg",50,90,190);
 
 }

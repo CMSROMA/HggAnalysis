@@ -108,6 +108,13 @@ void tree_reader_V6::Init(TTree *tree)
    fChain->SetBranchAddress("genpt", &genpt, &b_genpt);
    fChain->SetBranchAddress("genProcessId", &genProcessId, &b_genProcessId);
    fChain->SetBranchAddress("genQScale", &genQScale, &b_genQScale);
+   fChain->SetBranchAddress("qPDF", &qPDF, &b_qPDF);
+   fChain->SetBranchAddress("x1PDF", &x1PDF, &b_x1PDF);
+   fChain->SetBranchAddress("x2PDF", &x2PDF, &b_x2PDF);
+   fChain->SetBranchAddress("id1PDF", &id1PDF, &b_id1PDF);
+   fChain->SetBranchAddress("id2PDF", &id2PDF, &b_id2PDF);
+   fChain->SetBranchAddress("nWeightsPDF", nWeightsPDF, &b_nWeightsPDF);
+   fChain->SetBranchAddress("pdfWeight", pdfWeight, &b_pdfWeight);
    fChain->SetBranchAddress("isMC", &isMC, &b_isMC);
    fChain->SetBranchAddress("store", &store, &b_store);
    fChain->SetBranchAddress("lbn", &lbn, &b_lbn);
