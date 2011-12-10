@@ -72,13 +72,15 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       // analysis cuts
 
+      if(npu>=30) continue;
+
       if(massggnewvtx<90 || massggnewvtx>190) continue;
       //if(massggnewvtx<100 || massggnewvtx>180) continue;
 
       if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
 	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
 
-      //      if(ptphot1<ptphot1cut) continue; //pt first photon
+      //     if(ptphot1<ptphot1cut) continue; //pt first photon
       if(ptphot2<ptphot2cut) continue; //pt second photon
 
 // TEMPPPP
@@ -198,7 +200,9 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 //       else if (var == "zeppenjet")  variable = zeppenjet;
       else if (var == "nvtx")  variable = nvtx;
       else if (var == "npu")  variable = npu;
+      else if (var == "rhopfnvtx")  variable = (rhoPF-0.9*nvtx)/nvtx;
       else if (var == "met")  variable = met;
+      else if (var == "rhopf")  variable = rhoPF;
       else if (var == "ptgg")  variable = ptgg;
       else if (var == "pid_haspixelseedphot1")  variable = pid_haspixelseedphot1;
       else if (var == "pid_jurECALphot1")  variable = pid_jurECALphot1;
