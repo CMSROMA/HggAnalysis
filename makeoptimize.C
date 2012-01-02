@@ -8,13 +8,24 @@
   // float lumi2011=1090;
   float lumi2011=4700;
 
-  float ptleadvbf=55.;
+//   float ptleadvbf=55.;
+//   float ptsubleadvbf=25.;
+//   float ptjetleadvbf=30.;
+//   float ptjetsubleadvbf=20.;
+//   float deltaetavbf=3.5;
+//   float zeppenvbf=2.5;
+//   float mjjvbf=350.;
+// //   float zeppenvbf=2.;
+// //   float mjjvbf=400.;
+//   float deltaphivbf=2.6;
+
+  float ptleadvbf=60.;
   float ptsubleadvbf=25.;
   float ptjetleadvbf=30.;
-  float ptjetsubleadvbf=20.;
-  float deltaetavbf=3.5;
+  float ptjetsubleadvbf=30.;
+  float deltaetavbf=3.3;
   float zeppenvbf=2.5;
-  float mjjvbf=350.;
+  float mjjvbf=480.;
 //   float zeppenvbf=2.;
 //   float mjjvbf=400.;
   float deltaphivbf=2.6;
