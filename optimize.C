@@ -105,7 +105,9 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
 
   int h_masses[7] = {100,105,110,115,120,130,140};
 
-  TString redntpDir= "root://pccmsrm23.cern.ch:1094//u2/xrootd/meridian/Higgs/reduced_bck/";
+  TString redntpDir= "root://pccmsrm23.cern.ch:1094//u2/xrootd/delre/Higgs/reduced/";
+  //TString redntpDir= "root://pccmsrm23.cern.ch:1094//u2/xrootd/meridian/Higgs/reduced_bck/";
+  //TString redntpDir= "/Users/delre/";
   TString preselectionLevel;
 
   preselectionLevel="cicloose";
@@ -298,7 +300,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
     sprintf(name,"%s%s%s","results_gg/events_",allcut,".root");
     //    data_fill.WriteRoot(name);
   }
-  datainput = data_fill.File("/tmp/delre/data.root");
+  datainput = data_fill.File("results_gg/data.root");
   vardata->Add((TH1D*)datainput->Get("massgg")); 
   std::cout << "Selected events on data " << vardata->GetEntries() << std::endl;
   cout << "running over " << ((TTree*)datacs->Get("AnaTree"))->GetEntries("") << " data events (for cs)" <<  endl; 
@@ -309,7 +311,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
     sprintf(name,"%s%s%s","results_gg/events_",allcut,"_cs.root");
     //    datacs_fill.WriteRoot(name);
   }
-  datacsinput = datacs_fill.File("/tmp/delre/datacs.root");
+  datacsinput = datacs_fill.File("results_gg/datacs.root",1);
   vardatacs->Add((TH1D*)datacsinput->Get("massgg")); 
   std::cout << "Selected events on data cs " << vardatacs->GetEntries() << std::endl;
 
@@ -318,7 +320,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
     sprintf(name,"%s%s",mcnames[i].c_str()," 2011");
     if(int_exp>0) {
       cout << "running over " << ((TTree*)mc[i]->Get("AnaTree"))->GetEntries("") << " " << name << " events" <<  endl; 
-      sprintf(name,"%s%s%s","/tmp/delre/events_",mcnames[i].c_str(),".root");
+      sprintf(name,"%s%s%s","results_gg/events_",mcnames[i].c_str(),".root");
       if (variable == "massgg") {
 	//	mc_fill[i]->WriteRoot(name);
 	// 	sprintf(name,"%s%s%s%s%s","results_gg/events_",mcnames[i].c_str(),"_",allcut,".txt");
@@ -334,21 +336,21 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   std::cout << " ++++++++++++++ signal MC ++++++++++++++++" << std::endl;
   for (int i=0; i<7; i++){ 
     cout << "running over " << ((TTree*)mc_gluglu[i]->Get("AnaTree"))->GetEntries("") << " gluglu M=" << h_masses[i] << " events" <<  endl; 
-    sprintf(name,"%s%d%s","/tmp/delre/events_gluglu",h_masses[i],".root");
+    sprintf(name,"%s%d%s","results_gg/events_gluglu",h_masses[i],".root");
     //    if (variable == "massgg") mc_gluglu_fill[i]->WriteRoot(name);
     mc_glugluinput[i] = mc_gluglu_fill[i]->File(name);
     var_gluglu[i]->Add((TH1D*)mc_glugluinput[i]->Get("massgg"));
     std::cout << "Selected events on mc2011 gluglu " << h_masses[i] << " " << var_gluglu[i]->GetEntries() << std::endl;
  
     cout << "running over " << ((TTree*)mc_vbf[i]->Get("AnaTree"))->GetEntries("") << " vbf M=" << h_masses[i] << " events" <<  endl; 
-    sprintf(name,"%s%d%s","/tmp/delre/events_vbf",h_masses[i],".root");
+    sprintf(name,"%s%d%s","results_gg/events_vbf",h_masses[i],".root");
     //    if (variable == "massgg") mc_vbf_fill[i]->WriteRoot(name);
     mc_vbfinput[i] = mc_vbf_fill[i]->File(name);
     var_vbf[i]->Add((TH1D*)mc_vbfinput[i]->Get("massgg"));
     std::cout << "Selected events on mc2011 vbf " << h_masses[i] << " " << var_vbf[i]->GetEntries() << std::endl;
 
     cout << "running over " << ((TTree*)mc_wzh[i]->Get("AnaTree"))->GetEntries("") << " wzh M=" << h_masses[i] << " events" <<  endl; 
-    sprintf(name,"%s%d%s","/tmp/delre/events_wzh",h_masses[i],".root");
+    sprintf(name,"%s%d%s","results_gg/events_wzh",h_masses[i],".root");
     //    if (variable == "massgg") mc_wzh_fill[i]->WriteRoot(name);
     mc_wzhinput[i] = mc_wzh_fill[i]->File(name);
     var_wzh[i]->Add((TH1D*)mc_wzhinput[i]->Get("massgg"));
@@ -663,9 +665,13 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   // CODE FOR OPTIMIZATION
   // ----------------------------
   hOutputFile->cd();
-  double ptgg_range(80), phot1_range(60), phot2_range(30), jet1_range(40), jet2_range(20), deltae_range(2), zep_range(2), mjj_range(800), deltap_range(1.0);
-  double ptgg_central(40), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(30), deltae_central(3.5), zep_central(2.5), mjj_central(450), deltap_central(2.6);
-
+  // VBF
+  // double ptgg_range(80), phot1_range(60), phot2_range(30), jet1_range(40), jet2_range(20), deltae_range(2), zep_range(2), mjj_range(800), deltap_range(1.0), met_range(140.);
+  // double ptgg_central(40), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(30), deltae_central(3.5), zep_central(2.5), mjj_central(450), deltap_central(2.6), met_central(70);
+  // WZH
+  double ptgg_range(100), phot1_range(60), phot2_range(30), jet1_range(40), jet2_range(30), deltae_range(2), zep_range(3), mjj_range(60), deltap_range(1.0),  met_range(140);
+  double ptgg_central(50), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(35), deltae_central(-2.5), zep_central(2.), mjj_central(-35), deltap_central(2.6), met_central(70);
+  
   TH1D ptgg_prob_disc("ptgg_prob_disc","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_prob_disc("phot1_prob_disc","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
   TH1D phot2_prob_disc("phot2_prob_disc","",20,phot2_central-phot2_range/2.,phot2_central+phot2_range/2.);
@@ -675,6 +681,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_prob_disc("zep_prob_disc","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_prob_disc("mjj_prob_disc","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_prob_disc("deltap_prob_disc","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
+  TH1D met_prob_disc("met_prob_disc","",20,met_central-met_range/2.,met_central+met_range/2.);  
 
   TH1D ptgg_prob_UL("ptgg_prob_UL","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_prob_UL("phot1_prob_UL","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
@@ -685,6 +692,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_prob_UL("zep_prob_UL","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_prob_UL("mjj_prob_UL","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_prob_UL("deltap_prob_UL","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
+  TH1D met_prob_UL("met_prob_UL","",20,met_central-met_range/2.,met_central+met_range/2.);  
 
   TH1D ptgg_S("ptgg_S","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_S("phot1_S","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
@@ -695,6 +703,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_S("zep_S","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_S("mjj_S","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_S("deltap_S","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
+  TH1D met_S("met_S","",20,met_central-met_range/2.,met_central+met_range/2.);  
 
   TH1D ptgg_B("ptgg_B","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_B("phot1_B","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
@@ -705,6 +714,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_B("zep_B","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_B("mjj_B","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_B("deltap_B","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
+  TH1D met_B("met_B","",20,met_central-met_range/2.,met_central+met_range/2.);  
 
   TH1D ptgg_SovsqrtB("ptgg_SovsqrtB","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_SovsqrtB("phot1_SovsqrtB","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
@@ -715,7 +725,8 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_SovsqrtB("zep_SovsqrtB","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_SovsqrtB("mjj_SovsqrtB","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_SovsqrtB("deltap_SovsqrtB","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
-
+  TH1D met_SovsqrtB("met_SovsqrtB","",20,met_central-met_range/2.,met_central+met_range/2.);  
+             
   TH1D ptgg_SovsqrtSB("ptgg_SovsqrtSB","",20,ptgg_central-ptgg_range/2.,ptgg_central+ptgg_range/2.);                 
   TH1D phot1_SovsqrtSB("phot1_SovsqrtSB","",20,phot1_central-phot1_range/2.,phot1_central+phot1_range/2.);
   TH1D phot2_SovsqrtSB("phot2_SovsqrtSB","",20,phot2_central-phot2_range/2.,phot2_central+phot2_range/2.);
@@ -725,6 +736,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
   TH1D zep_SovsqrtSB("zep_SovsqrtSB","",20,zep_central-zep_range/2.,zep_central+zep_range/2.);
   TH1D mjj_SovsqrtSB("mjj_SovsqrtSB","",20,mjj_central-mjj_range/2.,mjj_central+mjj_range/2.);
   TH1D deltap_SovsqrtSB("deltap_SovsqrtSB","",20,deltap_central-deltap_range/2.,deltap_central+deltap_range/2.);  
+  TH1D met_SovsqrtSB("met_SovsqrtSB","",20,met_central-met_range/2.,met_central+met_range/2.);  
 //   TH1D ptgg_SovsqrtSB("ptgg_SovsqrtSB","",20,0,80);                 
 //   TH1D phot1_SovsqrtSB("phot1_SovsqrtSB","",20,35,95);
 //   TH1D phot2_SovsqrtSB("phot2_SovsqrtSB","",20,20,50);
@@ -735,7 +747,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
 //   TH1D mjj_SovsqrtSB("mjj_SovsqrtSB","",20,50,850);
 //   TH1D deltap_SovsqrtSB("deltap_SovsqrtSB","",20,2.1,3.1);  
 
-  for (int kk=0; kk<9; kk++){
+  for (int kk=0; kk<10; kk++){
 
     char nametest[100];
     if(kk==0) sprintf(nametest,"ptgg_");
@@ -747,6 +759,7 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
     if(kk==6) sprintf(nametest,"zep_");
     if(kk==7) sprintf(nametest,"mjj_");
     if(kk==8) sprintf(nametest,"deltap_");
+    if(kk==9) sprintf(nametest,"met_");
     char nameprob_disc[100]; sprintf(nameprob_disc,"%s%s",nametest,"prob_disc");
     char nameprob_UL[100]; sprintf(nameprob_UL,"%s%s",nametest,"prob_UL");
     char nameS[100]; sprintf(nameS,"%s%s",nametest,"S");
@@ -831,9 +844,14 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
       mydoublegau->SetParLimits(2,0.5,2.);
       mydoublegau->SetParLimits(5,2.,6.);    
       mypowlaw->SetParameter(0,2.88660e+07);
+      mypowlaw->SetParLimits(0,0.,1.e+12);
       mypowlaw->SetParameter(1,-3.42928e+00);
       // TEMP
-      mypowlaw->FixParameter(1,-3.42928e+00);
+      // if(var_mc[6].Integral()<5) mypowlaw->FixParameter(1,mypowlaw->GetParameter(1));
+      // VBF
+      //mypowlaw->FixParameter(1,-3.42928e+00);
+      // WZH
+      //mypowlaw->FixParameter(1,-2.97321e+00);
       //
       var_mc[6]->Fit("mydoublegau","l");
       var[1]->Fit("mypowlaw","l");
@@ -843,13 +861,21 @@ vector <double> optimize(double int_exp, double pt1=50, double pt2=30, double pt
       cout << "Number of bkg events " << integralbkg << endl;
       cout << "S/sqrt(B) " << integralhiggs/boosthiggs/sqrt(integralbkg) << endl; 
       cout << "probaility "<< probability_disc(integralhiggs/boosthiggs+integralbkg,integralbkg) << endl;
-      ((TH1D*)hOutputFile->Get(nameprob_disc))->SetBinContent(jj+1,probability_disc(integralhiggs/boosthiggs+integralbkg,integralbkg) );
-      ((TH1D*)hOutputFile->Get(nameprob_UL))->SetBinContent(jj+1,UL(integralhiggs/boosthiggs,integralbkg));
-      ((TH1D*)hOutputFile->Get(nameS))->SetBinContent(jj+1,integralhiggs/boosthiggs);
-      ((TH1D*)hOutputFile->Get(nameB))->SetBinContent(jj+1,integralbkg);
-      ((TH1D*)hOutputFile->Get(nameSovsqrtB))->SetBinContent(jj+1,integralhiggs/boosthiggs/sqrt(integralbkg));
-      ((TH1D*)hOutputFile->Get(nameSovsqrtSB))->SetBinContent(jj+1,integralhiggs/boosthiggs/sqrt(integralbkg+integralhiggs/boosthiggs));
-
+      if(integralbkg>0){
+	((TH1D*)hOutputFile->Get(nameprob_disc))->SetBinContent(jj+1,probability_disc(integralhiggs/boosthiggs+integralbkg,integralbkg) );
+	((TH1D*)hOutputFile->Get(nameprob_UL))->SetBinContent(jj+1,UL(integralhiggs/boosthiggs,integralbkg));
+	((TH1D*)hOutputFile->Get(nameS))->SetBinContent(jj+1,integralhiggs/boosthiggs);
+	((TH1D*)hOutputFile->Get(nameB))->SetBinContent(jj+1,integralbkg);
+	((TH1D*)hOutputFile->Get(nameSovsqrtB))->SetBinContent(jj+1,integralhiggs/boosthiggs/sqrt(integralbkg));
+	((TH1D*)hOutputFile->Get(nameSovsqrtSB))->SetBinContent(jj+1,integralhiggs/boosthiggs/sqrt(integralbkg+integralhiggs/boosthiggs));
+      } else { 
+	((TH1D*)hOutputFile->Get(nameprob_disc))->SetBinContent(jj+1,0);
+	((TH1D*)hOutputFile->Get(nameprob_UL))->SetBinContent(jj+1,0);
+	((TH1D*)hOutputFile->Get(nameS))->SetBinContent(jj+1,0);
+	((TH1D*)hOutputFile->Get(nameB))->SetBinContent(jj+1,0);
+	((TH1D*)hOutputFile->Get(nameSovsqrtB))->SetBinContent(jj+1,0);
+	((TH1D*)hOutputFile->Get(nameSovsqrtSB))->SetBinContent(jj+1,0);
+       }
       // ----------------------------
       
     }

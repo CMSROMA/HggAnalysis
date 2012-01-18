@@ -56,37 +56,57 @@ RedNtpTree::~RedNtpTree()
 
 
 
-vector<int>  RedNtpTree::firsttwo(Float_t *vec, vector<bool> *asso){
+vector<int>  RedNtpTree::firstfour(Float_t *vec, vector<bool> *asso){
 
-  double max(-999); int idmax(-999);
-  double secondmax(-999); int idsecondmax(-999);
+//   double max(-999); int idmax(-999);
+//   double secondmax(-999); int idsecondmax(-999);
 
-  for (int i=0; i<int(asso->size()); i++) {
+//   for (int i=0; i<int(asso->size()); i++) {
 
-    if ( vec[i] > max && asso->at(i)) {
-      max = vec[i];
-      idmax = i;
-    }
+//     if ( vec[i] > max && asso->at(i)) {
+//       max = vec[i];
+//       idmax = i;
+//     }
 
-  }
-  for (int i=0; i<int(asso->size()); i++) {
+//   }
+//   for (int i=0; i<int(asso->size()); i++) {
 
-    if ( vec[i] > secondmax && asso->at(i) && i!= idmax) {
-      secondmax = vec[i];
-      idsecondmax = i;
-    }
+//     if ( vec[i] > secondmax && asso->at(i) && i!= idmax) {
+//       secondmax = vec[i];
+//       idsecondmax = i;
+//     }
 
-  }
+//   }
   
-  //  int themaxtemp[] = {idmax,idsecondmax};
-
   vector<int> themax;
+//   themax.push_back(idmax);
+//   themax.push_back(idsecondmax);
+
   
-  themax.push_back(idmax);
-  themax.push_back(idsecondmax);
-
+  for(int j=0; j<4; j++){
+ 
+    double maxtemp(-999); int idmaxtemp(-999);
+ 
+    for (int i=0; i<int(asso->size()); i++) {
+   
+      bool skip(0);
+      for(int ss=0; ss<j; ss++) {
+	if ( i == themax.at(ss) )   {
+	  skip = 1;
+	}
+      }
+      if ( vec[i] > maxtemp && asso->at(i) && !skip) {
+	maxtemp = vec[i];
+	idmaxtemp = i;
+      }
+	  
+    }
+    themax.push_back(idmaxtemp);
+ 
+  }
+  
   return themax;
-
+    
 }
 // CiC SELECTION CODE BEGIN - SSIMON
 // ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -1318,12 +1338,26 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    ana_tree->Branch("ptjet1",&ptjet1,"ptjet1/F");
    ana_tree->Branch("ptjet2",&ptjet2,"ptjet2/F");
+   ana_tree->Branch("ptjet3",&ptjet3,"ptjet3/F");
+   ana_tree->Branch("ptjet4",&ptjet4,"ptjet4/F");
    ana_tree->Branch("ptcorrjet1",&ptcorrjet1,"ptcorrjet1/F");
    ana_tree->Branch("ptcorrjet2",&ptcorrjet2,"ptcorrjet2/F");
+   ana_tree->Branch("ptcorrjet3",&ptcorrjet3,"ptcorrjet3/F");
+   ana_tree->Branch("ptcorrjet4",&ptcorrjet4,"ptcorrjet4/F");
    ana_tree->Branch("etajet1",&etajet1,"etajet1/F");
    ana_tree->Branch("etajet2",&etajet2,"etajet2/F");
+   ana_tree->Branch("etajet3",&etajet3,"etajet3/F");
+   ana_tree->Branch("etajet4",&etajet4,"etajet4/F");
    ana_tree->Branch("phijet1",&phijet1,"phijet1/F");
    ana_tree->Branch("phijet2",&phijet2,"phijet2/F");
+   ana_tree->Branch("phijet3",&phijet3,"phijet3/F");
+   ana_tree->Branch("phijet4",&phijet4,"phijet4/F");
+   ana_tree->Branch("betajet1",&betajet1,"betajet1/F");
+   ana_tree->Branch("betajet2",&betajet2,"betajet2/F");
+   ana_tree->Branch("betastarjet1",&betastarjet1,"betastarjet1/F");
+   ana_tree->Branch("betastarjet2",&betastarjet2,"betastarjet2/F");
+   ana_tree->Branch("assjet1",&assjet1,"assjet1/I");
+   ana_tree->Branch("assjet2",&assjet2,"assjet2/I");
    ana_tree->Branch("deltaeta",&deltaeta,"deltaeta/F");
    ana_tree->Branch("zeppenjet",&zeppenjet,"zeppenjet/F");
    ana_tree->Branch("deltaphi",&deltaphi,"deltaphi/F");
@@ -1333,6 +1367,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    ana_tree->Branch("invmass2g2j",&invmass2g2j,"invmass2g2j/F");
    ana_tree->Branch("nvtx",&nvtx,"nvtx/F");
    ana_tree->Branch("met",&met,"met/F");
+   ana_tree->Branch("phimet",&phimet,"phimet/F");
    ana_tree->Branch("npu",&npu,"npu/I");
    ana_tree->Branch("NtotEvents",&NtotEvents,"NtotEvents/I");
    ana_tree->Branch("xsection",&xsection,"xsection/F");
@@ -1696,8 +1731,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       //      To be used only when ttH is not produced separately  
       //      if(ishiggsev && countertt>0) continue; 
 
-      vector<int> firsttwogenphot = firsttwo(ptMC,&photassocMC);
-      vector<int> firsttwohiggsgenphot = firsttwo(ptMC,&photassocMChiggs);
+      vector<int> firstfourgenphot = firstfour(ptMC,&photassocMC);
+      vector<int> firstfourhiggsgenphot = firstfour(ptMC,&photassocMChiggs);
 
       npu = pu_n;
       if(npu<MAX_PU_REWEIGHT && puweights_.size()>0 && nMC>0) 
@@ -1749,15 +1784,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
       nvtxnorew.Fill(nvertex);
       nvtxrew.Fill(nvertex,weight);
 
-      ptphotgen1.Fill(ptMC[firsttwogenphot.at(0)],weight);
-      ptphotgen2.Fill(ptMC[firsttwogenphot.at(1)],weight);
-      etaphotgen1.Fill(etaMC[firsttwogenphot.at(0)],weight);
-      etaphotgen2.Fill(etaMC[firsttwogenphot.at(1)],weight);
+      ptphotgen1.Fill(ptMC[firstfourgenphot.at(0)],weight);
+      ptphotgen2.Fill(ptMC[firstfourgenphot.at(1)],weight);
+      etaphotgen1.Fill(etaMC[firstfourgenphot.at(0)],weight);
+      etaphotgen2.Fill(etaMC[firstfourgenphot.at(1)],weight);
 
-      ptphothiggsgen1.Fill(ptMC[firsttwohiggsgenphot.at(0)],weight);
-      ptphothiggsgen2.Fill(ptMC[firsttwohiggsgenphot.at(1)],weight);
-      etaphothiggsgen1.Fill(etaMC[firsttwohiggsgenphot.at(0)],weight);
-      etaphothiggsgen2.Fill(etaMC[firsttwohiggsgenphot.at(1)],weight);
+      ptphothiggsgen1.Fill(ptMC[firstfourhiggsgenphot.at(0)],weight);
+      ptphothiggsgen2.Fill(ptMC[firstfourhiggsgenphot.at(1)],weight);
+      etaphothiggsgen1.Fill(etaMC[firstfourhiggsgenphot.at(0)],weight);
+      etaphothiggsgen2.Fill(etaMC[firstfourhiggsgenphot.at(1)],weight);
   
 
       TLorentzVector jetgen1, jetgen2;	
@@ -2032,9 +2067,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
       }  
 
-      vector<int> firsttwohiggsassphot = firsttwo(ptPhot,&assophothiggs);
-      vector<int> firsttwoassphot = firsttwo(ptPhot,&assophot);
-      vector<int> firsttwoisophot = firsttwo(ptPhot,&isophot);      
+      vector<int> firstfourhiggsassphot = firstfour(ptPhot,&assophothiggs);
+      vector<int> firstfourassphot = firstfour(ptPhot,&assophot);
+      vector<int> firstfourisophot = firstfour(ptPhot,&isophot);      
    
       vector<bool> jetnohiggsphot;
       vector<bool> jetnoassphot;
@@ -2050,23 +2085,25 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	for(int k=0; k<2; k++){
 	  
-	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwohiggsassphot.at(k)]) + 
-		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwohiggsassphot.at(k)]) ) ;
+	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firstfourhiggsassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firstfourhiggsassphot.at(k)]) + 
+		    delta_phi(phiJet_pfakt5[i],phiPhot[firstfourhiggsassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firstfourhiggsassphot.at(k)]) ) ;
 	  if( DR < .5 ) assh = 1; 
 	  
-	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoassphot.at(k)]) + 
-		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoassphot.at(k)]) ) ;
+	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firstfourassphot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firstfourassphot.at(k)]) + 
+		    delta_phi(phiJet_pfakt5[i],phiPhot[firstfourassphot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firstfourassphot.at(k)]) ) ;
 	  if( DR < .5 ) assp = 1; 
 	  
-	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firsttwoisophot.at(k)]) + 
-		    delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firsttwoisophot.at(k)]) ) ;
+	  DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(k)])*delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(k)]) + 
+		    delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(k)])*delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(k)]) ) ;
 	  if( DR < .5 ) assi = 1; 
 	  
 	}
 	
-	bool goodetajet(0);
+	bool goodetajet(1);
 
-	if(TMath::Abs(etaJet_pfakt5[i]) < 4.7) goodetajet = 1;
+	if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
+ 	if(TMath::Abs(etaJet_pfakt5[i]) < 2.0) 
+  	  if( betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
  
 	if(!assh && goodetajet) jetnohiggsphot.push_back(1);
 	else jetnohiggsphot.push_back(0); 
@@ -2079,15 +2116,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  
       }
 
-      vector<int> firsttwonohiggsjet = firsttwo(ptCorrJet_pfakt5,&jetnohiggsphot);
-      vector<int> firsttwonoassjet = firsttwo(ptCorrJet_pfakt5,&jetnoassphot);
-      vector<int> firsttwonoisojet = firsttwo(ptCorrJet_pfakt5,&jetnoisophot);      
+      vector<int> firstfournohiggsjet = firstfour(ptCorrJet_pfakt5,&jetnohiggsphot);
+      vector<int> firstfournoassjet = firstfour(ptCorrJet_pfakt5,&jetnoassphot);
+      vector<int> firstfournoisojet = firstfour(ptCorrJet_pfakt5,&jetnoisophot);      
 
-      if( firsttwohiggsassphot.at(0)>-1 && firsttwohiggsassphot.at(1)>-1 ) { 
+      if( firstfourhiggsassphot.at(0)>-1 && firstfourhiggsassphot.at(1)>-1 ) { 
 
 	TLorentzVector phot1, phot2;	
-	phot1.SetPtEtaPhiE(ptPhot[firsttwohiggsassphot.at(0)],etaPhot[firsttwohiggsassphot.at(0)],phiPhot[firsttwohiggsassphot.at(0)],ePhot[firsttwohiggsassphot.at(0)]);
-	phot2.SetPtEtaPhiE(ptPhot[firsttwohiggsassphot.at(1)],etaPhot[firsttwohiggsassphot.at(1)],phiPhot[firsttwohiggsassphot.at(1)],ePhot[firsttwohiggsassphot.at(1)]);
+	phot1.SetPtEtaPhiE(ptPhot[firstfourhiggsassphot.at(0)],etaPhot[firstfourhiggsassphot.at(0)],phiPhot[firstfourhiggsassphot.at(0)],ePhot[firstfourhiggsassphot.at(0)]);
+	phot2.SetPtEtaPhiE(ptPhot[firstfourhiggsassphot.at(1)],etaPhot[firstfourhiggsassphot.at(1)],phiPhot[firstfourhiggsassphot.at(1)],ePhot[firstfourhiggsassphot.at(1)]);
 
 	TLorentzVector higgs = phot1 + phot2;
 	
@@ -2096,18 +2133,18 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	ptphothiggsassreco1.Fill(phot1.Pt(),weight);
 	ptphothiggsassreco2.Fill(phot2.Pt(),weight);
-	etaphothiggsassreco1.Fill(etaPhot[firsttwohiggsassphot.at(0)],weight);
-	etaphothiggsassreco2.Fill(etaPhot[firsttwohiggsassphot.at(1)],weight);
+	etaphothiggsassreco1.Fill(etaPhot[firstfourhiggsassphot.at(0)],weight);
+	etaphothiggsassreco2.Fill(etaPhot[firstfourhiggsassphot.at(1)],weight);
 
       }
 
       double higgsmass(0), etahiggs(-999);
 
-      if( firsttwoassphot.at(0)>-1 && firsttwoassphot.at(1)>-1 ) { 
+      if( firstfourassphot.at(0)>-1 && firstfourassphot.at(1)>-1 ) { 
 
 	TLorentzVector phot1, phot2;	
-	phot1.SetPtEtaPhiE(ptPhot[firsttwoassphot.at(0)],etaPhot[firsttwoassphot.at(0)],phiPhot[firsttwoassphot.at(0)],ePhot[firsttwoassphot.at(0)]);
-	phot2.SetPtEtaPhiE(ptPhot[firsttwoassphot.at(1)],etaPhot[firsttwoassphot.at(1)],phiPhot[firsttwoassphot.at(1)],ePhot[firsttwoassphot.at(1)]);
+	phot1.SetPtEtaPhiE(ptPhot[firstfourassphot.at(0)],etaPhot[firstfourassphot.at(0)],phiPhot[firstfourassphot.at(0)],ePhot[firstfourassphot.at(0)]);
+	phot2.SetPtEtaPhiE(ptPhot[firstfourassphot.at(1)],etaPhot[firstfourassphot.at(1)],phiPhot[firstfourassphot.at(1)],ePhot[firstfourassphot.at(1)]);
 
 	TLorentzVector higgs = phot1 + phot2;
 
@@ -2119,19 +2156,19 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	ptphotassreco1.Fill(phot1.Pt(),weight);
 	ptphotassreco2.Fill(phot2.Pt(),weight);
-	etaphotassreco1.Fill(etaPhot[firsttwoassphot.at(0)],weight);
-	etaphotassreco2.Fill(etaPhot[firsttwoassphot.at(1)],weight);
+	etaphotassreco1.Fill(etaPhot[firstfourassphot.at(0)],weight);
+	etaphotassreco2.Fill(etaPhot[firstfourassphot.at(1)],weight);
 
       }	
 
       double higgsisomass(0), phihiggsiso(-999), etahiggsiso(-999), higgspt(-999.);
       double higgsisomassnewvtx(0), phihiggsisonewvtx(-999), etahiggsisonewvtx(-999), higgsptnewvtx(-999.);
 
-      if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 ) { 
+      if( firstfourisophot.at(0)>-1 && firstfourisophot.at(1)>-1 ) { 
 
 	TLorentzVector phot1, phot2, phot1new, phot2new;	
-	phot1.SetPtEtaPhiE(ptPhot[firsttwoisophot.at(0)],etaPhot[firsttwoisophot.at(0)],phiPhot[firsttwoisophot.at(0)],ePhot[firsttwoisophot.at(0)]);
-	phot2.SetPtEtaPhiE(ptPhot[firsttwoisophot.at(1)],etaPhot[firsttwoisophot.at(1)],phiPhot[firsttwoisophot.at(1)],ePhot[firsttwoisophot.at(1)]);
+	phot1.SetPtEtaPhiE(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)],ePhot[firstfourisophot.at(0)]);
+	phot2.SetPtEtaPhiE(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)],ePhot[firstfourisophot.at(1)]);
 
 	TLorentzVector higgs = phot1 + phot2;
 	thehiggs = phot1 + phot2;
@@ -2147,19 +2184,19 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	ptphotisoreco1.Fill(phot1.Pt(),weight);
 	ptphotisoreco2.Fill(phot2.Pt(),weight);
-	etaphotisoreco1.Fill(etaPhot[firsttwoisophot.at(0)],weight);
-	etaphotisoreco2.Fill(etaPhot[firsttwoisophot.at(1)],weight);
+	etaphotisoreco1.Fill(etaPhot[firstfourisophot.at(0)],weight);
+	etaphotisoreco2.Fill(etaPhot[firstfourisophot.at(1)],weight);
 
 	// recalculate photon kin with best vtx
-	double xnew1 = xscPhot[firsttwoisophot.at(0)] - vx[vrankPhotonPairs[0]];
-	double ynew1 = yscPhot[firsttwoisophot.at(0)] - vy[vrankPhotonPairs[0]];
-	double znew1 = zscPhot[firsttwoisophot.at(0)] - vz[vrankPhotonPairs[0]];
-	double xnew2 = xscPhot[firsttwoisophot.at(1)] - vx[vrankPhotonPairs[0]];
-	double ynew2 = yscPhot[firsttwoisophot.at(1)] - vy[vrankPhotonPairs[0]];
-	double znew2 = zscPhot[firsttwoisophot.at(1)] - vz[vrankPhotonPairs[0]];
+	double xnew1 = xscPhot[firstfourisophot.at(0)] - vx[vrankPhotonPairs[0]];
+	double ynew1 = yscPhot[firstfourisophot.at(0)] - vy[vrankPhotonPairs[0]];
+	double znew1 = zscPhot[firstfourisophot.at(0)] - vz[vrankPhotonPairs[0]];
+	double xnew2 = xscPhot[firstfourisophot.at(1)] - vx[vrankPhotonPairs[0]];
+	double ynew2 = yscPhot[firstfourisophot.at(1)] - vy[vrankPhotonPairs[0]];
+	double znew2 = zscPhot[firstfourisophot.at(1)] - vz[vrankPhotonPairs[0]];
 	
-	phot1new.SetX(xnew1); phot1new.SetY(ynew1); phot1new.SetZ(znew1);  phot1new.SetRho(ePhot[firsttwoisophot.at(0)]);  phot1new.SetE(ePhot[firsttwoisophot.at(0)]);
- 	phot2new.SetX(xnew2); phot2new.SetY(ynew2); phot2new.SetZ(znew2);  phot2new.SetRho(ePhot[firsttwoisophot.at(1)]);  phot2new.SetE(ePhot[firsttwoisophot.at(1)]);
+	phot1new.SetX(xnew1); phot1new.SetY(ynew1); phot1new.SetZ(znew1);  phot1new.SetRho(ePhot[firstfourisophot.at(0)]);  phot1new.SetE(ePhot[firstfourisophot.at(0)]);
+ 	phot2new.SetX(xnew2); phot2new.SetY(ynew2); phot2new.SetZ(znew2);  phot2new.SetRho(ePhot[firstfourisophot.at(1)]);  phot2new.SetE(ePhot[firstfourisophot.at(1)]);
 
 	TLorentzVector higgsnew = phot1new + phot2new;
 	thehiggsnewvtx = phot1new + phot2new;
@@ -2171,21 +2208,21 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
       }	
 
-      if( firsttwohiggsassphot.at(0)>-1 && firsttwohiggsassphot.at(1)>-1 ) { 
+      if( firstfourhiggsassphot.at(0)>-1 && firstfourhiggsassphot.at(1)>-1 ) { 
 
-	if( firsttwonohiggsjet.at(0) > -1) {
-	  ptjethiggsassreco1.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(0)],weight);
-	  etajethiggsassreco1.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)],weight);
+	if( firstfournohiggsjet.at(0) > -1) {
+	  ptjethiggsassreco1.Fill(ptCorrJet_pfakt5[firstfournohiggsjet.at(0)],weight);
+	  etajethiggsassreco1.Fill(etaJet_pfakt5[firstfournohiggsjet.at(0)],weight);
 	}
-	if( firsttwonohiggsjet.at(1) > -1) {
-	  ptjethiggsassreco2.Fill(ptCorrJet_pfakt5[firsttwonohiggsjet.at(1)],weight);
-	  etajethiggsassreco2.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(1)],weight);
+	if( firstfournohiggsjet.at(1) > -1) {
+	  ptjethiggsassreco2.Fill(ptCorrJet_pfakt5[firstfournohiggsjet.at(1)],weight);
+	  etajethiggsassreco2.Fill(etaJet_pfakt5[firstfournohiggsjet.at(1)],weight);
 	}
-	if( firsttwonohiggsjet.at(0) > -1 && firsttwonohiggsjet.at(1) > -1) {
-	  deltaetajethiggsassreco.Fill(etaJet_pfakt5[firsttwonohiggsjet.at(0)]-etaJet_pfakt5[firsttwonohiggsjet.at(1)]);
-	  double aveeta = (etaJet_pfakt5[firsttwonohiggsjet.at(0)]+etaJet_pfakt5[firsttwonohiggsjet.at(1)])/2;
-	  double zeppen1 = etaJet_pfakt5[firsttwonohiggsjet.at(0)] - aveeta;
-	  double zeppen2 = etaJet_pfakt5[firsttwonohiggsjet.at(1)] - aveeta;
+	if( firstfournohiggsjet.at(0) > -1 && firstfournohiggsjet.at(1) > -1) {
+	  deltaetajethiggsassreco.Fill(etaJet_pfakt5[firstfournohiggsjet.at(0)]-etaJet_pfakt5[firstfournohiggsjet.at(1)]);
+	  double aveeta = (etaJet_pfakt5[firstfournohiggsjet.at(0)]+etaJet_pfakt5[firstfournohiggsjet.at(1)])/2;
+	  double zeppen1 = etaJet_pfakt5[firstfournohiggsjet.at(0)] - aveeta;
+	  double zeppen2 = etaJet_pfakt5[firstfournohiggsjet.at(1)] - aveeta;
 	  zeppenjethiggsassreco1.Fill(zeppen1,weight);
 	  zeppenjethiggsassreco2.Fill(zeppen2,weight);	
 	}
@@ -2194,41 +2231,41 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
    
       double twojetsmass(0), etatwojets(-999), phitwojets(-999);
 
-      if( firsttwoassphot.at(0)>-1 && firsttwoassphot.at(1)>-1 ) { 
+      if( firstfourassphot.at(0)>-1 && firstfourassphot.at(1)>-1 ) { 
 
-	if( firsttwonoassjet.at(0) > -1) {
-	  ptjetassreco1.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(0)],weight);
-	  etajetassreco1.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)],weight);
+	if( firstfournoassjet.at(0) > -1) {
+	  ptjetassreco1.Fill(ptCorrJet_pfakt5[firstfournoassjet.at(0)],weight);
+	  etajetassreco1.Fill(etaJet_pfakt5[firstfournoassjet.at(0)],weight);
 	}
-	if( firsttwonoassjet.at(1) > -1) {
-	  ptjetassreco2.Fill(ptCorrJet_pfakt5[firsttwonoassjet.at(1)],weight);
-	  etajetassreco2.Fill(etaJet_pfakt5[firsttwonoassjet.at(1)]),weight;
+	if( firstfournoassjet.at(1) > -1) {
+	  ptjetassreco2.Fill(ptCorrJet_pfakt5[firstfournoassjet.at(1)],weight);
+	  etajetassreco2.Fill(etaJet_pfakt5[firstfournoassjet.at(1)]),weight;
 	}
-	if( firsttwonoassjet.at(0) > -1 && firsttwonoassjet.at(1) > -1) {
+	if( firstfournoassjet.at(0) > -1 && firstfournoassjet.at(1) > -1) {
 	  TLorentzVector jet1, jet2;	
-	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoassjet.at(0)],etaJet_pfakt5[firsttwonoassjet.at(0)],phiJet_pfakt5[firsttwonoassjet.at(0)],eJet_pfakt5[firsttwonoassjet.at(0)]/ptJet_pfakt5[firsttwonoassjet.at(0)]*ptCorrJet_pfakt5[firsttwonoassjet.at(0)]);
-	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoassjet.at(1)],etaJet_pfakt5[firsttwonoassjet.at(1)],phiJet_pfakt5[firsttwonoassjet.at(1)],eJet_pfakt5[firsttwonoassjet.at(1)]/ptJet_pfakt5[firsttwonoassjet.at(1)]*ptCorrJet_pfakt5[firsttwonoassjet.at(1)]);
+	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firstfournoassjet.at(0)],etaJet_pfakt5[firstfournoassjet.at(0)],phiJet_pfakt5[firstfournoassjet.at(0)],eJet_pfakt5[firstfournoassjet.at(0)]/ptJet_pfakt5[firstfournoassjet.at(0)]*ptCorrJet_pfakt5[firstfournoassjet.at(0)]);
+	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firstfournoassjet.at(1)],etaJet_pfakt5[firstfournoassjet.at(1)],phiJet_pfakt5[firstfournoassjet.at(1)],eJet_pfakt5[firstfournoassjet.at(1)]/ptJet_pfakt5[firstfournoassjet.at(1)]*ptCorrJet_pfakt5[firstfournoassjet.at(1)]);
 	  
 	  TLorentzVector sum = jet1 + jet2;
 	  
 	  twojetsmass = sum.M();
 	  etatwojets = sum.Eta();
 	 
-	  deltaetajetassreco.Fill(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)],weight);
-	  double aveeta = (etaJet_pfakt5[firsttwonoassjet.at(0)]+etaJet_pfakt5[firsttwonoassjet.at(1)])/2;
-	  double zeppen1 = etaJet_pfakt5[firsttwonoassjet.at(0)] - aveeta;
-	  double zeppen2 = etaJet_pfakt5[firsttwonoassjet.at(1)] - aveeta;
+	  deltaetajetassreco.Fill(etaJet_pfakt5[firstfournoassjet.at(0)]-etaJet_pfakt5[firstfournoassjet.at(1)],weight);
+	  double aveeta = (etaJet_pfakt5[firstfournoassjet.at(0)]+etaJet_pfakt5[firstfournoassjet.at(1)])/2;
+	  double zeppen1 = etaJet_pfakt5[firstfournoassjet.at(0)] - aveeta;
+	  double zeppen2 = etaJet_pfakt5[firstfournoassjet.at(1)] - aveeta;
 	  zeppenjetassreco1.Fill(zeppen1,weight);
 	  zeppenjetassreco2.Fill(zeppen2,weight);	
 	}
 
-	if(  ptCorrJet_pfakt5[firsttwonoassjet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoassjet.at(1)] > ptjet2cut 
-	    && ptPhot[firsttwoassphot.at(0)] > ptphot1cut && ptPhot[firsttwoassphot.at(1)] > ptphot2cut ){
+	if(  ptCorrJet_pfakt5[firstfournoassjet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firstfournoassjet.at(1)] > ptjet2cut 
+	    && ptPhot[firstfourassphot.at(0)] > ptphot1cut && ptPhot[firstfourassphot.at(1)] > ptphot2cut ){
 
-	  if(TMath::Abs(etaJet_pfakt5[firsttwonoassjet.at(0)]-etaJet_pfakt5[firsttwonoassjet.at(1)])>deltaetacut){
+	  if(TMath::Abs(etaJet_pfakt5[firstfournoassjet.at(0)]-etaJet_pfakt5[firstfournoassjet.at(1)])>deltaetacut){
 	    higgsmasscutreco.Fill(higgsmass,weight);
-	    if(isophot.at(firsttwoassphot.at(0)) && isophot.at(firsttwoassphot.at(1)))  higgsmassisorecocheck.Fill(higgsisomass,weight);	    
-	    double aveeta = (etaJet_pfakt5[firsttwonoassjet.at(0)]+etaJet_pfakt5[firsttwonoassjet.at(1)])/2;
+	    if(isophot.at(firstfourassphot.at(0)) && isophot.at(firstfourassphot.at(1)))  higgsmassisorecocheck.Fill(higgsisomass,weight);	    
+	    double aveeta = (etaJet_pfakt5[firstfournoassjet.at(0)]+etaJet_pfakt5[firstfournoassjet.at(1)])/2;
 	    double zeppen = etahiggs - aveeta;
 	    zeppenhiggsassreco.Fill(zeppen,weight);
 	    if(TMath::Abs(zeppen)<zeppencut) {
@@ -2245,23 +2282,23 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
       double twojetsmassiso(0), etatwojetsiso(-999), phitwojetsiso(-999);
    
-      if( firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 
-	  && ptPhot[firsttwoisophot.at(0)]>20 && ptPhot[firsttwoisophot.at(1)]>20
+      if( firstfourisophot.at(0)>-1 && firstfourisophot.at(1)>-1 
+	  && ptPhot[firstfourisophot.at(0)]>20 && ptPhot[firstfourisophot.at(1)]>20
 	  ) { 
 	
-	if( firsttwonoisojet.at(0) > -1) {
-	  ptjetisoreco1.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],weight);
-	  etajetisoreco1.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)],weight);
+	if( firstfournoisojet.at(0) > -1) {
+	  ptjetisoreco1.Fill(ptCorrJet_pfakt5[firstfournoisojet.at(0)],weight);
+	  etajetisoreco1.Fill(etaJet_pfakt5[firstfournoisojet.at(0)],weight);
 	}
-	if( firsttwonoisojet.at(1) > -1) {
-	  ptjetisoreco2.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(1)],weight);
-	  etajetisoreco2.Fill(etaJet_pfakt5[firsttwonoisojet.at(1)],weight);
+	if( firstfournoisojet.at(1) > -1) {
+	  ptjetisoreco2.Fill(ptCorrJet_pfakt5[firstfournoisojet.at(1)],weight);
+	  etajetisoreco2.Fill(etaJet_pfakt5[firstfournoisojet.at(1)],weight);
 	}
-	if( firsttwonoisojet.at(0) > -1 && firsttwonoisojet.at(1) > -1) {
+	if( firstfournoisojet.at(0) > -1 && firstfournoisojet.at(1) > -1) {
 	  
 	  TLorentzVector jet1, jet2;	
-	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],etaJet_pfakt5[firsttwonoisojet.at(0)],phiJet_pfakt5[firsttwonoisojet.at(0)],eJet_pfakt5[firsttwonoisojet.at(0)]/ptJet_pfakt5[firsttwonoisojet.at(0)]*ptCorrJet_pfakt5[firsttwonoisojet.at(0)]);
-	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firsttwonoisojet.at(1)],etaJet_pfakt5[firsttwonoisojet.at(1)],phiJet_pfakt5[firsttwonoisojet.at(1)],eJet_pfakt5[firsttwonoisojet.at(1)]/ptJet_pfakt5[firsttwonoisojet.at(1)]*ptCorrJet_pfakt5[firsttwonoisojet.at(1)]);
+	  jet1.SetPtEtaPhiE(ptCorrJet_pfakt5[firstfournoisojet.at(0)],etaJet_pfakt5[firstfournoisojet.at(0)],phiJet_pfakt5[firstfournoisojet.at(0)],eJet_pfakt5[firstfournoisojet.at(0)]/ptJet_pfakt5[firstfournoisojet.at(0)]*ptCorrJet_pfakt5[firstfournoisojet.at(0)]);
+	  jet2.SetPtEtaPhiE(ptCorrJet_pfakt5[firstfournoisojet.at(1)],etaJet_pfakt5[firstfournoisojet.at(1)],phiJet_pfakt5[firstfournoisojet.at(1)],eJet_pfakt5[firstfournoisojet.at(1)]/ptJet_pfakt5[firstfournoisojet.at(1)]*ptCorrJet_pfakt5[firstfournoisojet.at(1)]);
 	  
 	  TLorentzVector sum = jet1 + jet2;
 	  thejet1 = jet1;
@@ -2272,24 +2309,24 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  phitwojetsiso = sum.Phi();
 	  
 	  if(jetsyst_) 
-	    JECunc.Fill(ptCorrJet_pfakt5[firsttwonoisojet.at(0)],jetsyst_->getJESUncertainty(etaJet_pfakt5[firsttwonoisojet.at(0)],ptCorrJet_pfakt5[firsttwonoisojet.at(0)]));
+	    JECunc.Fill(ptCorrJet_pfakt5[firstfournoisojet.at(0)],jetsyst_->getJESUncertainty(etaJet_pfakt5[firstfournoisojet.at(0)],ptCorrJet_pfakt5[firstfournoisojet.at(0)]));
 
 	  int assjj(-999);
 	  for(int j=0; j<nJetGen_akt5; j++){	
-	    double DR = sqrt(delta_eta(etaJet_pfakt5[firsttwonoisojet.at(0)],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[firsttwonoisojet.at(0)],etaJetGen_akt5[j]) + 
-			     delta_phi(phiJet_pfakt5[firsttwonoisojet.at(0)],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[firsttwonoisojet.at(0)],phiJetGen_akt5[j]) ) ;
-	    if(DR < .1 && (TMath::Abs(ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < 0.5)) assjj = j; 
+	    double DR = sqrt(delta_eta(etaJet_pfakt5[firstfournoisojet.at(0)],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[firstfournoisojet.at(0)],etaJetGen_akt5[j]) + 
+			     delta_phi(phiJet_pfakt5[firstfournoisojet.at(0)],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[firstfournoisojet.at(0)],phiJetGen_akt5[j]) ) ;
+	    if(DR < .1 && (TMath::Abs(ptCorrJet_pfakt5[firstfournoisojet.at(0)]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < 0.5)) assjj = j; 
 	  }
-	  if(assjj>-1 && ptCorrJet_pfakt5[firsttwonoisojet.at(0)]>30. && ptCorrJet_pfakt5[firsttwonoisojet.at(1)]>20 ){
-	    if(TMath::Abs(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)])>2.5)
-	      JECresovbf.Fill((ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
+	  if(assjj>-1 && ptCorrJet_pfakt5[firstfournoisojet.at(0)]>30. && ptCorrJet_pfakt5[firstfournoisojet.at(1)]>20 ){
+	    if(TMath::Abs(etaJet_pfakt5[firstfournoisojet.at(0)]-etaJet_pfakt5[firstfournoisojet.at(1)])>2.5)
+	      JECresovbf.Fill((ptCorrJet_pfakt5[firstfournoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
 	    else
-	      JECresovh.Fill((ptCorrJet_pfakt5[firsttwonoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
+	      JECresovh.Fill((ptCorrJet_pfakt5[firstfournoisojet.at(0)]-ptJetGen_akt5[assjj])/ptJetGen_akt5[assjj]);
 	  }
-	  deltaetajetisoreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)],weight);
-	  double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
-	  double zeppen1 = etaJet_pfakt5[firsttwonoisojet.at(0)] - aveeta;
-	  double zeppen2 = etaJet_pfakt5[firsttwonoisojet.at(1)] - aveeta;
+	  deltaetajetisoreco.Fill(etaJet_pfakt5[firstfournoisojet.at(0)]-etaJet_pfakt5[firstfournoisojet.at(1)],weight);
+	  double aveeta = (etaJet_pfakt5[firstfournoisojet.at(0)]+etaJet_pfakt5[firstfournoisojet.at(1)])/2;
+	  double zeppen1 = etaJet_pfakt5[firstfournoisojet.at(0)] - aveeta;
+	  double zeppen2 = etaJet_pfakt5[firstfournoisojet.at(1)] - aveeta;
 	  zeppenjetisoreco1.Fill(zeppen1,weight);
 	  zeppenjetisoreco2.Fill(zeppen2,weight);	
 	}
@@ -2333,132 +2370,166 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	ptgg = higgspt;
 	massggnewvtx = higgsisomassnewvtx;
 	ptggnewvtx = higgsptnewvtx;
-        ptphot1 = ptPhot[firsttwoisophot.at(0)]; 
-        ptphot2 = ptPhot[firsttwoisophot.at(1)];   
-	timephot1 = timePhot[firsttwoisophot.at(0)];
-	timephot2 = timePhot[firsttwoisophot.at(1)];  
-	etaphot1 = etaPhot[firsttwoisophot.at(0)];
-	etaphot2 = etaPhot[firsttwoisophot.at(1)];  
-	phiphot1 = phiPhot[firsttwoisophot.at(0)];
-	phiphot2 = phiPhot[firsttwoisophot.at(1)];  
-	etascphot1 = etascPhot[firsttwoisophot.at(0)];
-	etascphot2 = etascPhot[firsttwoisophot.at(1)];  
-	phiscphot1 = phiscPhot[firsttwoisophot.at(0)];
-	phiscphot2 = phiscPhot[firsttwoisophot.at(1)];  
-	E1phot1 = E1Phot[firsttwoisophot.at(0)];
-	E1phot2 = E1Phot[firsttwoisophot.at(1)];  
-	E9phot1 = E9Phot[firsttwoisophot.at(0)];
-	E9phot2 = E9Phot[firsttwoisophot.at(1)];  
-        r9phot1 = E9Phot[firsttwoisophot.at(0)]/escRawPhot[firsttwoisophot.at(0)];
-        r9phot2 = E9Phot[firsttwoisophot.at(1)]/escRawPhot[firsttwoisophot.at(1)];
-	isemEGphot1 = isophotemeg.at(firsttwoisophot.at(0));;
-	isemEGphot2 = isophotemeg.at(firsttwoisophot.at(1));;
-	idloosenewEGphot1 = isophotlooseeg.at(firsttwoisophot.at(0));
-	idloosenewEGphot2 = isophotlooseeg.at(firsttwoisophot.at(1));
-	idloose006newEGphot1 = isophotloose006eg.at(firsttwoisophot.at(0));
-	idloose006newEGphot2 = isophotloose006eg.at(firsttwoisophot.at(1));
-	idtightnewEGphot1 = isophottighteg.at(firsttwoisophot.at(0));
-	idtightnewEGphot2 = isophottighteg.at(firsttwoisophot.at(1));
-	idhggtightnewEGphot1 = isophothggtight.at(firsttwoisophot.at(0));
-	idhggtightnewEGphot2 = isophothggtight.at(firsttwoisophot.at(1));
-	idloosenewpuEGphot1 = isophotloosepueg.at(firsttwoisophot.at(0));
-	idloosenewpuEGphot2 = isophotloosepueg.at(firsttwoisophot.at(1));
-	idtightnewpuEGphot1 = isophottightpueg.at(firsttwoisophot.at(0));
-	idtightnewpuEGphot2 = isophottightpueg.at(firsttwoisophot.at(1));
-	idhggtightnewpuEGphot1 = isophothggtightpu.at(firsttwoisophot.at(0));
-	idhggtightnewpuEGphot2 = isophothggtightpu.at(firsttwoisophot.at(1));
-	idcicphot1 = isocic.at(firsttwoisophot.at(0));
-	idcicphot2 = isocic.at(firsttwoisophot.at(1));
-	idcicnoelvetophot1 = isocicnoelveto.at(firsttwoisophot.at(0));
-	idcicnoelvetophot2 = isocicnoelveto.at(firsttwoisophot.at(1));
-	idlooseEGphot1 = pid_isLoose[firsttwoisophot.at(0)];
-	idlooseEGphot2 = pid_isLoose[firsttwoisophot.at(1)];
-	idtightEGphot1 = pid_isTight[firsttwoisophot.at(0)];
-	idtightEGphot2 = pid_isTight[firsttwoisophot.at(1)];
-	idloosephot1 = isophotloose.at(firsttwoisophot.at(0));
-	idloosephot2 = isophotloose.at(firsttwoisophot.at(1));
-	idmediumphot1 = isophotmedium.at(firsttwoisophot.at(0));
-	idmediumphot2 = isophotmedium.at(firsttwoisophot.at(1));
-        idloosecsphot1 = isophotloosecs.at(firsttwoisophot.at(0)); 
-        idloosecsphot2 = isophotloosecs.at(firsttwoisophot.at(1)); 
-        idmediumcsphot1 = isophotmediumcs.at(firsttwoisophot.at(0)); 
-        idmediumcsphot2 = isophotmediumcs.at(firsttwoisophot.at(1)); 
-	idelephot1 = isophotele.at(firsttwoisophot.at(0));
-	idelephot2 = isophotele.at(firsttwoisophot.at(1));
+        ptphot1 = ptPhot[firstfourisophot.at(0)]; 
+        ptphot2 = ptPhot[firstfourisophot.at(1)];   
+	timephot1 = timePhot[firstfourisophot.at(0)];
+	timephot2 = timePhot[firstfourisophot.at(1)];  
+	etaphot1 = etaPhot[firstfourisophot.at(0)];
+	etaphot2 = etaPhot[firstfourisophot.at(1)];  
+	phiphot1 = phiPhot[firstfourisophot.at(0)];
+	phiphot2 = phiPhot[firstfourisophot.at(1)];  
+	etascphot1 = etascPhot[firstfourisophot.at(0)];
+	etascphot2 = etascPhot[firstfourisophot.at(1)];  
+	phiscphot1 = phiscPhot[firstfourisophot.at(0)];
+	phiscphot2 = phiscPhot[firstfourisophot.at(1)];  
+	E1phot1 = E1Phot[firstfourisophot.at(0)];
+	E1phot2 = E1Phot[firstfourisophot.at(1)];  
+	E9phot1 = E9Phot[firstfourisophot.at(0)];
+	E9phot2 = E9Phot[firstfourisophot.at(1)];  
+        r9phot1 = E9Phot[firstfourisophot.at(0)]/escRawPhot[firstfourisophot.at(0)];
+        r9phot2 = E9Phot[firstfourisophot.at(1)]/escRawPhot[firstfourisophot.at(1)];
+	isemEGphot1 = isophotemeg.at(firstfourisophot.at(0));;
+	isemEGphot2 = isophotemeg.at(firstfourisophot.at(1));;
+	idloosenewEGphot1 = isophotlooseeg.at(firstfourisophot.at(0));
+	idloosenewEGphot2 = isophotlooseeg.at(firstfourisophot.at(1));
+	idloose006newEGphot1 = isophotloose006eg.at(firstfourisophot.at(0));
+	idloose006newEGphot2 = isophotloose006eg.at(firstfourisophot.at(1));
+	idtightnewEGphot1 = isophottighteg.at(firstfourisophot.at(0));
+	idtightnewEGphot2 = isophottighteg.at(firstfourisophot.at(1));
+	idhggtightnewEGphot1 = isophothggtight.at(firstfourisophot.at(0));
+	idhggtightnewEGphot2 = isophothggtight.at(firstfourisophot.at(1));
+	idloosenewpuEGphot1 = isophotloosepueg.at(firstfourisophot.at(0));
+	idloosenewpuEGphot2 = isophotloosepueg.at(firstfourisophot.at(1));
+	idtightnewpuEGphot1 = isophottightpueg.at(firstfourisophot.at(0));
+	idtightnewpuEGphot2 = isophottightpueg.at(firstfourisophot.at(1));
+	idhggtightnewpuEGphot1 = isophothggtightpu.at(firstfourisophot.at(0));
+	idhggtightnewpuEGphot2 = isophothggtightpu.at(firstfourisophot.at(1));
+	idcicphot1 = isocic.at(firstfourisophot.at(0));
+	idcicphot2 = isocic.at(firstfourisophot.at(1));
+	idcicnoelvetophot1 = isocicnoelveto.at(firstfourisophot.at(0));
+	idcicnoelvetophot2 = isocicnoelveto.at(firstfourisophot.at(1));
+	idlooseEGphot1 = pid_isLoose[firstfourisophot.at(0)];
+	idlooseEGphot2 = pid_isLoose[firstfourisophot.at(1)];
+	idtightEGphot1 = pid_isTight[firstfourisophot.at(0)];
+	idtightEGphot2 = pid_isTight[firstfourisophot.at(1)];
+	idloosephot1 = isophotloose.at(firstfourisophot.at(0));
+	idloosephot2 = isophotloose.at(firstfourisophot.at(1));
+	idmediumphot1 = isophotmedium.at(firstfourisophot.at(0));
+	idmediumphot2 = isophotmedium.at(firstfourisophot.at(1));
+        idloosecsphot1 = isophotloosecs.at(firstfourisophot.at(0)); 
+        idloosecsphot2 = isophotloosecs.at(firstfourisophot.at(1)); 
+        idmediumcsphot1 = isophotmediumcs.at(firstfourisophot.at(0)); 
+        idmediumcsphot2 = isophotmediumcs.at(firstfourisophot.at(1)); 
+	idelephot1 = isophotele.at(firstfourisophot.at(0));
+	idelephot2 = isophotele.at(firstfourisophot.at(1));
 
-        pid_haspixelseedphot1 =  hasPixelSeedPhot[firsttwoisophot.at(0)]; 
-        pid_haspixelseedphot2 =  hasPixelSeedPhot[firsttwoisophot.at(1)]; 
-        pid_isEMphot1 =  pid_isEM[firsttwoisophot.at(0)];
-        pid_isEMphot2 =  pid_isEM[firsttwoisophot.at(1)];
-        pid_jurECALphot1 =  pid_jurECAL[firsttwoisophot.at(0)];
-        pid_jurECALphot2 =  pid_jurECAL[firsttwoisophot.at(1)];
-        pid_twrHCALphot1 =  pid_twrHCAL[firsttwoisophot.at(0)];
-        pid_twrHCALphot2 =  pid_twrHCAL[firsttwoisophot.at(1)];
-        pid_HoverEphot1 =  pid_HoverE[firsttwoisophot.at(0)];
-        pid_HoverEphot2 =  pid_HoverE[firsttwoisophot.at(1)];
-        pid_hlwTrackphot1 =  pid_hlwTrack[firsttwoisophot.at(0)];
-        pid_hlwTrackphot2 =  pid_hlwTrack[firsttwoisophot.at(1)];
-        pid_etawidphot1 =  pid_etawid[firsttwoisophot.at(0)];
-        pid_etawidphot2 =  pid_etawid[firsttwoisophot.at(1)];
-        pid_hlwTrackNoDzphot1 =  pid_hlwTrackNoDz[firsttwoisophot.at(0)];
-        pid_hlwTrackNoDzphot2 =  pid_hlwTrackNoDz[firsttwoisophot.at(1)];
-        pid_hasMatchedConvphot1 =  hasMatchedConvPhot[firsttwoisophot.at(0)]; 
-        pid_hasMatchedConvphot2 =  hasMatchedConvPhot[firsttwoisophot.at(1)]; 
-        pid_hasMatchedPromptElephot1 =  hasMatchedPromptElePhot[firsttwoisophot.at(0)]; 
-        pid_hasMatchedPromptElephot2 =  hasMatchedPromptElePhot[firsttwoisophot.at(1)]; 
+        pid_haspixelseedphot1 =  hasPixelSeedPhot[firstfourisophot.at(0)]; 
+        pid_haspixelseedphot2 =  hasPixelSeedPhot[firstfourisophot.at(1)]; 
+        pid_isEMphot1 =  pid_isEM[firstfourisophot.at(0)];
+        pid_isEMphot2 =  pid_isEM[firstfourisophot.at(1)];
+        pid_jurECALphot1 =  pid_jurECAL[firstfourisophot.at(0)];
+        pid_jurECALphot2 =  pid_jurECAL[firstfourisophot.at(1)];
+        pid_twrHCALphot1 =  pid_twrHCAL[firstfourisophot.at(0)];
+        pid_twrHCALphot2 =  pid_twrHCAL[firstfourisophot.at(1)];
+        pid_HoverEphot1 =  pid_HoverE[firstfourisophot.at(0)];
+        pid_HoverEphot2 =  pid_HoverE[firstfourisophot.at(1)];
+        pid_hlwTrackphot1 =  pid_hlwTrack[firstfourisophot.at(0)];
+        pid_hlwTrackphot2 =  pid_hlwTrack[firstfourisophot.at(1)];
+        pid_etawidphot1 =  pid_etawid[firstfourisophot.at(0)];
+        pid_etawidphot2 =  pid_etawid[firstfourisophot.at(1)];
+        pid_hlwTrackNoDzphot1 =  pid_hlwTrackNoDz[firstfourisophot.at(0)];
+        pid_hlwTrackNoDzphot2 =  pid_hlwTrackNoDz[firstfourisophot.at(1)];
+        pid_hasMatchedConvphot1 =  hasMatchedConvPhot[firstfourisophot.at(0)]; 
+        pid_hasMatchedConvphot2 =  hasMatchedConvPhot[firstfourisophot.at(1)]; 
+        pid_hasMatchedPromptElephot1 =  hasMatchedPromptElePhot[firstfourisophot.at(0)]; 
+        pid_hasMatchedPromptElephot2 =  hasMatchedPromptElePhot[firstfourisophot.at(1)]; 
 	
-	pid_sminphot1 =  sMinMinPhot[firsttwoisophot.at(0)];
-	pid_sminphot2 =  sMinMinPhot[firsttwoisophot.at(1)];
-	pid_smajphot1 =  sMajMajPhot[firsttwoisophot.at(0)];
-	pid_smajphot2 =  sMajMajPhot[firsttwoisophot.at(1)];
-	pid_ntrkphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)];
-	pid_ntrkphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)];
-	pid_ptisophot1 =  ptiso035Phot[firsttwoisophot.at(0)];
-	pid_ptisophot2 =  ptiso035Phot[firsttwoisophot.at(1)];
-	pid_ecalisophot1 =  ecaliso04Phot[firsttwoisophot.at(0)];
-	pid_ecalisophot2 =  ecaliso04Phot[firsttwoisophot.at(1)];
-	pid_hcalisophot1 =  hcalovecal04Phot[firsttwoisophot.at(0)];
-	pid_hcalisophot2 =  hcalovecal04Phot[firsttwoisophot.at(1)];
-	if(!ieleassocPhot[firsttwoisophot.at(0)]){
-	  pid_ntrkcsphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)]; 
-	  pid_ptisocsphot1 =  ptiso035Phot[firsttwoisophot.at(0)]; 
+	pid_sminphot1 =  sMinMinPhot[firstfourisophot.at(0)];
+	pid_sminphot2 =  sMinMinPhot[firstfourisophot.at(1)];
+	pid_smajphot1 =  sMajMajPhot[firstfourisophot.at(0)];
+	pid_smajphot2 =  sMajMajPhot[firstfourisophot.at(1)];
+	pid_ntrkphot1 =  ntrkiso035Phot[firstfourisophot.at(0)];
+	pid_ntrkphot2 =  ntrkiso035Phot[firstfourisophot.at(1)];
+	pid_ptisophot1 =  ptiso035Phot[firstfourisophot.at(0)];
+	pid_ptisophot2 =  ptiso035Phot[firstfourisophot.at(1)];
+	pid_ecalisophot1 =  ecaliso04Phot[firstfourisophot.at(0)];
+	pid_ecalisophot2 =  ecaliso04Phot[firstfourisophot.at(1)];
+	pid_hcalisophot1 =  hcalovecal04Phot[firstfourisophot.at(0)];
+	pid_hcalisophot2 =  hcalovecal04Phot[firstfourisophot.at(1)];
+	if(!ieleassocPhot[firstfourisophot.at(0)]){
+	  pid_ntrkcsphot1 =  ntrkiso035Phot[firstfourisophot.at(0)]; 
+	  pid_ptisocsphot1 =  ptiso035Phot[firstfourisophot.at(0)]; 
 	}else{
-          pid_ntrkcsphot1 =  ntrkiso035Phot[firsttwoisophot.at(0)]-1;  
-          pid_ptisocsphot1 =  ptiso035Phot[firsttwoisophot.at(0)]-pid_ptElePhot[ieleassocPhot[firsttwoisophot.at(0)]];  
+          pid_ntrkcsphot1 =  ntrkiso035Phot[firstfourisophot.at(0)]-1;  
+          pid_ptisocsphot1 =  ptiso035Phot[firstfourisophot.at(0)]-pid_ptElePhot[ieleassocPhot[firstfourisophot.at(0)]];  
 	}
-        if(!ieleassocPhot[firsttwoisophot.at(1)]){ 
-          pid_ntrkcsphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)];  
-          pid_ptisocsphot2 =  ptiso035Phot[firsttwoisophot.at(1)];  
+        if(!ieleassocPhot[firstfourisophot.at(1)]){ 
+          pid_ntrkcsphot2 =  ntrkiso035Phot[firstfourisophot.at(1)];  
+          pid_ptisocsphot2 =  ptiso035Phot[firstfourisophot.at(1)];  
         }else{ 
-          pid_ntrkcsphot2 =  ntrkiso035Phot[firsttwoisophot.at(1)]-1;   
-          pid_ptisocsphot2 =  ptiso035Phot[firsttwoisophot.at(1)]-pid_ptElePhot[ieleassocPhot[firsttwoisophot.at(1)]];   
+          pid_ntrkcsphot2 =  ntrkiso035Phot[firstfourisophot.at(1)]-1;   
+          pid_ptisocsphot2 =  ptiso035Phot[firstfourisophot.at(1)]-pid_ptElePhot[ieleassocPhot[firstfourisophot.at(1)]];   
         } 
 
-	if( firsttwonoisojet.at(0) > -1) {
-	  ptjet1 = ptJet_pfakt5[firsttwonoisojet.at(0)];
-	  ptcorrjet1 = ptCorrJet_pfakt5[firsttwonoisojet.at(0)];	  
-	  etajet1 = etaJet_pfakt5[firsttwonoisojet.at(0)];
-	  phijet1 = phiJet_pfakt5[firsttwonoisojet.at(0)];
+	if( firstfournoisojet.at(0) > -1) {
+	  ptjet1 = ptJet_pfakt5[firstfournoisojet.at(0)];
+	  ptcorrjet1 = ptCorrJet_pfakt5[firstfournoisojet.at(0)];	  
+	  etajet1 = etaJet_pfakt5[firstfournoisojet.at(0)];
+	  phijet1 = phiJet_pfakt5[firstfournoisojet.at(0)];
+	  betajet1 = beta_pfakt5[firstfournoisojet.at(0)][vrankPhotonPairs[0]];
+	  betastarjet1 = betaStar_pfakt5[firstfournoisojet.at(0)][vrankPhotonPairs[0]];
+	  assjet1 = assoJet(firstfournoisojet.at(0));
 	}else{
 	  ptjet1 = -999;
 	  ptcorrjet1 = -999;
 	  etajet1 = -999;	 
 	  phijet1 = -999;	 
+	  betajet1 = -999.;
+	  betastarjet1 = -999.;
+	  assjet1 = -999.;
 	}
-	if( firsttwonoisojet.at(1) > -1) {
-	  ptjet2 = ptJet_pfakt5[firsttwonoisojet.at(1)];
-	  ptcorrjet2 = ptCorrJet_pfakt5[firsttwonoisojet.at(1)];	  
-	  etajet2 = etaJet_pfakt5[firsttwonoisojet.at(1)];
-	  phijet2 = phiJet_pfakt5[firsttwonoisojet.at(1)];
+	if( firstfournoisojet.at(1) > -1) {
+	  ptjet2 = ptJet_pfakt5[firstfournoisojet.at(1)];
+	  ptcorrjet2 = ptCorrJet_pfakt5[firstfournoisojet.at(1)];	  
+	  etajet2 = etaJet_pfakt5[firstfournoisojet.at(1)];
+	  phijet2 = phiJet_pfakt5[firstfournoisojet.at(1)];
+	  betajet2 = beta_pfakt5[firstfournoisojet.at(1)][vrankPhotonPairs[0]];
+	  betastarjet2 = betaStar_pfakt5[firstfournoisojet.at(1)][vrankPhotonPairs[0]];
+	  assjet2 = assoJet(firstfournoisojet.at(1));
 	}else{
 	  ptjet2 = -999;
 	  ptcorrjet2 = -999;
 	  etajet2 = -999;	 
 	  phijet2 = -999;	 
+	  betajet2 = -999.;
+	  betastarjet2 = -999.;
+	  assjet2 = -999.;
 	}
-	if( firsttwonoisojet.at(0) > -1 && firsttwonoisojet.at(1) > -1) {
-	  deltaeta = etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)];
-	  double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
+	if( firstfournoisojet.at(2) > -1) {
+	  ptjet3 = ptJet_pfakt5[firstfournoisojet.at(2)];
+	  ptcorrjet3 = ptCorrJet_pfakt5[firstfournoisojet.at(2)];	  
+	  etajet3 = etaJet_pfakt5[firstfournoisojet.at(2)];
+	  phijet3 = phiJet_pfakt5[firstfournoisojet.at(2)];
+	}else{
+	  ptjet3 = -999;
+	  ptcorrjet3 = -999;
+	  etajet3 = -999;	 
+	  phijet3 = -999;	 
+	}
+	if( firstfournoisojet.at(3) > -1) {
+	  ptjet4 = ptJet_pfakt5[firstfournoisojet.at(3)];
+	  ptcorrjet4 = ptCorrJet_pfakt5[firstfournoisojet.at(3)];	  
+	  etajet4 = etaJet_pfakt5[firstfournoisojet.at(3)];
+	  phijet4 = phiJet_pfakt5[firstfournoisojet.at(3)];
+	}else{
+	  ptjet4 = -999;
+	  ptcorrjet4 = -999;
+	  etajet4 = -999;	 
+	  phijet4 = -999;	 
+	}
+	if( firstfournoisojet.at(0) > -1 && firstfournoisojet.at(1) > -1) {
+	  deltaeta = etaJet_pfakt5[firstfournoisojet.at(0)]-etaJet_pfakt5[firstfournoisojet.at(1)];
+	  double aveeta = (etaJet_pfakt5[firstfournoisojet.at(0)]+etaJet_pfakt5[firstfournoisojet.at(1)])/2;
 	  zeppenjet = etahiggsiso - aveeta;
 	  invmassjet = twojetsmassiso;
 	  deltaphi = delta_phi(phihiggsiso,phitwojetsiso);
@@ -2470,7 +2541,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  deltaphi = -999.;
 	  deltaphinewvtx = -999.;
 	}	  
+
 	met = epfMet;
+	phimet = phipfMet;
 	nvtx = nvertex;
 
         runRN = run;
@@ -2485,21 +2558,21 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
 	ana_tree->Fill();
 
-	if(ptPhot[firsttwoisophot.at(0)] > ptphot1cut && ptPhot[firsttwoisophot.at(1)] > ptphot2cut){
+	if(ptPhot[firstfourisophot.at(0)] > ptphot1cut && ptPhot[firstfourisophot.at(1)] > ptphot2cut){
 	  higgsmassjustisocutreco.Fill(higgsisomass,weight);
 	  higgsmassjustisocutrecofull.Fill(higgsisomass,weight);
 	}
 
-	if( ptCorrJet_pfakt5[firsttwonoisojet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firsttwonoisojet.at(1)] > ptjet2cut 
-	    && ptPhot[firsttwoisophot.at(0)] > ptphot1cut && ptPhot[firsttwoisophot.at(1)] > ptphot2cut){
+	if( ptCorrJet_pfakt5[firstfournoisojet.at(0)] > ptjet1cut && ptCorrJet_pfakt5[firstfournoisojet.at(1)] > ptjet2cut 
+	    && ptPhot[firstfourisophot.at(0)] > ptphot1cut && ptPhot[firstfourisophot.at(1)] > ptphot2cut){
 	  higgsmassisojetptcutreco.Fill(higgsisomass,weight);
 	  higgsmassisojetptcutrecofull.Fill(higgsisomass,weight);
-	  deltaetajetreco.Fill(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)],weight);
+	  deltaetajetreco.Fill(etaJet_pfakt5[firstfournoisojet.at(0)]-etaJet_pfakt5[firstfournoisojet.at(1)],weight);
 	  //	  double zeppen = higgsreco_pt - aveeta;
-	  if(TMath::Abs(etaJet_pfakt5[firsttwonoisojet.at(0)]-etaJet_pfakt5[firsttwonoisojet.at(1)])>deltaetacut){
+	  if(TMath::Abs(etaJet_pfakt5[firstfournoisojet.at(0)]-etaJet_pfakt5[firstfournoisojet.at(1)])>deltaetacut){
 	    higgsmassisocutreco.Fill(higgsisomass,weight);
 	    higgsmassisocutrecofull.Fill(higgsisomass,weight);
-	    double aveeta = (etaJet_pfakt5[firsttwonoisojet.at(0)]+etaJet_pfakt5[firsttwonoisojet.at(1)])/2;
+	    double aveeta = (etaJet_pfakt5[firstfournoisojet.at(0)]+etaJet_pfakt5[firstfournoisojet.at(1)])/2;
 	    double zeppen = etahiggsiso - aveeta;
 	    zeppenhiggsisoreco.Fill(zeppen,weight);
 	    if(TMath::Abs(zeppen)<zeppencut) {
@@ -2644,6 +2717,7 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
   std::cout << "PT REWEIGHTING:: Using file " << ptWeightFile << std::endl;
 
   std::vector<std::string> tokens=tokenize_str(ptWeightFile,"Kfactors_");
+  //std::vector<std::string> tokens=tokenize_str(ptWeightFile,"weight_ptH_");
   TString massValue;
 
 //    for (int i=0;i<tokens.size();++i)
@@ -2655,13 +2729,15 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
       if (newTokens.size()>0)
 	massValue=TString(newTokens[0]);
     }
-
+  
   std::cout << "PT REWEIGHTING:: mass values used " << massValue << std::endl;
 
   TFile *f_pt  = new TFile(ptWeightFile.c_str(),"READ");
   f_pt->cd();
   
   ptweights_ =(TH1D*)  f_pt->Get("kfactors/kfact_mh"+massValue+"_ren"+massValue+"_fac"+massValue);
+  //f_pt->Get("powheg_weight/weight_hqt_fehipro_fit_120")->Draw();
+  //ptweights_ =(TH1D*)  f_pt->Get("powheg_weight/weight_hqt_fehipro_fit_120");
 
   if (!ptweights_ )
     {
@@ -2670,14 +2746,29 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
     }
 }
 
+bool RedNtpTree::assoJet(int i){
+
+  bool ass(0);
+  for(int j=0; j<nJetGen_akt5; j++){	
+    double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) + 
+		     delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
+    if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = 1; 
+  }
+
+  return ass;
+
+}
+
 void RedNtpTree::correctJets(int shift, float smear)
 {
 
   for(int i=0; i<nJet_pfakt5; i++){
     
-    ptCorrJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
-    ptJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
-    eJet_pfakt5[i] *= 1 + shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],eJet_pfakt5[i]);
+    double increase_endcap = 1;
+    if(TMath::Abs(etaJet_pfakt5[i])>2.5 && TMath::Abs(etaJet_pfakt5[i])<3.4) increase_endcap = 2;  
+    ptCorrJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
+    ptJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
+    eJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],eJet_pfakt5[i]);
     
     if(smear){
       

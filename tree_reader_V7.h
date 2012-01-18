@@ -50,6 +50,7 @@ public :
    Int_t           event;
    Float_t         rhoPF;
    Float_t         rhoCalo;
+   Float_t         rhoAllJets;
    Int_t           nMC;
    Int_t           pdgIdMC[150];   //[nMC]
    Int_t           statusMC[150];   //[nMC]
@@ -78,6 +79,9 @@ public :
    Float_t         xscPhot  [40];   //[nPhot]
    Float_t         yscPhot  [40];   //[nPhot]
    Float_t         zscPhot  [40];   //[nPhot]
+   Float_t         xcaloPhot  [40];   //[nPhot]
+   Float_t         ycaloPhot  [40];   //[nPhot]
+   Float_t         zcaloPhot  [40];   //[nPhot]
    Float_t         eseedPhot  [40];   //[nPhot]
    Float_t         etaPhot[40];   //[nPhot]
    Float_t         phiPhot[40];   //[nPhot]
@@ -89,6 +93,21 @@ public :
    Bool_t          isEBPhot[40];
    Bool_t          isEEPhot[40];
    Bool_t          isEBEEGapPhot[40];
+   Int_t           ntracksConvPhot[40];   //[nPhot]
+   Bool_t          isValidVtxConvPhot[40];   //[nPhot]
+   Float_t         pairInvmassConvPhot[40];   //[nPhot]
+   Float_t         pairCotThetaSeperationConvPhot[40];   //[nPhot]
+   Float_t         pairmomentumXConvPhot[40];   //[nPhot]
+   Float_t         pairmomentumYConvPhot[40];   //[nPhot]
+   Float_t         pairmomentumZConvPhot[40];   //[nPhot]
+   Float_t         chi2ConvPhot[40];   //[nPhot]
+   Float_t         nDofConvPhot[40];   //[nPhot]
+   Float_t         eOverPConvPhot[40];   //[nPhot]
+   Float_t         convVxConvPhot[40];   //[nPhot]
+   Float_t         convVyConvPhot[40];   //[nPhot]
+   Float_t         convVzConvPhot[40];   //[nPhot]
+   Float_t         distOfMinimumApproachConvPhot[40];   //[nPhot]
+   Float_t         dPhiTracksAtVtxConvPhot[40];   //[nPhot]
    Bool_t          pid_isEM[40];   //[nPhot]
    Bool_t          pid_isLoose[40];   //[nPhot]
    Bool_t          pid_isTight[40];   //[nPhot]
@@ -120,6 +139,7 @@ public :
    Float_t         sEtaPhiPhot[40];   //[nPhot]
    Float_t         sPhiPhiPhot[40];   //[nPhot]
    Float_t         E1Phot[40];   //[nPhot]
+   Float_t         E2OverE9Phot[40];   //[nPhot]
    Float_t         E9Phot[40];   //[nPhot]
    Float_t         E25Phot[40];   //[nPhot]
    Int_t           ieleassocPhot[40];   //[nPhot]
@@ -165,6 +185,8 @@ public :
    Float_t         phiJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         ptDJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         rmsCandJet_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         beta_pfakt5[100][100];
+   Float_t         betaStar_pfakt5[100][100];
    Float_t         combinedSecondaryVertexBJetTags[200];   //[nJet_pfakt5]
    Float_t         combinedSecondaryVertexMVABJetTags[200];   //[nJet_pfakt5]
    Float_t         jetBProbabilityBJetTags[200];   //[nJet_pfakt5]
@@ -254,10 +276,41 @@ public :
    Float_t         etcMet  ;
    Float_t         phitcMet;
    Float_t         signiftcMet;
+   Float_t         sglobalPfMet;
+   Float_t         eglobalPfMet;
+   Float_t         phiglobalPfMet;
+   Float_t         signifglobalPfMet;
+   Float_t         scentralPfMet;
+   Float_t         ecentralPfMet;
+   Float_t         phicentralPfMet;
+   Float_t         signifcentralPfMet;
+   Float_t         eassocPfMet[100];   //[nvertex]
+   Float_t         phiassocPfMet[100];   //[nvertex]
+   Float_t         signifassocPfMet[100];   //[nvertex]
+   Float_t         eassocOtherVtxPfMet[100];   //[nvertex]
+   Float_t         phiassocOtherVtxPfMet[100];   //[nvertex]
+   Float_t         signifassocOtherVtxPfMet[100];   //[nvertex]
+   Float_t         etrkPfMet[100];   //[nvertex]
+   Float_t         phitrkPfMet[100];   //[nvertex]
+   Float_t         signiftrkPfMet[100];   //[nvertex]
+   Float_t         ecleanPfMet[100];   //[nvertex]
+   Float_t         phicleanPfMet[100];   //[nvertex]
+   Float_t         signifcleanPfMet[100];   //[nvertex]
+   Float_t         ecleanedSaclayPfMet[100];   //[nvertex]
+   Float_t         phicleanedSaclayPfMet[100];   //[nvertex]
+   Float_t         signifcleanedSaclayPfMet[100];   //[nvertex]
+   Float_t         eminTypeICleanSaclayPfMet[100];   //[nvertex]
+   Float_t         phiminTypeICleanSaclayPfMet[100];   //[nvertex]
+   Float_t         signifminTypeICleanSaclayPfMet[100];   //[nvertex]
+   Float_t         globalPfSums[100];
    Float_t         spfMet  ;
    Float_t         epfMet  ;
    Float_t         phipfMet;
    Float_t         signifpfMet;
+   Float_t         spfMetType1;
+   Float_t         epfMetType1;
+   Float_t         phipfMetType1;
+   Float_t         signifpfMetType1;
    Float_t         sMetGen  ;
    Float_t         eMetGen  ;
    Float_t         phiMetGen;
@@ -277,16 +330,116 @@ public :
    Float_t         vndof[100];   //[nvertex]
    Float_t         vlogsumpt2[100];   //[nvertex]
    Int_t           nPreselPhotonPairs;
-   Float_t         indexPreselPhot1[200];   //[nPreselPhotonPairs]
-   Float_t         indexPreselPhot2[200];   //[nPreselPhotonPairs]
-   Int_t           vrankPhotonPairs[200];   //[nPreselPhotonPairs]
-   Float_t         vptbalPhotonPairs[200];   //[nPreselPhotonPairs]
-   Float_t         vptasymPhotonPairs[200];   //[nPreselPhotonPairs]
+   Float_t         indexPreselPhot1[100];   //[nPreselPhotonPairs]
+   Float_t         indexPreselPhot2[100];   //[nPreselPhotonPairs]
+   Int_t           vrankPhotonPairs[100];   //[nPreselPhotonPairs]
+   Float_t         vevtMvaPhotonPairs[100];   //[nPreselPhotonPairs]
+   Float_t         vevtProbPhotonPairs[100];   //[nPreselPhotonPairs]
+   Float_t         vptbalPhotonPairs[100];   //[nPreselPhotonPairs]
+   Float_t         vptasymPhotonPairs[100];   //[nPreselPhotonPairs]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;
    vector<bool>    *HLTResults;
-   
+   Int_t           nEle;   
+   Float_t         electron_px[40];   //[nEle]
+   Float_t         electron_py[40];   //[nEle]
+   Float_t         electron_pz[40];   //[nEle]
+   Float_t         electron_vx[40];   //[nEle]
+   Float_t         electron_vy[40];   //[nEle]
+   Float_t         electron_vz[40];   //[nEle]
+   Float_t         electron_pt[40];   //[nEle]
+   Float_t         electron_eta[40];   //[nEle]
+   Float_t         electron_phi[40];   //[nEle]
+   Float_t         electron_energy[40];   //[nEle]
+   Float_t         electron_charge[40];   //[nEle]
+   Float_t         electron_fBrem[40];   //[nEle]
+   Float_t         electron_dist[40];   //[nEle]
+   Float_t         electron_dcot[40];   //[nEle]
+   Int_t           electron_misHits[40];   //[nEle]
+   Int_t           electron_seedType[40];   //[nEle]
+   Float_t         electron_EoP[40];   //[nEle]
+   Float_t         electron_OneOverEMinusOneOverP[40];   //[nEle]
+   Float_t         electron_r9[40];   //[nEle]
+   Int_t           electron_nSubClusters[40];   //[nEle]
+   Float_t         electron_trkIso[40];   //[nEle]
+   Float_t         electron_ecalIso[40];   //[nEle]
+   Float_t         electron_hcalIso[40];   //[nEle]
+   Float_t         electron_trkIso03[40];   //[nEle]
+   Float_t         electron_ecalIso03[40];   //[nEle]
+   Float_t         electron_hcalIso03[40];   //[nEle]
+   Float_t         electron_SigmaIetaIeta[40];   //[nEle]
+   Float_t         electron_SigmaIphiIphi[40];   //[nEle]
+   Float_t         electron_dEtaIn[40];   //[nEle]
+   Float_t         electron_dPhiIn[40];   //[nEle]
+   Float_t         electron_HoE[40];   //[nEle]
+   Float_t         electron_pFlowMVA[40];   //[nEle]
+   Float_t         electron_sc_energy[40];   //[nEle]
+   Float_t         electron_sc_eta[40];   //[nEle]
+   Float_t         electron_sc_phi[40];   //[nEle]
+   Bool_t          isBeamHaloGlobalLoosePass;
+   Bool_t          isBeamHaloGlobalTightPass;
+   Bool_t          isBeamHaloHcalLoosePass;
+   Bool_t          isBeamHaloHcalTightPass;
+   Bool_t          isBeamHaloCSCLoosePass;
+   Bool_t          isBeamHaloCSCTightPass;
+   Bool_t          isBeamHaloEcalLoosePass;
+   Bool_t          isBeamHaloEcalTightPass;
+   Bool_t          isBeamHaloIDTightPass;
+   Bool_t          isBeamHaloIDLoosePass;
+   Bool_t          isSmellsLikeHalo_Tag;
+   Bool_t          isLooseHalo_Tag;
+   Bool_t          isTightHalo_Tag;
+   Bool_t          isExtremeTightHalo_Tag;
+   Int_t           nMuons;
+   Float_t         Muon_px[200];   //[nMuons]
+   Float_t         Muon_py[200];   //[nMuons]
+   Float_t         Muon_pz[200];   //[nMuons]
+   Float_t         Muon_vx[200];   //[nMuons]
+   Float_t         Muon_vy[200];   //[nMuons]
+   Float_t         Muon_vz[200];   //[nMuons]
+   Float_t         Muon_pt[200];   //[nMuons]
+   Float_t         Muon_eta[200];   //[nMuons]
+   Float_t         Muon_phi[200];   //[nMuons]
+   Float_t         Muon_energy[200];   //[nMuons]
+   Float_t         Muon_charge[200];   //[nMuons]
+   Bool_t          Muon_isGlobalMuon[200];   //[nMuons]
+   Bool_t          Muon_isTrackerMuon[200];   //[nMuons]
+   Bool_t          Muon_isStandAloneMuon[200];   //[nMuons]
+   Bool_t          Muon_InnerTrack_isNonnull[200];   //[nMuons]
+   Bool_t          Muon_OuterTrack_isNonnull[200];   //[nMuons]
+   Float_t         Muon_OuterPoint_x[200];   //[nMuons]
+   Float_t         Muon_OuterPoint_y[200];   //[nMuons]
+   Float_t         Muon_OuterPoint_z[200];   //[nMuons]
+   Float_t         Muon_InnerPoint_x[200];   //[nMuons]
+   Float_t         Muon_InnerPoint_y[200];   //[nMuons]
+   Float_t         Muon_InnerPoint_z[200];   //[nMuons]
+   Float_t         Muon_trackIso[200];   //[nMuons]
+   Float_t         Muon_ecalIso[200];   //[nMuons]
+   Float_t         Muon_hcalIso[200];   //[nMuons]
+   Float_t         Muon_relIso[200];   //[nMuons]
+   Int_t           Muon_normChi2[200];   //[nMuons]
+   Int_t           Muon_validHits[200];   //[nMuons]
+   Int_t           Muon_tkHits[200];   //[nMuons]
+   Int_t           Muon_pixHits[200];   //[nMuons]
+   Int_t           Muon_numberOfMatches[200];   //[nMuons]
+   Int_t           nCosmicMuons;
+   Float_t         CosmicMuon_px[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_py[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_pz[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_pt[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_eta[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_phi[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_energy[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_charge[200];   //[nCosmicMuons]
+   Bool_t          CosmicMuon_isGlobalMuon[200];   //[nCosmicMuons]
+   Bool_t          CosmicMuon_isTrackerMuon[200];   //[nCosmicMuons]
+   Bool_t          CosmicMuon_isStandAloneMuon[200];   //[nCosmicMuons]
+   Bool_t          CosmicMuon_InnerTrack_isNonnull[200];   //[nCosmicMuons]
+   Bool_t          CosmicMuon_OuterTrack_isNonnull[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_OuterPoint_x[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_OuterPoint_y[200];   //[nCosmicMuons]
+   Float_t         CosmicMuon_OuterPoint_z[200];   //[nCosmicMuons]
    Double_t        Xsec;
 
    // List of branches
@@ -309,6 +462,7 @@ public :
    TBranch        *b_event;   //!
    TBranch        *b_rhoPF;   //!
    TBranch        *b_rhoCalo;   //!
+   TBranch        *b_rhoAllJets;   //!
    TBranch        *b_nMC;   //!
    TBranch        *b_pdgIdMC;   //!
    TBranch        *b_statusMC;   //!
@@ -337,6 +491,9 @@ public :
    TBranch        *b_xscPhot  ;   //!
    TBranch        *b_yscPhot  ;   //!
    TBranch        *b_zscPhot  ;   //!
+   TBranch        *b_xcaloPhot  ;   //!
+   TBranch        *b_ycaloPhot  ;   //!
+   TBranch        *b_zcaloPhot  ;   //!
    TBranch        *b_eseedPhot  ;   //!
    TBranch        *b_etaPhot;   //!
    TBranch        *b_phiPhot;   //!
@@ -348,6 +505,21 @@ public :
    TBranch        *b_isEBPhot;   //!
    TBranch        *b_isEEPhot;   //!
    TBranch        *b_isEBEEGapPhot;   //!
+   TBranch        *b_ntracksConvPhot;   //!
+   TBranch        *b_isValidVtxConvPhot;   //!
+   TBranch        *b_pairInvmassConvPhot;   //!
+   TBranch        *b_pairCotThetaSeperationConvPhot;   //!
+   TBranch        *b_pairmomentumXConvPhot;   //!
+   TBranch        *b_pairmomentumYConvPhot;   //!
+   TBranch        *b_pairmomentumZConvPhot;   //!
+   TBranch        *b_chi2ConvPhot;   //!
+   TBranch        *b_nDofConvPhot;   //!
+   TBranch        *b_eOverPConvPhot;   //!
+   TBranch        *b_convVxConvPhot;   //!
+   TBranch        *b_convVyConvPhot;   //!
+   TBranch        *b_convVzConvPhot;   //!
+   TBranch        *b_distOfMinimumApproachConvPhot;   //!
+   TBranch        *b_dPhiTracksAtVtxConvPhot;   //!
    TBranch        *b_pid_isEM;   //!
    TBranch        *b_pid_isLoose;   //!
    TBranch        *b_pid_isTight;   //!
@@ -363,7 +535,6 @@ public :
    TBranch        *b_pid_hlwTrack03;   //!
    TBranch        *b_pid_hlwTrack03ForCiC;   //!
    TBranch        *b_pid_hlwTrack03NoDz;   //!
-   TBranch        *b_pid_deltaRToTrackPhot;   //!
    TBranch        *b_ptiso004Phot;   //!
    TBranch        *b_ntrkiso004Phot;   //!
    TBranch        *b_ptiso035Phot;   //!
@@ -379,9 +550,11 @@ public :
    TBranch        *b_sEtaPhiPhot;   //!
    TBranch        *b_sPhiPhiPhot;   //!
    TBranch        *b_E1Phot;   //!
+   TBranch        *b_E2OverE9Phot;   //!
    TBranch        *b_E9Phot;   //!
    TBranch        *b_E25Phot;   //!
    TBranch        *b_ieleassocPhot;   //!
+   TBranch        *b_pid_deltaRToTrackPhot;   //!
    TBranch        *b_nElePhot;   //!
    TBranch        *b_pid_jurECALElePhot ;   //!
    TBranch        *b_pid_twrHCALElePhot ;   //!
@@ -429,6 +602,8 @@ public :
    TBranch        *b_phiJet_pfakt5;   //!
    TBranch        *b_ptDJet_pfakt5;   //!
    TBranch        *b_rmsCandJet_pfakt5;   //!
+   TBranch        *b_beta_pfakt5;   //!
+   TBranch        *b_betaStar_pfakt5;   //!
    TBranch        *b_combinedSecondaryVertexBJetTags;   //!
    TBranch        *b_combinedSecondaryVertexMVABJetTags;   //!
    TBranch        *b_jetBProbabilityBJetTags;   //!
@@ -518,10 +693,41 @@ public :
    TBranch        *b_etcMet;   //!
    TBranch        *b_phitcMet;   //!
    TBranch        *b_signiftcMet;   //!
+   TBranch        *b_sglobalPfMet;   //!
+   TBranch        *b_eglobalPfMet;   //!
+   TBranch        *b_phiglobalPfMet;   //!
+   TBranch        *b_signifglobalPfMet;   //!
+   TBranch        *b_scentralPfMet;   //!
+   TBranch        *b_ecentralPfMet;   //!
+   TBranch        *b_phicentralPfMet;   //!
+   TBranch        *b_signifcentralPfMet;   //!
+   TBranch        *b_eassocPfMet;   //!
+   TBranch        *b_phiassocPfMet;   //!
+   TBranch        *b_signifassocPfMet;   //!
+   TBranch        *b_eassocOtherVtxPfMet;   //!
+   TBranch        *b_phiassocOtherVtxPfMet;   //!
+   TBranch        *b_signifassocOtherVtxPfMet;   //!
+   TBranch        *b_etrkPfMet;   //!
+   TBranch        *b_phitrkPfMet;   //!
+   TBranch        *b_signiftrkPfMet;   //!
+   TBranch        *b_ecleanPfMet;   //!
+   TBranch        *b_phicleanPfMet;   //!
+   TBranch        *b_signifcleanPfMet;   //!
+   TBranch        *b_ecleanedSaclayPfMet;   //!
+   TBranch        *b_phicleanedSaclayPfMet;   //!
+   TBranch        *b_signifcleanedSaclayPfMet;   //!
+   TBranch        *b_eminTypeICleanSaclayPfMet;   //!
+   TBranch        *b_phiminTypeICleanSaclayPfMet;   //!
+   TBranch        *b_signifminTypeICleanSaclayPfMet;   //!
+   TBranch        *b_globalPfSums;   //!
    TBranch        *b_spfMet;   //!
    TBranch        *b_epfMet;   //!
    TBranch        *b_phipfMet;   //!
    TBranch        *b_signifpfMet;   //!
+   TBranch        *b_spfMetType1;   //!
+   TBranch        *b_epfMetType1;   //!
+   TBranch        *b_phipfMetType1;   //!
+   TBranch        *b_signifpfMetType1;   //!
    TBranch        *b_sMetGen;   //!
    TBranch        *b_eMetGen;   //!
    TBranch        *b_phiMetGen;   //!
@@ -544,12 +750,113 @@ public :
    TBranch        *b_indexPreselPhot1;   //!
    TBranch        *b_indexPreselPhot2;   //!
    TBranch        *b_vrankPhotonPairs;   //!
+   TBranch        *b_vevtMvaPhotonPairs;   //!
+   TBranch        *b_vevtProbPhotonPairs;   //!
    TBranch        *b_vptbalPhotonPairs;   //!
    TBranch        *b_vptasymPhotonPairs;   //!
    TBranch        *b_nHLT;   //!
    TBranch        *b_hltNamesLen;   //!
    TBranch        *b_HLTNames;   //!
    TBranch        *b_HLTResults;   //!
+  TBranch        *b_nEle;   //!
+   TBranch        *b_electron_px;   //!
+   TBranch        *b_electron_py;   //!
+   TBranch        *b_electron_pz;   //!
+   TBranch        *b_electron_vx;   //!
+   TBranch        *b_electron_vy;   //!
+   TBranch        *b_electron_vz;   //!
+   TBranch        *b_electron_pt;   //!
+   TBranch        *b_electron_eta;   //!
+   TBranch        *b_electron_phi;   //!
+   TBranch        *b_electron_energy;   //!
+   TBranch        *b_electron_charge;   //!
+   TBranch        *b_electron_fBrem;   //!
+   TBranch        *b_electron_dist;   //!
+   TBranch        *b_electron_dcot;   //!
+   TBranch        *b_electron_misHits;   //!
+   TBranch        *b_electron_seedType;   //!
+   TBranch        *b_electron_EoP;   //!
+   TBranch        *b_electron_OneOverEMinusOneOverP;   //!
+   TBranch        *b_electron_r9;   //!
+   TBranch        *b_electron_nSubClusters;   //!
+   TBranch        *b_electron_trkIso;   //!
+   TBranch        *b_electron_ecalIso;   //!
+   TBranch        *b_electron_hcalIso;   //!
+   TBranch        *b_electron_trkIso03;   //!
+   TBranch        *b_electron_ecalIso03;   //!
+   TBranch        *b_electron_hcalIso03;   //!
+   TBranch        *b_electron_SigmaIetaIeta;   //!
+   TBranch        *b_electron_SigmaIphiIphi;   //!
+   TBranch        *b_electron_dEtaIn;   //!
+   TBranch        *b_electron_dPhiIn;   //!
+   TBranch        *b_electron_HoE;   //!
+   TBranch        *b_electron_pFlowMVA;   //!
+   TBranch        *b_electron_sc_energy;   //!
+   TBranch        *b_electron_sc_eta;   //!
+   TBranch        *b_electron_sc_phi;   //!
+   TBranch        *b_isBeamHaloGlobalLoosePass;   //!
+   TBranch        *b_isBeamHaloGloablTightPass;   //!
+   TBranch        *b_isBeamHaloHcalLoosePass;   //!
+   TBranch        *b_isBeamHaloHcalTightPass;   //!
+   TBranch        *b_isBeamHaloCSCLoosePass;   //!
+   TBranch        *b_isBeamHaloCSCTightPass;   //!
+   TBranch        *b_isBeamHaloEcalLoosePass;   //!
+   TBranch        *b_isBeamHaloEcalTightPass;   //!
+   TBranch        *b_isBeamHaloIDTightPass;   //!
+   TBranch        *b_isBeamHaloIDLoosePass;   //!
+   TBranch        *b_isSmellsLikeHalo_Tag;   //!
+   TBranch        *b_isLooseHalo_Tag;   //!
+   TBranch        *b_isTightHalo_Tag;   //!
+   TBranch        *b_isExtremeTightHalo_Tag;   //!
+   TBranch        *b_nMuons;   //!
+   TBranch        *b_Muon_px;   //!
+   TBranch        *b_Muon_py;   //!
+   TBranch        *b_Muon_pz;   //!
+   TBranch        *b_Muon_vx;   //!
+   TBranch        *b_Muon_vy;   //!
+   TBranch        *b_Muon_vz;   //!
+   TBranch        *b_Muon_pt;   //!
+   TBranch        *b_Muon_eta;   //!
+   TBranch        *b_Muon_phi;   //!
+   TBranch        *b_Muon_energy;   //!
+   TBranch        *b_Muon_charge;   //!
+   TBranch        *b_Muon_isGlobalMuon;   //!
+   TBranch        *b_Muon_isTrackerMuon;   //!
+   TBranch        *b_Muon_isStandAloneMuon;   //!
+   TBranch        *b_Muon_InnerTrack_isNonnull;   //!
+   TBranch        *b_Muon_OuterTrack_isNonnull;   //!
+   TBranch        *b_Muon_OuterPoint_x;   //!
+   TBranch        *b_Muon_OuterPoint_y;   //!
+   TBranch        *b_Muon_OuterPoint_z;   //!
+   TBranch        *b_Muon_InnerPoint_x;   //!
+   TBranch        *b_Muon_InnerPoint_y;   //!
+   TBranch        *b_Muon_InnerPoint_z;   //!
+   TBranch        *b_Muon_trackIso;   //!
+   TBranch        *b_Muon_ecalIso;   //!
+   TBranch        *b_Muon_hcalIso;   //!
+   TBranch        *b_Muon_relIso;   //!
+   TBranch        *b_Muon_normChi2;   //!
+   TBranch        *b_Muon_validHits;   //!
+   TBranch        *b_Muon_tkHits;   //!
+   TBranch        *b_Muon_pixHits;   //!
+   TBranch        *b_Muon_numberOfMatches;   //!
+   TBranch        *b_nCosmicMuons;   //!
+   TBranch        *b_CosmicMuon_px;   //!
+   TBranch        *b_CosmicMuon_py;   //!
+   TBranch        *b_CosmicMuon_pz;   //!
+   TBranch        *b_CosmicMuon_pt;   //!
+   TBranch        *b_CosmicMuon_eta;   //!
+   TBranch        *b_CosmicMuon_phi;   //!
+   TBranch        *b_CosmicMuon_energy;   //!
+   TBranch        *b_CosmicMuon_charge;   //!
+   TBranch        *b_CosmicMuon_isGlobalMuon;   //!
+   TBranch        *b_CosmicMuon_isTrackerMuon;   //!
+   TBranch        *b_CosmicMuon_isStandAloneMuon;   //!
+   TBranch        *b_CosmicMuon_InnerTrack_isNonnull;   //!
+   TBranch        *b_CosmicMuon_OuterTrack_isNonnull;   //!
+   TBranch        *b_CosmicMuon_OuterPoint_x;   //!
+   TBranch        *b_CosmicMuon_OuterPoint_y;   //!
+   TBranch        *b_CosmicMuon_OuterPoint_z;   //!
    TBranch        *b_Xsec;   //!
 
    tree_reader_V7(TTree *tree=0);

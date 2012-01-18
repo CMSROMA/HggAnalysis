@@ -309,7 +309,7 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Setcuts(double pt1=50, double pt2=30, double pthiggsmin=-100, double pthiggsmax=-100, double ptj1=20, double ptj2=15, double deltae=2.5, double zep=2.5, double mjj=300, double deltap=2.6, int eb = 1, int r9 = 1, bool thirdcat = 0);
-   virtual TFile*   File(char* writeRoot);
+   virtual TFile*   File(char* writeRoot, bool cs=0);
    virtual bool     cutIDEG(double ptPhot, double etaPhot, double pid_hlwTrackNoDz, double pid_jurECAL, double pid_twrHCAL, double pid_HoverE, double pid_etawid, int scaletrk=100, int scaleecal=100, int scalehcal=100, int scalehove=100);
    virtual bool     exclSel();   
    virtual void     setCic(int cic=5);

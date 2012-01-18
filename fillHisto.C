@@ -10,7 +10,7 @@
 
 #define MAX_PU_REWEIGHT 22
 
-TFile * fillHisto::File(char* writeRoot)
+TFile * fillHisto::File(char* writeRoot, bool cs)
 {
 //   In a ROOT session, you can do:
 //      Root > .L fillHisto.C
@@ -42,7 +42,6 @@ TFile * fillHisto::File(char* writeRoot)
    
    ofstream outfile;
 
-   int cs = 0;
    if(cs) getweights();
 
    TFile* fOut=0;
@@ -59,6 +58,7 @@ TFile * fillHisto::File(char* writeRoot)
    TH1D * mass_zep[20];
    TH1D * mass_mjj[20];
    TH1D * mass_deltap[20];
+   TH1D * mass_met[20];
 
    char namehisto[100], titlehisto[100]; 
 
@@ -82,6 +82,8 @@ TFile * fillHisto::File(char* writeRoot)
      mass_mjj[i] = new TH1D(namehisto,titlehisto,80,100,180);
      sprintf(namehisto,"%s%i","deltap_",i);sprintf(titlehisto,"%s%i","variation of deltap ",i);
      mass_deltap[i] = new TH1D(namehisto,titlehisto,80,100,180);
+     sprintf(namehisto,"%s%i","met_",i);sprintf(titlehisto,"%s%i","variation of met ",i);
+     mass_met[i] = new TH1D(namehisto,titlehisto,80,100,180);
      
    }
   
@@ -111,8 +113,11 @@ TFile * fillHisto::File(char* writeRoot)
       if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
 	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
 
-      bool ptgg_cut_default(0), phot1_cut_default(0), phot2_cut_default(0), jet1_cut_default(0), jet2_cut_default(0), deltae_cut_default(0), zep_cut_default(0), mjj_cut_default(0), deltap_cut_default(0);
-      bool ptgg_cut[20], phot1_cut[20], phot2_cut[20], jet1_cut[20], jet2_cut[20], deltae_cut[20], zep_cut[20], mjj_cut[20], deltap_cut[20];
+      bool ptgg_cut_default(1), phot1_cut_default(1), phot2_cut_default(1), jet1_cut_default(1), jet2_cut_default(1), deltae_cut_default(1), zep_cut_default(1), mjj_cut_default(1), deltap_cut_default(1), met_cut_default(1);
+      bool ptgg_cut[20], phot1_cut[20], phot2_cut[20], jet1_cut[20], jet2_cut[20], deltae_cut[20], zep_cut[20], mjj_cut[20], deltap_cut[20], met_cut[20];
+      for (int i=0; i<20; i++){
+	ptgg_cut[i]=1; phot1_cut[i]=1; phot2_cut[i]=1; jet1_cut[i]=1; jet2_cut[i]=1; deltae_cut[i]=1; zep_cut[i]=1; mjj_cut[i]=1; deltap_cut[i]=1, met_cut[i]=1;
+      }
 
       ptgg_cut_default = ptgg>pthiggsmincut;//pt higgs
 
@@ -143,13 +148,22 @@ TFile * fillHisto::File(char* writeRoot)
 	}
       }
 
-      if(deltaphicut!=0)//deltaphi
-	deltap_cut_default = TMath::Abs(deltaphi)>deltaphicut; 
+      deltap_cut_default = TMath::Abs(deltaphi)>deltaphicut; 
+
+      //      met_cut_default = met>70;
+      met_cut_default = 1;
       
       // CUT VARIATION
-      double ptgg_range(80), phot1_range(40), phot2_range(10), jet1_range(40), jet2_range(20), deltae_range(2), zep_range(2), mjj_range(400), deltap_range(0.8);
-      double ptgg_central(40), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(30), deltae_central(3.5), zep_central(2.5), mjj_central(350), deltap_central(2.6);
-      double pthiggsmincut_variation(0), ptphot1cut_variation(0), ptphot2cut_variation(0), ptjet1cut_variation(0), ptjet2cut_variation(0), deltaetacut_variation(0), zeppencut_variation(0), invmassjetcut_variation(0), deltaphicut_variation(0) ;
+      // VBF
+      // double ptgg_range(80), phot1_range(60), phot2_range(30), jet1_range(40), jet2_range(20), deltae_range(2), zep_range(2), mjj_range(800), deltap_range(1.0),  met_range(140);
+      // double ptgg_central(40), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(30), deltae_central(3.5), zep_central(2.5), mjj_central(450), deltap_central(2.6), met_central(70);
+      // WZH
+     double ptgg_range(100), phot1_range(60), phot2_range(30), jet1_range(40), jet2_range(30), deltae_range(2), zep_range(3), mjj_range(60), deltap_range(1.0),  met_range(140);
+     double ptgg_central(50), phot1_central(65), phot2_central(35), jet1_central(40), jet2_central(35), deltae_central(-2.5), zep_central(2.), mjj_central(-35), deltap_central(2.6), met_central(70);
+      double pthiggsmincut_variation(1), ptphot1cut_variation(1), ptphot2cut_variation(1), ptjet1cut_variation(1), ptjet2cut_variation(1), deltaetacut_variation(1), zeppencut_variation(1), invmassjetcut_variation(1), deltaphicut_variation(1), metcut_variation(1);
+
+      bool extramjjcut;
+      //      extramjjcut = invmassjet<500;
 
       for(int i=0; i<20; i++){
 	pthiggsmincut_variation = ptgg_central + ptgg_range * ( i - 10. ) / 20.;
@@ -167,33 +181,34 @@ TFile * fillHisto::File(char* writeRoot)
 	ptjet2cut_variation = jet2_central + jet2_range * ( i - 10. ) / 20.;
 	jet2_cut[i] = (ptcorrjet2>ptjet2cut_variation && TMath::Abs(etajet1)<4.7);//pt second jet
 	
-	if(deltaetacut!=0){//delteta
+	deltaetacut_variation = deltae_central + deltae_range * ( i - 10. ) / 20.;
+	if(deltaetacut_variation!=0){//delteta
 	  if(deltaetacut>0){
-	    deltaetacut_variation = deltae_central + deltae_range * ( i - 10. ) / 20.;
 	    deltae_cut[i] = TMath::Abs(deltaeta)>deltaetacut_variation;  // vbf selection 
 	  }else{
-	    deltaetacut_variation = deltae_central + deltae_range * ( i - 10. ) / 20.;
 	    deltae_cut[i] = TMath::Abs(deltaeta)<-deltaetacut_variation;  // WZH selection
 	  }
 	}
 	
-	if(zeppencut!=0) //zeppenfeld
-	 zeppencut_variation = zep_central + zep_range * ( i - 10. ) / 20.;
+	zeppencut_variation = zep_central + zep_range * ( i - 10. ) / 20.;
+	if(zeppencut_variation!=0){ //zeppenfeld
 	  zep_cut[i] = TMath::Abs(zeppenjet)<zeppencut_variation;       
-	
-	if(invmassjetcut!=0){//inv mass of jets
+	}
+
+	invmassjetcut_variation = mjj_central + mjj_range * ( i - 10. ) / 20.;
+	if(invmassjetcut_variation!=0){//inv mass of jets
 	  if(invmassjetcut>0){
-	 invmassjetcut_variation = mjj_central + mjj_range * ( i - 10. ) / 20.;
 	    mjj_cut[i] = invmassjet>invmassjetcut_variation; // vbf selection 
 	  }else{
-	 invmassjetcut_variation = mjj_central + mjj_range * ( i - 10. ) / 20.;
 	    mjj_cut[i] = TMath::Abs(invmassjet-85)<-invmassjetcut_variation; // WZH selection
 	  }
 	}
 
-	if(deltaphicut!=0)//deltaphi
-	 deltaphicut_variation = deltap_central + deltap_range * ( i - 10. ) / 20.;
-	  deltap_cut[i] = TMath::Abs(deltaphi)>deltaphicut_variation; 
+	deltaphicut_variation = deltap_central + deltap_range * ( i - 10. ) / 20.;
+	deltap_cut[i] = TMath::Abs(deltaphi)>deltaphicut_variation; 
+
+	metcut_variation = met_central + met_range * ( i - 10. ) / 20.;
+	met_cut[i] = met>metcut_variation; 
 
       }
 
@@ -271,7 +286,7 @@ TFile * fillHisto::File(char* writeRoot)
       if((TMath::Abs(etascphot1)<1.4442&&TMath::Abs(etascphot2)<1.4442)) ebeb = 1;	
 
        // applying all analysis cuts
-      if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) {
+      if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) {
 
 	tempplot->Fill(variable, weight);
 	
@@ -291,23 +306,26 @@ TFile * fillHisto::File(char* writeRoot)
       }
       for(int ii=0; ii<20; ii++){
 
-	if( ptgg_cut[ii] && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_ptgg[ii]->Fill(variable, weight);
+	//       	if(!extramjjcut) continue;
+	if( ptgg_cut[ii] && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_ptgg[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut[ii] && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_phot1[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut[ii] && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_phot1[ii]->Fill(variable, weight);
 	
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut[ii] && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_phot2[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut[ii] && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_phot2[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut[ii] && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_jet1[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut[ii] && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_jet1[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut[ii] && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_jet2[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut[ii] && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_jet2[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut[ii] && zep_cut_default && mjj_cut_default && deltap_cut_default) mass_deltae[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut[ii] && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut_default) mass_deltae[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut[ii] && mjj_cut_default && deltap_cut_default) mass_zep[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut[ii] && mjj_cut_default && deltap_cut_default && met_cut_default) mass_zep[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut[ii] && deltap_cut_default) mass_mjj[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut[ii] && deltap_cut_default && met_cut_default) mass_mjj[ii]->Fill(variable, weight);
 
-	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut[ii]) mass_deltap[ii]->Fill(variable, weight);
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut[ii] && met_cut_default) mass_deltap[ii]->Fill(variable, weight);
+
+	if( ptgg_cut_default && phot1_cut_default && phot2_cut_default && jet1_cut_default && jet2_cut_default && deltae_cut_default && zep_cut_default && mjj_cut_default && deltap_cut_default && met_cut[ii]) mass_met[ii]->Fill(variable, weight);
 
       }
 

@@ -64,13 +64,14 @@ private:
    float EquivLumi;
    bool doPDFweight;
 
-   virtual vector<int>    firsttwo(Float_t * vec, vector<bool> *asso);
+   virtual vector<int>    firstfour(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0,  bool pu = 0);
    bool cutIDele(int i, photonidelecuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDpresel(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDcs(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0); 
    bool mcID(int i); 
+   bool assoJet(int i);
    void correctPhotons(bool energyRegression);
    void correctJets(int scale, float smear);
 
@@ -169,12 +170,26 @@ private:
    Float_t E9phot2;
    Float_t ptjet1;
    Float_t ptjet2;
+   Float_t ptjet3;
+   Float_t ptjet4;
    Float_t ptcorrjet1;
    Float_t ptcorrjet2;
+   Float_t ptcorrjet3;
+   Float_t ptcorrjet4;
    Float_t etajet1;
    Float_t etajet2;
+   Float_t etajet3;
+   Float_t etajet4;
    Float_t phijet1;
    Float_t phijet2;
+   Float_t phijet3;
+   Float_t phijet4;
+   Float_t betajet1;
+   Float_t betajet2;
+   Float_t betastarjet1;
+   Float_t betastarjet2;
+   Int_t assjet1;
+   Int_t assjet2;
    Float_t deltaeta;
    Float_t zeppenjet;
    Float_t deltaphi;
@@ -184,6 +199,7 @@ private:
    Float_t invmass2g2j;
    Float_t nvtx;
    Float_t met;
+   Float_t phimet;
    Int_t npu;
    Int_t isemEGphot1;
    Int_t isemEGphot2;
