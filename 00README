@@ -14,8 +14,8 @@ transferXrootd.csh <castor dir> <xroot dir> <parallelism suggested value 5> (has
 Prepare list
 =============
 (has to be done for data and MC)
- ./runPrepareList.csh list.42xv3_data /castor/cern.ch/cms/store/user/meridian/data/42xv3 cern 1
- ./runPrepareList.csh list.42xv3 /castor/cern.ch/cms/store/user/meridian/MC/42xv3 cern 1
+ ./runPrepareList.csh list.42xv4_data /castor/cern.ch/cms/store/user/meridian/data/42xv4 cern 1
+ ./runPrepareList.csh list.42xv4 /castor/cern.ch/cms/store/user/meridian/MC/42xv4 cern 1
 
 if you want to create xrootd lists use xrootd as location (after having transferred all files to xrootd)
 
