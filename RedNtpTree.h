@@ -20,6 +20,10 @@
 using std::string;
 using std::vector;
 
+
+#define NGENJETS 200
+#define NMC 150
+
 class RedNtpTree : public tree_reader_V7 {
 
 public:
@@ -63,6 +67,10 @@ private:
    float xsection;
    float EquivLumi;
    bool doPDFweight;
+
+
+   void SetAllRecoVarToMinus999();
+   void SetAllGenVarToMinus999();
 
    virtual vector<int>    firstfour(Float_t * vec, vector<bool> *asso);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
@@ -198,8 +206,108 @@ private:
    Float_t invmass2g1j;
    Float_t invmass2g2j;
    Float_t nvtx;
-   Float_t met;
-   Float_t phimet;
+
+   //////////////////////////////////////
+   Float_t         sMet_  ;
+   Float_t         eMet_  ;
+   Float_t         phiMet_;
+   Float_t         signifMet_;
+   Float_t         sCorrMet_  ;
+   Float_t         eCorrMet_  ;
+   Float_t         phiCorrMet_;
+   Float_t         signifCorrMet_;
+   Float_t         smuCorrMet_  ;
+   Float_t         emuCorrMet_  ;
+   Float_t         phimuCorrMet_;
+   Float_t         signifmuCorrMet_;
+   Float_t         sNoHFMet_  ;
+   Float_t         eNoHFMet_  ;
+   Float_t         phiNoHFMet_;
+   Float_t         signifNoHFMet_;
+   Float_t         stcMet_  ;
+   Float_t         etcMet_  ;
+   Float_t         phitcMet_;
+   Float_t         signiftcMet_;
+   Float_t         sglobalPfMet_;
+   Float_t         eglobalPfMet_;
+   Float_t         phiglobalPfMet_;
+   Float_t         signifglobalPfMet_;
+   Float_t         scentralPfMet_;
+   Float_t         ecentralPfMet_;
+   Float_t         phicentralPfMet_;
+   Float_t         signifcentralPfMet_;
+   Float_t         eassocPfMet_;   //[nvertex]
+   Float_t         phiassocPfMet_;   //[nvertex]
+   Float_t         signifassocPfMet_;   //[nvertex]
+   Float_t         eassocOtherVtxPfMet_;   //[nvertex]
+   Float_t         phiassocOtherVtxPfMet_;   //[nvertex]
+   Float_t         signifassocOtherVtxPfMet_;   //[nvertex]
+   Float_t         etrkPfMet_;   //[nvertex]
+   Float_t         phitrkPfMet_;   //[nvertex]
+   Float_t         signiftrkPfMet_;   //[nvertex]
+   Float_t         ecleanPfMet_;   //[nvertex]
+   Float_t         phicleanPfMet_;   //[nvertex]
+   Float_t         signifcleanPfMet_;   //[nvertex]
+   Float_t         ecleanedSaclayPfMet_;   //[nvertex]
+   Float_t         phicleanedSaclayPfMet_;   //[nvertex]
+   Float_t         signifcleanedSaclayPfMet_;   //[nvertex]
+   Float_t         eminTypeICleanSaclayPfMet_;   //[nvertex]
+   Float_t         phiminTypeICleanSaclayPfMet_;   //[nvertex]
+   Float_t         signifminTypeICleanSaclayPfMet_;   //[nvertex]
+   Float_t         globalPfSums_;
+   Float_t         spfMet_  ;
+   Float_t         epfMet_  ;
+   Float_t         phipfMet_;
+   Float_t         signifpfMet_;
+   Float_t         spfMetType1_;
+   Float_t         epfMetType1_;
+   Float_t         phipfMetType1_;
+   Float_t         signifpfMetType1_;
+   Float_t         sMetGen_  ;
+   Float_t         eMetGen_  ;
+   Float_t         phiMetGen_;
+   Float_t         signifMetGen_;
+   Float_t         sMetGen2_  ;
+   Float_t         eMetGen2_  ;
+   Float_t         phiMetGen2_;
+   //////////////////////////////////////
+
+   // gen variables
+   ///////////////////////
+    
+   Int_t gen_custom_processId;
+
+   Float_t gen_pt_gamma1;
+   Float_t gen_pt_gamma2;
+   Float_t gen_eta_gamma1;
+   Float_t gen_eta_gamma2;
+   Float_t gen_phi_gamma1;
+   Float_t gen_phi_gamma2;
+
+   Float_t gen_pt_genjet1;
+   Float_t gen_pt_genjet2;
+   Float_t gen_eta_genjet1;
+   Float_t gen_eta_genjet2;
+   Float_t gen_phi_genjet1;
+   Float_t gen_phi_genjet2;
+
+  //  Float_t gen_pt_VectorBoson;
+  //  Float_t gen_phi_VectorBoson;
+  //  Float_t gen_eta_VectorBoson;
+
+   Float_t gen_mass_diphoton;
+   Float_t gen_pt_diphoton;
+   Float_t gen_eta_diphoton;
+   Float_t gen_phi_diphoton;
+
+   Float_t gen_mass_dijet;
+   Float_t gen_pt_dijet;
+   Float_t gen_eta_dijet;
+   Float_t gen_phi_dijet;
+
+   Float_t gen_zeppenfeld;
+   ////////////////////////
+
    Int_t npu;
    Int_t isemEGphot1;
    Int_t isemEGphot2;
