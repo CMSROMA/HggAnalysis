@@ -26,7 +26,7 @@ Modify the makeRedNtp.csh output directory  (castordir)
 
 runAllAnalysis2011.csh  <location> <version> <run if 1> <jsonfile> <use puweight=1> < use ptweight=1 for gg->H > <energy correction/smearings file>
 
-Example for Run2011: ./runAllAnalysis2011.csh cern v1 1 `pwd`/jsonFiles/Cert_160404-180252_7TeV_All2011_v3.txt 1 1 `pwd`/correctionFiles/regrPho_eCorr.dat
+Example for Run2011: ./runAllAnalysis2011.csh cern v1 1 `pwd`/jsonFiles/Cert_160404-180252_7TeV_All2011_v3.txt 1 1 `pwd`/correctionFiles/regrPho_eCorr_30Nov.dat
 
 json file & energy correction smearing file should be ABSOLUTE PATH
 
