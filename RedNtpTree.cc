@@ -201,6 +201,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TH1D pthiggsassreco("pthiggsassreco","pthiggsassreco", 100, 0.,250.);
     TH1D pthiggsisoreco("pthiggsisoreco","pthiggsisoreco", 100, 0.,250.);
     TH1D ptphotgen1("ptphotgen1","ptphotgen1", 100, 0.,300.);
+    TH1D ptphotgen1wl("ptphotgen1wl","ptphotgen1wl", 100, 0.,300.);
+    TH1D ptphotgen1wh("ptphotgen1wh","ptphotgen1wh", 100, 0.,300.);
+    TH1D ptphotgen1zl("ptphotgen1zl","ptphotgen1zl", 100, 0.,300.);
+    TH1D ptphotgen1zh("ptphotgen1zh","ptphotgen1zh", 100, 0.,300.);
+    TH1D ptphotgen1zn("ptphotgen1zn","ptphotgen1zn", 100, 0.,300.);
     TH1D ptphotgen2("ptphotgen2","ptphotgen2", 100, 0.,300.);
     TH1D ptphothiggsgen1("ptphothiggsgen1","ptphothiggsgen1", 100, 0.,300.);
     TH1D ptphothiggsgen2("ptphothiggsgen2","ptphothiggsgen2", 100, 0.,300.);
@@ -455,6 +460,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("eMet", &eMet_, "eMet/F")  ;
     ana_tree->Branch("phiMet", &phiMet_, "phiMet/F");
     ana_tree->Branch("signifMet", &signifMet_, "signifMet/F");
+    ana_tree->Branch("eSmearedMet",&eSmearedMet_,"eSmearedMet/F");
+    ana_tree->Branch("phiSmearedMet",&phiSmearedMet_,"phiSmearedMet/F");
     ana_tree->Branch("sCorrMet", &sCorrMet_, "sCorrMet/F")  ;
     ana_tree->Branch("eCorrMet", &eCorrMet_, "eCorrMet/F")  ;
     ana_tree->Branch("phiCorrMet", &phiCorrMet_, "phiCorrMet/F");
@@ -1124,6 +1131,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         nvtxrew.Fill(nvertex,weight);
         
         ptphotgen1.Fill(ptMC[firstfourgenphot.at(0)],weight);
+	if (gen_custom_processId==3101 || gen_custom_processId==3201 || gen_custom_processId==3301) ptphotgen1wl.Fill(ptMC[firstfourgenphot.at(0)],weight);
+	if (gen_custom_processId==4101 || gen_custom_processId==4201 || gen_custom_processId==4301) ptphotgen1zl.Fill(ptMC[firstfourgenphot.at(0)],weight);
+	if (gen_custom_processId==3401) ptphotgen1wh.Fill(ptMC[firstfourgenphot.at(0)],weight);
+	if (gen_custom_processId==4401) ptphotgen1zh.Fill(ptMC[firstfourgenphot.at(0)],weight);
+	if (gen_custom_processId==4501) ptphotgen1zn.Fill(ptMC[firstfourgenphot.at(0)],weight);
         ptphotgen2.Fill(ptMC[firstfourgenphot.at(1)],weight);
         etaphotgen1.Fill(etaMC[firstfourgenphot.at(0)],weight);
         etaphotgen2.Fill(etaMC[firstfourgenphot.at(1)],weight);
@@ -2095,6 +2107,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     sMet_ = sMet;
     eMet_ = eMet;
     phiMet_ = phiMet;
+    TLorentzVector theSmearedMet = correctMet();
+    eSmearedMet_   = theSmearedMet.Pt();
+    phiSmearedMet_ = theSmearedMet.Phi();
     signifMet_ = signifMet;
     sCorrMet_ = sCorrMet;
     eCorrMet_ = eCorrMet;
@@ -2511,6 +2526,57 @@ void RedNtpTree::correctJets(int shift, float smear)
 
 }
 
+TLorentzVector RedNtpTree::correctMet() {
+  
+  TLorentzVector jetSumSmeared;
+  jetSumSmeared.SetXYZT(0.,0.,0.,0);
+  
+  TLorentzVector jetSumUnsmeared;
+  jetSumUnsmeared.SetXYZT(0.,0.,0.,0);
+
+  // associating reco - gen met                                                                                                            
+  for(int i=0; i<nJet_pfakt5; i++){
+    
+    int ass(-999);
+    for(int j=0; j<nJetGen_akt5; j++){
+      double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) +
+		       delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
+      if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = j;
+    }
+
+    float smear = -999.;
+    if(ass>-1){
+      if (fabs(etaJet_pfakt5[i])<=1.1)                               smear = 1.06177;
+      if (fabs(etaJet_pfakt5[i])<=1.7 && fabs(etaJet_pfakt5[i])>1.1) smear = 1.08352;
+      if (fabs(etaJet_pfakt5[i])<=2.3 && fabs(etaJet_pfakt5[i])>1.7) smear = 1.02911;
+      if (fabs(etaJet_pfakt5[i])>2.3)                                smear = 1.15288;
+
+      float ptSmeared  = ptJetGen_akt5[ass] + (smear)*(ptJet_pfakt5[i]-ptJetGen_akt5[ass]);
+      float eneSmeared = eJetGen_akt5[ass]  + (smear)*(eJet_pfakt5[i]-eJetGen_akt5[ass]);
+
+      TLorentzVector thisJetSmeared;
+      thisJetSmeared.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);
+
+      TLorentzVector thisJetUnsmeared;
+      thisJetUnsmeared.SetPtEtaPhiE(ptJet_pfakt5[i],etaJet_pfakt5[i],phiJet_pfakt5[i],eJet_pfakt5[i]);
+
+      if (ptJet_pfakt5[i]>10) {
+        jetSumSmeared   += thisJetSmeared;
+        jetSumUnsmeared += thisJetUnsmeared;
+      }
+    }
+  }
+
+  // correcting MET                                                                                                                        
+  TLorentzVector tlvPFmet;
+  tlvPFmet.SetPtEtaPhiE(eMet,0,phiMet,eMet);
+
+  TLorentzVector correctedMet;
+  correctedMet = tlvPFmet - jetSumUnsmeared + jetSumSmeared;
+
+  return correctedMet;
+}
+
 void RedNtpTree::correctPhotons(bool energyRegression)
 {
   for (int iPho=0;iPho<nPhot;++iPho)
@@ -2642,6 +2708,8 @@ nvtx = -999;
     eMet_   = -999;
     phiMet_ = -999;
     signifMet_ = -999;
+    eSmearedMet_ = -999;
+    phiSmearedMet_ = -999;
     sCorrMet_   = -999;
     eCorrMet_   = -999;
     phiCorrMet_ = -999;

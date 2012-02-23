@@ -8,7 +8,7 @@
 #include "PhotonIdCuts.h"
 #include "EnergyScaleCorrection.h"
 #include "JetScaleSystematics.h"
-
+#include "TLorentzVector.h"
 
 #include <TFile.h>
 #include <TH1F.h>
@@ -82,6 +82,7 @@ private:
    bool assoJet(int i);
    void correctPhotons(bool energyRegression);
    void correctJets(int scale, float smear);
+   TLorentzVector correctMet();
 
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
@@ -212,6 +213,8 @@ private:
    Float_t         eMet_  ;
    Float_t         phiMet_;
    Float_t         signifMet_;
+   Float_t         eSmearedMet_;
+   Float_t         phiSmearedMet_;
    Float_t         sCorrMet_  ;
    Float_t         eCorrMet_  ;
    Float_t         phiCorrMet_;
