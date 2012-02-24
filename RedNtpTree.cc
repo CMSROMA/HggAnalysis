@@ -873,6 +873,19 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 #endif
 
 
+        /// bug fix:
+        /// when  nPreselPhotonPairs==0 the vrank variables are not initialized
+        if(nPreselPhotonPairs==0)
+        {
+            indexPreselPhot1[0] = 0;   //[nPreselPhotonPairs]
+            indexPreselPhot2[0] = 0;   //[nPreselPhotonPairs]
+            vrankPhotonPairs[0] = 0;   //[nPreselPhotonPairs]
+            vevtMvaPhotonPairs[0] = 0;   //[nPreselPhotonPairs]
+            vevtProbPhotonPairs[0] = 0;   //[nPreselPhotonPairs]
+            vptbalPhotonPairs[0] = 0;   //[nPreselPhotonPairs]
+            vptasymPhotonPairs[0] = 0;   //[nPreselPhotonPairs]
+        }
+
         if (nprocessed%1000 == 0) cout << "Events " << nprocessed << " processed; Run " << run << " LS " << lbn << endl;
       
         if (scaleCorrections_)
