@@ -163,6 +163,8 @@ private:
  
    Float_t massgg;
    Float_t ptgg;
+   Float_t phigg;
+   Float_t etagg;
    Float_t massggnewvtx;
    Float_t ptggnewvtx;
    Float_t ptphot1;
@@ -171,8 +173,8 @@ private:
    Float_t etaphot2;
    Float_t phiphot1;
    Float_t phiphot2;
-   Float_t timephot1; 
-   Float_t timephot2; 
+   Float_t timephot1;  
+   Float_t timephot2;  
    Float_t E1phot1;
    Float_t E1phot2;
    Float_t E9phot1;
@@ -197,15 +199,30 @@ private:
    Float_t betajet2;
    Float_t betastarjet1;
    Float_t betastarjet2;
+   Float_t btagvtxjet1;
+   Float_t btagtrkjet1;
+   Float_t btagvtxjet2;
+   Float_t btagtrkjet2;
+   Float_t ptDjet1;
+   Int_t ntrkjet1;
+   Int_t nneutjet1;
+   Float_t ptDjet2;
+   Int_t ntrkjet2;
+   Int_t nneutjet2;
    Int_t assjet1;
    Int_t assjet2;
    Float_t deltaeta;
    Float_t zeppenjet;
    Float_t deltaphi;
    Float_t deltaphinewvtx;
+   Float_t deltaphigg;
+   Float_t eta2j;
+   Float_t phi2j;
+   Float_t pt2j;
    Float_t invmassjet;
    Float_t invmass2g1j;
    Float_t invmass2g2j;
+   Float_t pt2g2j;           
    Float_t nvtx;
 
    //////////////////////////////////////
@@ -213,7 +230,7 @@ private:
    Float_t         eMet_  ;
    Float_t         phiMet_;
    Float_t         signifMet_;
-   Float_t         eSmearedMet_;
+   Float_t         eSmearedMet_;   
    Float_t         phiSmearedMet_;
    Float_t         sCorrMet_  ;
    Float_t         eCorrMet_  ;
@@ -251,11 +268,11 @@ private:
    Float_t         ecleanPfMet_;   //[nvertex]
    Float_t         phicleanPfMet_;   //[nvertex]
    Float_t         signifcleanPfMet_;   //[nvertex]
-   Float_t         ecleanedSaclayPfMet_;   //[nvertex]
-   Float_t         phicleanedSaclayPfMet_;   //[nvertex]
-   Float_t         signifcleanedSaclayPfMet_;   //[nvertex]
-   Float_t         eminTypeICleanSaclayPfMet_;   //[nvertex]
-   Float_t         phiminTypeICleanSaclayPfMet_;   //[nvertex]
+   Float_t         ecleanedSaclayPfMet_;   //[nvertex] 
+   Float_t         phicleanedSaclayPfMet_;   //[nvertex] 
+   Float_t         signifcleanedSaclayPfMet_;   //[nvertex] 
+   Float_t         eminTypeICleanSaclayPfMet_;   //[nvertex] 
+   Float_t         phiminTypeICleanSaclayPfMet_;   //[nvertex] 
    Float_t         signifminTypeICleanSaclayPfMet_;   //[nvertex]
    Float_t         globalPfSums_;
    Float_t         spfMet_  ;

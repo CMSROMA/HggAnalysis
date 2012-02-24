@@ -329,6 +329,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("massgg",&massgg,"massgg/F");
     ana_tree->Branch("ptgg",&ptgg,"ptgg/F");
     ana_tree->Branch("ptggnewvtx",&ptggnewvtx,"ptggnewvtx/F");
+    ana_tree->Branch("phigg",&phigg,"phigg/F");
+    ana_tree->Branch("etagg",&etagg,"etagg/F");
     ana_tree->Branch("massggnewvtx",&massggnewvtx,"massggnewvtx/F");
     ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
     ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
@@ -350,36 +352,36 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("r9phot2",&r9phot2,"r9phot2/F");
     ana_tree->Branch("isemEGphot1",&isemEGphot1,"isemEGphot1/I");
     ana_tree->Branch("isemEGphot2",&isemEGphot2,"isemEGphot2/I");
-    ana_tree->Branch("idloosenewEGphot1",&idloosenewEGphot1,"idloosenewEGphot1/I");
-    ana_tree->Branch("idloosenewEGphot2",&idloosenewEGphot2,"idloosenewEGphot2/I");
-    ana_tree->Branch("idloose006newEGphot1",&idloose006newEGphot1,"idloose006newEGphot1/I");
-    ana_tree->Branch("idloose006newEGphot2",&idloose006newEGphot2,"idloose006newEGphot2/I");
-    ana_tree->Branch("idtightnewEGphot1",&idtightnewEGphot1,"idtightnewEGphot1/I");
-    ana_tree->Branch("idtightnewEGphot2",&idtightnewEGphot2,"idtightnewEGphot2/I");
-    ana_tree->Branch("idhggtightnewEGphot1",&idhggtightnewEGphot1,"idhggtightnewEGphot1/I");
-    ana_tree->Branch("idhggtightnewEGphot2",&idhggtightnewEGphot2,"idhggtightnewEGphot2/I");
-    ana_tree->Branch("idloosenewpuEGphot1",&idloosenewpuEGphot1,"idloosenewpuEGphot1/I");
-    ana_tree->Branch("idloosenewpuEGphot2",&idloosenewpuEGphot2,"idloosenewpuEGphot2/I");
-    ana_tree->Branch("idtightnewpuEGphot1",&idtightnewpuEGphot1,"idtightnewpuEGphot1/I");
-    ana_tree->Branch("idtightnewpuEGphot2",&idtightnewpuEGphot2,"idtightnewpuEGphot2/I");
-    ana_tree->Branch("idhggtightnewpuEGphot1",&idhggtightnewpuEGphot1,"idhggtightnewpuEGphot1/I");
-    ana_tree->Branch("idhggtightnewpuEGphot2",&idhggtightnewpuEGphot2,"idhggtightnewpuEGphot2/I");
+//     ana_tree->Branch("idloosenewEGphot1",&idloosenewEGphot1,"idloosenewEGphot1/I");
+//     ana_tree->Branch("idloosenewEGphot2",&idloosenewEGphot2,"idloosenewEGphot2/I");
+//     ana_tree->Branch("idloose006newEGphot1",&idloose006newEGphot1,"idloose006newEGphot1/I");
+//     ana_tree->Branch("idloose006newEGphot2",&idloose006newEGphot2,"idloose006newEGphot2/I");
+//     ana_tree->Branch("idtightnewEGphot1",&idtightnewEGphot1,"idtightnewEGphot1/I");
+//     ana_tree->Branch("idtightnewEGphot2",&idtightnewEGphot2,"idtightnewEGphot2/I");
+//     ana_tree->Branch("idhggtightnewEGphot1",&idhggtightnewEGphot1,"idhggtightnewEGphot1/I");
+//     ana_tree->Branch("idhggtightnewEGphot2",&idhggtightnewEGphot2,"idhggtightnewEGphot2/I");
+//     ana_tree->Branch("idloosenewpuEGphot1",&idloosenewpuEGphot1,"idloosenewpuEGphot1/I");
+//     ana_tree->Branch("idloosenewpuEGphot2",&idloosenewpuEGphot2,"idloosenewpuEGphot2/I");
+//     ana_tree->Branch("idtightnewpuEGphot1",&idtightnewpuEGphot1,"idtightnewpuEGphot1/I");
+//     ana_tree->Branch("idtightnewpuEGphot2",&idtightnewpuEGphot2,"idtightnewpuEGphot2/I");
+//     ana_tree->Branch("idhggtightnewpuEGphot1",&idhggtightnewpuEGphot1,"idhggtightnewpuEGphot1/I");
+//     ana_tree->Branch("idhggtightnewpuEGphot2",&idhggtightnewpuEGphot2,"idhggtightnewpuEGphot2/I");
     ana_tree->Branch("idcicphot1",&idcicphot1,"idcicphot1/I");
     ana_tree->Branch("idcicphot2",&idcicphot2,"idcicphot2/I");
     ana_tree->Branch("idcicnoelvetophot1",&idcicnoelvetophot1,"idcicnoelvetophot1/I");
     ana_tree->Branch("idcicnoelvetophot2",&idcicnoelvetophot2,"idcicnoelvetophot2/I");
-    ana_tree->Branch("idlooseEGphot1",&idlooseEGphot1,"idlooseEGphot1/I");
-    ana_tree->Branch("idlooseEGphot2",&idlooseEGphot2,"idlooseEGphot2/I");
-    ana_tree->Branch("idtightEGphot1",&idtightEGphot1,"idtightEGphot1/I");
-    ana_tree->Branch("idtightEGphot2",&idtightEGphot2,"idtightEGphot2/I");
-    ana_tree->Branch("idloosephot1",&idloosephot1,"idloosephot1/I");
-    ana_tree->Branch("idloosephot2",&idloosephot2,"idloosephot2/I");
-    ana_tree->Branch("idmediumphot1",&idmediumphot1,"idmediumphot1/I");
-    ana_tree->Branch("idmediumphot2",&idmediumphot2,"idmediumphot2/I");
-    ana_tree->Branch("idloosecsphot1",&idloosecsphot1,"idloosecsphot1/I"); 
-    ana_tree->Branch("idloosecsphot2",&idloosecsphot2,"idloosecsphot2/I"); 
-    ana_tree->Branch("idmediumcsphot1",&idmediumcsphot1,"idmediumcsphot1/I"); 
-    ana_tree->Branch("idmediumcsphot2",&idmediumcsphot2,"idmediumcsphot2/I"); 
+//     ana_tree->Branch("idlooseEGphot1",&idlooseEGphot1,"idlooseEGphot1/I");
+//     ana_tree->Branch("idlooseEGphot2",&idlooseEGphot2,"idlooseEGphot2/I");
+//     ana_tree->Branch("idtightEGphot1",&idtightEGphot1,"idtightEGphot1/I");
+//     ana_tree->Branch("idtightEGphot2",&idtightEGphot2,"idtightEGphot2/I");
+//     ana_tree->Branch("idloosephot1",&idloosephot1,"idloosephot1/I");
+//     ana_tree->Branch("idloosephot2",&idloosephot2,"idloosephot2/I");
+//     ana_tree->Branch("idmediumphot1",&idmediumphot1,"idmediumphot1/I");
+//     ana_tree->Branch("idmediumphot2",&idmediumphot2,"idmediumphot2/I");
+//     ana_tree->Branch("idloosecsphot1",&idloosecsphot1,"idloosecsphot1/I"); 
+//     ana_tree->Branch("idloosecsphot2",&idloosecsphot2,"idloosecsphot2/I"); 
+//     ana_tree->Branch("idmediumcsphot1",&idmediumcsphot1,"idmediumcsphot1/I"); 
+//     ana_tree->Branch("idmediumcsphot2",&idmediumcsphot2,"idmediumcsphot2/I"); 
     ana_tree->Branch("idelephot1",&idelephot1,"idelephot1/I");
     ana_tree->Branch("idelephot2",&idelephot2,"idelephot2/I");
     
@@ -442,15 +444,30 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("betajet2",&betajet2,"betajet2/F");
     ana_tree->Branch("betastarjet1",&betastarjet1,"betastarjet1/F");
     ana_tree->Branch("betastarjet2",&betastarjet2,"betastarjet2/F");
+    ana_tree->Branch("btagvtxjet1",&btagvtxjet1,"btagvtxjet1/F");
+    ana_tree->Branch("btagtrkjet1",&btagtrkjet1,"btagtrkjet1/F");
+    ana_tree->Branch("btagvtxjet2",&btagvtxjet2,"btagvtxjet2/F");
+    ana_tree->Branch("btagtrkjet2",&btagtrkjet2,"btagtrkjet2/F");
+    ana_tree->Branch("ptDjet1",&ptDjet1,"ptDjet1/F");
+    ana_tree->Branch("ntrkjet1",&ntrkjet1,"ntrkjet1/I");
+    ana_tree->Branch("nneutjet1",&nneutjet1,"nneutjet1/I");
+    ana_tree->Branch("ptDjet2",&ptDjet2,"ptDjet2/F");
+    ana_tree->Branch("ntrkjet2",&ntrkjet2,"ntrkjet2/I");
+    ana_tree->Branch("nneutjet2",&nneutjet2,"nneutjet2/I");
     ana_tree->Branch("assjet1",&assjet1,"assjet1/I");
     ana_tree->Branch("assjet2",&assjet2,"assjet2/I");
     ana_tree->Branch("deltaeta",&deltaeta,"deltaeta/F");
     ana_tree->Branch("zeppenjet",&zeppenjet,"zeppenjet/F");
     ana_tree->Branch("deltaphi",&deltaphi,"deltaphi/F");
     ana_tree->Branch("deltaphinewvtx",&deltaphinewvtx,"deltaphinewvtx/F");
+    ana_tree->Branch("deltaphigg",&deltaphigg,"deltaphigg/F");
     ana_tree->Branch("invmassjet",&invmassjet,"invmassjet/F");
     ana_tree->Branch("invmass2g1j",&invmass2g1j,"invmass2g1j/F");
     ana_tree->Branch("invmass2g2j",&invmass2g2j,"invmass2g2j/F");
+    ana_tree->Branch("pt2g2j",&pt2g2j,"pt2g2j/F");
+    ana_tree->Branch("eta2j",&eta2j,"eta2j/F");
+    ana_tree->Branch("phi2j",&phi2j,"phi2j/F");
+    ana_tree->Branch("pt2j",&pt2j,"pt2j/F");
     ana_tree->Branch("nvtx",&nvtx,"nvtx/F");
     
     // ana_tree->Branch("met",&met,"met/F");
@@ -1770,7 +1787,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             }
         }
    
-        double twojetsmass(0), etatwojets(-999), phitwojets(-999);
+        double twojetsmass(0), etatwojets(-999), phitwojets(-999), pttwojets(-999);
 
         if( firstfourassphot.at(0)>-1 && firstfourassphot.at(1)>-1 ) { 
 
@@ -1791,6 +1808,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
               
               twojetsmass = sum.M();
               etatwojets = sum.Eta();
+	      phitwojets = sum.Phi();
+	      pttwojets = sum.Pt();
              
               deltaetajetassreco.Fill(etaJet_pfakt5[firstfournoassjet.at(0)]-etaJet_pfakt5[firstfournoassjet.at(1)],weight);
               double aveeta = (etaJet_pfakt5[firstfournoassjet.at(0)]+etaJet_pfakt5[firstfournoassjet.at(1)])/2;
@@ -1833,7 +1852,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         ***************************************************/
 
 
-      double twojetsmassiso(0), etatwojetsiso(-999), phitwojetsiso(-999);
+      double twojetsmassiso(0), etatwojetsiso(-999), phitwojetsiso(-999), pttwojetsiso(-999);
    
       //bool recoPreselection = (firsttwoisophot.at(0)>-1 && firsttwoisophot.at(1)>-1 && ptPhot[firsttwoisophot.at(0)]>20 && ptPhot[firsttwoisophot.at(1)]>20);
 
@@ -1878,6 +1897,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  twojetsmassiso = sum.M();
 	  etatwojetsiso = sum.Eta();
 	  phitwojetsiso = sum.Phi();
+	  pttwojetsiso = sum.Pt();
 	  
 	  if(jetsyst_) 
 	    JECunc.Fill(ptCorrJet_pfakt5[firstfournoisojet.at(0)],jetsyst_->getJESUncertainty(etaJet_pfakt5[firstfournoisojet.at(0)],ptCorrJet_pfakt5[firstfournoisojet.at(0)]));
@@ -1941,10 +1961,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	ptgg = higgspt;
 	massggnewvtx = higgsisomassnewvtx;
 	ptggnewvtx = higgsptnewvtx;
-        ptphot1 = ptPhot[firstfourisophot.at(0)]; 
+ 	phigg = phihiggsisonewvtx;
+	etagg = etahiggsisonewvtx;
+	deltaphigg = delta_phi(phiPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(1)]);
+	ptphot1 = ptPhot[firstfourisophot.at(0)]; 
         ptphot2 = ptPhot[firstfourisophot.at(1)];   
-	timephot1 = timePhot[firstfourisophot.at(0)];
-	timephot2 = timePhot[firstfourisophot.at(1)];  
+ 	timephot1 = timePhot[firstfourisophot.at(0)];
+ 	timephot2 = timePhot[firstfourisophot.at(1)];  
 	etaphot1 = etaPhot[firstfourisophot.at(0)];
 	etaphot2 = etaPhot[firstfourisophot.at(1)];  
 	phiphot1 = phiPhot[firstfourisophot.at(0)];
@@ -2050,6 +2073,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  betajet1 = beta_pfakt5[firstfournoisojet.at(0)][vrankPhotonPairs[0]];
 	  betastarjet1 = betaStar_pfakt5[firstfournoisojet.at(0)][vrankPhotonPairs[0]];
 	  assjet1 = assoJet(firstfournoisojet.at(0));
+ 	  btagvtxjet1 = simpleSecondaryVertexHighEffBJetTags[firstfournoisojet.at(0)];
+ 	  btagtrkjet1 = trackCountingHighEffBJetTags[firstfournoisojet.at(0)];	  
+ 	  ptDjet1 = ptDJet_pfakt5[firstfournoisojet.at(0)];
+ 	  ntrkjet1 = nChargedHadrons_pfakt5[firstfournoisojet.at(0)];
+ 	  nneutjet1 = nNeutralHadrons_pfakt5[firstfournoisojet.at(0)];
 	}else{
 	  ptjet1 = -999;
 	  ptcorrjet1 = -999;
@@ -2058,6 +2086,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  betajet1 = -999.;
 	  betastarjet1 = -999.;
 	  assjet1 = -999.;
+ 	  btagvtxjet1 = -999.;
+ 	  btagtrkjet1 = -999.;
+ 	  ptDjet1 = -999.;
+ 	  ntrkjet1 = -999.;
+ 	  nneutjet1 = -999.; 
 	}
 	if( firstfournoisojet.at(1) > -1) {
 	  ptjet2 = ptJet_pfakt5[firstfournoisojet.at(1)];
@@ -2067,6 +2100,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  betajet2 = beta_pfakt5[firstfournoisojet.at(1)][vrankPhotonPairs[0]];
 	  betastarjet2 = betaStar_pfakt5[firstfournoisojet.at(1)][vrankPhotonPairs[0]];
 	  assjet2 = assoJet(firstfournoisojet.at(1));
+ 	  btagvtxjet2 = simpleSecondaryVertexHighEffBJetTags[firstfournoisojet.at(1)];
+ 	  btagtrkjet2 = trackCountingHighEffBJetTags[firstfournoisojet.at(1)];	  
+ 	  ptDjet2 = ptDJet_pfakt5[firstfournoisojet.at(1)];
+ 	  ntrkjet2 = nChargedHadrons_pfakt5[firstfournoisojet.at(1)];
+ 	  nneutjet2 = nNeutralHadrons_pfakt5[firstfournoisojet.at(1)];
 	}else{
 	  ptjet2 = -999;
 	  ptcorrjet2 = -999;
@@ -2075,6 +2113,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  betajet2 = -999.;
 	  betastarjet2 = -999.;
 	  assjet2 = -999.;
+ 	  btagvtxjet2 = -999.;
+ 	  btagtrkjet2 = -999.;
+ 	  ptDjet2 = -999.;
+ 	  ntrkjet2 = -999.;
+ 	  nneutjet2 = -999.; 
 	}
 	if( firstfournoisojet.at(2) > -1) {
 	  ptjet3 = ptJet_pfakt5[firstfournoisojet.at(2)];
@@ -2103,12 +2146,18 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  double aveeta = (etaJet_pfakt5[firstfournoisojet.at(0)]+etaJet_pfakt5[firstfournoisojet.at(1)])/2;
 	  zeppenjet = etahiggsiso - aveeta;
 	  invmassjet = twojetsmassiso;
+	  eta2j = etatwojetsiso;
+	  phi2j = phitwojetsiso;
+	  pt2j = pttwojetsiso;
 	  deltaphi = delta_phi(phihiggsiso,phitwojetsiso);
-	  deltaphinewvtx = delta_phi(phihiggsisonewvtx,phitwojetsiso);
+	  deltaphinewvtx = delta_phi(phihiggsisonewvtx,phitwojetsiso);	  
 	}else{
 	  deltaeta = -999.;
 	  zeppenjet = -999.;
 	  invmassjet = -999.;
+	  eta2j = -999.;
+	  phi2j = -999.;
+	  pt2j = -999.;
 	  deltaphi = -999.;
 	  deltaphinewvtx = -999.;
 	}	  
@@ -2270,6 +2319,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 #endif
 	invmass2g1j = twog1j.M();
 	invmass2g2j = twog2j.M();
+	pt2g2j = twog2j.Pt();
 	
 
 	if(ptPhot[firstfourisophot.at(0)] > ptphot1cut && ptPhot[firstfourisophot.at(1)] > ptphot2cut){
@@ -2564,8 +2614,9 @@ TLorentzVector RedNtpTree::correctMet() {
       if (fabs(etaJet_pfakt5[i])<=2.3 && fabs(etaJet_pfakt5[i])>1.7) smear = 1.02911;
       if (fabs(etaJet_pfakt5[i])>2.3)                                smear = 1.15288;
 
-      float ptSmeared  = ptJetGen_akt5[ass] + (smear)*(ptJet_pfakt5[i]-ptJetGen_akt5[ass]);
-      float eneSmeared = eJetGen_akt5[ass]  + (smear)*(eJet_pfakt5[i]-eJetGen_akt5[ass]);
+      double shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptJetGen_akt5[ass];
+      float ptSmeared  = ptJet_pfakt5[i] * ( 1 + shift );
+      float eneSmeared = eJet_pfakt5[i]  + ( 1 + shift );
 
       TLorentzVector thisJetSmeared;
       thisJetSmeared.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);
@@ -2679,8 +2730,8 @@ etaphot1 = -999;
 etaphot2 = -999;
 phiphot1 = -999;
 phiphot2 = -999;
-timephot1 = -999; 
-timephot2 = -999; 
+// timephot1 = -999; 
+// timephot2 = -999; 
 E1phot1 = -999;
 E1phot2 = -999;
 E9phot1 = -999;
@@ -2711,6 +2762,7 @@ deltaeta = -999;
 zeppenjet = -999;
 deltaphi = -999;
 deltaphinewvtx = -999;
+deltaphigg = -999;
 invmassjet = -999;
 invmass2g1j = -999;
 invmass2g2j = -999;
@@ -2759,11 +2811,11 @@ nvtx = -999;
     ecleanPfMet_ = -999;   //[nvertex]
     phicleanPfMet_ = -999;   //[nvertex]
     signifcleanPfMet_ = -999;   //[nvertex]
-    ecleanedSaclayPfMet_ = -999;   //[nvertex]
-    phicleanedSaclayPfMet_ = -999;   //[nvertex]
-    signifcleanedSaclayPfMet_ = -999;   //[nvertex]
-    eminTypeICleanSaclayPfMet_ = -999;   //[nvertex]
-    phiminTypeICleanSaclayPfMet_ = -999;   //[nvertex]
+//     ecleanedSaclayPfMet_ = -999;   //[nvertex]
+//     phicleanedSaclayPfMet_ = -999;   //[nvertex]
+//     signifcleanedSaclayPfMet_ = -999;   //[nvertex]
+//     eminTypeICleanSaclayPfMet_ = -999;   //[nvertex]
+//     phiminTypeICleanSaclayPfMet_ = -999;   //[nvertex]
     signifminTypeICleanSaclayPfMet_ = -999;   //[nvertex]
     globalPfSums_ = -999;
     spfMet_   = -999;
