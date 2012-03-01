@@ -164,7 +164,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TH2D JECunc("JECunc","JECunc", 100, 0.,200.,100,0.,0.2);
     TH1D JECresovbf("JECresovbf","JECresovbf", 100, -0.5,0.5);
     TH1D JECresovh("JECresovh","JECresovh", 100, -0.5,0.5);
+    jetDR = new TH2D("jetDR","jetDR", 20, 0.,100.,100,0,1.);
+    jetresp = new TH2D("jetresp","jetresp", 20, 0.,100.,100,-2,2);
     
+
     TH1D nPDFweight1("nPDFweight1","nPDFweight1", 150, 0.,150.);
     TH1D nPDFweight2("nPDFweight2","nPDFweight2", 150, 0.,150.);
     TH1D nPDFweight3("nPDFweight3","nPDFweight3", 150, 0.,150.);
@@ -1613,8 +1616,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         
         vector<bool> jetnohiggsphot;
         vector<bool> jetnoassphot;
-        vector<bool> jetnoisophot;
-
+	//        vector<bool> jetnoisophot;
+	jetnoisophot.clear();
 
        /***************************************************
         *                                                 *
@@ -2556,6 +2559,58 @@ bool RedNtpTree::assoJet(int i){
 
 }
 
+// pfjet resolutions. taken from AN-2010-371
+double RedNtpTree::ErrEt( double Et, double Eta) {
+  
+  double InvPerr2;
+
+  double N, S, C, m;
+  if(fabs(Eta) < 0.5 ) {
+    N = 3.96859;
+    S = 0.18348;
+    C = 0.;
+    m = 0.62627;
+  } else if( fabs(Eta) < 1. ) {
+    N = 3.55226;
+    S = 0.24026;
+    C = 0.;
+    m = 0.52571;
+  } else if( fabs(Eta) < 1.5 ) {
+    N = 4.54826;
+    S = 0.22652;
+    C = 0.;
+    m = 0.58963;
+  } else if( fabs(Eta) < 2. ) {
+    N = 4.62622;
+    S = 0.23664;
+    C = 0.;
+    m = 0.48738;
+  } else if( fabs(Eta) < 3. ) {
+    N = 2.53324;
+    S = 0.34306;
+    C = 0.;
+    m = 0.28662;
+//   } else if( fabs(Eta) < 3. ) {
+//     N = -3.33814;
+//     S = 0.73360;
+//     C = 0.;
+//     m = 0.08264;
+  } else if( fabs(Eta) < 5. ) {
+    N = 2.95397;
+    S = 0.11619;
+    C = 0.;
+    m = 0.96086;
+  }
+
+  // this is the absolute resolution (squared), not sigma(pt)/pt
+  // so have to multiply by pt^2, thats why m+1 instead of m-1
+  InvPerr2 =  (N * fabs(N) ) + (S * S) * pow(Et, m+1) + (C * C) * Et * Et ;
+
+
+  return sqrt(InvPerr2)/Et;
+
+}
+
 void RedNtpTree::correctJets(int shift, float smear)
 {
 
@@ -2600,44 +2655,64 @@ TLorentzVector RedNtpTree::correctMet() {
   // associating reco - gen met                                                                                                            
   for(int i=0; i<nJet_pfakt5; i++){
     
+    if(!jetnoisophot.at(i)) continue;
+
     int ass(-999);
+    double DRmin(999.);
     for(int j=0; j<nJetGen_akt5; j++){
       double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) +
 		       delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
-      if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = j;
-    }
-
-    float smear = -999.;
-    if(ass>-1){
-      if (fabs(etaJet_pfakt5[i])<=1.1)                               smear = 1.06177;
-      if (fabs(etaJet_pfakt5[i])<=1.7 && fabs(etaJet_pfakt5[i])>1.1) smear = 1.08352;
-      if (fabs(etaJet_pfakt5[i])<=2.3 && fabs(etaJet_pfakt5[i])>1.7) smear = 1.02911;
-      if (fabs(etaJet_pfakt5[i])>2.3)                                smear = 1.15288;
-
-      double shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptJetGen_akt5[ass];
-      float ptSmeared  = ptJet_pfakt5[i] * ( 1 + shift );
-      float eneSmeared = eJet_pfakt5[i]  + ( 1 + shift );
-
-      TLorentzVector thisJetSmeared;
-      thisJetSmeared.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);
-
-      TLorentzVector thisJetUnsmeared;
-      thisJetUnsmeared.SetPtEtaPhiE(ptJet_pfakt5[i],etaJet_pfakt5[i],phiJet_pfakt5[i],eJet_pfakt5[i]);
-
-      if (ptJet_pfakt5[i]>10) {
-        jetSumSmeared   += thisJetSmeared;
-        jetSumUnsmeared += thisJetUnsmeared;
+      if(DR < DRmin && (ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptCorrJet_pfakt5[i] < 10 ) {
+	ass = j;
+	DRmin = DR;
       }
     }
+    
+    if(DRmin > 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[ass]-10)))  ass = -999;
+
+    if(ass>-1) jetDR->Fill(ptJetGen_akt5[ass],DRmin);
+    if(ass>-1) jetresp->Fill(ptJetGen_akt5[ass],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass])/ptJetGen_akt5[ass]);
+
+    float smear = -999.;
+    //    if(ass>-1){
+    if (fabs(etaJet_pfakt5[i])<=1.1)                               smear = 1.06177;
+    if (fabs(etaJet_pfakt5[i])<=1.7 && fabs(etaJet_pfakt5[i])>1.1) smear = 1.08352;
+    if (fabs(etaJet_pfakt5[i])<=2.3 && fabs(etaJet_pfakt5[i])>1.7) smear = 1.02911;
+    if (fabs(etaJet_pfakt5[i])>2.3)                                smear = 1.15288;
+    
+    double shift(0);
+    if(ass>-1)
+      shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptCorrJet_akt5[i];
+    else {
+      double expres = ErrEt(ptJet_pfakt5[i],etaJet_pfakt5[i]);
+      double relsmear = expres * sqrt(smear*smear-1);
+      shift = gen_->Gaus(0.,relsmear);
+    }
+
+    float ptSmeared  = ptJet_pfakt5[i] * ( 1 + shift );
+    float eneSmeared = eJet_pfakt5[i]  + ( 1 + shift );
+    
+    TLorentzVector thisJetSmeared;
+    thisJetSmeared.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);
+    
+    TLorentzVector thisJetUnsmeared;
+
+    thisJetUnsmeared.SetPtEtaPhiE(ptJet_pfakt5[i],etaJet_pfakt5[i],phiJet_pfakt5[i],eJet_pfakt5[i]);
+    
+    if (ptJet_pfakt5[i]>10 && TMath::Abs(etaJet_pfakt5[i])<5.) {
+      jetSumSmeared   += thisJetSmeared;
+      jetSumUnsmeared += thisJetUnsmeared;
+    }
+    
   }
 
   // correcting MET                                                                                                                        
   TLorentzVector tlvPFmet;
-  tlvPFmet.SetPtEtaPhiE(eMet,0,phiMet,eMet);
+  tlvPFmet.SetPtEtaPhiE(epfMet,0,phipfMet,epfMet);
 
   TLorentzVector correctedMet;
   correctedMet = tlvPFmet - jetSumUnsmeared + jetSumSmeared;
-
+  
   return correctedMet;
 }
 

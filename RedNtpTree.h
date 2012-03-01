@@ -12,6 +12,7 @@
 
 #include <TFile.h>
 #include <TH1F.h>
+#include <TH2D.h>
 #include <TMath.h>
 #include <TRandom3.h>
 #include <TString.h>
@@ -35,7 +36,8 @@ public:
     void SetPuWeights(std::string puWeightFile);
     void SetPtWeights(std::string ptWeightFile);
     void DoPDFWeighting();
-    void SetNtotXsection(int ntot, float xsec) {
+    double ErrEt(double Et, double Eta);
+    void SetNtotXsection(int ntot, float xsec) {      
       NtotEvents = ntot;
       xsection = xsec;
       EquivLumi = ntot/xsec;
@@ -59,6 +61,8 @@ private:
    TTree * ana_tree ;
 
    TRandom3* gen_;
+
+   vector<bool> jetnoisophot;
 
    const char* jsonFile;
    
@@ -156,6 +160,8 @@ private:
    // vector of pu weights
    std::vector<Double_t> puweights_;
    TH1D* ptweights_;
+   TH2D* jetDR;
+   TH2D* jetresp;
 
    EnergyScaleCorrection* scaleCorrections_;
    JetScaleSystematics* jetsyst_;
