@@ -86,7 +86,8 @@ private:
    bool assoJet(int i);
    void correctPhotons(bool energyRegression);
    void correctJets(int scale, float smear);
-   TLorentzVector correctMet();
+   TLorentzVector correctMet(TLorentzVector uncormet, bool smearing = 1, bool scale = 0);
+   TLorentzVector shiftMet(TLorentzVector uncormet);
 
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
@@ -238,6 +239,12 @@ private:
    Float_t         signifMet_;
    Float_t         eSmearedMet_;   
    Float_t         phiSmearedMet_;
+   Float_t         eShiftedMet_;   
+   Float_t         phiShiftedMet_;
+   Float_t         eShiftedScaledMet_;   
+   Float_t         phiShiftedScaledMet_;
+   Float_t         eSmearedShiftedMet_;   
+   Float_t         phiSmearedShiftedMet_;
    Float_t         sCorrMet_  ;
    Float_t         eCorrMet_  ;
    Float_t         phiCorrMet_;
