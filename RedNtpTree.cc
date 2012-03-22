@@ -337,6 +337,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("massggnewvtx",&massggnewvtx,"massggnewvtx/F");
     ana_tree->Branch("ptphot1",&ptphot1,"ptphot1/F");
     ana_tree->Branch("ptphot2",&ptphot2,"ptphot2/F");
+    ana_tree->Branch("deltaRToTrackphot1",&deltaRToTrackphot1,"deltaRToTrackphot1/F");
+    ana_tree->Branch("deltaRToTrackphot2",&deltaRToTrackphot2,"deltaRToTrackphot2/F");
     ana_tree->Branch("timephot1",&timephot1,"timephot1/F"); 
     ana_tree->Branch("timephot2",&timephot2,"timephot2/F"); 
     ana_tree->Branch("etaphot1",&etaphot1,"etaphot1/F");
@@ -355,6 +357,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("r9phot2",&r9phot2,"r9phot2/F");
     ana_tree->Branch("isemEGphot1",&isemEGphot1,"isemEGphot1/I");
     ana_tree->Branch("isemEGphot2",&isemEGphot2,"isemEGphot2/I");
+
 //     ana_tree->Branch("idloosenewEGphot1",&idloosenewEGphot1,"idloosenewEGphot1/I");
 //     ana_tree->Branch("idloosenewEGphot2",&idloosenewEGphot2,"idloosenewEGphot2/I");
 //     ana_tree->Branch("idloose006newEGphot1",&idloose006newEGphot1,"idloose006newEGphot1/I");
@@ -584,7 +587,74 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("gen_eta_dijet",       &gen_eta_dijet,       "gen_eta_dijet/F");         
     ana_tree->Branch("gen_phi_dijet",       &gen_phi_dijet,       "gen_phi_dijet/F");         
     ana_tree->Branch("gen_zeppenfeld",      &gen_zeppenfeld,      "gen_zeppenfeld/F");         
+    ana_tree->Branch("gen_pt_lep1",      &gen_pt_lep1,      "gen_pt_lep1/F");         
+    ana_tree->Branch("gen_pt_lep2",      &gen_pt_lep2,      "gen_pt_lep2/F");         
+    ana_tree->Branch("gen_eta_lep1",     &gen_eta_lep1,     "gen_eta_lep1/F");         
+    ana_tree->Branch("gen_eta_lep2",     &gen_eta_lep2,     "gen_eta_lep2/F");         
+    ana_tree->Branch("gen_phi_lep1",     &gen_phi_lep1,     "gen_phi_lep1/F");         
+    ana_tree->Branch("gen_phi_lep2",     &gen_phi_lep2,     "gen_phi_lep2/F");         
+    ana_tree->Branch("gen_pid_lep1",     &gen_pid_lep1,     "gen_pid_lep1/I");         
+    ana_tree->Branch("gen_pid_lep2",     &gen_pid_lep2,     "gen_pid_lep2/I");         
 
+    // electrons
+    ana_tree->Branch("ptele1",    &ptele1,    "ptele1/F");
+    ana_tree->Branch("ptele2",    &ptele2,    "ptele2/F");
+    ana_tree->Branch("etaele1",   &etaele1,   "etaele1/F");
+    ana_tree->Branch("etaele2",   &etaele2,   "etaele2/F");
+    ana_tree->Branch("phiele1",   &phiele1,   "phiele1/F");
+    ana_tree->Branch("phiele2",   &phiele2,   "phiele2/F");
+    ana_tree->Branch("eneele1",   &eneele1,   "eneele1/F");
+    ana_tree->Branch("eneele2",   &eneele2,   "eneele2/F");
+    ana_tree->Branch("sIeIeele1", &sIeIeele1, "sIeIeele1/F");
+    ana_tree->Branch("sIeIeele2", &sIeIeele2, "sIeIeele2/F");
+    ana_tree->Branch("dphiele1",  &dphiele1,  "dphiele1/F");
+    ana_tree->Branch("dphiele2",  &dphiele2,  "dphiele2/F");
+    ana_tree->Branch("detaele1",  &detaele1,  "detaele1/F");
+    ana_tree->Branch("detaele2",  &detaele2,  "detaele2/F");
+    ana_tree->Branch("mhitsele1", &mhitsele1, "mhitsele1/I");
+    ana_tree->Branch("mhitsele2", &mhitsele2, "mhitsele2/I");
+    ana_tree->Branch("dcotele1",  &dcotele1,  "dcotele1/F");
+    ana_tree->Branch("dcotele2",  &dcotele2,  "dcotele2/F");
+    ana_tree->Branch("distele1",  &distele1,  "distele1/F");
+    ana_tree->Branch("distele2",  &distele2,  "distele2/F");
+    ana_tree->Branch("d0ele1",    &d0ele1,    "d0ele1/F");
+    ana_tree->Branch("d0ele2",    &d0ele2,    "d0ele2/F");
+    ana_tree->Branch("dzele1",    &dzele1,    "dzele1/F");
+    ana_tree->Branch("dzele2",    &dzele2,    "dzele2/F");
+    ana_tree->Branch("isoele1",   &isoele1,   "isoele1/F");
+    ana_tree->Branch("isoele2",   &isoele2,   "isoele2/F");
+    ana_tree->Branch("fullisoele1", &fullisoele1, "fullisoele1/F");
+    ana_tree->Branch("fullisoele2", &fullisoele2, "fullisoele2/F");
+    ana_tree->Branch("invMassele1g1",   &invMassele1g1,   "invMassele1g1/F");
+    ana_tree->Branch("invMassele1g2",   &invMassele1g2,   "invMassele1g2/F");
+    ana_tree->Branch("invMassele2g1",   &invMassele2g1,   "invMassele2g1/F");
+    ana_tree->Branch("invMassele2g2",   &invMassele2g2,   "invMassele2g2/F");
+
+    // muons
+    ana_tree->Branch("ptmu1",      &ptmu1,      "ptmu1/F");
+    ana_tree->Branch("ptmu2",      &ptmu2,      "ptmu2/F");
+    ana_tree->Branch("etamu1",     &etamu1,     "etamu1/F");
+    ana_tree->Branch("etamu2",     &etamu2,     "etamu2/F");
+    ana_tree->Branch("phimu1",     &phimu1,     "phimu1/F");
+    ana_tree->Branch("phimu2",     &phimu2,     "phimu2/F");
+    ana_tree->Branch("enemu1",     &enemu1,     "enemu1/F");
+    ana_tree->Branch("enemu2",     &enemu2,     "enemu2/F");
+    ana_tree->Branch("pixhitsmu1", &pixhitsmu1, "pixhitsmu1/I");
+    ana_tree->Branch("pixhitsmu2", &pixhitsmu2, "pixhitsmu2/I");
+    ana_tree->Branch("trkhitsmu1", &trkhitsmu1, "trkhitsmu1/I");
+    ana_tree->Branch("trkhitsmu2", &trkhitsmu2, "trkhitsmu2/I");
+    ana_tree->Branch("hitsmu1",    &hitsmu1,    "hitsmu1/I");
+    ana_tree->Branch("hitsmu2",    &hitsmu2,    "hitsmu2/I");
+    ana_tree->Branch("chi2mu1",    &chi2mu1,    "chi2mu1/F");
+    ana_tree->Branch("chi2mu2",    &chi2mu2,    "chi2mu2/F");
+    ana_tree->Branch("matchmu1",   &matchmu1,   "matchmu1/I");
+    ana_tree->Branch("matchmu2",   &matchmu2,   "matchmu2/I");
+    ana_tree->Branch("d0mu1",      &d0mu1,      "d0mu1/F");
+    ana_tree->Branch("d0mu2",      &d0mu2,      "d0mu2/F");
+    ana_tree->Branch("dzmu1",      &dzmu1,      "dzmu1/F");
+    ana_tree->Branch("dzmu2",      &dzmu2,      "dzmu2/F");
+    ana_tree->Branch("isomu1",     &isomu1,     "isomu1/F");
+    ana_tree->Branch("isomu2",     &isomu2,     "isomu2/F");
 
     if(doPDFweight){
         ana_tree->Branch("nWeightsPDF1",&nWeightsPDF1,"nWeightsPDF1/I");
@@ -769,7 +839,46 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     isemid.trackiso_abs=        1000.;
     isemid.setaetaEB=             1000.;
     isemid.setaetaEE=             1000.;
-  
+    
+    // Lepton tag selection: electrons
+    electronidcuts eletag;
+    eletag.eta       = 2.5;
+    eletag.crack1    = 1.4442;
+    eletag.crack2    = 1.566;
+    eletag.pt        = 20.;
+    eletag.setaetaEB = 0.01;
+    eletag.setaetaEE = 0.031;
+    eletag.dphiEB    = 0.039;
+    eletag.dphiEE    = 0.028;
+    eletag.detaEB    = 0.005;
+    eletag.detaEE    = 0.007;
+    eletag.minhitsEB = 0;
+    eletag.minhitsEE = 0;
+    eletag.dcotEB    = 0.02;
+    eletag.dcotEE    = 0.02;
+    eletag.distEB    = 0.02;
+    eletag.distEE    = 0.02;
+    eletag.d0EB      = 0.02;
+    eletag.d0EE      = 0.02;
+    eletag.dzEB      = 0.1;
+    eletag.dzEE      = 0.1;
+    eletag.iso_relEB = 0.053;
+    eletag.iso_relEE = 0.042;
+
+    // Lepton tag selection: muons
+    muonidcuts mutag;
+    mutag.eta     = 2.4;
+    mutag.pt      = 20.;
+    mutag.pixhits = 0;
+    mutag.tkhits  = 10;
+    mutag.hits    = 0;
+    mutag.chi2    = 10;
+    mutag.match   = 1;
+    mutag.d0      = 0.02;
+    mutag.dz      = 0.1;
+    mutag.iso_rel = 0.1;
+
+
    /********************************************************
     *                                                      *
     *            APPLYING CUTS IN CATEGORIES               *
@@ -1108,6 +1217,18 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         vector<int> firstfourgenphot = firstfour(ptMC,&photassocMC);
         vector<int> firstfourhiggsgenphot = firstfour(ptMC,&photassocMChiggs);
         
+	// gen level info for leptons  
+	vector<int> genVHLepton;
+	if (gen_custom_processId<3400 && gen_custom_processId>3100) {         // W leptonic
+	  genVHLepton.push_back(VHLeptonIndexes[0]);
+	  genVHLepton.push_back(-999);
+	} else if (gen_custom_processId<4400 && gen_custom_processId>4100) {  // Z leptonic 
+	  genVHLepton.push_back(VHLeptonIndexes[0]);
+	  genVHLepton.push_back(VHLeptonIndexes[1]);
+	} else {
+	  genVHLepton.push_back(-999);
+	  genVHLepton.push_back(-999);
+	}
 
 #ifdef DEBUG
         cout << "[DEBUG] photassocMC.size() = " << photassocMC.size() << endl;
@@ -1336,8 +1457,61 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             gen_phi_dijet  = dijet.Phi();
         }
 
+	// gen. level variables for lepton tag
+	int index_lep1 = genVHLepton.at(0);
+	int index_lep2 = genVHLepton.at(1);
+	if (index_lep1>-1 && index_lep2>-1) {
+	  if(ptMC[index_lep1]>ptMC[index_lep2]) {
+	    gen_pt_lep1  = ptMC[index_lep1];
+	    gen_pt_lep2  = ptMC[index_lep2];
+	    gen_eta_lep1 = etaMC[index_lep1];
+	    gen_eta_lep2 = etaMC[index_lep2];
+	    gen_phi_lep1 = phiMC[index_lep1];
+	    gen_phi_lep2 = phiMC[index_lep2];
+	    gen_pid_lep1 = pdgIdMC[index_lep1];
+	    gen_pid_lep2 = pdgIdMC[index_lep2];
+	  } else {
+	    gen_pt_lep1  = ptMC[index_lep2];
+	    gen_pt_lep2  = ptMC[index_lep1];
+	    gen_eta_lep1 = etaMC[index_lep2];
+	    gen_eta_lep2 = etaMC[index_lep1];
+	    gen_phi_lep1 = phiMC[index_lep2];
+	    gen_phi_lep2 = phiMC[index_lep1];
+	    gen_pid_lep1 = pdgIdMC[index_lep2];
+	    gen_pid_lep2 = pdgIdMC[index_lep1];
+	  } 
 
+	} else if (index_lep1>-1 && index_lep2<0) {
+	  gen_pt_lep1  = ptMC[index_lep1];
+	  gen_eta_lep1 = etaMC[index_lep1];
+	  gen_phi_lep1 = phiMC[index_lep1];
+	  gen_pid_lep1 = pdgIdMC[index_lep1];
+	  gen_pt_lep2  = -500.;
+	  gen_eta_lep2 = -500.;
+	  gen_phi_lep2 = -500.;
+	  gen_pid_lep2 = -500;	  
 
+	} else if (index_lep2>-1 && index_lep1<0) {
+	  gen_pt_lep1  = ptMC[index_lep2];
+	  gen_eta_lep1 = etaMC[index_lep2];
+	  gen_phi_lep1 = phiMC[index_lep2];
+	  gen_pid_lep1 = pdgIdMC[index_lep2];
+	  gen_pt_lep2  = -500.;
+	  gen_eta_lep2 = -500.;
+	  gen_phi_lep2 = -500.;
+	  gen_pid_lep2 = -500;
+	  
+	} else if (index_lep2<0 && index_lep1<0) {
+	  gen_pt_lep1  = -500.;
+	  gen_eta_lep1 = -500.;
+	  gen_phi_lep1 = -500.;
+	  gen_pid_lep1 = -500;
+	  gen_pt_lep2  = -500.;
+	  gen_eta_lep2 = -500.;
+	  gen_phi_lep2 = -500.;
+	  gen_pid_lep2 = -500;
+	}
+	
         // skip events where the number of jets, photons, and vertexes is above the maximum allowed value
         if (nPhot>30) {
 	        cout << "number of photons = " << nPhot << " and above threshold of 30; skipping" << endl;
@@ -1404,8 +1578,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         cout << "[DEBUG] after reco vector declaration" << endl;
 #endif
 
-
-       /***************************************************
+    
+	/***************************************************
         *                                                 *
         *                 RECO PHOTONS                    *
         *                                                 *
@@ -1615,7 +1789,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	            etaphotisojetreco.Fill(etaPhot[i],weight);
 	        }
         }  
-
+       
         vector<int> firstfourhiggsassphot = firstfour(ptPhot,&assophothiggs);
         vector<int> firstfourassphot = firstfour(ptPhot,&assophot);
         vector<int> firstfourisophot = firstfour(ptPhot,&isophot);      
@@ -1696,7 +1870,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             etaphothiggsassreco2.Fill(etaPhot[firstfourhiggsassphot.at(1)],weight);
 
         }
-
+    
         double higgsmass(0), etahiggs(-999);
 
         if( firstfourassphot.at(0)>-1 && firstfourassphot.at(1)>-1 ) { 
@@ -1855,9 +2029,224 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             }
 
         }
+    
+	/****************************************************
+	 *                                                  *
+	 *        LEPTON TAG                                *
+	 *                                                  *
+	 ****************************************************/
+	// electron tag 
+	vector<bool> idpasseletag(11);
+	int firstEle       = -999;
+	int secondEle      = -999;
+	double firstElePt  = -998.;
+	double secondElePt = -999.;
 
+        for(int iEle=0; iEle<nEle; iEle++){
+	  
+	  if (!leptonCutsEle(iEle, eletag, &idpasseletag)) continue; 
+	  
+	  if (electron_pt[iEle]>=secondElePt && electron_pt[iEle]<firstElePt) {
+	    secondEle=iEle;
+	    secondElePt=electron_pt[iEle];
+	  } else if (electron_pt[iEle]>=firstElePt && electron_pt[iEle]>=secondElePt) {
+	    secondEle=firstEle;
+	    secondElePt=firstElePt;
+	    firstEle=iEle;
+	    firstElePt=electron_pt[iEle];
+	  }
+	}
 
-       /***************************************************
+	// muon tag 
+	vector<bool> idpassmutag(11);
+	int firstMu       = -999;
+	int secondMu      = -999;
+	double firstMuPt  = -998.;
+	double secondMuPt = -999.;
+        for(int iMu=0; iMu<nMuons; iMu++){
+
+	  if (!leptonCutsMu(iMu, mutag, &idpassmutag)) continue; 
+
+	  if (Muon_pt[iMu]>=secondMuPt && Muon_pt[iMu]<firstMuPt) {
+	    secondMu=iMu;
+	    secondMuPt=Muon_pt[iMu];
+	  } else if (Muon_pt[iMu]>=firstMuPt && Muon_pt[iMu]>=secondMuPt) {
+	    secondMu=firstMu;
+	    secondMuPt=firstMuPt;
+	    firstMu=iMu;
+	    firstMuPt=Muon_pt[iMu];
+	  }
+	}
+	
+	// filling variables for the tree - lepton tag
+	if (firstEle>=0) {
+	  ptele1    = electron_pt[firstEle];
+	  etaele1   = electron_sc_eta[firstEle];
+	  phiele1   = electron_phi[firstEle];
+	  eneele1   = electron_energy[firstEle];
+	  sIeIeele1 = electron_SigmaIetaIeta[firstEle];
+	  dphiele1  = electron_dPhiIn[firstEle];
+	  detaele1  = electron_dEtaIn[firstEle];
+	  mhitsele1 = electron_misHits[firstEle];
+	  dcotele1  = electron_dcot[firstEle];
+	  distele1  = electron_dist[firstEle];
+	  d0ele1    = eleDxyPV(firstEle,vrankPhotonPairs[0]); 
+	  dzele1    = eleDzPV(firstEle,vrankPhotonPairs[0]); 
+	  
+	  TVector3 t3ele1, t3phot1, t3phot2;
+	  t3ele1.SetPtEtaPhi(ptele1,etaele1,phiele1);
+	  t3phot1.SetPtEtaPhi(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)]);
+	  t3phot2.SetPtEtaPhi(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)]);
+	  float eneEle1  = ptele1/(fabs(sin(t3ele1.Theta())));
+	  float enePhot1 = ptPhot[firstfourisophot.at(0)]/(fabs(sin(t3phot1.Theta())));
+	  float enePhot2 = ptPhot[firstfourisophot.at(1)]/(fabs(sin(t3phot2.Theta())));
+	  TLorentzVector t4ele1, t4phot1, t4phot2;
+	  t4ele1.SetPtEtaPhiE(ptele1,etaele1,phiele1,eneEle1);
+	  t4phot1.SetPtEtaPhiE(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)],enePhot1);
+	  t4phot2.SetPtEtaPhiE(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)],enePhot2);
+	  invMassele1g1 = (t4phot1 + t4ele1).M();
+	  invMassele1g2 = (t4phot2 + t4ele1).M();
+
+	  float fullHcal = electron_hcalIso03[firstEle] + electron_HoE[firstEle]*electron_sc_energy[firstEle]/cosh(electron_sc_eta[firstEle]);	  
+	  if (fabs(electron_sc_eta[firstEle])<1.4442) {
+	    // to correct for H/E removal...
+	    isoele1     = electron_trkIso03[firstEle] + std::max(0.,(electron_ecalIso03[firstEle]-1.)) + electron_hcalIso03[firstEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+	    fullisoele1 = electron_trkIso03[firstEle] + std::max(0.,(electron_ecalIso03[firstEle]-1.)) + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+	  } else {
+	    isoele1     = electron_trkIso03[firstEle] + electron_ecalIso03[firstEle] + electron_hcalIso03[firstEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+	    fullisoele1 = electron_trkIso03[firstEle] + electron_ecalIso03[firstEle] + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+	  }
+	} else {
+	  ptele1    = -500.;
+	  etaele1   = -500.;
+	  phiele1   = -500.;
+	  eneele1   = -500.;
+	  sIeIeele1 = -500.;
+	  dphiele1  = -500.;
+	  detaele1  = -500.;
+	  mhitsele1 = -500;
+	  dcotele1  = -500.;
+	  distele1  = -500.;
+	  d0ele1    = -500.;
+	  dzele1    = -500.;
+	  isoele1   = -500.;
+	  fullisoele1   = -500.; 
+	  invMassele1g1 = -500.;
+	  invMassele1g2 = -500.;
+	} 	    
+
+	if (secondEle>=0) {
+	  ptele2    = electron_pt[secondEle];
+	  etaele2   = electron_sc_eta[secondEle];
+	  phiele2   = electron_phi[secondEle];
+	  eneele2   = electron_energy[secondEle];
+	  sIeIeele2 = electron_SigmaIetaIeta[secondEle];
+	  dphiele2  = electron_dPhiIn[secondEle];
+	  detaele2  = electron_dEtaIn[secondEle];
+	  mhitsele2 = electron_misHits[secondEle];
+	  dcotele2  = electron_dcot[secondEle];
+	  distele2  = electron_dist[secondEle];
+	  d0ele2    = eleDxyPV(secondEle,vrankPhotonPairs[0]); 
+	  dzele2    = eleDzPV(secondEle,vrankPhotonPairs[0]); 
+
+	  TVector3 t3ele2, t3phot1, t3phot2;
+	  t3ele2.SetPtEtaPhi(ptele2,etaele2,phiele2);
+	  t3phot1.SetPtEtaPhi(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)]);
+	  t3phot2.SetPtEtaPhi(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)]);
+	  float eneEle2  = ptele2/(fabs(sin(t3ele2.Theta())));
+	  float enePhot1 = ptPhot[firstfourisophot.at(0)]/(fabs(sin(t3phot1.Theta())));
+	  float enePhot2 = ptPhot[firstfourisophot.at(1)]/(fabs(sin(t3phot2.Theta())));
+	  TLorentzVector t4ele2, t4phot1, t4phot2;
+	  t4ele2.SetPtEtaPhiE(ptele2,etaele2,phiele2,eneEle2);
+	  t4phot1.SetPtEtaPhiE(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)],enePhot1);
+	  t4phot2.SetPtEtaPhiE(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)],enePhot2);
+	  invMassele2g1 = (t4phot1 + t4ele2).M();
+	  invMassele2g2 = (t4phot2 + t4ele2).M();
+
+	  float fullHcal = electron_hcalIso03[secondEle] + electron_HoE[secondEle]*electron_sc_energy[secondEle]/cosh(electron_sc_eta[secondEle]);	  
+	  if (fabs(electron_sc_eta[secondEle])<1.4442) {
+	    isoele2     = electron_trkIso03[secondEle] + std::max(0.,(electron_ecalIso03[secondEle]-1.)) + electron_hcalIso03[secondEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+	    fullisoele2 = electron_trkIso03[secondEle] + std::max(0.,(electron_ecalIso03[secondEle]-1.)) + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+	  } else {
+	    isoele2     = electron_trkIso03[secondEle] + electron_ecalIso03[secondEle] + electron_hcalIso03[secondEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+	    fullisoele2 = electron_trkIso03[secondEle] + electron_ecalIso03[secondEle] + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+	  }
+	} else {
+	  ptele2    = -500.;
+	  etaele2   = -500.;
+	  phiele2   = -500.;
+	  eneele2   = -500.;
+	  sIeIeele2 = -500.;
+	  dphiele2  = -500.;
+	  detaele2  = -500.;
+	  mhitsele2 = -500;
+	  dcotele2  = -500.;
+	  distele2  = -500.;
+	  d0ele2    = -500.;
+	  dzele2    = -500.;
+	  fullisoele2 = -500.;
+	  isoele2     = -500.;
+	  invMassele2g1 = -500.;
+	  invMassele2g2 = -500.;
+	}	 
+
+	if (firstMu>=0) {
+	  ptmu1      = Muon_pt[firstMu];
+	  etamu1     = Muon_eta[firstMu];
+	  phimu1     = Muon_phi[firstMu];
+	  enemu1     = Muon_energy[firstMu];
+	  pixhitsmu1 = Muon_pixHits[firstMu];
+	  trkhitsmu1 = Muon_tkHits[firstMu];
+	  hitsmu1    = Muon_validHits[firstMu];
+	  chi2mu1    = Muon_normChi2[firstMu];
+	  matchmu1   = Muon_numberOfMatches[firstMu];
+	  d0mu1      = muonDxyPV(firstMu,vrankPhotonPairs[0]);
+	  dzmu1      = muonDzPV(firstMu,vrankPhotonPairs[0]);
+	  isomu1     = Muon_trackIso[firstMu] + Muon_ecalIso[firstMu] + Muon_hcalIso[firstMu] - rhoPF*TMath::Pi()*0.3*0.3; 
+	} else {
+	  ptmu1      = -500.;
+	  etamu1     = -500.;
+	  phimu1     = -500.;
+	  enemu1     = -500.;
+	  pixhitsmu1 = -500;
+	  trkhitsmu1 = -500;
+	  hitsmu1    = -500;
+	  chi2mu1    = -500.;
+	  matchmu1   = -500;
+	  d0mu1      = -500.;
+	  dzmu1      = -500.;
+	  isomu1     = -500.;
+	}
+
+	if (secondMu>=0) {
+	  ptmu2      = Muon_pt[secondMu];
+	  etamu2     = Muon_eta[secondMu];
+	  phimu2     = Muon_phi[secondMu];
+	  enemu2     = Muon_energy[secondMu];
+	  pixhitsmu2 = Muon_pixHits[secondMu];
+	  trkhitsmu2 = Muon_tkHits[secondMu];
+	  hitsmu2    = Muon_validHits[secondMu];
+	  chi2mu2    = Muon_normChi2[secondMu];
+	  matchmu2   = Muon_numberOfMatches[secondMu];
+	  d0mu2      = muonDxyPV(secondMu,vrankPhotonPairs[0]);
+	  dzmu2      = muonDzPV(secondMu,vrankPhotonPairs[0]);
+	  isomu2     = Muon_trackIso[secondMu] + Muon_ecalIso[secondMu] + Muon_hcalIso[secondMu] - rhoPF*TMath::Pi()*0.3*0.3;  
+	} else {
+	  ptmu2      = -500.;
+	  etamu2     = -500.;
+	  phimu2     = -500.;
+	  enemu2     = -500.;
+	  pixhitsmu2 = -500;
+	  trkhitsmu2 = -500;
+	  hitsmu2    = -500;
+	  chi2mu2    = -500.;
+	  matchmu2   = -500;
+	  d0mu2      = -500.;
+	  dzmu2      = -500.;
+	  isomu2     = -500.;
+	}
+	  
+	/***************************************************
         *                                                 *
         *        SAVING RECO VARIABLES IN TTREE           *
         *                                                 *
@@ -1978,6 +2367,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	deltaphigg = delta_phi(phiPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(1)]);
 	ptphot1 = ptPhot[firstfourisophot.at(0)]; 
         ptphot2 = ptPhot[firstfourisophot.at(1)];   
+	deltaRToTrackphot1 = pid_deltaRToTrackPhot[firstfourisophot.at(0)];
+	deltaRToTrackphot2 = pid_deltaRToTrackPhot[firstfourisophot.at(1)];
  	timephot1 = timePhot[firstfourisophot.at(0)];
  	timephot2 = timePhot[firstfourisophot.at(1)];  
 	etaphot1 = etaPhot[firstfourisophot.at(0)];
@@ -2849,6 +3240,15 @@ void RedNtpTree::SetAllGenVarToMinus999()
     gen_phi_dijet = -999;
     
     gen_zeppenfeld = -999;
+
+    gen_pt_lep1  = -999.;
+    gen_pt_lep2  = -999.;
+    gen_eta_lep1 = -999.;
+    gen_eta_lep2 = -999.;
+    gen_phi_lep1 = -999.;
+    gen_phi_lep2 = -999.;
+    gen_pid_lep1 = -999;
+    gen_pid_lep2 = -999;
 }
 
 
@@ -2860,6 +3260,8 @@ massggnewvtx = -999;
 ptggnewvtx = -999;
 ptphot1 = -999;
 ptphot2 = -999;
+deltaRToTrackphot1 = -999;
+deltaRToTrackphot2 = -999;
 etaphot1 = -999;
 etaphot2 = -999;
 phiphot1 = -999;
@@ -3069,6 +3471,64 @@ idelephot2 = -999;
    nWeightsPDF8 = -999;
    nWeightsPDF9 = -999;
    nWeightsPDF10 = -999;
+
+   ptele1    = -999.;
+   ptele2    = -999.;
+   etaele1   = -999.;
+   etaele2   = -999.;
+   phiele1   = -999.;
+   phiele2   = -999.;
+   eneele1   = -999.;
+   eneele2   = -999.;
+   sIeIeele1 = -999.;
+   sIeIeele2 = -999.;
+   dphiele1  = -999.;
+   dphiele2  = -999.;
+   detaele1  = -999.;
+   detaele2  = -999.;
+   mhitsele1 = -999;
+   mhitsele2 = -999;
+   dcotele1  = -999.;
+   dcotele2  = -999.;
+   distele1  = -999.;
+   distele2  = -999.;
+   d0ele1    = -999.;
+   d0ele2    = -999.;
+   dzele1    = -999.;
+   dzele2    = -999.;
+   isoele1   = -999.;
+   isoele2   = -999.;
+   fullisoele1 = -999.;
+   fullisoele2 = -999.;
+   invMassele1g1 = -999.;
+   invMassele1g2 = -999.;
+   invMassele2g1 = -999.;
+   invMassele2g2 = -999.;
+
+   ptmu1     = -999.;
+   ptmu2     = -999.;
+   etamu1    = -999.;
+   etamu2    = -999.;
+   phimu1    = -999.;
+   phimu2    = -999.;
+   enemu1    = -999.;
+   enemu2    = -999.;
+   pixhitsmu1 = -999;
+   pixhitsmu2 = -999;
+   trkhitsmu1 = -999;
+   trkhitsmu2 = -999;
+   hitsmu1 = -999;
+   hitsmu2 = -999;
+   chi2mu1 = -999.;   
+   chi2mu2 = -999.;   
+   matchmu1 = -999;
+   matchmu2 = -999;
+   d0mu1 = -999.;
+   d0mu2 = -999.;
+   dzmu1 = -999.;
+   dzmu2 = -999.;
+   isomu1 = -999.;
+   isomu2 = -999.;
    
    weight = -999;
 }
@@ -3265,7 +3725,116 @@ bool RedNtpTree::cutIDele(int i, photonidelecuts const& pid, vector<bool> *vpass
   return (ptiso && hcaliso && ecaliso && hoveiso && setaeta && deta && minhits && dcot && dist);
 }
 
+bool RedNtpTree::leptonCutsEle(int iEle, electronidcuts const& pid, vector<bool> *vpass) {
 
+  bool pt, eta, crack;
+  bool setaeta, deta, dphi;
+  bool minhits, dconv;
+  bool d0, dz;
+  bool isol;
+
+  // acceptance
+  pt    = electron_pt[iEle] > pid.pt;      
+  eta   = fabs(electron_sc_eta[iEle]) < pid.eta; 
+  crack = fabs(electron_sc_eta[iEle]) < pid.crack1 || fabs(electron_sc_eta[iEle]) > pid.crack2;
+
+  // electronId + conv.rejection + impact parameters + isolation
+  float d0Ele = eleDxyPV(iEle,vrankPhotonPairs[0]);   
+  float dzEle = eleDzPV(iEle,vrankPhotonPairs[0]);   
+
+  float fullHcal = electron_hcalIso03[iEle] + fabs(electron_HoE[iEle]*electron_sc_energy[iEle]/cosh(electron_sc_eta[iEle]));
+  // float electronIsoEB = electron_trkIso03[iEle] + std::max(0.,(electron_ecalIso03[iEle]-1.)) + electron_hcalIso03[iEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+  // float electronIsoEE = electron_trkIso03[iEle] + electron_ecalIso03[iEle] + electron_hcalIso03[iEle] - rhoPF*TMath::Pi()*0.3*0.3; 
+  float electronIsoEB = electron_trkIso03[iEle] + std::max(0.,(electron_ecalIso03[iEle]-1.)) + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+  float electronIsoEE = electron_trkIso03[iEle] + electron_ecalIso03[iEle] + fullHcal - rhoPF*TMath::Pi()*0.3*0.3; 
+  
+  if (fabs(electron_sc_eta[iEle])<1.4442) {
+    setaeta = electron_SigmaIetaIeta[iEle] < pid.setaetaEB;
+    deta    = fabs(electron_dEtaIn[iEle]) < pid.detaEB;
+    dphi    = fabs(electron_dPhiIn[iEle]) < pid.dphiEB;  
+    minhits = electron_misHits[iEle] <= pid.minhitsEB;
+    dconv   = (fabs(electron_dcot[iEle]) > pid.dcotEB) || (fabs(electron_dist[iEle]) > pid.distEB);  
+    d0      = fabs(d0Ele) < pid.d0EB;
+    dz      = fabs(dzEle) < pid.dzEB;
+    isol    = electronIsoEB < electron_pt[iEle]* pid.iso_relEB;
+  } else {
+    setaeta = electron_SigmaIetaIeta[iEle] < pid.setaetaEE;
+    deta    = fabs(electron_dEtaIn[iEle]) < pid.detaEE;
+    dphi    = fabs(electron_dPhiIn[iEle]) < pid.dphiEE;
+    minhits = electron_misHits[iEle] <= pid.minhitsEE;
+    dconv   = (fabs(electron_dcot[iEle]) > pid.dcotEE) || (fabs(electron_dist[iEle]) > pid.distEE); 
+    d0      = fabs(d0Ele) < pid.d0EE;
+    dz      = fabs(dzEle) < pid.dzEE;
+    isol    = electronIsoEE < electron_pt[iEle]* pid.iso_relEE;
+  }
+
+  if (vpass) {
+    if((*vpass).size()!=11) { cout << "major failure in LeptonCutsEle! (*vpass).size()!=11.. die!" << endl; exit(0) ; }
+    (*vpass)[0]  = pt;
+    (*vpass)[1]  = eta;
+    (*vpass)[2]  = crack;
+    (*vpass)[3]  = setaeta;
+    (*vpass)[4]  = deta;
+    (*vpass)[5]  = dphi;
+    (*vpass)[6]  = minhits;
+    (*vpass)[7]  = dconv;  
+    (*vpass)[8]  = d0;
+    (*vpass)[9]  = dz;
+    (*vpass)[10] = isol;
+  }
+
+  return (pt && eta && crack && setaeta && deta && dphi && minhits && dconv && d0 && dz && isol);
+}
+
+bool RedNtpTree::leptonCutsMu(int iMu, muonidcuts const& pid, vector<bool> *vpass) {
+
+  bool pt, eta;
+  bool pixhits, tkhits, globalhits, chi2, match, globAndTrk;
+  bool d0, dz;
+  bool isol;
+
+  // acceptance
+  pt  = Muon_pt[iMu] > pid.pt;      
+  eta = fabs(Muon_eta[iMu]) < pid.eta; 
+	   
+  // muonId 
+  pixhits    = Muon_pixHits[iMu] > pid.pixhits;          
+  tkhits     = Muon_tkHits[iMu] > pid.tkhits;            
+                                                         
+  globalhits = Muon_validHits[iMu] > pid.hits;           
+  chi2       = Muon_normChi2[iMu] < pid.chi2;            
+  match      = Muon_numberOfMatches[iMu] > pid.match;
+  
+  globAndTrk = Muon_isGlobalMuon[iMu] && Muon_isTrackerMuon[iMu];
+
+  // impact parameter 
+  float d0Muon = muonDxyPV(iMu,vrankPhotonPairs[0]);
+  float dzMuon = muonDzPV(iMu,vrankPhotonPairs[0]);
+  d0 = fabs(d0Muon) < pid.d0;
+  dz = fabs(dzMuon) < pid.dz;
+  
+  // isolation 
+  float muonIso  = Muon_trackIso[iMu] + Muon_ecalIso[iMu] + Muon_hcalIso[iMu] - rhoPF*TMath::Pi()*0.3*0.3;	   
+  float relMuIso = muonIso/Muon_pt[iMu];
+  isol = relMuIso < pid.iso_rel;
+
+  if (vpass) {
+    if((*vpass).size()!=11) { cout << "major failure! (*vpass).size()!=10.. die!" << endl; exit(0) ; }
+    (*vpass)[0] = pt;
+    (*vpass)[1] = eta;
+    (*vpass)[2] = pixhits;
+    (*vpass)[3] = tkhits;
+    (*vpass)[4] = globalhits;
+    (*vpass)[5] = chi2;
+    (*vpass)[6] = match;
+    (*vpass)[7] = d0;
+    (*vpass)[8] = dz;
+    (*vpass)[9] = isol;
+    (*vpass)[10] = globAndTrk;
+  }
+
+  return (pt && eta && pixhits && tkhits && globalhits && chi2 && match && d0 && dz && isol && globAndTrk);
+}
 
 bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass, bool PU) {
 
@@ -3309,9 +3878,42 @@ bool RedNtpTree::cutIDEG(int i, photonidegcuts const& pid, vector<bool> *vpass, 
   return (ptiso && hcaliso && ecaliso && hoveiso && setaeta);
 }
 
+double RedNtpTree::eleDzPV(int iele, int iPV) {
+  TVector3 PVPos(vx[iPV],vy[iPV],vz[iPV]);
+  TVector3 lepVPos(electron_vx[iele],electron_vy[iele],electron_vz[iele]);  
+  TVector3 lepMom(electron_px[iele],electron_py[iele],electron_pz[iele]);
+  return trackDzPV(PVPos,lepVPos,lepMom);
+}
 
+double RedNtpTree::eleDxyPV(int iele, int iPV) {
+  TVector3 PVPos(vx[iPV],vy[iPV],vz[iPV]);
+  TVector3 lepVPos(electron_vx[iele],electron_vy[iele],electron_vz[iele]);
+  TVector3 lepMom(electron_px[iele],electron_py[iele],electron_pz[iele]);
+  return trackDxyPV(PVPos,lepVPos,lepMom);
+}
 
+double RedNtpTree::muonDzPV(int imu, int iPV) {
+  TVector3 PVPos(vx[iPV],vy[iPV],vz[iPV]);
+  TVector3 lepVPos(Muon_vx[imu],Muon_vy[imu],Muon_vz[imu]);
+  TVector3 lepMom(Muon_px[imu],Muon_py[imu],Muon_pz[imu]);
+  return trackDzPV(PVPos,lepVPos,lepMom);
+}
 
+double RedNtpTree::muonDxyPV(int imu, int iPV) {
+  TVector3 PVPos(vx[iPV],vy[iPV],vz[iPV]);
+  TVector3 lepVPos(Muon_vx[imu],Muon_vy[imu],Muon_vz[imu]);
+  TVector3 lepMom(Muon_px[imu],Muon_py[imu],Muon_pz[imu]);
+  return trackDxyPV(PVPos,lepVPos,lepMom);
+}
+
+double RedNtpTree::trackDzPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom) {
+  float trackPt = trackMom.Pt();
+  return (trackVPos.Z()-PVPos.Z()) - ((trackVPos.X()-PVPos.X())*trackMom.X()+(trackVPos.Y()-PVPos.Y())*trackMom.Y())/trackPt *trackMom.Pz()/trackPt;
+}
+
+double RedNtpTree::trackDxyPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom) {
+  return ( - (trackVPos.X()-PVPos.X())*trackMom.Y() + (trackVPos.Y()-PVPos.Y())*trackMom.X() ) / trackMom.Pt();
+}
 
 
 /************************************

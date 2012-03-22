@@ -6,6 +6,7 @@
 //#include "tree_reader_V3.h"
 #include "tree_reader_V7.h"
 #include "PhotonIdCuts.h"
+#include "LeptonIdCuts.h"
 #include "EnergyScaleCorrection.h"
 #include "JetScaleSystematics.h"
 #include "TLorentzVector.h"
@@ -157,6 +158,15 @@ private:
    }
 
 
+   // lepton tag
+   bool leptonCutsEle(int iEle, electronidcuts const& pid, vector<bool> *vpass);
+   bool leptonCutsMu(int iMu, muonidcuts const& pid, vector<bool> *vpass);
+   double eleDzPV(int iele, int iPV);
+   double eleDxyPV(int iele, int iPV);
+   double muonDzPV(int imu, int iPV);
+   double muonDxyPV(int imu, int iPV);
+   double trackDzPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom);
+   double trackDxyPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom);
 
    // vector of pu weights
    std::vector<Double_t> puweights_;
@@ -176,6 +186,8 @@ private:
    Float_t ptggnewvtx;
    Float_t ptphot1;
    Float_t ptphot2;
+   Float_t deltaRToTrackphot1;
+   Float_t deltaRToTrackphot2;
    Float_t etaphot1;
    Float_t etaphot2;
    Float_t phiphot1;
@@ -339,6 +351,11 @@ private:
    Float_t gen_phi_dijet;
 
    Float_t gen_zeppenfeld;
+
+   Float_t gen_pt_lep1,  gen_pt_lep2;
+   Float_t gen_eta_lep1, gen_eta_lep2;
+   Float_t gen_phi_lep1, gen_phi_lep2;
+   Int_t gen_pid_lep1, gen_pid_lep2;
    ////////////////////////
 
    Int_t npu;
@@ -445,6 +462,37 @@ private:
    Float_t PDFweight8[150];
    Float_t PDFweight9[150];
    Float_t PDFweight10[150];
+
+   // lepton tag
+   Float_t ptele1, ptele2;
+   Float_t etaele1, etaele2;
+   Float_t phiele1, phiele2;
+   Float_t eneele1, eneele2;
+   Float_t sIeIeele1, sIeIeele2;
+   Float_t dphiele1, dphiele2;
+   Float_t detaele1, detaele2;
+   Int_t mhitsele1, mhitsele2;
+   Float_t dcotele1, dcotele2;
+   Float_t distele1, distele2;
+   Float_t d0ele1, d0ele2;
+   Float_t dzele1, dzele2;
+   Float_t isoele1, isoele2;
+   Float_t fullisoele1, fullisoele2;
+   Float_t invMassele1g1, invMassele1g2;
+   Float_t invMassele2g1, invMassele2g2;
+   // 
+   Float_t ptmu1, ptmu2;
+   Float_t etamu1, etamu2;
+   Float_t phimu1, phimu2;
+   Float_t enemu1, enemu2;
+   Int_t pixhitsmu1, pixhitsmu2;
+   Int_t trkhitsmu1, trkhitsmu2;
+   Int_t hitsmu1, hitsmu2;
+   Float_t chi2mu1, chi2mu2;
+   Int_t matchmu1, matchmu2;
+   Float_t d0mu1, d0mu2;
+   Float_t dzmu1, dzmu2;
+   Float_t isomu1,isomu2;
 
    float weight;
 };
