@@ -1,0 +1,965 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 1218
+# of uniq files in directory: 1213 /tmp/uniq.DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_07.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_08.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_09.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_10.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_11.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_12.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_13.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_14.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_15.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_16.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_17.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_18.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_19.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_20.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_21.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_22.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_23.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_24.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_25.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_26.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_27.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_28.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_29.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_30.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_31.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_32.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_33.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_34.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_35.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_36.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_37.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_38.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_39.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_40.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_41.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_42.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_43.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_44.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_45.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_46.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_47.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_48.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_49.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_50.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_51.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_52.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_53.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_54.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_55.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_56.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_57.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_58.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_59.list
+new list:   DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_60.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 34
+# of uniq files in directory: 34 /tmp/uniq.DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBorn_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 36
+# of uniq files in directory: 36 /tmp/uniq.DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBorn_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 36
+# of uniq files in directory: 36 /tmp/uniq.DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBorn_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 36
+# of uniq files in directory: 36 /tmp/uniq.DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBox_Pt-10To25_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 36
+# of uniq files in directory: 36 /tmp/uniq.DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBox_Pt-250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 28
+# of uniq files in directory: 28 /tmp/uniq.DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonBox_Pt-25To250_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 78
+# of uniq files in directory: 78 /tmp/uniq.DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   DiPhotonJets_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 52
+# of uniq files in directory: 52 /tmp/uniq.GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   GJet_Pt-20_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.GluGluToHToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 9
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 9
+# of uniq files in directory: 9 /tmp/uniq.GluGluToHToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.GluGluToHToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.GluGluToHToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp GluGluToHToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.GluGluToHToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 155
+# of uniq files in directory: 155 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_07.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 791
+# of uniq files in directory: 756 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_07.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_08.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_09.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_10.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_11.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_12.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_13.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_14.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_15.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_16.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_17.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_18.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_19.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_20.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_21.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_22.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_23.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_24.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_25.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_26.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_27.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_28.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_29.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_30.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_31.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_32.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_33.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_34.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_35.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_36.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_37.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.TTH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.TTH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v2.files.tmp TTH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v2_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v2.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v2_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp TTH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 161
+# of uniq files in directory: 160 /tmp/uniq.TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   TTJets_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_07.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-100_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-105_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 9
+# of uniq files in directory: 9 /tmp/uniq.VBF_HToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-110_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 9
+# of uniq files in directory: 9 /tmp/uniq.VBF_HToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-115_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-120_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-121_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-123_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-125_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-130_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-135_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-140_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-145_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-150_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-155_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-160_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-160_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-160_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-160_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-160_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.VBF_HToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-90_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp VBF_HToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.VBF_HToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-95_7TeV-powheg-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 35
+# of uniq files in directory: 35 /tmp/uniq.WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WGToENuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 35
+# of uniq files in directory: 35 /tmp/uniq.WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WGToMuNuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 62
+# of uniq files in directory: 35 /tmp/uniq.WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WGToTauNuG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-100_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-105_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-110_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-115_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-120_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-121_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-123_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 6
+# of uniq files in directory: 6 /tmp/uniq.WH_ZH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-125_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-130_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-135_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-140_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.WH_ZH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-145_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-150_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-155_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-160_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-90_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp WH_ZH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 8
+# of uniq files in directory: 8 /tmp/uniq.WH_ZH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-95_7TeV-pythia6-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 1368
+# of uniq files in directory: 1362 /tmp/uniq.WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_07.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_08.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_09.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_10.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_11.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_12.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_13.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_14.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_15.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_16.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_17.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_18.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_19.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_20.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_21.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_22.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_23.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_24.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_25.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_26.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_27.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_28.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_29.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_30.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_31.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_32.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_33.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_34.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_35.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_36.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_37.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_38.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_39.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_40.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_41.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_42.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_43.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_44.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_45.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_46.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_47.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_48.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_49.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_50.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_51.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_52.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_53.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_54.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_55.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_56.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_57.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_58.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_59.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_60.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_61.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_62.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_63.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_64.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_65.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_66.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_67.list
+new list:   WJetsToLNu_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_68.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WWTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WWTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp WWTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 15
+# of uniq files in directory: 15 /tmp/uniq.WWTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WWTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 74
+# of uniq files in directory: 74 /tmp/uniq.WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   WZTo3LNu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 288
+# of uniq files in directory: 288 /tmp/uniq.WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_02.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_03.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_04.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_05.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_06.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_07.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_08.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_09.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_10.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_11.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_12.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_13.list
+new list:   WZ_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_14.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Wminusgg_madgraph_Fall11_private_v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Wminusgg_madgraph_Fall11_private_v2.files.tmp Wminusgg_madgraph_Fall11_private_v2_
+# of root files in directory: 18
+# of uniq files in directory: 18 /tmp/uniq.Wminusgg_madgraph_Fall11_private_v2.files.tmp
+# of files per list: 20
+new list:   Wminusgg_madgraph_Fall11_private_v2_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Wplusgg_madgraph_Fall11_private_v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Wplusgg_madgraph_Fall11_private_v2.files.tmp Wplusgg_madgraph_Fall11_private_v2_
+# of root files in directory: 18
+# of uniq files in directory: 18 /tmp/uniq.Wplusgg_madgraph_Fall11_private_v2.files.tmp
+# of files per list: 20
+new list:   Wplusgg_madgraph_Fall11_private_v2_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 23
+# of uniq files in directory: 23 /tmp/uniq.ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   ZGToEEG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 22
+# of uniq files in directory: 22 /tmp/uniq.ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   ZGToMuMuG_TuneZ2_7TeV-madgraph-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 22
+# of uniq files in directory: 22 /tmp/uniq.ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+new list:   ZGToTauTauG_TuneZ2_7TeV-madgraph-tauola-Fall11-PU_S6_START42_V14B-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp ZZTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_
+# of root files in directory: 15
+# of uniq files in directory: 15 /tmp/uniq.ZZTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1.files.tmp
+# of files per list: 20
+new list:   ZZTo2L2Nu_TuneZ2_7TeV_pythia6_tauola-Fall11-PU_S6_START42_V14B-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Zgg_madgraph_Fall11_private_v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Zgg_madgraph_Fall11_private_v2.files.tmp Zgg_madgraph_Fall11_private_v2_
+# of root files in directory: 18
+# of uniq files in directory: 18 /tmp/uniq.Zgg_madgraph_Fall11_private_v2.files.tmp
+# of files per list: 20
+new list:   Zgg_madgraph_Fall11_private_v2_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ttgg_madgraph_Fall11_private_v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ttgg_madgraph_Fall11_private_v2.files.tmp ttgg_madgraph_Fall11_private_v2_
+# of root files in directory: 18
+# of uniq files in directory: 18 /tmp/uniq.ttgg_madgraph_Fall11_private_v2.files.tmp
+# of files per list: 20
+new list:   ttgg_madgraph_Fall11_private_v2_00.list

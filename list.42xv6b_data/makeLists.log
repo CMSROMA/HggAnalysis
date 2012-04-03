@@ -1,0 +1,71 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly.files.tmp Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_
+# of root files in directory: 275
+# of uniq files in directory: 275 /tmp/uniq.Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly.files.tmp
+# of files per list: 20
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_00.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_01.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_02.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_03.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_04.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_05.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_06.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_07.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_08.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_09.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_10.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_11.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_12.list
+new list:   Photon-Run2011A-16Jan2012-v1-DiPhotonSkimOnFly_13.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly.files.tmp Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_
+# of root files in directory: 357
+# of uniq files in directory: 353 /tmp/uniq.Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly.files.tmp
+# of files per list: 20
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_00.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_01.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_02.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_03.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_04.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_05.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_06.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_07.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_08.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_09.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_10.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_11.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_12.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_13.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_14.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_15.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_16.list
+new list:   Photon-Run2011A-30Nov2011-v1-DiPhotonSkimOnFly_17.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly.files.tmp Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_
+# of root files in directory: 357
+# of uniq files in directory: 357 /tmp/uniq.Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly.files.tmp
+# of files per list: 20
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_00.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_01.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_02.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_03.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_04.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_05.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_06.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_07.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_08.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_09.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_10.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_11.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_12.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_13.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_14.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_15.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_16.list
+new list:   Photon-Run2011B-30Nov2011-v1-DiPhotonSkimOnFly_17.list
