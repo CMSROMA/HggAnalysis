@@ -464,9 +464,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("btagvtxjet2",&btagvtxjet2,"btagvtxjet2/F");
     ana_tree->Branch("btagtrkjet2",&btagtrkjet2,"btagtrkjet2/F");
     ana_tree->Branch("ptDjet1",&ptDjet1,"ptDjet1/F");
+    ana_tree->Branch("rmsjet1",&rmsjet1,"rmsjet1/F");
     ana_tree->Branch("ntrkjet1",&ntrkjet1,"ntrkjet1/I");
     ana_tree->Branch("nneutjet1",&nneutjet1,"nneutjet1/I");
     ana_tree->Branch("ptDjet2",&ptDjet2,"ptDjet2/F");
+    ana_tree->Branch("rmsjet2",&rmsjet2,"rmsjet2/F");
     ana_tree->Branch("ntrkjet2",&ntrkjet2,"ntrkjet2/I");
     ana_tree->Branch("nneutjet2",&nneutjet2,"nneutjet2/I");
     ana_tree->Branch("assjet1",&assjet1,"assjet1/I");
@@ -1841,9 +1843,16 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             bool goodetajet(1);
             
             if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
-            if(TMath::Abs(etaJet_pfakt5[i]) < 2.0) 
-              if( betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
-            
+
+	    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
+	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
+	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;
+	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 3){
+	      if(rmsCandJet_pfakt5[i] > 0.03) goodetajet = 0;
+	    } else {
+	      if(rmsCandJet_pfakt5[i] > 0.04) goodetajet = 0;
+	    }
+		            
             if(!assh && goodetajet) jetnohiggsphot.push_back(1);
             else jetnohiggsphot.push_back(0); 
             
@@ -2488,8 +2497,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  btagvtxjet1 = simpleSecondaryVertexHighEffBJetTags[firstfournoisojet.at(0)];
  	  btagtrkjet1 = trackCountingHighEffBJetTags[firstfournoisojet.at(0)];	  
  	  ptDjet1 = ptDJet_pfakt5[firstfournoisojet.at(0)];
+	  rmsjet1 = rmsCandJet_pfakt5[firstfournoisojet.at(0)];
  	  ntrkjet1 = nChargedHadrons_pfakt5[firstfournoisojet.at(0)];
- 	  nneutjet1 = nNeutralHadrons_pfakt5[firstfournoisojet.at(0)];
+ 	  nneutjet1 = nPhotons_pfakt5[firstfournoisojet.at(0)] + nNeutralHadrons_pfakt5[firstfournoisojet.at(0)] + nHFHadrons_pfakt5[firstfournoisojet.at(0)] + nHFEM_pfakt5[firstfournoisojet.at(0)];
 	}else{
 	  ptjet1 = -999;
 	  ptcorrjet1 = -999;
@@ -2501,6 +2511,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  btagvtxjet1 = -999.;
  	  btagtrkjet1 = -999.;
  	  ptDjet1 = -999.;
+	  rmsjet1 = -999.;
  	  ntrkjet1 = -999.;
  	  nneutjet1 = -999.; 
 	}
@@ -2515,8 +2526,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  btagvtxjet2 = simpleSecondaryVertexHighEffBJetTags[firstfournoisojet.at(1)];
  	  btagtrkjet2 = trackCountingHighEffBJetTags[firstfournoisojet.at(1)];	  
  	  ptDjet2 = ptDJet_pfakt5[firstfournoisojet.at(1)];
+	  rmsjet2 = rmsCandJet_pfakt5[firstfournoisojet.at(1)];
  	  ntrkjet2 = nChargedHadrons_pfakt5[firstfournoisojet.at(1)];
- 	  nneutjet2 = nNeutralHadrons_pfakt5[firstfournoisojet.at(1)];
+	  // 	  nneutjet2 = nNeutralHadrons_pfakt5[firstfournoisojet.at(1)];
+ 	  nneutjet2 = nPhotons_pfakt5[firstfournoisojet.at(1)] + nNeutralHadrons_pfakt5[firstfournoisojet.at(1)] + nHFHadrons_pfakt5[firstfournoisojet.at(1)] + nHFEM_pfakt5[firstfournoisojet.at(1)];
 	}else{
 	  ptjet2 = -999;
 	  ptcorrjet2 = -999;
@@ -2528,7 +2541,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  btagvtxjet2 = -999.;
  	  btagtrkjet2 = -999.;
  	  ptDjet2 = -999.;
- 	  ntrkjet2 = -999.;
+ 	  rmsjet2 = -999.;
+	  ntrkjet2 = -999.;
  	  nneutjet2 = -999.; 
 	}
 	if( firstfournoisojet.at(2) > -1) {
@@ -2977,7 +2991,9 @@ bool RedNtpTree::assoJet(int i){
   for(int j=0; j<nJetGen_akt5; j++){	
     double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) + 
 		     delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
-    if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = 1; 
+    //    if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = 1; 
+    if(DR < 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[j]-10)) &&  TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5)  ass = 1;
+
   }
 
   return ass;

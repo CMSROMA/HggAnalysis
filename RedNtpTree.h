@@ -253,9 +253,11 @@ private:
    Float_t btagvtxjet2;
    Float_t btagtrkjet2;
    Float_t ptDjet1;
+   Float_t rmsjet1;
    Int_t ntrkjet1;
    Int_t nneutjet1;
    Float_t ptDjet2;
+   Float_t rmsjet2;
    Int_t ntrkjet2;
    Int_t nneutjet2;
    Int_t assjet1;

@@ -17,7 +17,7 @@
 using std::vector;
 using std::string;
 
-#define SMALL_VERTEX_VECTOR
+//#define SMALL_VERTEX_VECTOR
 
 #ifdef SMALL_VERTEX_VECTOR
 #define VECTOR_ARRAY_SIZE 30
