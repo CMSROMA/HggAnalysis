@@ -27,6 +27,7 @@ using std::endl;
 RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V7(tree), jsonFile(0) , ptweights_(0), scaleCorrections_(0)
 {  
   hOutputFile   = TFile::Open(outname, "RECREATE" ) ;
+
   // must be set by the user 
   EquivLumi = -1.;
   xsection = -1.;
@@ -35,6 +36,10 @@ RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V7(tre
   gen_=new TRandom3(0);
   doPDFweight = 0;
   jetsyst_ = 0;
+
+  // myTree = new TTree("cicTree_structure_","");
+  // TString treeVariables = "runCIC/I:eventCIC/I:isosumoet/F:isoecalet/F:isohcalet/F:isotrackeret/F:isosumoetbad/F:isoecaletbad/F:isohcaletbad/F:isotrackeretbad/F:sieie/F:hoe/F:r9/F:drtotk_25_99/F:pixel/F";
+  // myTree->Branch("cicTree_structure_",&(tree_.runCIC),treeVariables);
 }
 
 
@@ -133,7 +138,7 @@ bool RedNtpTree::mcID(int i)
 void RedNtpTree::Loop(int isgjetqcd, char* selection)
 {
     if (fChain == 0) return;
-    
+
     Long64_t nentries = fChain->GetEntriesFast();
     //   Long64_t nentries = 10000;
     
@@ -357,6 +362,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("r9phot2",&r9phot2,"r9phot2/F");
     ana_tree->Branch("isemEGphot1",&isemEGphot1,"isemEGphot1/I");
     ana_tree->Branch("isemEGphot2",&isemEGphot2,"isemEGphot2/I");
+    ana_tree->Branch("promptGamma",&promptGamma,"promptGamma/I");
+    ana_tree->Branch("LOGamma",    &LOGamma,    "LOGamma/I");
+    ana_tree->Branch("ISRGamma",   &ISRGamma,   "ISRGamma/I");
+    ana_tree->Branch("FSRGamma",   &FSRGamma,   "FSRGamma/I");
 
 //     ana_tree->Branch("idloosenewEGphot1",&idloosenewEGphot1,"idloosenewEGphot1/I");
 //     ana_tree->Branch("idloosenewEGphot2",&idloosenewEGphot2,"idloosenewEGphot2/I");
@@ -984,7 +993,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ********************************************************/
 
 
-    for (Long64_t jentry=0; jentry<nentries;jentry++) 
+   for (Long64_t jentry=0; jentry<nentries;jentry++) 
     {
         Long64_t ientry = LoadTree(jentry);
         if (ientry < 0) break;
@@ -2440,7 +2449,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         pid_hasMatchedConvphot2 =  hasMatchedConvPhot[firstfourisophot.at(1)]; 
         pid_hasMatchedPromptElephot1 =  hasMatchedPromptElePhot[firstfourisophot.at(0)]; 
         pid_hasMatchedPromptElephot2 =  hasMatchedPromptElePhot[firstfourisophot.at(1)]; 
-	
+
 	pid_sminphot1 =  sMinMinPhot[firstfourisophot.at(0)];
 	pid_sminphot2 =  sMinMinPhot[firstfourisophot.at(1)];
 	pid_smajphot1 =  sMajMajPhot[firstfourisophot.at(0)];
@@ -2721,6 +2730,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         eventRN = event;
         lumi = lbn;
         rhoPFRN = rhoPF;
+
+	LOGamma  = countLOGenGamma();
+	ISRGamma = countISRGenGamma();
+	FSRGamma = countFSRGenGamma();
+	promptGamma = LOGamma + ISRGamma + FSRGamma;
 	
 #ifdef DEBUG
     cout << "[DEBUG] before gamma-jet combination" << endl;
@@ -3529,7 +3543,12 @@ idelephot2 = -999;
    dzmu2 = -999.;
    isomu1 = -999.;
    isomu2 = -999.;
-   
+
+   promptGamma = -999;
+   LOGamma     = -999;
+   ISRGamma    = -999;
+   FSRGamma    = -999;
+ 
    weight = -999;
 }
 
@@ -3915,6 +3934,50 @@ double RedNtpTree::trackDxyPV(TVector3 PVPos, TVector3 trackVPos, TVector3 track
   return ( - (trackVPos.X()-PVPos.X())*trackMom.Y() + (trackVPos.Y()-PVPos.Y())*trackMom.X() ) / trackMom.Pt();
 }
 
+int RedNtpTree::countLOGenGamma(){
+  
+  int totLO = 0;
+  for (int ii=0; ii<nMC; ii++) {
+    int myStatus = statusMC[ii];
+    int myId     = pdgIdMC[ii];
+    if (myStatus==3 && myId==22) {
+      int myMoth   = motherIDMC[ii];
+      int myMothId = abs(pdgIdMC[myMoth]);
+      if (myMothId<=25) totLO++;   // quarks, gluons, W, Z and ZHiggs as mothers                  
+    }
+  }
+  return totLO;
+}
+
+int RedNtpTree::countISRGenGamma(){
+  
+  int totISR = 0;
+  for (int ii=0; ii<nMC; ii++) {
+    int myStatus = statusMC[ii];
+    int myId     = pdgIdMC[ii];
+    if (myStatus==1 && myId==22) {
+      int myMoth   = motherIDMC[ii];
+      int myMothId = abs(pdgIdMC[myMoth]);
+      if (myMothId<11 || myMothId==21) totISR++;   // quarks and gluons as mothers                  
+    }
+  }
+  return totISR;
+}
+
+int RedNtpTree::countFSRGenGamma(){
+  
+  int totFSR = 0;
+  for (int ii=0; ii<nMC; ii++) {
+    int myStatus = statusMC[ii];
+    int myId     = pdgIdMC[ii];
+    if (myStatus==1 && myId==22) {
+      int myMoth   = motherIDMC[ii];
+      int myMothId = abs(pdgIdMC[myMoth]);
+      if (myMothId>10 && myMothId<21) totFSR++;   // leptons as mothers                  
+    }
+  }
+  return totFSR;
+}
 
 /************************************
  *                                  *
@@ -4541,8 +4604,6 @@ void RedNtpTree::FillPhotonCiCSelectionVariable(int photon_index, int vtx_index)
 
 }
 
-
-
 int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto, int vtx_index) {
 
   int cutlevelpassed = -1;
@@ -4555,6 +4616,7 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto, i
   float val_ecalisobad = pid_jurECAL[photon_index];
   float val_hcalisobad = pid_twrHCAL[photon_index];
   float val_tkisobad = 0;
+
   for(int j=0;j<nvertex;j++)
     if(pid_hlwTrackForCiC[photon_index][j]>val_tkisobad) val_tkisobad = pid_hlwTrackForCiC[photon_index][j];
   float val_sieie = pid_etawid[photon_index];
@@ -4566,11 +4628,32 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto, i
   float isosumconst = 0.;
   float isosumconstbad = 0.;
 
+
   //PM 2011.05.30 Changed according to new values
   float rhofacbad=0.52, rhofac=0.17;
   float val_isosumoet=(val_tkiso+val_ecaliso+val_hcaliso+isosumconst-rhoPF*rhofac)*50./ptPhot[photon_index];
   float val_isosumoetbad=(val_tkisobad+val_ecalisobad+val_hcalisobad+isosumconstbad-rhoPF*rhofacbad)*50./ptPhot[photon_index];
   float val_trkisooet=(val_tkiso)*50./ptPhot[photon_index];
+
+  /*
+  tree_.runCIC=run;
+  tree_.eventCIC=event;
+  tree_.isosumoet=val_isosumoet;
+  tree_.isoecalet=val_ecaliso; 
+  tree_.isohcalet=val_hcaliso; 
+  tree_.isotrackeret=val_tkiso; 
+  tree_.isosumoetbad=val_isosumoetbad;
+  tree_.isoecaletbad=val_ecalisobad;
+  tree_.isohcaletbad=val_hcalisobad; 
+  tree_.isotrackeretbad=val_tkisobad; 
+  tree_.sieie=val_sieie; 
+  tree_.hoe=val_hoe; 
+  tree_.r9=val_r9; 
+  tree_.drtotk_25_99=val_drtotk_25_99; 
+  tree_.pixel=val_pixel; 
+  myTree->Fill();
+  */
+
 
   bool ph_passcut[phoNCUTLEVELS][8];
   //   float variable[8];
@@ -4603,6 +4686,7 @@ int RedNtpTree::PhotonCiCSelectionLevel( int photon_index , bool electronVeto, i
     ph_passcut[iCUTLEVEL][5] = (val_r9             >=     cic4_cut_lead_r9[iCUTLEVEL][photon_category]            );// gt cut
     ph_passcut[iCUTLEVEL][6] = electronVeto ? (val_drtotk_25_99   >=     cic4_cut_lead_drtotk_25_99[iCUTLEVEL][photon_category]  ) : true;// gt cut
     ph_passcut[iCUTLEVEL][7] = electronVeto ? (val_pixel            <=   cic4_cut_lead_pixel[iCUTLEVEL][photon_category]         ) : true;
+
     bool ph_passcut_all = true;
     for(int icut=0;icut!=8;++icut) {
       ph_passcut_all = ph_passcut_all && ph_passcut[iCUTLEVEL][icut];

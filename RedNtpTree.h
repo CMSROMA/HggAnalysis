@@ -19,6 +19,8 @@
 #include <TString.h>
 #include<vector>
 #include<string>
+#include <TChain.h>
+
 using std::string;
 using std::vector;
 
@@ -56,6 +58,29 @@ public:
      jetsyst_=new JetScaleSystematics(correctionFile);
      typejetsyst_=typesyst;
    }
+    
+    /*
+    TTree* myTree; 
+    struct cicTree_structure_ {
+      int runCIC;
+      int eventCIC;
+      float isosumoet;
+      float isoecalet;
+      float isohcalet;
+      float isotrackeret;
+      float isosumoetbad;
+      float isoecaletbad;
+      float isohcaletbad;
+      float isotrackeretbad;
+      float sieie;
+      float hoe;
+      float r9;
+      float drtotk_25_99;
+      float pixel;
+    };
+
+    cicTree_structure_ tree_;
+    */
 
 private:
    TFile* hOutputFile ;
@@ -167,6 +192,11 @@ private:
    double muonDxyPV(int imu, int iPV);
    double trackDzPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom);
    double trackDxyPV(TVector3 PVPos, TVector3 trackVPos, TVector3 trackMom);
+
+   // gen level info
+   int countLOGenGamma();
+   int countISRGenGamma();
+   int countFSRGenGamma();
 
    // vector of pu weights
    std::vector<Double_t> puweights_;
@@ -426,6 +456,11 @@ private:
    Int_t runRN;
    Int_t eventRN;
    Int_t lumi;
+   Int_t promptGamma;
+   Int_t LOGamma;
+   Int_t ISRGamma;
+   Int_t FSRGamma;
+
    Float_t   rhoPFRN;
    Float_t   pid_hlwTrackNoDzphot1;
    Float_t   pid_hlwTrackNoDzphot2;
