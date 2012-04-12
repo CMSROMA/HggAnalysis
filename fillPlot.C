@@ -1,16 +1,25 @@
 #define fillPlot_cxx
 #include "fillPlot.h"
 #include <TH2.h>
+#include <TVector3.h>
+#include <TLorentzVector.h>
 #include <TStyle.h>
 #include <TRandom3.h>
 #include <TCanvas.h>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <TMath.h>
 
 #define MAX_PU_REWEIGHT 22
 
-TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max, bool cs)
+inline double delta_phi(double phi1, double phi2) {
+
+  double dphi = TMath::Abs(phi1 - phi2);
+  return (dphi <= TMath::Pi())? dphi : TMath::TwoPi() - dphi;
+}
+
+TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max, bool cs, int signal)
 {
 //   In a ROOT session, you can do:
 //      Root > .L fillPlot.C
@@ -42,7 +51,6 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
    TH1D * tempplot = new TH1D(name.c_str(),name.c_str(),nbin,min,max);
    
    ofstream outfile;
-
    TFile* fOut=0;
    TTree* myTree=0;
 
@@ -69,13 +77,20 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
+      
+      // for VH, select only the production mechanism I want to study                                                                          
+      if (signal==23 && gen_custom_processId!=3101 && gen_custom_processId!=3201 && gen_custom_processId!=3301) continue;
+      if (signal==24 && gen_custom_processId!=3401) continue;
+      if (signal==25 && gen_custom_processId!=4101 && gen_custom_processId!=4201 && gen_custom_processId!=4301) continue;
+      if (signal==26 && gen_custom_processId!=4401) continue;
+      if (signal==27 && gen_custom_processId!=4501) continue;
 
       // analysis cuts
 
       if(npu>=30) continue;
 
-      if(massggnewvtx<90 || massggnewvtx>190) continue;
-      //if(massggnewvtx<100 || massggnewvtx>180) continue;
+      // if(massggnewvtx<90 || massggnewvtx>190) continue;
+      if(massggnewvtx<100 || massggnewvtx>180) continue;
 
       if((TMath::Abs(etascphot1)>1.4442&&TMath::Abs(etascphot1)<1.566)||(TMath::Abs(etascphot2)>1.4442&&TMath::Abs(etascphot2)<1.566)
 	 || TMath::Abs(etascphot1)>2.5 || TMath::Abs(etascphot2)>2.5) continue;  // acceptance
@@ -95,6 +110,34 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       if(ptjet1cut>0 && (ptcorrjet1<ptjet1cut || TMath::Abs(etajet1)>4.7)) continue; //pt first jet
       if(ptjet2cut>0 && (ptcorrjet2<ptjet2cut || TMath::Abs(etajet2)>4.7)) continue; //pt second jet
 
+      // smeared / shifted met
+      if(signal==100){ // data                                                                                                         
+	if(metcut>0 && eShiftedScaledMet<metcut) continue;
+      }
+      if(signal!=100){ // MC                                                                                                           
+	if(metcut>0 && eSmearedShiftedMet<metcut) continue;
+      }
+
+      // angular variable
+      TVector3 t3met, t3jet1, t3phot1, t3phot2;
+      if(signal==100) t3met.SetPtEtaPhi(eShiftedScaledMet,0,phiShiftedScaledMet);      // data                                         
+      if(signal!=100) t3met.SetPtEtaPhi(eSmearedShiftedMet,0,phiSmearedShiftedMet);    // MC                                           
+      // t3met.SetPtEtaPhi(epfMet,0,phipfMet);           // unsmeared                                                                  
+      t3jet1.SetPtEtaPhi(ptcorrjet1,etajet1,phijet1);
+      t3phot1.SetPtEtaPhi(ptphot1,etaphot1,phiphot1);
+      t3phot2.SetPtEtaPhi(ptphot2,etaphot2,phiphot2);
+      TVector3 t3higgs(t3phot1.Px()+t3phot2.Px(),t3phot1.Py()+t3phot2.Py(),t3phot1.Pz()+t3phot2.Pz());
+      float deltaPhiMetJet1 = 10000.;
+      if(ptcorrjet1>15.0) deltaPhiMetJet1 = fabs(180./3.1415927 * t3jet1.DeltaPhi(t3met));
+      float deltaPhiMetHiggs = fabs(180./3.1415927 * t3higgs.DeltaPhi(t3met));
+      float deltaPhiMetPhot1 = fabs(180./3.1415927 * t3phot1.DeltaPhi(t3met));
+      float deltaPhiMetPhot2 = fabs(180./3.1415927 * t3phot2.DeltaPhi(t3met));
+      float deltaPhiPho1Pho2 = fabs(180./3.1415927 * t3phot1.DeltaPhi(t3phot2));
+      if (deltaPhiMetJet1>0  && deltaPhiMetJet1<phijetmetcut)    continue;
+      if (deltaPhiMetHiggs>0 && deltaPhiMetHiggs<phihiggsmetcut) continue;
+      if (deltaPhiMetPhot1>0 && deltaPhiMetPhot1<phiphot1metcut) continue;
+      if (deltaPhiMetPhot2>0 && deltaPhiMetPhot2<phiphot2metcut) continue;
+      if (deltaPhiPho1Pho2>0 && deltaPhiPho1Pho2>phipho1pho2cut) continue;
  
       //delteta
       if(deltaetacut!=0){
@@ -177,6 +220,16 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
 
       if(thirdcat && exclSel()) continue; 
 
+      // for the lepton tag analysis
+      if (leptontag && !muonTagSelection() && !electronTagSelection()) continue;                                                    
+      // if (leptontag && !electronTagSelection()) continue;
+      // if (leptontag && !muonTagSelection()) continue;                                                                               
+
+      // to apply the lepton tag veto                                                                                          
+      if (leptonveto && (muonTagSelection() || electronTagSelection())) continue;
+
+      // if (signal==100) cout << "data: event = " << event << ", run = " << run << ", mgg = " << massggnewvtx << endl;
+
       // finding variable to be plotted
       double variable(0);
       if (var == "massgg")  variable = massggnewvtx;
@@ -201,7 +254,11 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       else if (var == "nvtx")  variable = nvtx;
       else if (var == "npu")  variable = npu;
       else if (var == "rhopfnvtx")  variable = (rhoPF-0.9*nvtx)/nvtx;
-      else if (var == "met")  variable = met;
+      else if (var == "met")  variable = epfMet;
+      else if (var == "smearedMet" && signal==100) variable = eShiftedScaledMet;   // data                                             
+      else if (var == "smearedMet" && signal!=100) variable = eSmearedShiftedMet;  // MC                                               
+      else if (var == "smearedMetPhi" && signal==100) variable = phiShiftedScaledMet;   // data                                        
+      else if (var == "smearedMetPhi" && signal!=100) variable = phiSmearedShiftedMet;  // MC       
       else if (var == "rhopf")  variable = rhoPF;
       else if (var == "ptgg")  variable = ptgg;
       else if (var == "pid_haspixelseedphot1")  variable = pid_haspixelseedphot1;
@@ -218,6 +275,8 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
       else if (var == "pid_etawidphot2")  variable = pid_etawidphot2;
       else if (var == "idcicphot1")  variable = idcicphot1;
       else if (var == "idcicphot2")  variable = idcicphot2;      
+      else if (var == "methiggs") variable = deltaPhiMetHiggs;
+      else if (var == "dphigg")   variable = deltaPhiPho1Pho2;
       else{
 	cout << "NO SUCH VARIABLE IMPLEMENTED!" << endl;
 	break;
@@ -280,26 +339,33 @@ TH1D * fillPlot::Plot(string var, string name, int nbin, double min, double max,
      outfile.close();
 
    return tempplot;
-
 }
 
-void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double deltae, double zep, double mjj, double deltap, int eb, int r9, bool third)
-{
+void  fillPlot::Setcuts(double pt1, double pt2, double higgsptcutmin, double higgsptcutmax, double ptj1, double ptj2, double misset,double deltae, double zep, double mjj, double deltap, double jetmet, double p1met, double p2met, double hmet, double delphigg, int eb, int r9, bool third, bool leptag, bool lepveto) {
+
   ptphot1cut = pt1;
   ptphot2cut = pt2;
   pthiggsmincut = higgsptcutmin;
   pthiggsmaxcut = higgsptcutmax;
   ptjet1cut = ptj1;
   ptjet2cut = ptj2;
+  metcut = misset;
   deltaetacut = deltae;
   deltaphicut = deltap;
+  phijetmetcut   = jetmet;
+  phiphot1metcut = p1met;
+  phiphot2metcut = p2met;
+  phihiggsmetcut = hmet;
+  phipho1pho2cut = delphigg;
   zeppencut = zep;
   invmassjetcut = mjj;
   ebcat = eb;
   r9cat = r9;
   thirdcat = third;
-  
+  leptontag  = leptag;
+  leptonveto = lepveto;
 }
+
 
 bool fillPlot::exclSel(){
 
@@ -477,10 +543,83 @@ void fillPlot::getweights()
       float weight=1.;
       weight=puweights->GetBinContent(i+1,j+1);
       weights_[i][j] =  weight;
-      cout << i << "  " << "  " << j << "   " << weight << endl; 
+      // cout << i << "  " << "  " << j << "   " << weight << endl; 
     }
   }
   
   //std::cout << "weights sum is " << sumPuWeights << std::endl;
 
+}
+
+bool fillPlot::muonTagSelection(){
+
+  bool passMuTag = true;
+
+  // at least one full reco/id/isol muon                                                                                             
+  if (ptmu1<0) passMuTag = false;
+
+  // non implementazione migliore perche' andrebbe applicata a tutti... ma vabbe'                                                    
+  if (deltaRToTrackphot1<1) passMuTag = false;
+  if (deltaRToTrackphot2<1) passMuTag = false;
+
+  if (passMuTag) {
+
+    // lepton/photon distance                                                                                                        
+    TVector3 t3muon, t3phot1, t3phot2;
+    t3muon.SetPtEtaPhi(ptmu1,etamu1,phimu1);
+    t3phot1.SetPtEtaPhi(ptphot1,etaphot1,phiphot1);
+    t3phot2.SetPtEtaPhi(ptphot2,etaphot2,phiphot2);
+    float deltaR1 = t3muon.DeltaR(t3phot1);
+    float deltaR2 = t3muon.DeltaR(t3phot2);
+    if (deltaR1<1) passMuTag = false;
+    if (deltaR2<1) passMuTag = false;
+  }
+
+  return passMuTag;
+}
+
+bool fillPlot::electronTagSelection(){
+
+  bool passEleTag = true;
+
+  // not considered if passed the muon tag                                                                                           
+  if (muonTagSelection()) passEleTag = false;
+  
+  // at least one full reco/id/isol electron                                                                                         
+  if (ptele1<0) passEleTag = false;
+
+  // non implementazione migliore perche' andrebbe applicata a tutti... ma vabbe'                                                    
+  if (deltaRToTrackphot1<1) passEleTag = false;
+  if (deltaRToTrackphot2<1) passEleTag = false;
+
+  if (passEleTag) {
+
+    // lepton/photon distance                                                                                                        
+    TVector3 t3ele1, t3phot1, t3phot2;
+    t3ele1.SetPtEtaPhi(ptele1,etaele1,phiele1);
+    t3phot1.SetPtEtaPhi(ptphot1,etaphot1,phiphot1);
+    t3phot2.SetPtEtaPhi(ptphot2,etaphot2,phiphot2);
+    float deltaR1 = t3ele1.DeltaR(t3phot1);
+    float deltaR2 = t3ele1.DeltaR(t3phot2);
+    if (deltaR1<1) passEleTag = false;
+    if (deltaR2<1) passEleTag = false;
+
+    // invariant mass                                                                                                                
+    float enePhot1 = ptphot1/(fabs(sin(t3phot1.Theta())));
+    float enePhot2 = ptphot2/(fabs(sin(t3phot2.Theta())));
+    float eneEle   = ptele1/(fabs(sin(t3ele1.Theta())));
+    TLorentzVector t4ele1, t4phot1, t4phot2;
+    t4ele1.SetPtEtaPhiE(ptele1,etaele1,phiele1,eneEle);
+    t4phot1.SetPtEtaPhiE(ptphot1,etaphot1,phiphot1,enePhot1);
+    t4phot2.SetPtEtaPhiE(ptphot2,etaphot2,phiphot2,enePhot2);
+    float invMass1 = (t4phot1 + t4ele1).M();
+    float invMass2 = (t4phot2 + t4ele1).M();
+    float diff1 = fabs(invMass1-91.19);
+    float diff2 = fabs(invMass2-91.19);
+
+    if ( diff1<5. ) passEleTag = false;
+    if ( diff2<5. ) passEleTag = false;
+  }
+
+  return passEleTag;
 }
