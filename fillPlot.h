@@ -25,26 +25,6 @@ public :
      float ptgg;
      int ebeb;
      float massggnewvtx;
-     float ptphot1;
-     float ptphot2;
-     float ptcorrjet1;
-     float ptcorrjet2;
-     float deltaeta;
-     float deltaphi;
-     float zeppenjet;
-     float invmassjet;
-     float r9phot1;
-     float r9phot2;
-     float metjet1;
-     float methiggs;
-     float metphot1;
-     float metphot2;
-     float epfMet;
-     float workedMet;
-     int signalId;
-     float dphigg;
-     float ele1RemovedMet;
-     float ele2RemovedMet;
      float weight;
    };
 
