@@ -609,9 +609,15 @@ bool fillPlot::electronTagSelection(){
     float enePhot2 = ptphot2/(fabs(sin(t3phot2.Theta())));
     float eneEle   = ptele1/(fabs(sin(t3ele1.Theta())));
     TLorentzVector t4ele1, t4phot1, t4phot2;
-    t4ele1.SetPtEtaPhiE(ptele1,etaele1,phiele1,eneEle);
-    t4phot1.SetPtEtaPhiE(ptphot1,etaphot1,phiphot1,enePhot1);
-    t4phot2.SetPtEtaPhiE(ptphot2,etaphot2,phiphot2,enePhot2);
+
+    // t4ele1.SetPtEtaPhiE(ptele1,etaele1,phiele1,eneEle);
+    // t4phot1.SetPtEtaPhiE(ptphot1,etaphot1,phiphot1,enePhot1);
+    // t4phot2.SetPtEtaPhiE(ptphot2,etaphot2,phiphot2,enePhot2);
+
+    t4ele1.SetPtEtaPhiM(ptele1,etaele1,phiele1,0.000511); 
+    t4phot1.SetPtEtaPhiM(ptphot1,etaphot1,phiphot1,0.);
+    t4phot2.SetPtEtaPhiM(ptphot2,etaphot2,phiphot2,0.);
+
     float invMass1 = (t4phot1 + t4ele1).M();
     float invMass2 = (t4phot2 + t4ele1).M();
     float diff1 = fabs(invMass1-91.19);
