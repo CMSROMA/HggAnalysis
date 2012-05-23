@@ -3126,7 +3126,7 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
     
     double shift(0);
     if(ass>-1)
-      shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptCorrJet_akt5[i];
+      shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptCorrJet_pfakt5[i];
     else {
       double expres = ErrEt(ptJet_pfakt5[i],etaJet_pfakt5[i]);
       double relsmear = expres * sqrt(smear*smear-1);
