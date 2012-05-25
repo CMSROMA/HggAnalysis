@@ -1,0 +1,13 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DoublePhoton-Run2012B-PromptReco-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DoublePhoton-Run2012B-PromptReco-v1.files.tmp DoublePhoton-Run2012B-PromptReco-v1_
+# of root files in directory: 118
+# of uniq files in directory: 118 /tmp/uniq.DoublePhoton-Run2012B-PromptReco-v1.files.tmp
+# of files per list: 20
+new list:   DoublePhoton-Run2012B-PromptReco-v1_00.list
+new list:   DoublePhoton-Run2012B-PromptReco-v1_01.list
+new list:   DoublePhoton-Run2012B-PromptReco-v1_02.list
+new list:   DoublePhoton-Run2012B-PromptReco-v1_03.list
+new list:   DoublePhoton-Run2012B-PromptReco-v1_04.list
+new list:   DoublePhoton-Run2012B-PromptReco-v1_05.list
