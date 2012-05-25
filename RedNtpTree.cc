@@ -14,7 +14,7 @@
 #ifdef SMALL_VERTEX_VECTOR
 #define MAX_PU_REWEIGHT 30
 #else
-#define MAX_PU_REWEIGHT 40
+#define MAX_PU_REWEIGHT 60   // for 2012. Was 40 at the end of 2011
 #endif
 
 //#define DEBUG
