@@ -17,12 +17,13 @@
 #define MAX_PU_REWEIGHT 60   // for 2012. Was 40 at the end of 2011
 #endif
 
+#define MET_SHIFT_2012
+
 //#define DEBUG
 //#define DEBUG1
 
 using std::cout;
 using std::endl;
-
 
 RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V7(tree), jsonFile(0) , ptweights_(0), scaleCorrections_(0)
 {  
@@ -3333,15 +3334,8 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
   
   // correction for METx, METy bias
   double px(0), py(0), e(0);
-  // data
-//   if(nMC==0){
-//     px = uncormet.Pt()*cos(uncormet.Phi())-0.00563109*spfMet+0.959742;
-//     py = uncormet.Pt()*sin(uncormet.Phi())+0.00586162*spfMet-0.540137;
-//   // MC
-//   }else{
-//     px = uncormet.Pt()*cos(uncormet.Phi())-0.00069992*spfMet+0.430059;
-//     py = uncormet.Pt()*sin(uncormet.Phi())+0.00262869*spfMet+0.210784;
-//   }
+
+#ifdef MET_SHIFT_2012
   if(nMC==0){
     px = uncormet.Pt()*cos(uncormet.Phi())-0.006239*spfMet+0.662;
     py = uncormet.Pt()*sin(uncormet.Phi())+0.004613*spfMet-0.673;
@@ -3350,6 +3344,18 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
     px = uncormet.Pt()*cos(uncormet.Phi())+0.00135*spfMet-0.021;
     py = uncormet.Pt()*sin(uncormet.Phi())+0.00371*spfMet-0.826;
    }
+#else
+// data
+   if(nMC==0){
+     px = uncormet.Pt()*cos(uncormet.Phi())-0.00563109*spfMet+0.959742;
+     py = uncormet.Pt()*sin(uncormet.Phi())+0.00586162*spfMet-0.540137;
+   // MC
+   }else{
+     px = uncormet.Pt()*cos(uncormet.Phi())-0.00069992*spfMet+0.430059;
+     py = uncormet.Pt()*sin(uncormet.Phi())+0.00262869*spfMet+0.210784;
+   }
+#endif
+
   e = sqrt(px*px+py*py);
   
   correctedMet.SetPxPyPzE(px,py,0,e);
