@@ -20,7 +20,7 @@ using std::string;
 //#define SMALL_VERTEX_VECTOR
 
 #ifdef SMALL_VERTEX_VECTOR
-#define VECTOR_ARRAY_SIZE 30
+#define VECTOR_ARRAY_SIZE 60
 #else
 #define VECTOR_ARRAY_SIZE 100
 #endif
@@ -185,6 +185,25 @@ public :
    Float_t         phiJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         ptDJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         rmsCandJet_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         jetId_dRMean_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_frac01_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_frac02_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_frac03_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_frac04_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_frac05_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_nNeutrals_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_beta_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_betaStar_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_dZ_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_nCharged_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_dR2Mean_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetId_betaStarClassic_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetIdSimple_mva_pfakt5[100];   //[nJet_pfakt5]
+   Int_t           jetIdSimple_wp_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetIdFull_mva_pfakt5[100];   //[nJet_pfakt5]
+   Int_t           jetIdFull_wp_pfakt5[100];   //[nJet_pfakt5]
+   Float_t         jetIdCutBased_mva_pfakt5[100];   //[nJet_pfakt5]
+   Int_t           jetIdCutBased_wp_pfakt5[100];   //[nJet_pfakt5]
    Float_t         beta_pfakt5[100][100];
    Float_t         betaStar_pfakt5[100][100];
    Float_t         combinedSecondaryVertexBJetTags[200];   //[nJet_pfakt5]
@@ -602,6 +621,25 @@ public :
    TBranch        *b_phiJet_pfakt5;   //!
    TBranch        *b_ptDJet_pfakt5;   //!
    TBranch        *b_rmsCandJet_pfakt5;   //!
+   TBranch        *b_jetId_dRMean_pfakt5;   //!
+   TBranch        *b_jetId_frac01_pfakt5;   //!
+   TBranch        *b_jetId_frac02_pfakt5;   //!
+   TBranch        *b_jetId_frac03_pfakt5;   //!
+   TBranch        *b_jetId_frac04_pfakt5;   //!
+   TBranch        *b_jetId_frac05_pfakt5;   //!
+   TBranch        *b_jetId_nNeutrals_pfakt5;   //!
+   TBranch        *b_jetId_beta_pfakt5;   //!
+   TBranch        *b_jetId_betaStar_pfakt5;   //!
+   TBranch        *b_jetId_dZ_pfakt5;   //!
+   TBranch        *b_jetId_nCharged_pfakt5;   //!
+   TBranch        *b_jetId_dR2Mean_pfakt5;   //!
+   TBranch        *b_jetId_betaStarClassic_pfakt5;   //!
+   TBranch        *b_jetIdSimple_mva_pfakt5;   //!
+   TBranch        *b_jetIdSimple_wp_pfakt5;   //!
+   TBranch        *b_jetIdFull_mva_pfakt5;   //!
+   TBranch        *b_jetIdFull_wp_pfakt5;   //!
+   TBranch        *b_jetIdCutBased_mva_pfakt5;   //!
+   TBranch        *b_jetIdCutBased_wp_pfakt5;   //!
    TBranch        *b_beta_pfakt5;   //!
    TBranch        *b_betaStar_pfakt5;   //!
    TBranch        *b_combinedSecondaryVertexBJetTags;   //!

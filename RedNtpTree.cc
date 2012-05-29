@@ -12,7 +12,7 @@
 #include <TLorentzVector.h>
 
 #ifdef SMALL_VERTEX_VECTOR
-#define MAX_PU_REWEIGHT 30
+#define MAX_PU_REWEIGHT 60
 #else
 #define MAX_PU_REWEIGHT 60   // for 2012. Was 40 at the end of 2011
 #endif
@@ -170,9 +170,16 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TH1D JECresovbf("JECresovbf","JECresovbf", 100, -0.5,0.5);
     TH1D JECresovh("JECresovh","JECresovh", 100, -0.5,0.5);
     jetDR = new TH2D("jetDR","jetDR", 20, 0.,100.,100,0,1.);
-    jetresp = new TH2D("jetresp","jetresp", 20, 0.,100.,100,-2,2);
-    
-
+    jetresp_vs_pt = new TH2D("jetresp_vs_pt","jetresp_vs_pt", 20, 20.,420.,100,-.35,.35);
+    jetresp_vs_eta = new TH2D("jetresp_vs_eta","jetresp_vs_eta", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_npu = new TH2D("jetresp_vs_npu","jetresp_vs_npu", 20, 10.,50.,100,-.35,.35);
+    jetresp_vs_eta_50 = new TH2D("jetresp_vs_eta_50","jetresp_vs_eta_50", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_npu_50 = new TH2D("jetresp_vs_npu_50","jetresp_vs_npu_50", 20, 10.,50.,100,-.35,.35);
+    jetresp_vs_eta_150 = new TH2D("jetresp_vs_eta_150","jetresp_vs_eta_150", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_npu_150 = new TH2D("jetresp_vs_npu_150","jetresp_vs_npu_150", 20, 10.,50.,100,-.35,.35);
+    jetresp_vs_pt_forward = new TH2D("jetresp_vs_pt_forward","jetresp_vs_pt_forward", 20, 20.,420.,100,-.35,.35);
+    jetresp_vs_npu_forward = new TH2D("jetresp_vs_npu_forward","jetresp_vs_npu_forward", 20, 10.,50.,100,-.35,.35);
+ 
     TH1D nPDFweight1("nPDFweight1","nPDFweight1", 150, 0.,150.);
     TH1D nPDFweight2("nPDFweight2","nPDFweight2", 150, 0.,150.);
     TH1D nPDFweight3("nPDFweight3","nPDFweight3", 150, 0.,150.);
@@ -467,10 +474,38 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("rmsjet1",&rmsjet1,"rmsjet1/F");
     ana_tree->Branch("ntrkjet1",&ntrkjet1,"ntrkjet1/I");
     ana_tree->Branch("nneutjet1",&nneutjet1,"nneutjet1/I");
+    ana_tree->Branch("jetIdSimple_mvajet1",&jetIdSimple_mvajet1,"jetIdSimple_mvajet1/F");
+    ana_tree->Branch("jetIdFull_mvajet1",&jetIdFull_mvajet1,"jetIdFull_mvajet1/F");
+    ana_tree->Branch("jetId_dR2Meanjet1",&jetId_dR2Meanjet1,"jetId_dR2Meanjet1/F");
+    ana_tree->Branch("jetId_betaStarClassicjet1",&jetId_betaStarClassicjet1,"jetId_betaStarClassicjet1/F");
+    ana_tree->Branch("jetId_frac01jet1",&jetId_frac01jet1,"jetId_frac01jet1/F");
+    ana_tree->Branch("jetId_frac02jet1",&jetId_frac02jet1,"jetId_frac02jet1/F");
+    ana_tree->Branch("jetId_frac03jet1",&jetId_frac03jet1,"jetId_frac03jet1/F");
+    ana_tree->Branch("jetId_frac04jet1",&jetId_frac04jet1,"jetId_frac04jet1/F");
+    ana_tree->Branch("jetId_frac05jet1",&jetId_frac05jet1,"jetId_frac05jet1/F");
+    ana_tree->Branch("jetId_betajet1",&jetId_betajet1,"jetId_betajet1/F");
+    ana_tree->Branch("jetId_betaStarjet1",&jetId_betaStarjet1,"jetId_betaStarjet1/F");
+    ana_tree->Branch("jetIdCutBased_wpjet1",&jetIdCutBased_wpjet1,"jetIdCutBased_wpjet1/I");
+    ana_tree->Branch("jetIdSimple_wpjet1",&jetIdSimple_wpjet1,"jetIdSimple_wpjet1/I");
+    ana_tree->Branch("jetIdFull_wpjet1",&jetIdFull_wpjet1,"jetIdFull_wpjet1/I");
     ana_tree->Branch("ptDjet2",&ptDjet2,"ptDjet2/F");
     ana_tree->Branch("rmsjet2",&rmsjet2,"rmsjet2/F");
     ana_tree->Branch("ntrkjet2",&ntrkjet2,"ntrkjet2/I");
     ana_tree->Branch("nneutjet2",&nneutjet2,"nneutjet2/I");
+    ana_tree->Branch("jetIdSimple_mvajet2",&jetIdSimple_mvajet2,"jetIdSimple_mvajet2/F");
+    ana_tree->Branch("jetIdFull_mvajet2",&jetIdFull_mvajet2,"jetIdFull_mvajet2/F");
+    ana_tree->Branch("jetId_dR2Meanjet2",&jetId_dR2Meanjet2,"jetId_dR2Meanjet2/F");
+    ana_tree->Branch("jetId_betaStarClassicjet2",&jetId_betaStarClassicjet2,"jetId_betaStarClassicjet2/F");
+    ana_tree->Branch("jetIdCutBased_wpjet2",&jetIdCutBased_wpjet2,"jetIdCutBased_wpjet2/I");
+    ana_tree->Branch("jetIdSimple_wpjet2",&jetIdSimple_wpjet2,"jetIdSimple_wpjet2/I");
+    ana_tree->Branch("jetIdFull_wpjet2",&jetIdFull_wpjet2,"jetIdFull_wpjet2/I");
+    ana_tree->Branch("jetId_frac01jet2",&jetId_frac01jet2,"jetId_frac01jet2/F");
+    ana_tree->Branch("jetId_frac02jet2",&jetId_frac02jet2,"jetId_frac02jet2/F");
+    ana_tree->Branch("jetId_frac03jet2",&jetId_frac03jet2,"jetId_frac03jet2/F");
+    ana_tree->Branch("jetId_frac04jet2",&jetId_frac04jet2,"jetId_frac04jet2/F");
+    ana_tree->Branch("jetId_frac05jet2",&jetId_frac05jet2,"jetId_frac05jet2/F");
+    ana_tree->Branch("jetId_betajet2",&jetId_betajet2,"jetId_betajet2/F");
+    ana_tree->Branch("jetId_betaStarjet2",&jetId_betaStarjet2,"jetId_betaStarjet2/F");
     ana_tree->Branch("assjet1",&assjet1,"assjet1/I");
     ana_tree->Branch("assjet2",&assjet2,"assjet2/I");
     ana_tree->Branch("deltaeta",&deltaeta,"deltaeta/F");
@@ -502,6 +537,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("phiShiftedScaledMet",&phiShiftedScaledMet_,"phiShiftedScaledMet/F");
     ana_tree->Branch("eSmearedShiftedMet",&eSmearedShiftedMet_,"eSmearedShiftedMet/F");
     ana_tree->Branch("phiSmearedShiftedMet",&phiSmearedShiftedMet_,"phiSmearedShiftedMet/F");
+    ana_tree->Branch("eShiftedScaledMetPUcorr",&eShiftedScaledMetPUcorr_,"eShiftedScaledMetPUcorr/F");
+    ana_tree->Branch("phiShiftedScaledMetPUcorr",&phiShiftedScaledMetPUcorr_,"phiShiftedScaledMetPUcorr/F");
+    ana_tree->Branch("eSmearedShiftedMePUcorrt",&eSmearedShiftedMetPUcorr_,"eSmearedShiftedMetPUcorr/F");
+    ana_tree->Branch("phiSmearedShiftedMetPUcorr",&phiSmearedShiftedMetPUcorr_,"phiSmearedShiftedMetPUcorr/F");
     ana_tree->Branch("sCorrMet", &sCorrMet_, "sCorrMet/F")  ;
     ana_tree->Branch("eCorrMet", &eCorrMet_, "eCorrMet/F")  ;
     ana_tree->Branch("phiCorrMet", &phiCorrMet_, "phiCorrMet/F");
@@ -1847,11 +1886,14 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
 	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
 	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;
+	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 2.75){
+	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.3 * log( nvertex - 0.67 ) ) goodetajet = 0;
+	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;	     
 	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 3){
-	      if(rmsCandJet_pfakt5[i] > 0.03) goodetajet = 0;
-	    } else {
-	      if(rmsCandJet_pfakt5[i] > 0.04) goodetajet = 0;
-	    }
+ 	      if(rmsCandJet_pfakt5[i] > 0.05) goodetajet = 0;
+ 	    } else {
+	      if(rmsCandJet_pfakt5[i] > 0.055) goodetajet = 0;
+ 	    }
 		            
             if(!assh && goodetajet) jetnohiggsphot.push_back(1);
             else jetnohiggsphot.push_back(0); 
@@ -1865,7 +1907,44 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    if(!assi) jetnoisophot.push_back(1); 
             else jetnoisophot.push_back(0);  
           
-        }
+	    int ass_here(-999);
+	    double DRmin_here(999.);
+	    for(int j=0; j<nJetGen_akt5; j++){
+	      double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) +
+			       delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
+	      double expres = ErrEt(ptCorrJet_pfakt5[i],etaJet_pfakt5[i]);
+	      //      if(DR < DRmin && (ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptCorrJet_pfakt5[i] < 5. * expres) {
+	      if(DR < DRmin_here && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < .5) {
+		ass_here = j;
+		DRmin_here = DR;
+	      }
+	    }
+	    
+	    if(DRmin_here > 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[ass_here]-10)))  ass_here = -999;
+	    
+	    if(!assi && ass_here>-1) {
+	      jetDR->Fill(ptJetGen_akt5[ass_here],DRmin_here);
+	      jetresp_vs_pt->Fill(ptJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+	      if(ptJetGen_akt5[ass_here]>20 && ptJetGen_akt5[ass_here]<50) {
+		jetresp_vs_eta->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_npu->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+	      }
+	      if(ptJetGen_akt5[ass_here]>50) {
+		jetresp_vs_eta_50->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_npu_50->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+	      }
+	      if(ptJetGen_akt5[ass_here]>150) {
+		jetresp_vs_eta_150->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_npu_150->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+	      }
+	      if(ptJetGen_akt5[ass_here]>20 && TMath::Abs(etaJet_akt5[i])>3.) {
+		jetresp_vs_npu_forward->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_pt_forward->Fill(ptJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);		
+	      }
+	      
+	    }
+
+	}
 
         vector<int> firstfournohiggsjet = firstfour(ptCorrJet_pfakt5,&jetnohiggsphot);
         vector<int> firstfournoassjet = firstfour(ptCorrJet_pfakt5,&jetnoassphot);
@@ -2500,6 +2579,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  rmsjet1 = rmsCandJet_pfakt5[firstfournoisojet.at(0)];
  	  ntrkjet1 = nChargedHadrons_pfakt5[firstfournoisojet.at(0)];
  	  nneutjet1 = nPhotons_pfakt5[firstfournoisojet.at(0)] + nNeutralHadrons_pfakt5[firstfournoisojet.at(0)] + nHFHadrons_pfakt5[firstfournoisojet.at(0)] + nHFEM_pfakt5[firstfournoisojet.at(0)];
+ 	  jetIdSimple_mvajet1 = jetIdSimple_mva_pfakt5[firstfournoisojet.at(0)];
+ 	  jetIdFull_mvajet1 = jetIdFull_mva_pfakt5[firstfournoisojet.at(0)];
+ 	  jetId_dR2Meanjet1 = jetId_dR2Mean_pfakt5[firstfournoisojet.at(0)];
+ 	  jetId_betaStarClassicjet1 = jetId_betaStarClassic_pfakt5[firstfournoisojet.at(0)];
+ 	  jetIdCutBased_wpjet1 = jetIdCutBased_wp_pfakt5[firstfournoisojet.at(0)];
+ 	  jetIdSimple_wpjet1 = jetIdSimple_wp_pfakt5[firstfournoisojet.at(0)];	  
+ 	  jetIdFull_wpjet1 = jetIdFull_wp_pfakt5[firstfournoisojet.at(0)];	  
+	  jetId_frac01jet1 = jetId_frac01_pfakt5[firstfournoisojet.at(0)];
+	  jetId_frac02jet1 = jetId_frac02_pfakt5[firstfournoisojet.at(0)];
+	  jetId_frac03jet1 = jetId_frac03_pfakt5[firstfournoisojet.at(0)];
+	  jetId_frac04jet1 = jetId_frac04_pfakt5[firstfournoisojet.at(0)];
+	  jetId_frac05jet1 = jetId_frac05_pfakt5[firstfournoisojet.at(0)];
+          jetId_betajet1 = jetId_beta_pfakt5[firstfournoisojet.at(0)];
+	  jetId_betaStarjet1 = jetId_betaStar_pfakt5[firstfournoisojet.at(0)];
 	}else{
 	  ptjet1 = -999;
 	  ptcorrjet1 = -999;
@@ -2514,6 +2607,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  rmsjet1 = -999.;
  	  ntrkjet1 = -999.;
  	  nneutjet1 = -999.; 
+ 	  jetIdSimple_mvajet1 = -999.; 
+ 	  jetIdFull_mvajet1   = -999.; 
+ 	  jetId_dR2Meanjet1   = -999.; 
+ 	  jetId_betaStarClassicjet1 = -999.; 
+ 	  jetIdCutBased_wpjet1 = -999.; 
+ 	  jetIdSimple_wpjet1 = -999.; 
+ 	  jetIdFull_wpjet1 = -999.; 
+ 	  jetId_frac01jet1 = -999.; 
+ 	  jetId_frac02jet1 = -999.; 
+ 	  jetId_frac03jet1 = -999.; 
+ 	  jetId_frac04jet1 = -999.; 
+ 	  jetId_frac05jet1 = -999.; 
+ 	  jetId_betajet1 = -999.; 
+ 	  jetId_betaStarjet1 = -999.; 
 	}
 	if( firstfournoisojet.at(1) > -1) {
 	  ptjet2 = ptJet_pfakt5[firstfournoisojet.at(1)];
@@ -2530,6 +2637,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  ntrkjet2 = nChargedHadrons_pfakt5[firstfournoisojet.at(1)];
 	  // 	  nneutjet2 = nNeutralHadrons_pfakt5[firstfournoisojet.at(1)];
  	  nneutjet2 = nPhotons_pfakt5[firstfournoisojet.at(1)] + nNeutralHadrons_pfakt5[firstfournoisojet.at(1)] + nHFHadrons_pfakt5[firstfournoisojet.at(1)] + nHFEM_pfakt5[firstfournoisojet.at(1)];
+	  jetIdSimple_mvajet2 = jetIdSimple_mva_pfakt5[firstfournoisojet.at(1)];
+ 	  jetIdFull_mvajet2 = jetIdFull_mva_pfakt5[firstfournoisojet.at(1)];
+ 	  jetId_dR2Meanjet2 = jetId_dR2Mean_pfakt5[firstfournoisojet.at(1)];
+ 	  jetId_betaStarClassicjet2 = jetId_betaStarClassic_pfakt5[firstfournoisojet.at(1)];
+ 	  jetIdCutBased_wpjet2 = jetIdCutBased_wp_pfakt5[firstfournoisojet.at(1)];
+ 	  jetIdSimple_wpjet2 = jetIdSimple_wp_pfakt5[firstfournoisojet.at(1)];	  
+ 	  jetIdFull_wpjet2 = jetIdFull_wp_pfakt5[firstfournoisojet.at(1)];	  
+	  jetId_frac01jet2 = jetId_frac01_pfakt5[firstfournoisojet.at(1)];
+	  jetId_frac02jet2 = jetId_frac02_pfakt5[firstfournoisojet.at(1)];
+	  jetId_frac03jet2 = jetId_frac03_pfakt5[firstfournoisojet.at(1)];
+	  jetId_frac04jet2 = jetId_frac04_pfakt5[firstfournoisojet.at(1)];
+	  jetId_frac05jet2 = jetId_frac05_pfakt5[firstfournoisojet.at(1)];
+          jetId_betajet2 = jetId_beta_pfakt5[firstfournoisojet.at(1)];
+	  jetId_betaStarjet2 = jetId_betaStar_pfakt5[firstfournoisojet.at(1)];
 	}else{
 	  ptjet2 = -999;
 	  ptcorrjet2 = -999;
@@ -2544,6 +2665,20 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	  rmsjet2 = -999.;
 	  ntrkjet2 = -999.;
  	  nneutjet2 = -999.; 
+ 	  jetIdSimple_mvajet2 = -999.; 
+ 	  jetIdFull_mvajet2   = -999.; 
+ 	  jetId_dR2Meanjet2   = -999.; 
+ 	  jetId_betaStarClassicjet2 = -999.; 
+ 	  jetIdCutBased_wpjet2 = -999.; 
+ 	  jetIdSimple_wpjet2 = -999.; 
+ 	  jetIdFull_wpjet2 = -999.; 
+	  jetId_frac01jet2 = -999.; 
+ 	  jetId_frac02jet2 = -999.; 
+ 	  jetId_frac03jet2 = -999.; 
+ 	  jetId_frac04jet2 = -999.; 
+ 	  jetId_frac05jet2 = -999.; 
+ 	  jetId_betajet2 = -999.; 
+ 	  jetId_betaStarjet2 = -999.; 
 	}
 	if( firstfournoisojet.at(2) > -1) {
 	  ptjet3 = ptJet_pfakt5[firstfournoisojet.at(2)];
@@ -2598,9 +2733,12 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TLorentzVector tlvPFmet;
     tlvPFmet.SetPtEtaPhiE(epfMet,0,phipfMet,epfMet);
     TLorentzVector theSmearedMet = correctMet(tlvPFmet);
+    TLorentzVector theSmearedMetPUcorr = correctMet(tlvPFmet,1,0,1);
     TLorentzVector theShiftedMet = shiftMet(tlvPFmet);
     TLorentzVector theShiftedScaledMet = correctMet(theShiftedMet,0,1);
+    TLorentzVector theShiftedScaledMetPUcorr = correctMet(theShiftedMet,0,1,1);
     TLorentzVector theSmearedShiftedMet = shiftMet(theSmearedMet);
+    TLorentzVector theSmearedShiftedMetPUcorr = shiftMet(theSmearedMetPUcorr);
     eSmearedMet_   = theSmearedMet.Pt();
     phiSmearedMet_ = theSmearedMet.Phi();
     eShiftedMet_   = theShiftedMet.Pt();
@@ -2609,6 +2747,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     phiShiftedScaledMet_ = theShiftedScaledMet.Phi();
     eSmearedShiftedMet_   = theSmearedShiftedMet.Pt();
     phiSmearedShiftedMet_ = theSmearedShiftedMet.Phi();
+    eShiftedScaledMetPUcorr_   = theShiftedScaledMetPUcorr.Pt();
+    phiShiftedScaledMetPUcorr_ = theShiftedScaledMetPUcorr.Phi();
+    eSmearedShiftedMetPUcorr_   = theSmearedShiftedMetPUcorr.Pt();
+    phiSmearedShiftedMetPUcorr_ = theSmearedShiftedMetPUcorr.Phi();
     signifMet_ = signifMet;
     sCorrMet_ = sCorrMet;
     eCorrMet_ = eCorrMet;
@@ -3085,7 +3227,7 @@ void RedNtpTree::correctJets(int shift, float smear)
 
 }
 
-TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bool scale) {
+TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bool scale, bool PUremoval) {
   
   TLorentzVector jetSumSmeared;
   jetSumSmeared.SetXYZT(0.,0.,0.,0);
@@ -3099,6 +3241,18 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
     // remove identified photons
     if(!jetnoisophot.at(i)) continue;
     
+    bool goodetajet(1);
+    if(PUremoval){
+      if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
+	if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
+	if(rmsCandJet_pfakt5[i] > 0.07) goodetajet = 0;
+      } else if(TMath::Abs(etaJet_pfakt5[i]) < 3){
+	if(rmsCandJet_pfakt5[i] > 0.05) goodetajet = 0;
+      } else {
+	if(rmsCandJet_pfakt5[i] > 0.055) goodetajet = 0;
+      }
+    }
+
     // smearing via association with genjets
     int ass(-999);
     double DRmin(999.);
@@ -3114,8 +3268,8 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
     
     if(DRmin > 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[ass]-10)))  ass = -999;
 
-    if(ass>-1) jetDR->Fill(ptJetGen_akt5[ass],DRmin);
-    if(ass>-1) jetresp->Fill(ptJetGen_akt5[ass],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass])/ptJetGen_akt5[ass]);
+//     if(ass>-1) jetDR->Fill(ptJetGen_akt5[ass],DRmin);
+//     if(ass>-1) jetresp->Fill(ptJetGen_akt5[ass],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass])/ptJetGen_akt5[ass]);
     
     // smearing for non-associated jets, using expected resolutions
     float smear = -999.;
@@ -3158,16 +3312,18 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
 
     thisJetUnsmeared.SetPtEtaPhiE(ptJet_pfakt5[i],etaJet_pfakt5[i],phiJet_pfakt5[i],eJet_pfakt5[i]);
     
+    //    if(!PUremoval || ptJet_pfakt5[i]>50) ass=0;
     if (ptJet_pfakt5[i]>10 && TMath::Abs(etaJet_pfakt5[i])<4.7) {
+      //      if(ass>-1) jetSumSmeared   += thisJetSmeared;
       jetSumSmeared   += thisJetSmeared;
       jetSumUnsmeared += thisJetUnsmeared;
     }
-    
+
   }
 
   TLorentzVector correctedMet;
   correctedMet = uncormet + jetSumUnsmeared - jetSumSmeared;
-  
+
   return correctedMet;
 }
 
@@ -3178,14 +3334,22 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
   // correction for METx, METy bias
   double px(0), py(0), e(0);
   // data
+//   if(nMC==0){
+//     px = uncormet.Pt()*cos(uncormet.Phi())-0.00563109*spfMet+0.959742;
+//     py = uncormet.Pt()*sin(uncormet.Phi())+0.00586162*spfMet-0.540137;
+//   // MC
+//   }else{
+//     px = uncormet.Pt()*cos(uncormet.Phi())-0.00069992*spfMet+0.430059;
+//     py = uncormet.Pt()*sin(uncormet.Phi())+0.00262869*spfMet+0.210784;
+//   }
   if(nMC==0){
-    px = uncormet.Pt()*cos(uncormet.Phi())-0.00563109*spfMet+0.959742;
-    py = uncormet.Pt()*sin(uncormet.Phi())+0.00586162*spfMet-0.540137;
+    px = uncormet.Pt()*cos(uncormet.Phi())-0.006239*spfMet+0.662;
+    py = uncormet.Pt()*sin(uncormet.Phi())+0.004613*spfMet-0.673;
   // MC
   }else{
-    px = uncormet.Pt()*cos(uncormet.Phi())-0.00069992*spfMet+0.430059;
-    py = uncormet.Pt()*sin(uncormet.Phi())+0.00262869*spfMet+0.210784;
-  }
+    px = uncormet.Pt()*cos(uncormet.Phi())+0.00135*spfMet-0.021;
+    py = uncormet.Pt()*sin(uncormet.Phi())+0.00371*spfMet-0.826;
+   }
   e = sqrt(px*px+py*py);
   
   correctedMet.SetPxPyPzE(px,py,0,e);
@@ -3347,6 +3511,10 @@ nvtx = -999;
     phiShiftedScaledMet_ = -999;
     eSmearedShiftedMet_ = -999;
     phiSmearedShiftedMet_ = -999;
+    eShiftedScaledMetPUcorr_ = -999;
+    phiShiftedScaledMetPUcorr_ = -999;
+    eSmearedShiftedMetPUcorr_ = -999;
+    phiSmearedShiftedMetPUcorr_ = -999;
     sCorrMet_   = -999;
     eCorrMet_   = -999;
     phiCorrMet_ = -999;
