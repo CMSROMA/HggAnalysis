@@ -4,7 +4,8 @@
 //#include "higgsanal_tree_V1.h"
 //#include "tree_reader_V2.h"
 //#include "tree_reader_V3.h"
-#include "tree_reader_V7.h"
+//#include "tree_reader_V7.h"
+#include "tree_reader_V8.h"
 #include "PhotonIdCuts.h"
 #include "LeptonIdCuts.h"
 #include "EnergyScaleCorrection.h"
@@ -21,6 +22,8 @@
 #include<string>
 #include <TChain.h>
 
+#include "TMVA/Reader.h"
+
 using std::string;
 using std::vector;
 
@@ -28,7 +31,7 @@ using std::vector;
 #define NGENJETS 200
 #define NMC 150
 
-class RedNtpTree : public tree_reader_V7 {
+class RedNtpTree : public tree_reader_V8 {
 
 public:
   
@@ -82,6 +85,8 @@ public:
     cicTree_structure_ tree_;
     */
 
+    std::string photonLevelNewIDMVA_EB;
+    std::string photonLevelNewIDMVA_EE;
 private:
    TFile* hOutputFile ;
    TTree * ana_tree ;
@@ -115,11 +120,13 @@ private:
    TLorentzVector correctMet(TLorentzVector uncormet, bool smearing = 1, bool scale = 0, bool PUremoval = 0);
    TLorentzVector shiftMet(TLorentzVector uncormet);
 
+   // defines photon CiC ID cuts for all cut levels
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoNCUTLEVELS };
    enum phoCiCCuts { phoISOSUMOET=0,  phoISOSUMOETBAD,   phoTRKISOOETOM,   phoSIEIE,   phoHOVERE,   phoR9,   phoDRTOTK_25_99,   phoPIXEL, phoNCUTS };
    enum phoCiC6Categories { phoCiC6EBhighR9=0, phoCiC6EBmidR9, phoCiC6EBlowR9, phoCiC6EEhighR9, phoCiC6EEmidR9, phoCiC6EElowR9, phoCiC6NCATEGORIES };
    enum phoCiC4Categories { phoCiC4EBhighR9=0, phoCiC4EBlowR9, phoCiC4EEhighR9, phoCiC4EElowR9, phoCiC4NCATEGORIES };
-   void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead);
+
+   void SetPhotonCutsInCategories(phoCiCIDLevel cutlevel, float * cic6_cuts_lead, float * cic6_cuts_sublead, float * cic4_cuts_lead, float * cic4_cuts_sublead, float*, float*);
    void FillPhotonCiCSelectionVariable(int photon_index, int vtx_index);
 
    float cic6_cut_lead_isosumoet[phoNCUTLEVELS][6];
@@ -156,6 +163,24 @@ private:
    float cic4_cut_sublead_drtotk_25_99[phoNCUTLEVELS][4];
    float cic4_cut_sublead_pixel[phoNCUTLEVELS][4];
 
+   float cic4pf_cut_lead_isosumoet[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_isosumoetbad[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_trkisooet[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_sieie[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_hovere[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_r9[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_drtotk_25_99[phoNCUTLEVELS][4];
+   float cic4pf_cut_lead_pixel[phoNCUTLEVELS][4];
+   
+   float cic4pf_cut_sublead_isosumoet[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_isosumoetbad[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_trkisooet[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_sieie[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_hovere[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_r9[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_drtotk_25_99[phoNCUTLEVELS][4];
+   float cic4pf_cut_sublead_pixel[phoNCUTLEVELS][4];
+
    TH1F* cic4_cut_isosumoet[phoCiC4NCATEGORIES];
    TH1F* cic4_cut_isosumoetbad[phoCiC4NCATEGORIES];
    TH1F* cic4_cut_trkisooet[phoCiC4NCATEGORIES];
@@ -165,11 +190,32 @@ private:
    TH1F* cic4_cut_drtotk_25_99[phoCiC4NCATEGORIES];
    TH1F* cic4_cut_pixel[phoCiC4NCATEGORIES];
 
-   int   PhotonCiCSelectionLevel( int photon_index, bool electronVeto, int vertex_index);
-   //photon category functions (r9 and eta)
-   int PhotonCategory(int photonindex) { 
-     return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);
-   }
+   void SetAllMVA(); 
+   int   PhotonCiCSelectionLevel( int photon_index, bool electronVeto, int vertex_index, bool usePF);
+   bool  PhotonMITPreSelection( int photon_index, int vertex_index, bool electronVeto) ;
+
+   //  TMVA::Reader *tmvaReader_dipho_MIT;
+  TMVA::Reader *tmvaReaderID_Single_Barrel, *tmvaReaderID_Single_Endcap;
+  Float_t tmva_photonid_pfchargedisogood03;
+  Float_t tmva_photonid_pfchargedisobad03;
+  Float_t tmva_photonid_pfphotoniso03;
+  Float_t tmva_photonid_pfneutraliso03;
+  Float_t tmva_photonid_sieie;
+  Float_t tmva_photonid_sieip;
+  Float_t tmva_photonid_etawidth;
+  Float_t tmva_photonid_phiwidth;
+  Float_t tmva_photonid_r9;
+  Float_t tmva_photonid_s4ratio;
+  Float_t tmva_photonid_lambdaratio;
+  Float_t tmva_photonid_sceta;
+  Float_t tmva_photonid_eventrho;
+  Float_t tmva_photonid_ESEffSigmaRR;
+  Float_t PhotonIDMVANew(Int_t iPhoton, Int_t vtx);  
+  
+  //photon category functions (r9 and eta)
+  int PhotonCategory(int photonindex) { 
+    return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);
+  }
    Int_t PhotonR9Category(int photonindex) { 
      if(photonindex < 0) return -1;
      int r9cat = (Int_t)(E9Phot[photonindex]/escRawPhot[photonindex]<0.94);// 0, 1(high r9 --> low r9)
@@ -236,6 +282,10 @@ private:
    Float_t E1phot2;
    Float_t E9phot1;
    Float_t E9phot2;
+   Float_t energyErrphot1;
+   Float_t energyErrphot2;
+   Float_t energySmearingphot1;
+   Float_t energySmearingphot2;
    Float_t ptjet1;
    Float_t ptjet2;
    Float_t ptjet3;
@@ -311,6 +361,12 @@ private:
    Float_t invmass2g2j;
    Float_t pt2g2j;           
    Float_t nvtx;
+   Int_t vtxId;
+   Float_t vtxPos_x;
+   Float_t vtxPos_y;
+   Float_t vtxPos_z;
+   Float_t vtxIdMVA;
+   Float_t vtxIdEvtProb;
 
    //////////////////////////////////////
    Float_t         sMet_  ;
@@ -447,10 +503,16 @@ private:
    Int_t idtightnewpuEGphot2;
    Int_t idhggtightnewpuEGphot1;
    Int_t idhggtightnewpuEGphot2;
+   Float_t idmvaphot1;
+   Float_t idmvaphot2;
    Int_t idcicphot1;
    Int_t idcicphot2;
    Int_t idcicnoelvetophot1;
    Int_t idcicnoelvetophot2;
+   Int_t idcicpfphot1;
+   Int_t idcicpfphot2;
+   Int_t idcicpfnoelvetophot1;
+   Int_t idcicpfnoelvetophot2;
    Int_t idlooseEGphot1;
    Int_t idlooseEGphot2;
    Int_t idtightEGphot1;

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2010/12/08 09:53:53 rahatlou Exp $
+# $Id: Makefile,v 1.3 2010/12/08 11:49:30 rahatlou Exp $
 ROOTLIBS      = $(shell $(ROOTSYS)/bin/root-config --libs)
 ROOTGLIBS     = $(shell $(ROOTSYS)/bin/root-config --glibs)
 
@@ -26,7 +26,7 @@ ROOFIT_LIBS += $(shell cd $(CMSSW_BASE); scram tool info roofit | grep LIB= | se
 INCLUDES += -I.  -I.. -I$(ROOTSYS)/include  -I$(ROOFIT_INCLUDE)/
 ROOTSYS  ?= ERROR_RootSysIsNotDefined
 
-EXTRALIBS  :=  -L$(ROOTSYS)/lib -L$(ROOFIT_LIBDIR)/ -lHtml -lMathCore -lGenVector -lMinuit -lEG -lRooFitCore -lRooFit -lRIO
+EXTRALIBS  :=  -L$(ROOTSYS)/lib -L$(ROOFIT_LIBDIR)/ -lHtml -lMathCore -lGenVector -lMinuit -lEG -lRooFitCore -lRooFit -lRIO -lTMVA
 
 # CC files excluding the binaries
 CCFILES=$(filter-out $(BINFILES),$(wildcard *.cc))

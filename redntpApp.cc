@@ -29,12 +29,14 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 3 || argc>11 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional) doPDFrew(optional) systJets(optional)\n" 
+      if(argc < 5 || argc>13 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection idmvaEB_file idmvaEE_file jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional) doPDFrew(optional) systJets(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
-             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection cicloose cicloosenoeleveto cicmedium cictight cicsuper cichyper mcass\n"
+             << "       options: superloose loose medium isem looseeg tighteg hggtighteg looseegpu tightegpu hggtightegpu preselection preselectionCS preselectionMVA preselectionMVAnoeleveto cicloose cicloosenoeleveto cicmedium cictight cicsuper cichyper cicpfloose cicpfloosenoeleveto cicpfmedium cicpftight cicpfsuper cicpfhyper mcass\n"
+	     << "   weights for EB photonID MVA"
+	     << "   weights for EE photonID MVA"
              << "   jsonfile: jsonfile used to select RUN/LS when looping over data. -1 if not used"
              << "   puweight: puweight for MC nPU reweighting. -1 if not used"
              << "   ptweight: ptweight for MC HiggsPt reweighting for GluGlu. -1 if not used"
@@ -103,32 +105,34 @@ int main(int argc, char* argv[]) {
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
        tool.SetNtotXsection( ntot, myxsec );
-
-       if (argc>4 && std::string(argv[4]) != "-1")
- 	 tool.SetJsonFile(argv[4]);
-
-       if (argc>5 && std::string(argv[5]) != "-1")
-	 tool.SetPuWeights(std::string(argv[5]));
+       tool.photonLevelNewIDMVA_EB=std::string(argv[4]);
+       tool.photonLevelNewIDMVA_EE=std::string(argv[5]);
 
        if (argc>6 && std::string(argv[6]) != "-1")
-	 tool.SetPtWeights(std::string(argv[6]));
+ 	 tool.SetJsonFile(argv[6]);
 
        if (argc>7 && std::string(argv[7]) != "-1")
+	 tool.SetPuWeights(std::string(argv[7]));
+
+       if (argc>8 && std::string(argv[8]) != "-1")
+	 tool.SetPtWeights(std::string(argv[8]));
+
+       if (argc>9 && std::string(argv[9]) != "-1")
 	 {
 	   //	   EnergyScaleCorrection::energyScaleParameters scaleCorrections;
 	   //scaleCorrections.parameterSetName="";
-	   TString scaleCorrectionFile(argv[7]);
+	   TString scaleCorrectionFile(argv[9]);
 	   //	   fillCorrections(scaleCorrectionSet,scaleCorrections); 
 	   if (scaleCorrectionFile!="")
 	     tool.setEnergyScaleCorrections(scaleCorrectionFile,"Hgg_eta_R9");
 	 }
 
-       if (argc>8 && std::string(argv[8]) != "-1")
+       if (argc>10 && std::string(argv[10]) != "-1")
 	 tool.DoPDFWeighting();
 
-       if (argc>9 && std::string(argv[9]) != "-1" && argc>10 && std::string(argv[9]) != "-1"){
-	 TString scaleJetSysFile(argv[9]);
-	 TString stringtypesyst(argv[10]);
+       if (argc>11 && std::string(argv[11]) != "-1" && argc>12 && std::string(argv[12]) != "-1"){
+	 TString scaleJetSysFile(argv[11]);
+	 TString stringtypesyst(argv[12]);
 	 char* endptr;
 	 int typesyst = strtol (stringtypesyst, &endptr, 0);
 	 tool.setJetSystematics(scaleJetSysFile,typesyst);;

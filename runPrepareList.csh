@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: runPrepareList.csh,v 1.5 2011/07/29 09:16:48 meridian Exp $
+# $Id: runPrepareList.csh,v 1.6 2012/05/25 12:11:58 crovelli Exp $
 
 if( $#argv<3  ) then
   echo "usage:  runPrepareList.csh  <list dir>  <directory> <location>   [run if 1]"
@@ -24,7 +24,7 @@ echo "Configuring list for $location"
 
 if ( "$location" == "cern" ) then
     set lsCommand="rfdir"
-else if ( "$location" == "xrootd" ) then
+else if ( "$location" == "xrootd" || "$location" == "eos" ) then
     set lsCommand="/afs/cern.ch/project/eos/installation/0.1.0-22d/bin/eos.select find"
 else if ( "$location" == "eth" ) then
     set lsCommand="lcg-ls"
@@ -36,7 +36,7 @@ rm -rf ${listdir}/allFiles.txt
 mkdir -p ${listdir}
 touch ${listdir}/allFiles.txt
 
-if ($location == "xrootd") then 
+if ($location == "xrootd" || $location == "eos") then 
 #    echo "${lsCommand} -type f ${srmdir}"
     ${lsCommand} -f "${srmdir}"  >> ${listdir}/allFiles.txt
 else if ($location == "cern") then 
@@ -56,9 +56,9 @@ cd ${listdir}/
 #endif
 
 
-if ($location == "xrootd") then    
+if ($location == "xrootd" || $location == "eos") then    
 #    echo "${lsCommand} -d ${srmdir}  | awk -F '/' '{print NF}'" 
-    ${lsCommand} -d "${srmdir}"  | awk -F '/' '{print $9}' | xargs -I {} ../${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
+    ${lsCommand} -d "${srmdir}"  | awk -F '/' '{ if (NF>1) {dir=NF-1; print $dir}}' | xargs -I {} ../${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
 else if ($location == "cern") then 
     ${lsCommand} "${srmdir}" | awk '{print $9}' | xargs -I {} ../${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
 else 
