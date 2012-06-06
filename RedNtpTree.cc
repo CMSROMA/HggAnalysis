@@ -142,8 +142,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 {
     if (fChain == 0) return;
 
-    //    Long64_t nentries = fChain->GetEntriesFast();
-       Long64_t nentries = 1000;
+    Long64_t nentries = fChain->GetEntriesFast();
+    //   Long64_t nentries = 1000;
     
     Long64_t nbytes = 0, nb = 0;
     
@@ -1313,7 +1313,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         // cout << endl << endl;
 
 
-        if(isgjetqcd && counter > 1) continue; 
+	//        if(isgjetqcd && counter > 1) continue; 
         //      To be used only when ttH is not produced separately  
         //      if(ishiggsev && countertt>0) continue; 
         
@@ -1955,14 +1955,14 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
             bool goodetajet(1);
             
-            if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
+	    //            if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
 
 	    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
 	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
 	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;
-	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 2.75){
-	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.3 * log( nvertex - 0.67 ) ) goodetajet = 0;
-	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;	     
+// 	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 2.75){
+// 	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.3 * log( nvertex - 0.67 ) ) goodetajet = 0;
+//	      if(rmsCandJet_pfakt5[i] > 0.06) goodetajet = 0;	     
 	    } else if(TMath::Abs(etaJet_pfakt5[i]) < 3){
  	      if(rmsCandJet_pfakt5[i] > 0.05) goodetajet = 0;
  	    } else {
@@ -3368,7 +3368,8 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
     else {
       double expres = ErrEt(ptJet_pfakt5[i],etaJet_pfakt5[i]);
       double relsmear = expres * sqrt(smear*smear-1);
-      shift = gen_->Gaus(0.,relsmear);
+      TRandom3 gen(int(eventRN+ptJet_pfakt5[i]*1000));
+      shift = gen.Gaus(0.,relsmear);
     }
 
     float ptSmeared  = ptJet_pfakt5[i];

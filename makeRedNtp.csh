@@ -1,9 +1,9 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.30 2011/11/29 08:14:27 delre Exp $
+# $Id: makeRedNtp.csh,v 1.31 2012/06/02 08:47:42 meridian Exp $
 
 # change if needed
-set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
-#set castordir = /castor/cern.ch/user/d/delre/Higgs/reduced
+#set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
+set castordir = /castor/cern.ch/user/d/delre/Higgs/reduced
 
 set photonIDweights_EB = /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EBpf_BDT.weights.xml
 set photonIDweights_EE = /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EEpf_BDT.weights.xml
@@ -101,11 +101,12 @@ if ($#argv > 8) then
 endif 
 
 set PDFstudy = -1
-if ($#argv > 8) then
-  set PDFstudy = $9
+if ($#argv > 9) then
+  set PDFstudy = $10
   echo "PDFstudy: ${PDFstudy}"
 endif 
 
+echo "PDFstudy: ${PDFstudy}"
 
 echo "------   ready ro run at $location ------------------"
 
