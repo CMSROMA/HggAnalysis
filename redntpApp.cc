@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
 
        // run analysis code
        RedNtpTree tool(chain, OutputFileName);
+       tool.cicVersion="7TeV";
        tool.SetNtotXsection( ntot, myxsec );
        tool.photonLevelNewIDMVA_EB=std::string(argv[4]);
        tool.photonLevelNewIDMVA_EE=std::string(argv[5]);
