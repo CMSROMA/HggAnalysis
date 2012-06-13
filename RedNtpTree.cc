@@ -177,11 +177,12 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TH1D JECresovh("JECresovh","JECresovh", 100, -0.5,0.5);
     jetDR = new TH2D("jetDR","jetDR", 20, 0.,100.,100,0,1.);
     jetresp_vs_pt = new TH2D("jetresp_vs_pt","jetresp_vs_pt", 20, 20.,420.,100,-.35,.35);
-    jetresp_vs_eta = new TH2D("jetresp_vs_eta","jetresp_vs_eta", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_eta = new TH2D("jetresp_vs_eta","jetresp_vs_eta", 200, -5.,5.,100,-.35,.35);
     jetresp_vs_npu = new TH2D("jetresp_vs_npu","jetresp_vs_npu", 20, 10.,50.,100,-.35,.35);
-    jetresp_vs_eta_50 = new TH2D("jetresp_vs_eta_50","jetresp_vs_eta_50", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_eta_50 = new TH2D("jetresp_vs_eta_50","jetresp_vs_eta_50", 200, -5.,5.,100,-.35,.35);
+    jetresp_vs_eta_50_abs = new TH2D("jetresp_vs_eta_50_abs","jetresp_vs_eta_50_abs", 100, 0.,5.,100,-.35,.35);
     jetresp_vs_npu_50 = new TH2D("jetresp_vs_npu_50","jetresp_vs_npu_50", 20, 10.,50.,100,-.35,.35);
-    jetresp_vs_eta_150 = new TH2D("jetresp_vs_eta_150","jetresp_vs_eta_150", 20, -5.,5.,100,-.35,.35);
+    jetresp_vs_eta_150 = new TH2D("jetresp_vs_eta_150","jetresp_vs_eta_150", 200, -5.,5.,100,-.35,.35);
     jetresp_vs_npu_150 = new TH2D("jetresp_vs_npu_150","jetresp_vs_npu_150", 20, 10.,50.,100,-.35,.35);
     jetresp_vs_pt_forward = new TH2D("jetresp_vs_pt_forward","jetresp_vs_pt_forward", 20, 20.,420.,100,-.35,.35);
     jetresp_vs_npu_forward = new TH2D("jetresp_vs_npu_forward","jetresp_vs_npu_forward", 20, 10.,50.,100,-.35,.35);
@@ -1313,7 +1314,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         // cout << endl << endl;
 
 
-	//        if(isgjetqcd && counter > 1) continue; 
+	if(isgjetqcd && counter > 1) continue; 
         //      To be used only when ttH is not produced separately  
         //      if(ishiggsev && countertt>0) continue; 
         
@@ -1955,7 +1956,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	
             bool goodetajet(1);
             
-	    //            if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
+	    if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
 
 	    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
 	      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
@@ -1988,27 +1989,28 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 			       delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
 	      double expres = ErrEt(ptCorrJet_pfakt5[i],etaJet_pfakt5[i]);
 	      //      if(DR < DRmin && (ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptCorrJet_pfakt5[i] < 5. * expres) {
-	      if(DR < DRmin_here && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < .5) {
+	      if(DR < DRmin_here && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j] < .75) {
 		ass_here = j;
 		DRmin_here = DR;
 	      }
 	    }
 	    
-	    if(DRmin_here > 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[ass_here]-10)))  ass_here = -999;
+	    if(DRmin_here > 0.1 )  ass_here = -999;
 	    
 	    if(!assi && ass_here>-1) {
 	      jetDR->Fill(ptJetGen_akt5[ass_here],DRmin_here);
 	      jetresp_vs_pt->Fill(ptJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 	      if(ptJetGen_akt5[ass_here]>20 && ptJetGen_akt5[ass_here]<50) {
-		jetresp_vs_eta->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_eta->Fill(etaJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 		jetresp_vs_npu->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 	      }
-	      if(ptJetGen_akt5[ass_here]>50) {
-		jetresp_vs_eta_50->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+	      if(ptJetGen_akt5[ass_here]>50 && ptJetGen_akt5[ass_here]<150) {
+		jetresp_vs_eta_50->Fill(etaJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_eta_50_abs->Fill(TMath::Abs(etaJetGen_akt5[ass_here]),(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 		jetresp_vs_npu_50->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 	      }
 	      if(ptJetGen_akt5[ass_here]>150) {
-		jetresp_vs_eta_150->Fill(etaJet_akt5[i],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
+		jetresp_vs_eta_150->Fill(etaJetGen_akt5[ass_here],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 		jetresp_vs_npu_150->Fill(npu,(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass_here])/ptJetGen_akt5[ass_here]);
 	      }
 	      if(ptJetGen_akt5[ass_here]>20 && TMath::Abs(etaJet_akt5[i])>3.) {
@@ -3214,12 +3216,19 @@ void RedNtpTree::SetPtWeights(std::string ptWeightFile)
 bool RedNtpTree::assoJet(int i){
 
   bool ass(0);
+  double cut, cutptlow, cutpthigh;
   for(int j=0; j<nJetGen_akt5; j++){	
     double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) + 
 		     delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
     //    if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = 1; 
-    if(DR < 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[j]-10)) &&  TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5)  ass = 1;
-
+    if(TMath::Abs(etaJetGen_akt5[j])<2.5) {cut = 0.1; cutptlow = -0.75; cutpthigh = 1.;}
+    else if(TMath::Abs(etaJetGen_akt5[j])<3.5) {cut = 0.15; cutptlow = -0.75; cutpthigh = 1.;}
+    else if(TMath::Abs(etaJetGen_akt5[j])<4.5) {cut = 0.12; cutptlow = -0.75; cutpthigh = 1.;}
+    else {cut = 0.2; cutptlow = -0.75; cutpthigh = 1.;}
+    if( (DR < cut + 0.3 * exp(-0.015*(ptJetGen_akt5[j]-10))) &&  
+	((ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  > cutptlow)  && 
+        ((ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < cutpthigh)
+	)  ass = 1;
   }
 
   return ass;

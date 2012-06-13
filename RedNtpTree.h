@@ -256,6 +256,7 @@ private:
    TH2D* jetresp_vs_eta_50;
    TH2D* jetresp_vs_npu_50;
    TH2D* jetresp_vs_eta_150;
+   TH2D* jetresp_vs_eta_50_abs;
    TH2D* jetresp_vs_npu_150;
    TH2D* jetresp_vs_pt_forward;
    TH2D* jetresp_vs_npu_forward;
