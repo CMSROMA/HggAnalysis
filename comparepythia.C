@@ -30,13 +30,17 @@ void comparepythia(char* default, char* check, char* name1, char* name2, char *v
   int n_powheg = ((TH1D*)g2->Get("ptphotgen1"))->GetEntries();
 
   // cuts
-  float ptleadvbf=55.;
+  float ptleadvbf=60.;
+  //  float ptleadvbf=55.;
   float ptsubleadvbf=25.;
   float ptjetleadvbf=30.;
-  float ptjetsubleadvbf=20.;
-  float deltaetavbf=3.5;
+  //  float ptjetsubleadvbf=20.;
+  float ptjetsubleadvbf=30.;  
+  float deltaetavbf=3.;
+  //float deltaetavbf=3.5;
   float zeppenvbf=2.5;
-  float mjjvbf=350.;
+  float mjjvbf=500.;
+  //float mjjvbf=350.;
   float deltaphi=2.6;
 // 
 //   float zeppenvbf=2.;
@@ -44,11 +48,13 @@ void comparepythia(char* default, char* check, char* name1, char* name2, char *v
 //   float deltaphi=0;
 
   pythia.DoPuReweight();
-  pythia.DoPtReweight();
-  powheg.DoPtReweight();
+  //  pythia.DoPtReweight();
+  //  powheg.DoPtReweight();
   powheg.DoPuReweight();
-  powheg.setCic(4);
-  pythia.setCic(4);
+//   powheg.setCic(4);
+//   pythia.setCic(4);
+  powheg.setCic(15);
+  pythia.setCic(15);
 
 //   //photon cuts
 //   pythia.Setcuts(ptleadvbf,ptsubleadvbf,-10000, -10000, -10000,-10000,0,0,-10000,-1,-1);
@@ -87,8 +93,8 @@ void comparepythia(char* default, char* check, char* name1, char* name2, char *v
   }
   //allcuts
   if(cuts == 6){
-    pythia.Setcuts(ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphi,-1,-1);
-    powheg.Setcuts(ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphi,-1,-1);
+    pythia.Setcuts(ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphi,-1,-1,0);
+    powheg.Setcuts(ptleadvbf,ptsubleadvbf,-10000, -10000, ptjetleadvbf,ptjetsubleadvbf,deltaetavbf,zeppenvbf,mjjvbf,deltaphi,-1,-1,0);
   }
 
   TH1D *pythiaplot = pythia.Plot(var,name2, bin, min, max);
@@ -96,8 +102,8 @@ void comparepythia(char* default, char* check, char* name1, char* name2, char *v
 
 //   double effpythia = pythiaplot->GetEntries()/n_pythia;
 //   double effpowheg = powhegplot->GetEntries()/n_powheg;
-  double effpythia = pythiaplot->Integral()/n_pythia;
-  double effpowheg = powhegplot->Integral()/n_powheg;
+  double effpythia = pythiaplot->Integral(0,bin+1)/n_pythia;
+  double effpowheg = powhegplot->Integral(0,bin+1)/n_powheg;
   double erreffpythia = sqrt(effpythia*(1-effpythia)/n_pythia);
   double erreffpowheg = sqrt(effpowheg*(1-effpowheg)/n_powheg);
 

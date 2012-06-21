@@ -1,11 +1,13 @@
 #!/bin/tcsh
 
 #set data_json = "`pwd`/jsonFiles/Cert_160404-180252_7TeV_All2011_v3.txt"
-set data_json = "`pwd`/jsonFiles/latest_prompt_2012.json"
+#set data_json = "`pwd`/jsonFiles/latest_prompt_2012.json"
+set data_json = "`pwd`/jsonFiles/Cert_190456-195396_8TeV_PromptReco_Collisions12_JSON_v2.txt"
 set puweight_41x = "`pwd`/mc_41x_PUweight.root"
 set puweight_42x = "`pwd`/RUN2011_0100_73500.weights.root"
 #set puweight_52x = "`pwd`/Summer12-190456-194076_Prompt_RUN2012.68300.true.weights.root"
-set puweight_52x = "`pwd`/Summer12-190456-194479_Prompt_RUN2012.69000.observed.weights.root"
+#set puweight_52x = "`pwd`/Summer12-rereco_prompt_2012.69000.observed.weights.root"
+set puweight_52x = "`pwd`/Summer12-prompt08Jun.71000.observed.weights.root"
 set ptweightfile_template = "`pwd`/kfactors/Kfactors_MASSVALUE_AllScales.root"
 
 set location = "eth"
@@ -59,10 +61,11 @@ endif
 #foreach class ( 42xv3_data_2  ) 
 #foreach class ( 42xv6_temp ) 
 #foreach class ( 42xv6b_data ) 
-foreach class ( 52xv3 52xv3_data )
-#   foreach preseltype ( cicloose preselectionCS ) 
-    foreach preseltype ( cicpfhyper preselectionMVA) 
-#    foreach preseltype ( cicloose ) 
+foreach class ( 52xv4 52xv4_data )
+#foreach class ( 52xv4_data_may23 )
+    foreach preseltype ( preselectionCS cicpfloose preselectionMVA cicpfloosenoeleveto )
+#    foreach preseltype ( cicpfloose preselectionMVA  ) 
+#    foreach preseltype ( cicpfloosenoeleveto ) 
 	if ( "`echo ${class} | grep data`XXX" != "XXX" ) then
 	    set command="./makeRedNtp.csh list.${class}/ redntp.${class}.${preseltype}.${energyCorrectionName}.${version} ${preseltype} ${location} ${run} $data_json -1 -1 ${energyCorrection}"
 	else 

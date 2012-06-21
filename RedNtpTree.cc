@@ -3293,7 +3293,7 @@ void RedNtpTree::correctJets(int shift, float smear)
   for(int i=0; i<nJet_pfakt5; i++){
     
     double increase_endcap = 1;
-    if(TMath::Abs(etaJet_pfakt5[i])>2.5 && TMath::Abs(etaJet_pfakt5[i])<3.4) increase_endcap = 2;  
+    //    if(TMath::Abs(etaJet_pfakt5[i])>2.5 && TMath::Abs(etaJet_pfakt5[i])<3.4) increase_endcap = 2;  
     ptCorrJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
     ptJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],ptCorrJet_pfakt5[i]);
     eJet_pfakt5[i] *= 1 + increase_endcap * shift * jetsyst_->getJESUncertainty(etaJet_pfakt5[i],eJet_pfakt5[i]);
@@ -3304,7 +3304,7 @@ void RedNtpTree::correctJets(int shift, float smear)
       for(int j=0; j<nJetGen_akt5; j++){	
 	double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) + 
 			 delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
-	if(DR < .1 && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = j; 
+	if(DR < .1 + 0.3 * exp(-0.015*(ptJetGen_akt5[j]-10)) && TMath::Abs(ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptJetGen_akt5[j]  < 0.5) ass = j; 
       }
       
       if(ass>-1){

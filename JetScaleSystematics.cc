@@ -84,7 +84,7 @@ JetScaleSystematics::JetScaleSystematics(TString inputfile)
 
 	}
     }
-  for (int j=0;j<28; j++){
+  for (int j=0;j<38; j++){
     std::cout << mineta[j] << "  " ;
     for (int i=0;i<39; i++){
       std::cout << minpt[j][i] << "   " << unc[j][i] << "   " ;
@@ -104,7 +104,7 @@ float JetScaleSystematics::getJESUncertainty(double eta, double pt)
   
   float uncertainty(0);
 
-  for(int j=0; j<28; j++)
+  for(int j=0; j<38; j++)
 
     if(eta > mineta[j] && eta < mineta[j+1]){
 

@@ -16,9 +16,9 @@ public:
   float getJESUncertainty(double eta, double pt);
 
 private:
-  float mineta[28];
-  float minpt[28][39];
-  float unc[28][39];
+  float mineta[38];
+  float minpt[38][39];
+  float unc[38][39];
 
 };
 
