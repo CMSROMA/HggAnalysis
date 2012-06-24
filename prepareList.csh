@@ -1,5 +1,5 @@
 #!/bin/csh
-# $Id: prepareList.csh,v 1.7 2011/12/08 14:45:23 delre Exp $
+# $Id: prepareList.csh,v 1.8 2012/06/02 08:47:42 meridian Exp $
 
 if( $#argv<3  ) then
   echo "usage:  prepareList.csh  <inputfile> <listname> <location>  [run if 1]"
@@ -41,9 +41,9 @@ echo "Working on dataset $listname"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 if ($location != "xrootd" ) then
-    set files = ( `cat $infile | grep $listname` )
+    set files = ( `cat $infile | grep "$listname/"` )
 else
-    set files = ( `cat $infile | grep $listname | sed -e "s%/xrootdfs%%g"` )
+    set files = ( `cat $infile | grep "$listname/" | sed -e "s%/xrootdfs%%g"` )
 endif
 
 
