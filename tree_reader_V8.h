@@ -394,6 +394,7 @@ public :
    Float_t         electron_fBrem[40];   //[nEle]
    Float_t         electron_dist[40];   //[nEle]
    Float_t         electron_dcot[40];   //[nEle]
+   Int_t           electron_matchedConv[40];  //[nEle]
    Int_t           electron_misHits[40];   //[nEle]
    Int_t           electron_seedType[40];   //[nEle]
    Float_t         electron_EoP[40];   //[nEle]
@@ -415,6 +416,19 @@ public :
    Float_t         electron_sc_energy[40];   //[nEle]
    Float_t         electron_sc_eta[40];   //[nEle]
    Float_t         electron_sc_phi[40];   //[nEle]
+   Float_t         electron_ecalEnergy[40];  //[nEle]
+   Float_t         electron_trackPatVtx[40]; //[nEle]
+   Float_t         electron_mvaNonTrig[40];  //[nEle]
+   Float_t         electron_mvaTrig[40];     //[nEle]
+   Float_t         electron_chHad03Iso[40];   //[nEle]
+   Float_t         electron_nHad03Iso[40];    //[nEle]
+   Float_t         electron_phot03Iso[40]; //[nEle]
+   Float_t         electron_chHad04Iso[40];   //[nEle]
+   Float_t         electron_nHad04Iso[40];    //[nEle]
+   Float_t         electron_phot04Iso[40]; //[nEle]
+   Float_t         electron_chHad05Iso[40];   //[nEle]
+   Float_t         electron_nHad05Iso[40];    //[nEle]
+   Float_t         electron_phot05Iso[40]; //[nEle]
    Bool_t          isBeamHaloGlobalLoosePass;
    Bool_t          isBeamHaloGlobalTightPass;
    Bool_t          isBeamHaloHcalLoosePass;
@@ -456,11 +470,23 @@ public :
    Float_t         Muon_ecalIso[200];   //[nMuons]
    Float_t         Muon_hcalIso[200];   //[nMuons]
    Float_t         Muon_relIso[200];   //[nMuons]
-   Int_t           Muon_normChi2[200];   //[nMuons]
+   Float_t         Muon_normChi2[200];   //[nMuons]
    Int_t           Muon_validHits[200];   //[nMuons]
    Int_t           Muon_tkHits[200];   //[nMuons]
    Int_t           Muon_pixHits[200];   //[nMuons]
    Int_t           Muon_numberOfMatches[200];   //[nMuons]
+   Float_t         Muon_pfiso04_chHad[200];   //[nMuons] 
+   Float_t         Muon_pfiso04_chPar[200];   //[nMuons] 
+   Float_t         Muon_pfiso04_nHad[200];   //[nMuons] 
+   Float_t         Muon_pfiso04_Phot[200];   //[nMuons] 
+   Float_t         Muon_pfiso04_PUPt[200];   //[nMuons] 
+   Float_t         Muon_pfiso03_chHad[200];   //[nMuons] 
+   Float_t         Muon_pfiso03_chPar[200];   //[nMuons] 
+   Float_t         Muon_pfiso03_nHad[200];   //[nMuons] 
+   Float_t         Muon_pfiso03_Phot[200];   //[nMuons] 
+   Float_t         Muon_pfiso03_PUPt[200];   //[nMuons] 
+   Bool_t          Muon_isPFMuon[200];  //[nMuons]
+   Int_t           Muon_trkLayerWithMeas[200];   //[nMuons]
    Int_t           nCosmicMuons;
    Float_t         CosmicMuon_px[200];   //[nCosmicMuons]
    Float_t         CosmicMuon_py[200];   //[nCosmicMuons]
@@ -855,6 +881,7 @@ public :
    TBranch        *b_electron_fBrem;   //!
    TBranch        *b_electron_dist;   //!
    TBranch        *b_electron_dcot;   //!
+   TBranch        *b_electron_matchedConv;  //!
    TBranch        *b_electron_misHits;   //!
    TBranch        *b_electron_seedType;   //!
    TBranch        *b_electron_EoP;   //!
@@ -876,6 +903,19 @@ public :
    TBranch        *b_electron_sc_energy;   //!
    TBranch        *b_electron_sc_eta;   //!
    TBranch        *b_electron_sc_phi;   //!
+   TBranch        *b_electron_ecalEnergy; //!
+   TBranch        *b_electron_trackPatVtx; //!
+   TBranch        *b_electron_mvaNonTrig;  //!
+   TBranch        *b_electron_mvaTrig;     //! 
+   TBranch        *b_electron_chHad03Iso;  //!
+   TBranch        *b_electron_nHad03Iso;   //!
+   TBranch        *b_electron_phot03Iso;   //!
+   TBranch        *b_electron_chHad04Iso;  //!
+   TBranch        *b_electron_nHad04Iso;   //!
+   TBranch        *b_electron_phot04Iso;   //!
+   TBranch        *b_electron_chHad05Iso;  //!
+   TBranch        *b_electron_nHad05Iso;   //!
+   TBranch        *b_electron_phot05Iso;   //!
    TBranch        *b_isBeamHaloGlobalLoosePass;   //!
    TBranch        *b_isBeamHaloGloablTightPass;   //!
    TBranch        *b_isBeamHaloHcalLoosePass;   //!
@@ -922,6 +962,18 @@ public :
    TBranch        *b_Muon_tkHits;   //!
    TBranch        *b_Muon_pixHits;   //!
    TBranch        *b_Muon_numberOfMatches;   //!
+   TBranch        *b_Muon_pfiso04_chHad; //!
+   TBranch        *b_Muon_pfiso04_chPar; //!
+   TBranch        *b_Muon_pfiso04_nHad; //!
+   TBranch        *b_Muon_pfiso04_Phot; //!
+   TBranch        *b_Muon_pfiso04_PUPt; //!
+   TBranch        *b_Muon_pfiso03_chHad; //!
+   TBranch        *b_Muon_pfiso03_chPar; //!
+   TBranch        *b_Muon_pfiso03_nHad; //!
+   TBranch        *b_Muon_pfiso03_Phot; //!
+   TBranch        *b_Muon_pfiso03_PUPt; //!
+   TBranch        *b_Muon_isPFMuon;  //!
+   TBranch        *b_Muon_trkLayerWithMeas;   //!
    TBranch        *b_nCosmicMuons;   //!
    TBranch        *b_CosmicMuon_px;   //!
    TBranch        *b_CosmicMuon_py;   //!

@@ -10,6 +10,7 @@
 #include "LeptonIdCuts.h"
 #include "EnergyScaleCorrection.h"
 #include "JetScaleSystematics.h"
+#include "ElectronEffectiveArea.h"
 #include "TLorentzVector.h"
 
 #include <TFile.h>
@@ -232,8 +233,10 @@ private:
 
 
    // lepton tag
-   bool leptonCutsEle(int iEle, electronidcuts const& pid, vector<bool> *vpass);
-   bool leptonCutsMu(int iMu, muonidcuts const& pid, vector<bool> *vpass);
+   bool leptonCutsEle2011(int iEle, electronidcuts const& pid, vector<bool> *vpass);
+   bool leptonCutsEle2012(int iEle, electronidcuts2012 const& pid, vector<bool> *vpass);
+   bool leptonCutsMu2011(int iMu, muonidcuts const& pid, vector<bool> *vpass);
+   bool leptonCutsMu2012(int iMu, muonidcuts2012 const& pid, vector<bool> *vpass);
    double eleDzPV(int iele, int iPV);
    double eleDxyPV(int iele, int iPV);
    double muonDzPV(int imu, int iPV);
@@ -622,7 +625,37 @@ private:
    Float_t fullisoele1, fullisoele2;
    Float_t invMassele1g1, invMassele1g2;
    Float_t invMassele2g1, invMassele2g2;
-   // 
+   Float_t oEmoPele1, mvanotrigele1, mvatrigele1; 
+   Int_t matchconvele1;
+   Float_t chHadIso03ele1, nHadIso03ele1, photIso03ele1;
+   Float_t oEmoPele2, mvanotrigele2, mvatrigele2; 
+   Int_t matchconvele2;
+   Float_t chHadIso03ele2, nHadIso03ele2, photIso03ele2;
+
+   // loose electrons 
+   Float_t pteleloose1, pteleloose2;
+   Float_t etaeleloose1, etaeleloose2;
+   Float_t phieleloose1, phieleloose2;
+   Float_t eneeleloose1, eneeleloose2;
+   Float_t sIeIeeleloose1, sIeIeeleloose2;
+   Float_t dphieleloose1, dphieleloose2;
+   Float_t detaeleloose1, detaeleloose2;
+   Int_t mhitseleloose1, mhitseleloose2;
+   Float_t dcoteleloose1, dcoteleloose2;
+   Float_t disteleloose1, disteleloose2;
+   Float_t d0eleloose1, d0eleloose2;
+   Float_t dzeleloose1, dzeleloose2;
+   Float_t isoeleloose1, isoeleloose2;
+   Float_t fullisoeleloose1, fullisoeleloose2;
+   Float_t invMasseleloose1g1, invMasseleloose1g2;
+   Float_t invMasseleloose2g1, invMasseleloose2g2;
+   Float_t oEmoPeleloose1, mvanotrigeleloose1, mvatrigeleloose1; 
+   Int_t matchconveleloose1;
+   Float_t chHadIso03eleloose1, nHadIso03eleloose1, photIso03eleloose1;
+   Float_t oEmoPeleloose2, mvanotrigeleloose2, mvatrigeleloose2; 
+   Int_t matchconveleloose2;
+   Float_t chHadIso03eleloose2, nHadIso03eleloose2, photIso03eleloose2;
+
    Float_t ptmu1, ptmu2;
    Float_t etamu1, etamu2;
    Float_t phimu1, phimu2;
@@ -635,7 +668,26 @@ private:
    Float_t d0mu1, d0mu2;
    Float_t dzmu1, dzmu2;
    Float_t isomu1,isomu2;
+   Float_t chHadmu1, nHadmu1, photmu1, puptmu1;
+   Float_t chHadmu2, nHadmu2, photmu2, puptmu2;
 
+   // loose muons
+   Float_t ptmuloose1, ptmuloose2;
+   Float_t etamuloose1, etamuloose2;
+   Float_t phimuloose1, phimuloose2;
+   Float_t enemuloose1, enemuloose2;
+   Int_t pixhitsmuloose1, pixhitsmuloose2;
+   Int_t trkhitsmuloose1, trkhitsmuloose2;
+   Int_t hitsmuloose1, hitsmuloose2;
+   Float_t chi2muloose1, chi2muloose2;
+   Int_t matchmuloose1, matchmuloose2;
+   Float_t d0muloose1, d0muloose2;
+   Float_t dzmuloose1, dzmuloose2;
+   Float_t isomuloose1,isomuloose2;
+   Float_t chHadmuloose1, nHadmuloose1, photmuloose1, puptmuloose1;
+   Float_t chHadmuloose2, nHadmuloose2, photmuloose2, puptmuloose2;
+
+   
    float weight;
 };
 #endif
