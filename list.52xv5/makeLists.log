@@ -1,0 +1,836 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DYJetsToLL_M-10To50filter_8TeV-madgraph
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DYJetsToLL_M-10To50filter_8TeV-madgraph.files.tmp DYJetsToLL_M-10To50filter_8TeV-madgraph_
+# of root files in directory: 145
+# of uniq files in directory: 145 /tmp/uniq.DYJetsToLL_M-10To50filter_8TeV-madgraph.files.tmp
+# of files per list: 20
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_00.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_01.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_02.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_03.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_04.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_05.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_06.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_07.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball.files.tmp DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_
+# of root files in directory: 596
+# of uniq files in directory: 596 /tmp/uniq.DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball.files.tmp
+# of files per list: 20
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_00.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_01.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_02.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_03.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_04.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_05.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_06.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_07.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_08.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_09.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_10.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_11.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_12.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_13.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_14.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_15.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_16.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_17.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_18.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_19.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_20.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_21.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_22.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_23.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_24.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_25.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_26.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_27.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_28.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_29.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-10To25_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-10To25_8TeV-pythia6.files.tmp DiPhotonBorn_Pt-10To25_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBorn_Pt-10To25_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-10To25_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-250ToInf_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-250ToInf_8TeV-pythia6.files.tmp DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBorn_Pt-250ToInf_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-25To250_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-25To250_8TeV-pythia6.files.tmp DiPhotonBorn_Pt-25To250_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBorn_Pt-25To250_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-25To250_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-10To25_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-10To25_8TeV-pythia6.files.tmp DiPhotonBox_Pt-10To25_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBox_Pt-10To25_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-10To25_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-250ToInf_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-250ToInf_8TeV-pythia6.files.tmp DiPhotonBox_Pt-250ToInf_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBox_Pt-250ToInf_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-250ToInf_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-25To250_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-25To250_8TeV-pythia6.files.tmp DiPhotonBox_Pt-25To250_8TeV-pythia6_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.DiPhotonBox_Pt-25To250_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-25To250_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonJets_8TeV-madgraph-tarball-v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonJets_8TeV-madgraph-tarball-v2.files.tmp DiPhotonJets_8TeV-madgraph-tarball-v2_
+# of root files in directory: 24
+# of uniq files in directory: 24 /tmp/uniq.DiPhotonJets_8TeV-madgraph-tarball-v2.files.tmp
+# of files per list: 20
+new list:   DiPhotonJets_8TeV-madgraph-tarball-v2_00.list
+new list:   DiPhotonJets_8TeV-madgraph-tarball-v2_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_
+# of root files in directory: 120
+# of uniq files in directory: 120 /tmp/uniq.GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_00.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_01.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_02.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_03.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_04.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_05.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_
+# of root files in directory: 121
+# of uniq files in directory: 121 /tmp/uniq.GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_00.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_01.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_02.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_03.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_04.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_05.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_06.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-100_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-100_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-100_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-100_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-100_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-105_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-105_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-105_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-105_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-105_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-110_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-110_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-110_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-110_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-110_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-115_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-115_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-115_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-115_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-115_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-120_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-120_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-120_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-120_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-120_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-123_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-123_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-123_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-123_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-123_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-124_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-124_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-124_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-124_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-124_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-125_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-125_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-125_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-125_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-125_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-130_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-130_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-130_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-130_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-130_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-135_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-135_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-135_8TeV-powheg-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.GluGluToHToGG_M-135_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-135_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-140_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-140_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-140_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-140_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-140_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-145_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-145_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-145_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-145_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-145_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-150_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-150_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-150_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-150_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-150_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-90_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-90_8TeV-powheg-pythia6.files.tmp GluGluToHToGG_M-90_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.GluGluToHToGG_M-90_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-90_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_
+# of root files in directory: 123
+# of uniq files in directory: 123 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_00.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_01.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_02.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_03.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_04.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_05.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_06.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_
+# of root files in directory: 198
+# of uniq files in directory: 198 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_00.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_01.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_02.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_03.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_04.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_05.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_06.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_07.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_08.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_09.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTGJets_8TeV-madgraph
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTGJets_8TeV-madgraph.files.tmp TTGJets_8TeV-madgraph_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTGJets_8TeV-madgraph.files.tmp
+# of files per list: 20
+new list:   TTGJets_8TeV-madgraph_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTJets_TuneZ2star_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTJets_TuneZ2star_8TeV-madgraph-tauola.files.tmp TTJets_TuneZ2star_8TeV-madgraph-tauola_
+# of root files in directory: 137
+# of uniq files in directory: 137 /tmp/uniq.TTJets_TuneZ2star_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_00.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_01.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_02.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_03.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_04.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_05.list
+new list:   TTJets_TuneZ2star_8TeV-madgraph-tauola_06.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTbarGG_0Jet_S1-cmkuo-TTGG_525_RECO_s46_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTbarGG_0Jet_S1-cmkuo-TTGG_525_RECO_s46_v1.files.tmp TTbarGG_0Jet_S1-cmkuo-TTGG_525_RECO_s46_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.TTbarGG_0Jet_S1-cmkuo-TTGG_525_RECO_s46_v1.files.tmp
+# of files per list: 20
+new list:   TTbarGG_0Jet_S1-cmkuo-TTGG_525_RECO_s46_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-100_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-100_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-100_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-100_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-100_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-105_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-105_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-105_8TeV-powheg-pythia6_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.VBF_HToGG_M-105_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-105_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-110_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-110_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-110_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-110_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-110_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-115_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-115_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-115_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-115_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-115_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-120_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-120_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-120_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-120_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-120_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-123_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-123_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-123_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-123_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-123_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-124_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-124_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-124_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-124_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-124_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-125_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-125_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-125_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-125_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-125_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-130_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-130_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-130_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-130_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-130_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-135_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-135_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-135_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-135_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-135_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-140_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-140_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-140_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-140_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-140_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-145_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-145_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-145_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-145_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-145_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-150_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-150_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-150_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-150_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-150_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-90_8TeV-powheg-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-90_8TeV-powheg-pythia6.files.tmp VBF_HToGG_M-90_8TeV-powheg-pythia6_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.VBF_HToGG_M-90_8TeV-powheg-pythia6.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-90_8TeV-powheg-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGToLNuG_TuneZ2star_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGToLNuG_TuneZ2star_8TeV-madgraph-tauola.files.tmp WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_
+# of root files in directory: 99
+# of uniq files in directory: 99 /tmp/uniq.WGToLNuG_TuneZ2star_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_00.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_01.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_02.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_03.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_04.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGstarToLNu2E_TuneZ2star_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGstarToLNu2E_TuneZ2star_8TeV-madgraph-tauola.files.tmp WGstarToLNu2E_TuneZ2star_8TeV-madgraph-tauola_
+# of root files in directory: 7
+# of uniq files in directory: 7 /tmp/uniq.WGstarToLNu2E_TuneZ2star_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WGstarToLNu2E_TuneZ2star_8TeV-madgraph-tauola_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGstarToLNu2Mu_TuneZ2star_7TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGstarToLNu2Mu_TuneZ2star_7TeV-madgraph-tauola.files.tmp WGstarToLNu2Mu_TuneZ2star_7TeV-madgraph-tauola_
+# of root files in directory: 6
+# of uniq files in directory: 6 /tmp/uniq.WGstarToLNu2Mu_TuneZ2star_7TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WGstarToLNu2Mu_TuneZ2star_7TeV-madgraph-tauola_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGstarToLNu2Tau_TuneZ2star_7TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGstarToLNu2Tau_TuneZ2star_7TeV-madgraph-tauola.files.tmp WGstarToLNu2Tau_TuneZ2star_7TeV-madgraph-tauola_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.WGstarToLNu2Tau_TuneZ2star_7TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WGstarToLNu2Tau_TuneZ2star_7TeV-madgraph-tauola_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-100_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-100_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-100_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-100_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-100_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-105_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-105_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-105_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-105_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-105_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-110_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-110_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-110_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-110_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-110_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-115_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-115_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-115_8TeV-pythia6_
+# of root files in directory: 4
+# of uniq files in directory: 4 /tmp/uniq.WH_ZH_HToGG_M-115_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-115_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-120_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-120_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-120_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-120_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-120_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-123_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-123_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-123_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-123_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-123_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-124_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-124_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-124_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-124_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-124_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-125_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-125_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-125_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-125_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-125_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-130_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-130_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-130_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-130_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-130_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-135_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-135_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-135_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-135_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-135_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-140_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-140_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-140_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-140_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-140_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-145_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-145_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-145_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-145_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-145_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-150_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-150_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-150_8TeV-pythia6_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-150_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-150_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-90_8TeV-pythia6
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-90_8TeV-pythia6.files.tmp WH_ZH_HToGG_M-90_8TeV-pythia6_
+# of root files in directory: 4
+# of uniq files in directory: 4 /tmp/uniq.WH_ZH_HToGG_M-90_8TeV-pythia6.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-90_8TeV-pythia6_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WJetsToLNu_TuneZ2Star_8TeV-madgraph
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WJetsToLNu_TuneZ2Star_8TeV-madgraph.files.tmp WJetsToLNu_TuneZ2Star_8TeV-madgraph_
+# of root files in directory: 359
+# of uniq files in directory: 359 /tmp/uniq.WJetsToLNu_TuneZ2Star_8TeV-madgraph.files.tmp
+# of files per list: 20
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_00.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_01.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_02.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_03.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_04.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_05.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_06.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_07.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_08.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_09.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_10.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_11.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_12.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_13.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_14.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_15.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_16.list
+new list:   WJetsToLNu_TuneZ2Star_8TeV-madgraph_17.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola.files.tmp WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_
+# of root files in directory: 38
+# of uniq files in directory: 38 /tmp/uniq.WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_00.list
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WW_TuneZ2star_8TeV_pythia6_tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WW_TuneZ2star_8TeV_pythia6_tauola.files.tmp WW_TuneZ2star_8TeV_pythia6_tauola_
+# of root files in directory: 203
+# of uniq files in directory: 203 /tmp/uniq.WW_TuneZ2star_8TeV_pythia6_tauola.files.tmp
+# of files per list: 20
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_00.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_01.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_02.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_03.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_04.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_05.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_06.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_07.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_08.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_09.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_10.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola.files.tmp WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_
+# of root files in directory: 41
+# of uniq files in directory: 41 /tmp/uniq.WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_00.list
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_01.list
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola.files.tmp WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola_
+# of root files in directory: 60
+# of uniq files in directory: 60 /tmp/uniq.WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola.files.tmp
+# of files per list: 20
+new list:   WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola_00.list
+new list:   WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola_01.list
+new list:   WZTo3LNu_TuneZ2star_8TeV_pythia6_tauola_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZ_TuneZ2star_8TeV_pythia6_tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZ_TuneZ2star_8TeV_pythia6_tauola.files.tmp WZ_TuneZ2star_8TeV_pythia6_tauola_
+# of root files in directory: 203
+# of uniq files in directory: 203 /tmp/uniq.WZ_TuneZ2star_8TeV_pythia6_tauola.files.tmp
+# of files per list: 20
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_00.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_01.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_02.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_03.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_04.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_05.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_06.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_07.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_08.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_09.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_10.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WmGG_S3-cmkuo-WmGG_525_RECO_s3_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WmGG_S3-cmkuo-WmGG_525_RECO_s3_v1.files.tmp WmGG_S3-cmkuo-WmGG_525_RECO_s3_v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.WmGG_S3-cmkuo-WmGG_525_RECO_s3_v1.files.tmp
+# of files per list: 20
+new list:   WmGG_S3-cmkuo-WmGG_525_RECO_s3_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WmGG_S6-cmkuo-WmGG_525_RECO_s6_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WmGG_S6-cmkuo-WmGG_525_RECO_s6_v1.files.tmp WmGG_S6-cmkuo-WmGG_525_RECO_s6_v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.WmGG_S6-cmkuo-WmGG_525_RECO_s6_v1.files.tmp
+# of files per list: 20
+new list:   WmGG_S6-cmkuo-WmGG_525_RECO_s6_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WpGG_S2-cmkuo-WpGG_525_RECO_s2_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WpGG_S2-cmkuo-WpGG_525_RECO_s2_v1.files.tmp WpGG_S2-cmkuo-WpGG_525_RECO_s2_v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.WpGG_S2-cmkuo-WpGG_525_RECO_s2_v1.files.tmp
+# of files per list: 20
+new list:   WpGG_S2-cmkuo-WpGG_525_RECO_s2_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S46-cmkuo-ZGG_525_RECO_s46_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S46-cmkuo-ZGG_525_RECO_s46_v1.files.tmp ZGG_S46-cmkuo-ZGG_525_RECO_s46_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S46-cmkuo-ZGG_525_RECO_s46_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S46-cmkuo-ZGG_525_RECO_s46_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S47-cmkuo-ZGG_525_RECO_s47_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S47-cmkuo-ZGG_525_RECO_s47_v1.files.tmp ZGG_S47-cmkuo-ZGG_525_RECO_s47_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S47-cmkuo-ZGG_525_RECO_s47_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S47-cmkuo-ZGG_525_RECO_s47_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S50-cmkuo-ZGG_525_RECO_s50_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S50-cmkuo-ZGG_525_RECO_s50_v1.files.tmp ZGG_S50-cmkuo-ZGG_525_RECO_s50_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S50-cmkuo-ZGG_525_RECO_s50_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S50-cmkuo-ZGG_525_RECO_s50_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S51-cmkuo-ZGG_525_RECO_s51_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S51-cmkuo-ZGG_525_RECO_s51_v1.files.tmp ZGG_S51-cmkuo-ZGG_525_RECO_s51_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S51-cmkuo-ZGG_525_RECO_s51_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S51-cmkuo-ZGG_525_RECO_s51_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S52-cmkuo-ZGG_525_RECO_s52_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S52-cmkuo-ZGG_525_RECO_s52_v1.files.tmp ZGG_S52-cmkuo-ZGG_525_RECO_s52_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S52-cmkuo-ZGG_525_RECO_s52_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S52-cmkuo-ZGG_525_RECO_s52_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S56-cmkuo-ZGG_525_RECO_s56_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S56-cmkuo-ZGG_525_RECO_s56_v1.files.tmp ZGG_S56-cmkuo-ZGG_525_RECO_s56_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S56-cmkuo-ZGG_525_RECO_s56_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S56-cmkuo-ZGG_525_RECO_s56_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S58-cmkuo-ZGG_525_RECO_s58_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S58-cmkuo-ZGG_525_RECO_s58_v1.files.tmp ZGG_S58-cmkuo-ZGG_525_RECO_s58_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S58-cmkuo-ZGG_525_RECO_s58_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S58-cmkuo-ZGG_525_RECO_s58_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S60-cmkuo-ZGG_525_RECO_s60_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S60-cmkuo-ZGG_525_RECO_s60_v1.files.tmp ZGG_S60-cmkuo-ZGG_525_RECO_s60_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S60-cmkuo-ZGG_525_RECO_s60_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S60-cmkuo-ZGG_525_RECO_s60_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S62-cmkuo-ZGG_525_RECO_s62_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S62-cmkuo-ZGG_525_RECO_s62_v1.files.tmp ZGG_S62-cmkuo-ZGG_525_RECO_s62_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S62-cmkuo-ZGG_525_RECO_s62_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S62-cmkuo-ZGG_525_RECO_s62_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S66-cmkuo-ZGG_525_RECO_s66_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S66-cmkuo-ZGG_525_RECO_s66_v1.files.tmp ZGG_S66-cmkuo-ZGG_525_RECO_s66_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S66-cmkuo-ZGG_525_RECO_s66_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S66-cmkuo-ZGG_525_RECO_s66_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S70-cmkuo-ZGG_525_RECO_s70_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S70-cmkuo-ZGG_525_RECO_s70_v1.files.tmp ZGG_S70-cmkuo-ZGG_525_RECO_s70_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S70-cmkuo-ZGG_525_RECO_s70_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S70-cmkuo-ZGG_525_RECO_s70_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGG_S72-cmkuo-ZGG_525_RECO_s72_v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGG_S72-cmkuo-ZGG_525_RECO_s72_v1.files.tmp ZGG_S72-cmkuo-ZGG_525_RECO_s72_v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.ZGG_S72-cmkuo-ZGG_525_RECO_s72_v1.files.tmp
+# of files per list: 20
+new list:   ZGG_S72-cmkuo-ZGG_525_RECO_s72_v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGToLLG_8TeV-madgraph
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGToLLG_8TeV-madgraph.files.tmp ZGToLLG_8TeV-madgraph_
+# of root files in directory: 117
+# of uniq files in directory: 117 /tmp/uniq.ZGToLLG_8TeV-madgraph.files.tmp
+# of files per list: 20
+new list:   ZGToLLG_8TeV-madgraph_00.list
+new list:   ZGToLLG_8TeV-madgraph_01.list
+new list:   ZGToLLG_8TeV-madgraph_02.list
+new list:   ZGToLLG_8TeV-madgraph_03.list
+new list:   ZGToLLG_8TeV-madgraph_04.list
+new list:   ZGToLLG_8TeV-madgraph_05.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZG_Inclusive_8TeV-madgraph
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZG_Inclusive_8TeV-madgraph.files.tmp ZG_Inclusive_8TeV-madgraph_
+# of root files in directory: 65
+# of uniq files in directory: 65 /tmp/uniq.ZG_Inclusive_8TeV-madgraph.files.tmp
+# of files per list: 20
+new list:   ZG_Inclusive_8TeV-madgraph_00.list
+new list:   ZG_Inclusive_8TeV-madgraph_01.list
+new list:   ZG_Inclusive_8TeV-madgraph_02.list
+new list:   ZG_Inclusive_8TeV-madgraph_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola.files.tmp ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_
+# of root files in directory: 20
+# of uniq files in directory: 20 /tmp/uniq.ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola.files.tmp
+# of files per list: 20
+new list:   ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZTo2L2Nu_TuneZ2star_8TeV_pythia6_tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZTo2L2Nu_TuneZ2star_8TeV_pythia6_tauola.files.tmp ZZTo2L2Nu_TuneZ2star_8TeV_pythia6_tauola_
+# of root files in directory: 11
+# of uniq files in directory: 11 /tmp/uniq.ZZTo2L2Nu_TuneZ2star_8TeV_pythia6_tauola.files.tmp
+# of files per list: 20
+new list:   ZZTo2L2Nu_TuneZ2star_8TeV_pythia6_tauola_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZ_TuneZ2star_8TeV_pythia6_tauola
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZ_TuneZ2star_8TeV_pythia6_tauola.files.tmp ZZ_TuneZ2star_8TeV_pythia6_tauola_
+# of root files in directory: 197
+# of uniq files in directory: 197 /tmp/uniq.ZZ_TuneZ2star_8TeV_pythia6_tauola.files.tmp
+# of files per list: 20
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_00.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_01.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_02.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_03.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_04.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_05.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_06.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_07.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_08.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_09.list
