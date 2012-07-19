@@ -2507,7 +2507,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    secondEleLoose=iEle;
 	    secondEleLoosePt=electron_pt[iEle];
 	  } else if (electron_pt[iEle]>=firstEleLoosePt && electron_pt[iEle]>=secondEleLoosePt) {
-	    secondEleLoose=firstEle;
+	    secondEleLoose=firstEleLoose;
 	    secondEleLoosePt=firstEleLoosePt;
 	    firstEleLoose=iEle;
 	    firstEleLoosePt=electron_pt[iEle];
@@ -2555,7 +2555,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    secondMuLoose=iMu;
 	    secondMuLoosePt=Muon_pt[iMu];
 	  } else if (Muon_pt[iMu]>=firstMuLoosePt && Muon_pt[iMu]>=secondMuLoosePt) {
-	    secondMuLoose=firstMu;
+	    secondMuLoose=firstMuLoose;
 	    secondMuLoosePt=firstMuLoosePt;
 	    firstMuLoose=iMu;
 	    firstMuLoosePt=Muon_pt[iMu];
