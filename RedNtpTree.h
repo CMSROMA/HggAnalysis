@@ -110,7 +110,7 @@ private:
    void SetAllRecoVarToMinus999();
    void SetAllGenVarToMinus999();
 
-   virtual vector<int>    firstfour(Float_t * vec, vector<bool> *asso);
+   virtual vector<int>    firstones(Float_t * vec, vector<bool> *asso, int number=4);
    bool cutID(int i, photonidcuts const& pid, std::vector<bool> *vpass = 0);
    bool cutIDEG(int i, photonidegcuts const& pid, std::vector<bool> *vpass = 0,  bool pu = 0);
    bool cutIDele(int i, photonidelecuts const& pid, std::vector<bool> *vpass = 0);
@@ -235,10 +235,8 @@ private:
    // lepton tag
    bool leptonCutsEle2011(int iEle, electronidcuts const& pid, vector<bool> *vpass);
    bool leptonCutsEle2012(int iEle, electronidcuts2012 const& pid, vector<bool> *vpass);
-   bool leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid, vector<bool> *vpass);
    bool leptonCutsMu2011(int iMu, muonidcuts const& pid, vector<bool> *vpass);
    bool leptonCutsMu2012(int iMu, muonidcuts2012 const& pid, vector<bool> *vpass);
-   bool leptonCutsMuVL2012(int iMu, muonidcuts2012 const& pid, vector<bool> *vpass);
    double eleDzPV(int iele, int iPV);
    double eleDxyPV(int iele, int iPV);
    double muonDzPV(int imu, int iPV);
@@ -294,68 +292,39 @@ private:
    Float_t energyErrphot2;
    Float_t energySmearingphot1;
    Float_t energySmearingphot2;
-   Float_t ptjet1;
-   Float_t ptjet2;
-   Float_t ptjet3;
-   Float_t ptjet4;
-   Float_t ptcorrjet1;
-   Float_t ptcorrjet2;
-   Float_t ptcorrjet3;
-   Float_t ptcorrjet4;
-   Float_t etajet1;
-   Float_t etajet2;
-   Float_t etajet3;
-   Float_t etajet4;
-   Float_t phijet1;
-   Float_t phijet2;
-   Float_t phijet3;
-   Float_t phijet4;
-   Float_t betajet1;
-   Float_t betajet2;
-   Float_t betastarjet1;
-   Float_t betastarjet2;
-   Float_t btagvtxjet1;
-   Float_t btagtrkjet1;
-   Float_t btagvtxjet2;
-   Float_t btagtrkjet2;
-   Float_t ptDjet1;
-   Float_t rmsjet1;
-   Float_t jetIdSimple_mvajet1;
-   Float_t jetIdFull_mvajet1;
-   Float_t jetId_dR2Meanjet1;
-   Float_t jetId_betaStarClassicjet1;
-   Float_t jetId_frac01jet1;
-   Float_t jetId_frac02jet1;
-   Float_t jetId_frac03jet1;
-   Float_t jetId_frac04jet1;
-   Float_t jetId_frac05jet1;
-   Float_t jetId_betajet1;
-   Float_t jetId_betaStarjet1;
-   Int_t jetIdCutBased_wpjet1;
-   Int_t jetIdSimple_wpjet1;
-   Int_t jetIdFull_wpjet1;
-   Int_t ntrkjet1;
-   Int_t nneutjet1;
-   Float_t ptDjet2;
-   Float_t rmsjet2;
-   Int_t ntrkjet2;
-   Int_t nneutjet2;
-   Float_t jetIdSimple_mvajet2;
-   Float_t jetIdFull_mvajet2;
-   Float_t jetId_dR2Meanjet2;
-   Float_t jetId_betaStarClassicjet2;
-   Float_t jetId_frac01jet2;
-   Float_t jetId_frac02jet2;
-   Float_t jetId_frac03jet2;
-   Float_t jetId_frac04jet2;
-   Float_t jetId_frac05jet2;
-   Float_t jetId_betajet2;
-   Float_t jetId_betaStarjet2;
-   Int_t jetIdCutBased_wpjet2;
-   Int_t jetIdSimple_wpjet2;
-   Int_t jetIdFull_wpjet2;
-   Int_t assjet1;
-   Int_t assjet2;
+   Int_t njets;
+   Float_t ptjet[10];
+   Float_t ptcorrjet[10];
+   Float_t ecorrjet[10];
+   Float_t etajet[10];
+   Float_t phijet[10];
+   Float_t betajet[10];
+   Float_t betastarjet[10];
+   Float_t btagvtxjet[10];
+   Float_t btagtrkjet[10];
+   Float_t btagjprobjet[10];
+   Float_t ptDjet[10];
+   Float_t rmsjet[10];
+   Int_t ntrkjet[10];
+   Int_t nneutjet[10];
+   Float_t jetIdSimple_mvajet[10];
+   Float_t jetIdFull_mvajet[10];
+   Float_t jetId_dR2Meanjet[10];
+   Float_t jetId_betaStarClassicjet[10];
+   Float_t jetId_frac01jet[10];
+   Float_t jetId_frac02jet[10];
+   Float_t jetId_frac03jet[10];
+   Float_t jetId_frac04jet[10];
+   Float_t jetId_frac05jet[10];
+   Float_t jetId_betajet[10];
+   Float_t jetId_betaStarjet[10];
+   Int_t jetIdCutBased_wpjet[10];
+   Int_t jetIdSimple_wpjet[10];
+   Int_t jetIdFull_wpjet[10];
+   Int_t assjet[10];
+   Int_t partPdgIDjet[10];
+   Int_t partMomPdgIDjet[10];
+
    Float_t deltaeta;
    Float_t zeppenjet;
    Float_t deltaphi;
@@ -573,6 +542,11 @@ private:
    Int_t ISRGamma;
    Int_t FSRGamma;
 
+   Bool_t H_event;
+   Bool_t V_event;
+   Bool_t Zbb_event;
+   Bool_t Vqq_event;
+
    Float_t   rhoPFRN;
    Float_t   pid_hlwTrackNoDzphot1;
    Float_t   pid_hlwTrackNoDzphot2;
@@ -618,7 +592,6 @@ private:
    Float_t sIeIeele1, sIeIeele2;
    Float_t dphiele1, dphiele2;
    Float_t detaele1, detaele2;
-   Float_t hoeele1, hoeele2;
    Int_t mhitsele1, mhitsele2;
    Float_t dcotele1, dcotele2;
    Float_t distele1, distele2;
@@ -643,7 +616,6 @@ private:
    Float_t sIeIeeleloose1, sIeIeeleloose2;
    Float_t dphieleloose1, dphieleloose2;
    Float_t detaeleloose1, detaeleloose2;
-   Float_t hoeeleloose1, hoeeleloose2;
    Int_t mhitseleloose1, mhitseleloose2;
    Float_t dcoteleloose1, dcoteleloose2;
    Float_t disteleloose1, disteleloose2;
@@ -659,17 +631,6 @@ private:
    Float_t oEmoPeleloose2, mvanotrigeleloose2, mvatrigeleloose2; 
    Int_t matchconveleloose2;
    Float_t chHadIso03eleloose2, nHadIso03eleloose2, photIso03eleloose2;
-
-   Float_t ptelenontr951, ptelenontr952;
-   Float_t etaelenontr951, etaelenontr952;
-   Float_t phielenontr951, phielenontr952;
-   Float_t eneelenontr951, eneelenontr952;
-   //
-   Float_t ptelenontr901, ptelenontr902;
-   Float_t etaelenontr901, etaelenontr902;
-   Float_t phielenontr901, phielenontr902;
-   Float_t eneelenontr901, eneelenontr902;
-
 
    Float_t ptmu1, ptmu2;
    Float_t etamu1, etamu2;
@@ -701,22 +662,6 @@ private:
    Float_t isomuloose1,isomuloose2;
    Float_t chHadmuloose1, nHadmuloose1, photmuloose1, puptmuloose1;
    Float_t chHadmuloose2, nHadmuloose2, photmuloose2, puptmuloose2;
-
-   // very loose muons
-   Float_t ptmuvloose1, ptmuvloose2;
-   Float_t etamuvloose1, etamuvloose2;
-   Float_t phimuvloose1, phimuvloose2;
-   Float_t enemuvloose1, enemuvloose2;
-   Int_t pixhitsmuvloose1, pixhitsmuvloose2;
-   Int_t trkhitsmuvloose1, trkhitsmuvloose2;
-   Int_t hitsmuvloose1, hitsmuvloose2;
-   Float_t chi2muvloose1, chi2muvloose2;
-   Int_t matchmuvloose1, matchmuvloose2;
-   Float_t d0muvloose1, d0muvloose2;
-   Float_t dzmuvloose1, dzmuvloose2;
-   Float_t isomuvloose1,isomuvloose2;
-   Float_t chHadmuvloose1, nHadmuvloose1, photmuvloose1, puptmuvloose1;
-   Float_t chHadmuvloose2, nHadmuvloose2, photmuvloose2, puptmuvloose2;
 
    
    float weight;
