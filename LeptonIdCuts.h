@@ -53,6 +53,26 @@ struct electronidcuts2012 {
   float iso_relEE;
 };
 
+struct electronidcutsMva2012 {
+
+  float eta;
+  float crack1;
+  float crack2;
+  float pt;
+  float mvaCentEB;
+  float mvaOutEB;
+  float mvaEE;
+  float minhitsEB;
+  float minhitsEE;
+  float d0EB;
+  float d0EE;
+  float dzEB;
+  float dzEE;
+  float iso_relCentEB;
+  float iso_relOutEB;
+  float iso_relEE;
+};
+
 struct muonidcuts {
 
   float eta;
