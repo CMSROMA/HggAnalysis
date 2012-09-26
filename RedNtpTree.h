@@ -11,6 +11,8 @@
 #include "EnergyScaleCorrection.h"
 #include "JetScaleSystematics.h"
 #include "ElectronEffectiveArea.h"
+#include "MassResolution.h"
+
 #include "TLorentzVector.h"
 
 #include <TFile.h>
@@ -24,6 +26,7 @@
 #include <TChain.h>
 
 #include "TMVA/Reader.h"
+
 
 using std::string;
 using std::vector;
@@ -62,7 +65,7 @@ public:
      jetsyst_=new JetScaleSystematics(correctionFile);
      typejetsyst_=typesyst;
    }
-    
+   TLorentzVector p4Phot(int phot,int vtx) const;      
     /*
     TTree* myTree; 
     struct cicTree_structure_ {
@@ -88,6 +91,7 @@ public:
 
     std::string photonLevelNewIDMVA_EB;
     std::string photonLevelNewIDMVA_EE;
+    std::string diPhotonMVAweights;
     std::string cicVersion;
 
 private:
@@ -99,6 +103,8 @@ private:
    vector<bool> jetnoisophot;
 
    const char* jsonFile;
+
+   MassResolution* massResCalc_;
    
    Int_t SampleID;
    Int_t  NtotEvents;
@@ -215,6 +221,18 @@ private:
   Float_t tmva_photonid_ESEffSigmaRR;
   Float_t PhotonIDMVANew(Int_t iPhoton, Int_t vtx);  
   
+  TMVA::Reader *tmvaReader_dipho_MIT;
+  Float_t tmva_dipho_MIT_dmom;
+  Float_t tmva_dipho_MIT_dmom_wrong_vtx;
+  Float_t tmva_dipho_MIT_vtxprob;
+  Float_t tmva_dipho_MIT_ptom1;
+  Float_t tmva_dipho_MIT_ptom2;
+  Float_t tmva_dipho_MIT_eta1;
+  Float_t tmva_dipho_MIT_eta2;
+  Float_t tmva_dipho_MIT_dphi;
+  Float_t tmva_dipho_MIT_ph1mva;
+  Float_t tmva_dipho_MIT_ph2mva;
+  Float_t diphotonMVA(Int_t leadingPho, Int_t subleadingPho, Int_t vtx, float vtxProb, TLorentzVector leadP4, TLorentzVector subleadP4, float sigmaMrv, float sigmaMwv, float photonID_1,float photonID_2);
   //photon category functions (r9 and eta)
   int PhotonCategory(int photonindex) { 
     return PhotonR9Category(photonindex) + 2*PhotonEtaCategory(photonindex);
@@ -344,6 +362,8 @@ private:
    Float_t vtxPos_z;
    Float_t vtxIdMVA;
    Float_t vtxIdEvtProb;
+
+   Float_t diPhotMVA;
 
    //////////////////////////////////////
    Float_t         sMet_  ;

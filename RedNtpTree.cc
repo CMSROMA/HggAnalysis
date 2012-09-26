@@ -46,6 +46,7 @@ RedNtpTree::RedNtpTree(TTree *tree, const TString& outname) : tree_reader_V8(tre
   // myTree = new TTree("cicTree_structure_","");
   // TString treeVariables = "runCIC/I:eventCIC/I:isosumoet/F:isoecalet/F:isohcalet/F:isotrackeret/F:isosumoetbad/F:isoecaletbad/F:isohcaletbad/F:isotrackeretbad/F:sieie/F:hoe/F:r9/F:drtotk_25_99/F:pixel/F";
   // myTree->Branch("cicTree_structure_",&(tree_.runCIC),treeVariables);
+  massResCalc_=new MassResolution();
 }
 
 
@@ -528,7 +529,18 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("vtxIdMVA",&vtxIdMVA,"vtxIdMVA/F");
     ana_tree->Branch("vtxIdEvtProb",&vtxIdEvtProb,"vtxIdEvtProb/F");
 
-    
+    ana_tree->Branch("diPhotMVA",&diPhotMVA,"diPhotMVA/F");
+    ana_tree->Branch("tmva_dipho_MIT_dmom",&tmva_dipho_MIT_dmom,"tmva_dipho_MIT_dmom/F");
+    ana_tree->Branch("tmva_dipho_MIT_dmom_wrong_vtx",&tmva_dipho_MIT_dmom_wrong_vtx,"tmva_dipho_MIT_dmom_wrong_vtx/F");
+    ana_tree->Branch("tmva_dipho_MIT_vtxprob",    &tmva_dipho_MIT_vtxprob ,"tmva_dipho_MIT_vtxprob/F");
+    ana_tree->Branch("tmva_dipho_MIT_ptom1",&tmva_dipho_MIT_ptom1	  ,"tmva_dipho_MIT_ptom1/F");
+    ana_tree->Branch("tmva_dipho_MIT_ptom2",&tmva_dipho_MIT_ptom2	  ,"tmva_dipho_MIT_ptom2/F");
+    ana_tree->Branch("tmva_dipho_MIT_eta1",&tmva_dipho_MIT_eta1	  ,"tmva_dipho_MIT_eta1/F");
+    ana_tree->Branch("tmva_dipho_MIT_eta2",&tmva_dipho_MIT_eta2	  ,"tmva_dipho_MIT_eta2/F");
+    ana_tree->Branch("tmva_dipho_MIT_dphi",&tmva_dipho_MIT_dphi	  ,"tmva_dipho_MIT_dphi/F");
+    ana_tree->Branch("tmva_dipho_MIT_ph1mva",&tmva_dipho_MIT_ph1mva  ,"tmva_dipho_MIT_ph1mva/F");
+    ana_tree->Branch("tmva_dipho_MIT_ph2mva",    &tmva_dipho_MIT_ph2mva  ,"tmva_dipho_MIT_ph2mva/F");
+
     // ana_tree->Branch("met",&met,"met/F");
     // ana_tree->Branch("phimet",&phimet,"phimet/F");
     
@@ -3269,6 +3281,19 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             PDFweight10[iy] = pdfWeight[9][iy];
 	}
 
+
+	//Calculate DiPhotonMVA for vrankPhot (need special treatment for lepton and MET tag)
+	// Mass Resolution of the Event
+        massResCalc_->Setup(scaleCorrections_,this, firstfourisophot.at(0), firstfourisophot.at(1),vtxId,4.8); //beamSpot is fixed @ 4.8
+	float sigmaMrv = massResCalc_->massResolutionEonly();
+        float sigmaMwv = massResCalc_->massResolutionWrongVtx();
+
+	diPhotMVA = diphotonMVA(firstfourisophot.at(0), firstfourisophot.at(1),
+					    vtxId,vtxIdEvtProb,
+				p4Phot(firstfourisophot.at(0),vtxId), p4Phot(firstfourisophot.at(1),vtxId),
+					    sigmaMrv,sigmaMwv,
+					    isomva.at(firstfourisophot.at(0)),isomva.at(firstfourisophot.at(1)));
+	
 	massgg = higgsisomass;
 	ptgg = higgspt;
 	massggnewvtx = higgsisomassnewvtx;
@@ -4397,7 +4422,14 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
 }
 
 
-
+TLorentzVector RedNtpTree::p4Phot(int phot_i,int vtx_i) const
+{
+  TVector3 vPos(vx[vtx_i],vy[vtx_i],vz[vtx_i]);
+  TVector3 direction = TVector3(xscPhot[phot_i],yscPhot[phot_i],zscPhot[phot_i]) - vPos;
+  TVector3 p = direction.Unit() * escRegrPhot[phot_i];
+  TLorentzVector p4(p.x(),p.y(),p.z(),escRegrPhot[phot_i]);
+  return p4;
+}
 
 void RedNtpTree::correctPhotons(bool energyRegression)
 {
@@ -4534,6 +4566,7 @@ invmass2g2j = -999;
  vtxPos_z = -999;
  vtxIdMVA = -999;
  vtxIdEvtProb = -999;
+ diPhotMVA=-999;
    //////////////////////////////////////
     sMet_   = -999;
     eMet_   = -999;
@@ -6806,6 +6839,39 @@ Float_t RedNtpTree::PhotonIDMVANew(Int_t iPhoton, Int_t vtx)
   return mva;
 }
 
+
+Float_t RedNtpTree::diphotonMVA(Int_t leadingPho, Int_t subleadingPho, Int_t vtx, float vtxProb, TLorentzVector leadP4, TLorentzVector subleadP4, float sigmaMrv, float sigmaMwv, float photonID_1,float photonID_2) {
+
+    // Ok need to re-write the diphoton-mva part since the systematics won't work unless we can change the Et of the photons
+    // all we have to do is to pass in the ->Et of the two photons also rather than take them from the four-vector branches
+  
+    Float_t mva = 99.;
+    TLorentzVector Higgs = leadP4+subleadP4;
+    float leadPt    = leadP4.Pt();
+    float subleadPt = subleadP4.Pt();
+    float mass     = Higgs.M();
+    float diphopt   = Higgs.Pt();
+
+
+    tmva_dipho_MIT_dmom = sigmaMrv/mass;
+    tmva_dipho_MIT_dmom_wrong_vtx = sigmaMwv/mass;
+    tmva_dipho_MIT_vtxprob = vtxProb;
+    tmva_dipho_MIT_ptom1 = leadPt/mass;
+    tmva_dipho_MIT_ptom2 = subleadPt/mass;
+
+    tmva_dipho_MIT_eta1 = leadP4.Eta();
+    tmva_dipho_MIT_eta2 =  subleadP4.Eta();
+    tmva_dipho_MIT_dphi = TMath::Cos(leadP4.Phi() - subleadP4.Phi());
+      
+
+    tmva_dipho_MIT_ph1mva = photonID_1;//photonIDMVANew(leadingPho,vtx, leadP4, "MIT");
+    tmva_dipho_MIT_ph2mva = photonID_2;//photonIDMVANew(subleadingPho,vtx, subleadP4, "MIT");
+
+    mva = tmvaReader_dipho_MIT->EvaluateMVA("Gradient");
+  
+    return mva;
+}
+
 void RedNtpTree::SetAllMVA() {
   tmvaReaderID_Single_Barrel = new TMVA::Reader("!Color:Silent");
   tmvaReaderID_Single_Barrel->AddVariable("myphoton_pfchargedisogood03",   &tmva_photonid_pfchargedisogood03 );
@@ -6834,7 +6900,22 @@ void RedNtpTree::SetAllMVA() {
   tmvaReaderID_Single_Endcap->AddVariable("event_rho",   &tmva_photonid_eventrho );
   tmvaReaderID_Single_Endcap->AddVariable("myphoton_ESEffSigmaRR",   &tmva_photonid_ESEffSigmaRR );
 
-
+  std::cout << "Booking PhotonID EB MVA with file " << photonLevelNewIDMVA_EB.c_str() << std::endl;
   tmvaReaderID_Single_Barrel->BookMVA("AdaBoost",photonLevelNewIDMVA_EB.c_str());
+  std::cout << "Booking PhotonID EE MVA with file " << photonLevelNewIDMVA_EE.c_str() << std::endl;
   tmvaReaderID_Single_Endcap->BookMVA("AdaBoost",photonLevelNewIDMVA_EE.c_str());
+
+  tmvaReader_dipho_MIT = new TMVA::Reader("!Color:Silent"); 
+  tmvaReader_dipho_MIT->AddVariable("masserrsmeared/mass",         &tmva_dipho_MIT_dmom);
+  tmvaReader_dipho_MIT->AddVariable("masserrsmearedwrongvtx/mass", &tmva_dipho_MIT_dmom_wrong_vtx);
+  tmvaReader_dipho_MIT->AddVariable("vtxprob",                     &tmva_dipho_MIT_vtxprob);
+  tmvaReader_dipho_MIT->AddVariable("ph1.pt/mass",                 &tmva_dipho_MIT_ptom1);
+  tmvaReader_dipho_MIT->AddVariable("ph2.pt/mass",                 &tmva_dipho_MIT_ptom2);
+  tmvaReader_dipho_MIT->AddVariable("ph1.eta",                     &tmva_dipho_MIT_eta1);
+  tmvaReader_dipho_MIT->AddVariable("ph2.eta",                     &tmva_dipho_MIT_eta2);
+  tmvaReader_dipho_MIT->AddVariable("TMath::Cos(ph1.phi-ph2.phi)", &tmva_dipho_MIT_dphi);
+  tmvaReader_dipho_MIT->AddVariable("ph1.idmva",                   &tmva_dipho_MIT_ph1mva);
+  tmvaReader_dipho_MIT->AddVariable("ph2.idmva",                   &tmva_dipho_MIT_ph2mva);
+  std::cout << "Booking diPhoton MVA with file " << diPhotonMVAweights << std::endl;
+  tmvaReader_dipho_MIT->BookMVA("Gradient", diPhotonMVAweights.c_str());
 }

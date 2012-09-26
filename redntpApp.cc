@@ -29,8 +29,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
       //================ Parameters 
-      if(argc < 5 || argc>13 ) {
-        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection idmvaEB_file idmvaEE_file jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional) doPDFrew(optional) systJets(optional)\n" 
+      if(argc < 6 || argc>14 ) {
+        cout << "Usage:  ./tmp/redntpApp  listfile   outputfile   selection idmvaEB_file idmvaEE_file diPhotMVA_file jsonfile(optional) puweight(optional) ptweight(optional) scaleCorrections(optional) doPDFrew(optional) systJets(optional)\n" 
              << "    listfile:    list of root files incusing protocol eg dcap:/// .....\n"
              << "    outputfile:  name of output root file  eg output.root\n"
              << "    selection:   selection for preselecting events"  
@@ -108,32 +108,33 @@ int main(int argc, char* argv[]) {
        tool.SetNtotXsection( ntot, myxsec );
        tool.photonLevelNewIDMVA_EB=std::string(argv[4]);
        tool.photonLevelNewIDMVA_EE=std::string(argv[5]);
-
-       if (argc>6 && std::string(argv[6]) != "-1")
- 	 tool.SetJsonFile(argv[6]);
+       tool.diPhotonMVAweights=std::string(argv[6]);
 
        if (argc>7 && std::string(argv[7]) != "-1")
-	 tool.SetPuWeights(std::string(argv[7]));
+ 	 tool.SetJsonFile(argv[7]);
 
        if (argc>8 && std::string(argv[8]) != "-1")
-	 tool.SetPtWeights(std::string(argv[8]));
+	 tool.SetPuWeights(std::string(argv[8]));
 
        if (argc>9 && std::string(argv[9]) != "-1")
+	 tool.SetPtWeights(std::string(argv[9]));
+
+       if (argc>10 && std::string(argv[10]) != "-1")
 	 {
 	   //	   EnergyScaleCorrection::energyScaleParameters scaleCorrections;
 	   //scaleCorrections.parameterSetName="";
-	   TString scaleCorrectionFile(argv[9]);
+	   TString scaleCorrectionFile(argv[10]);
 	   //	   fillCorrections(scaleCorrectionSet,scaleCorrections); 
 	   if (scaleCorrectionFile!="")
 	     tool.setEnergyScaleCorrections(scaleCorrectionFile,"Hgg_eta_R9");
 	 }
 
-       if (argc>10 && std::string(argv[10]) != "-1")
+       if (argc>11 && std::string(argv[11]) != "-1")
 	 tool.DoPDFWeighting();
 
-       if (argc>11 && std::string(argv[11]) != "-1" && argc>12 && std::string(argv[12]) != "-1"){
-	 TString scaleJetSysFile(argv[11]);
-	 TString stringtypesyst(argv[12]);
+       if (argc>12 && std::string(argv[12]) != "-1" && argc>13 && std::string(argv[13]) != "-1"){
+	 TString scaleJetSysFile(argv[12]);
+	 TString stringtypesyst(argv[13]);
 	 char* endptr;
 	 int typesyst = strtol (stringtypesyst, &endptr, 0);
 	 tool.setJetSystematics(scaleJetSysFile,typesyst);;

@@ -33,10 +33,10 @@ fi
 if [ "$domain" == "cern.ch" ]; then
     cd -
 fi
-echo dir is $CMSSW_BASE file is $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12}
-echo ${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 ${11} ${12} $5 $6 $7 $8 $9 ${10}
+echo dir is $CMSSW_BASE file is $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+echo ${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 ${11} ${12} ${13} $5 $6 $7 $8 $9 ${10}
 
-${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 ${11} ${12} $5 $6 $7 $8 $9 ${10}
+${CMSSW_BASE}/src/Analysis/Higgs/tmp/redntpApp $2 ${filename} $4 ${11} ${12} ${13} $5 $6 $7 $8 $9 ${10}
 exit_stat=$?
 
 if [ "$domain" == "cern.ch" ]; then
