@@ -664,10 +664,10 @@ private:
    Int_t matchconveleloose2;
    Float_t chHadIso03eleloose2, nHadIso03eleloose2, photIso03eleloose2;
 
-   Float_t ptelenontr951, ptelenontr952;
-   Float_t etaelenontr951, etaelenontr952;
-   Float_t phielenontr951, phielenontr952;
-   Float_t eneelenontr951, eneelenontr952;
+   Float_t ptelenontr801, ptelenontr802;
+   Float_t etaelenontr801, etaelenontr802;
+   Float_t phielenontr801, phielenontr802;
+   Float_t eneelenontr801, eneelenontr802;
    //
    Float_t ptelenontr901, ptelenontr902;
    Float_t etaelenontr901, etaelenontr902;

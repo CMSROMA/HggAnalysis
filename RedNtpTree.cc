@@ -792,14 +792,14 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     }
 
     // MVA-based selection for electrons
-    ana_tree->Branch("ptelenontr951",    &ptelenontr951,    "ptelenontr951/F");
-    ana_tree->Branch("ptelenontr952",    &ptelenontr952,    "ptelenontr952/F");
-    ana_tree->Branch("etaelenontr951",   &etaelenontr951,   "etaelenontr951/F");
-    ana_tree->Branch("etaelenontr952",   &etaelenontr952,   "etaelenontr952/F");
-    ana_tree->Branch("phielenontr951",   &phielenontr951,   "phielenontr951/F");
-    ana_tree->Branch("phielenontr952",   &phielenontr952,   "phielenontr952/F");
-    ana_tree->Branch("eneelenontr951",   &eneelenontr951,   "eneelenontr951/F");
-    ana_tree->Branch("eneelenontr952",   &eneelenontr952,   "eneelenontr952/F");
+    ana_tree->Branch("ptelenontr801",    &ptelenontr801,    "ptelenontr801/F");
+    ana_tree->Branch("ptelenontr802",    &ptelenontr802,    "ptelenontr802/F");
+    ana_tree->Branch("etaelenontr801",   &etaelenontr801,   "etaelenontr801/F");
+    ana_tree->Branch("etaelenontr802",   &etaelenontr802,   "etaelenontr802/F");
+    ana_tree->Branch("phielenontr801",   &phielenontr801,   "phielenontr801/F");
+    ana_tree->Branch("phielenontr802",   &phielenontr802,   "phielenontr802/F");
+    ana_tree->Branch("eneelenontr801",   &eneelenontr801,   "eneelenontr801/F");
+    ana_tree->Branch("eneelenontr802",   &eneelenontr802,   "eneelenontr802/F");
     //
     ana_tree->Branch("ptelenontr901",    &ptelenontr901,    "ptelenontr901/F");
     ana_tree->Branch("ptelenontr902",    &ptelenontr902,    "ptelenontr902/F");
@@ -874,7 +874,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("dzmuloose1",      &dzmuloose1,      "dzmuloose1/F");
     ana_tree->Branch("dzmuloose2",      &dzmuloose2,      "dzmuloose2/F");
 
-    // very loose selected muons - chiara
+    // very loose selected muons
     ana_tree->Branch("ptmuvloose1",      &ptmuvloose1,      "ptmuvloose1/F");
     ana_tree->Branch("ptmuvloose2",      &ptmuvloose2,      "ptmuvloose2/F");
     ana_tree->Branch("etamuvloose1",     &etamuvloose1,     "etamuvloose1/F");
@@ -1243,42 +1243,38 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     eletagLoose2012.iso_relEE = 0.15;  
 
 
-    // Lepton tag selection 2012: electrons
-    // this is the Non-Triggering Electrons WP95 
-    // in https://twiki.cern.ch/twiki/bin/view/Main/HVVElectronId2012#Optimized_working_points
-    electronidcutsMva2012 eletagNonTr95;     // chiara: metto i numeri per pT>10
-    eletagNonTr95.eta       = 2.5;
-    eletagNonTr95.crack1    = 1.4442;
-    eletagNonTr95.crack2    = 1.566;
-    eletagNonTr95.pt        = 5.;
-    eletagNonTr95.mvaCentEB = 0.634; 
-    eletagNonTr95.mvaOutEB  = 0.719;
-    eletagNonTr95.mvaEE     = 0.593;
-    eletagNonTr95.iso_relCentEB = 0.567;
-    eletagNonTr95.iso_relOutEB  = 0.909;
-    eletagNonTr95.iso_relEE     = 0.665;     
-    eletagNonTr95.d0EB = 0.02;               
-    eletagNonTr95.d0EE = 0.02;
-    eletagNonTr95.dzEB = 0.2;
-    eletagNonTr95.dzEE = 0.2;
-    eletagNonTr95.minhitsEB = 1;
-    eletagNonTr95.minhitsEE = 1;
+    // Lepton tag selection 2012: electrons with mva, cut at 0.8
+    electronidcutsMva2012 eletagNonTr80;     
+    eletagNonTr80.eta       = 2.5;
+    eletagNonTr80.crack1    = 1.4442;
+    eletagNonTr80.crack2    = 1.566;
+    eletagNonTr80.pt        = 5.;
+    eletagNonTr80.mvaCentEB = 0.8; 
+    eletagNonTr80.mvaOutEB  = 0.8;
+    eletagNonTr80.mvaEE     = 0.8;
+    eletagNonTr80.iso_relCentEB = 0.15;
+    eletagNonTr80.iso_relOutEB  = 0.15;
+    eletagNonTr80.iso_relEE     = 0.15;     
+    eletagNonTr80.d0EB = 0.02;               
+    eletagNonTr80.d0EE = 0.02;
+    eletagNonTr80.dzEB = 0.2;
+    eletagNonTr80.dzEE = 0.2;
+    eletagNonTr80.minhitsEB = 1;
+    eletagNonTr80.minhitsEE = 1;
 
 
-    // Lepton tag selection 2012: electrons
-    // this is the NonTriggering Electrons WP90 
-    // in https://twiki.cern.ch/twiki/bin/view/Main/HVVElectronId2012#Optimized_working_points
-    electronidcutsMva2012 eletagNonTr90;     // chiara: metto i numeri per pT>10
+    // Lepton tag selection 2012: electrons with mva, cut at 0.9
+    electronidcutsMva2012 eletagNonTr90;     
     eletagNonTr90.eta       = 2.5;
     eletagNonTr90.crack1    = 1.4442;
     eletagNonTr90.crack2    = 1.566;
     eletagNonTr90.pt        = 5.;
-    eletagNonTr90.mvaCentEB = 0.877; 
-    eletagNonTr90.mvaOutEB  = 0.811;
-    eletagNonTr90.mvaEE     = 0.707;
-    eletagNonTr90.iso_relCentEB = 0.426;
-    eletagNonTr90.iso_relOutEB  = 0.481;
-    eletagNonTr90.iso_relEE     = 0.390;
+    eletagNonTr90.mvaCentEB = 0.9; 
+    eletagNonTr90.mvaOutEB  = 0.9;
+    eletagNonTr90.mvaEE     = 0.9;
+    eletagNonTr90.iso_relCentEB = 0.15;
+    eletagNonTr90.iso_relOutEB  = 0.15;
+    eletagNonTr90.iso_relEE     = 0.15;
     eletagNonTr90.d0EB = 0.02;
     eletagNonTr90.d0EE = 0.02;
     eletagNonTr90.dzEB = 0.2;
@@ -2759,27 +2755,27 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	double firstEleNonTr90Pt  = -998.;
 	double secondEleNonTr90Pt = -999.;
 	//
-	int firstEleNonTr95       = -999;
-	int secondEleNonTr95      = -999;
-	double firstEleNonTr95Pt  = -998.;
-	double secondEleNonTr95Pt = -999.;
+	int firstEleNonTr80       = -999;
+	int secondEleNonTr80      = -999;
+	double firstEleNonTr80Pt  = -998.;
+	double secondEleNonTr80Pt = -999.;
 
-	vector<bool> idpasseletagNonTr95(9); 
+	vector<bool> idpasseletagNonTr80(9); 
 	vector<bool> idpasseletagNonTr90(9); 
 
-	// non triggering ele, WP95
+	// non triggering ele, cut 80
         for(int iEle=0; iEle<nEle; iEle++){
 	  
-	  if (LEPTONS_2012 && !leptonCutsEleMva2012(iEle, eletagNonTr95, &idpasseletagNonTr95)) continue;    
+	  if (LEPTONS_2012 && !leptonCutsEleMva2012(iEle, eletagNonTr80, &idpasseletagNonTr80)) continue;    
 
-	  if (electron_pt[iEle]>=secondEleNonTr95Pt && electron_pt[iEle]<firstEleNonTr95Pt) {
-	    secondEleNonTr95=iEle;
-	    secondEleNonTr95Pt=electron_pt[iEle];
-	  } else if (electron_pt[iEle]>=firstEleNonTr95Pt && electron_pt[iEle]>=secondEleNonTr95Pt) {
-	    secondEleNonTr95=firstEleNonTr95;
-	    secondEleNonTr95Pt=firstEleNonTr95Pt;
-	    firstEleNonTr95=iEle;
-	    firstEleNonTr95Pt=electron_pt[iEle];
+	  if (electron_pt[iEle]>=secondEleNonTr80Pt && electron_pt[iEle]<firstEleNonTr80Pt) {
+	    secondEleNonTr80=iEle;
+	    secondEleNonTr80Pt=electron_pt[iEle];
+	  } else if (electron_pt[iEle]>=firstEleNonTr80Pt && electron_pt[iEle]>=secondEleNonTr80Pt) {
+	    secondEleNonTr80=firstEleNonTr80;
+	    secondEleNonTr80Pt=firstEleNonTr80Pt;
+	    firstEleNonTr80=iEle;
+	    firstEleNonTr80Pt=electron_pt[iEle];
 	  }
 	}
 
@@ -3197,30 +3193,28 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  }
 	}	 
 
-
-	// chiara
-	if (firstEleNonTr95>=0) {
-	  ptelenontr951    = electron_pt[firstEleNonTr95];
-	  etaelenontr951   = electron_sc_eta[firstEleNonTr95];
-	  phielenontr951   = electron_phi[firstEleNonTr95];
-	  eneelenontr951   = electron_energy[firstEleNonTr95];
+	if (firstEleNonTr80>=0) {
+	  ptelenontr801    = electron_pt[firstEleNonTr80];
+	  etaelenontr801   = electron_sc_eta[firstEleNonTr80];
+	  phielenontr801   = electron_phi[firstEleNonTr80];
+	  eneelenontr801   = electron_energy[firstEleNonTr80];
 	} else {
-	  ptelenontr951    = -500.;
-	  etaelenontr951   = -500.;
-	  phielenontr951   = -500.;
-	  eneelenontr951   = -500.;
+	  ptelenontr801    = -500.;
+	  etaelenontr801   = -500.;
+	  phielenontr801   = -500.;
+	  eneelenontr801   = -500.;
 	} 	    
 
-	if (secondEleNonTr95>=0) {
-	  ptelenontr952    = electron_pt[secondEleNonTr95];
-	  etaelenontr952   = electron_sc_eta[secondEleNonTr95];
-	  phielenontr952   = electron_phi[secondEleNonTr95];
-	  eneelenontr952   = electron_energy[secondEleNonTr95];
+	if (secondEleNonTr80>=0) {
+	  ptelenontr802    = electron_pt[secondEleNonTr80];
+	  etaelenontr802   = electron_sc_eta[secondEleNonTr80];
+	  phielenontr802   = electron_phi[secondEleNonTr80];
+	  eneelenontr802   = electron_energy[secondEleNonTr80];
 	} else {
-	  ptelenontr952    = -500.;
-	  etaelenontr952   = -500.;
-	  phielenontr952   = -500.;
-	  eneelenontr952   = -500.;
+	  ptelenontr802    = -500.;
+	  etaelenontr802   = -500.;
+	  phielenontr802   = -500.;
+	  eneelenontr802   = -500.;
 	}	 
 
 	if (firstEleNonTr90>=0) {
@@ -3246,7 +3240,6 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  phielenontr902   = -500.;
 	  eneelenontr902   = -500.;
 	}	 
-	// chiara
 
 	// muons: tight selection
 	if (firstMu>=0) {
@@ -5253,15 +5246,14 @@ idelephot2 = -999;
      fullisoeleloose2 = -999.;
    }
 
-   // chiara
-   ptelenontr951    = -999.;
-   ptelenontr952    = -999.;
-   etaelenontr951   = -999.;
-   etaelenontr952   = -999.;
-   phielenontr951   = -999.;
-   phielenontr952   = -999.;
-   eneelenontr951   = -999.;
-   eneelenontr952   = -999.;
+   ptelenontr801    = -999.;
+   ptelenontr802    = -999.;
+   etaelenontr801   = -999.;
+   etaelenontr802   = -999.;
+   phielenontr801   = -999.;
+   phielenontr802   = -999.;
+   eneelenontr801   = -999.;
+   eneelenontr802   = -999.;
    //
    ptelenontr901    = -999.;
    ptelenontr902    = -999.;
@@ -5348,7 +5340,6 @@ idelephot2 = -999;
      isomuloose2 = -999.;
    }
 
-   // chiara
    ptmuvloose1      = -999.;
    ptmuvloose2      = -999.;
    etamuvloose1     = -999.;
@@ -5385,7 +5376,6 @@ idelephot2 = -999;
      isomuvloose1 = -999.;
      isomuvloose2 = -999.;
    }
-   // chiara
 
    promptGamma = -999;
    LOGamma     = -999;
@@ -5722,7 +5712,6 @@ bool RedNtpTree::leptonCutsEle2012(int iEle, electronidcuts2012 const& pid, vect
   return (pt && eta && crack && setaeta && deta && dphi && hoe && oeMop && d0 && dz && minhits && matchconv && isol);
 }
 
-// chiara
 bool RedNtpTree::leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid, vector<bool> *vpass) {
 
   bool pt, eta, crack;
@@ -5739,20 +5728,13 @@ bool RedNtpTree::leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid
   float d0Ele = eleDxyPV(iEle,vrankPhotonPairs[0]);
   float dzEle = eleDzPV(iEle,vrankPhotonPairs[0]);
 
-  // effective areas - chiara: ricontrolla
+  // effective areas - chiara: per il momento e' la versione 2011
   float abseta = fabs(electron_sc_eta[iEle]);
-  ElectronEffectiveArea::ElectronEffectiveAreaTarget effAreaTarget_ = ElectronEffectiveArea::kEleEAData2012;
-  // ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGamma_ = ElectronEffectiveArea::kEleGammaIso04;
-  // ElectronEffectiveArea::ElectronEffectiveAreaType effAreaNeutralHad_ = ElectronEffectiveArea::kEleNeutralHadronIso04;
-  ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGammaAndNeutralHad_ = ElectronEffectiveArea::kEleGammaAndNeutralHadronIso04;
-  // float eff_area_ga   = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaGamma_, abseta, effAreaTarget_);
-  // float eff_area_nh   = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaNeutralHad_, abseta, effAreaTarget_);
+  ElectronEffectiveArea::ElectronEffectiveAreaTarget effAreaTarget_ = ElectronEffectiveArea::kEleEAData2011;
+  ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGammaAndNeutralHad_ = ElectronEffectiveArea::kEleGammaAndNeutralHadronIso03;
   float eff_area_ganh = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaGammaAndNeutralHad_, abseta, effAreaTarget_);
-  // float eff_area_sum  = eff_area_ga + eff_area_nh;
-  // isolation                                                                                                                             
-  float theIsolation = electron_chHad04Iso[iEle];
-  // theIsolation += max<float>(0.,electron_nHad04Iso[iEle]+electron_phot04Iso[iEle]-eff_area_sum*rhoAllJets);
-  theIsolation += max<float>(0.,electron_nHad04Iso[iEle]+electron_phot04Iso[iEle]-eff_area_ganh*rhoAllJets);
+  float theIsolation = electron_chHad03Iso[iEle];
+  theIsolation += max<float>(0.,electron_nHad03Iso[iEle]+electron_phot03Iso[iEle]-eff_area_ganh*rhoAllJets);
 
   // full selection                                                                                                                        
   if (abseta<0.8) {
@@ -5797,9 +5779,6 @@ bool RedNtpTree::leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid
 
   return (pt && eta && crack && d0 && dz && minhits && matchconv && isol && mva);
 }
-// chiara
-
-
 
 bool RedNtpTree::leptonCutsMu2011(int iMu, muonidcuts const& pid, vector<bool> *vpass) {
 
