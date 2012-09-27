@@ -5728,13 +5728,18 @@ bool RedNtpTree::leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid
   float d0Ele = eleDxyPV(iEle,vrankPhotonPairs[0]);
   float dzEle = eleDzPV(iEle,vrankPhotonPairs[0]);
 
-  // effective areas - chiara: per il momento e' la versione 2011
+  // effective areas - 2012 version
   float abseta = fabs(electron_sc_eta[iEle]);
-  ElectronEffectiveArea::ElectronEffectiveAreaTarget effAreaTarget_ = ElectronEffectiveArea::kEleEAData2011;
-  ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGammaAndNeutralHad_ = ElectronEffectiveArea::kEleGammaAndNeutralHadronIso03;
-  float eff_area_ganh = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaGammaAndNeutralHad_, abseta, effAreaTarget_);
+  ElectronEffectiveArea::ElectronEffectiveAreaTarget effAreaTarget_ = ElectronEffectiveArea::kEleEAData2012;
+  // ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGammaAndNeutralHad_ = ElectronEffectiveArea::kEleGammaAndNeutralHadronIso03;
+  // float eff_area_ganh = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaGammaAndNeutralHad_, abseta, effAreaTarget_);
+  ElectronEffectiveArea::ElectronEffectiveAreaType effAreaGamma_      = ElectronEffectiveArea::kEleGammaIso03;
+  ElectronEffectiveArea::ElectronEffectiveAreaType effAreaNeutralHad_ = ElectronEffectiveArea::kEleNeutralHadronIso03;
+  float eff_area_ga   = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaGamma_, abseta, effAreaTarget_);
+  float eff_area_nh   = ElectronEffectiveArea::GetElectronEffectiveArea(effAreaNeutralHad_, abseta, effAreaTarget_);
+  float eff_area_sum  = eff_area_ga + eff_area_nh;
   float theIsolation = electron_chHad03Iso[iEle];
-  theIsolation += max<float>(0.,electron_nHad03Iso[iEle]+electron_phot03Iso[iEle]-eff_area_ganh*rhoAllJets);
+  theIsolation += max<float>(0.,electron_nHad03Iso[iEle]+electron_phot03Iso[iEle]-eff_area_sum*rhoAllJets);
 
   // full selection                                                                                                                        
   if (abseta<0.8) {
