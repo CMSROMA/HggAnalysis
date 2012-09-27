@@ -1,5 +1,5 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.32 2012/06/06 09:45:36 delre Exp $
+# $Id: makeRedNtp.csh,v 1.33 2012/09/26 00:20:40 meridian Exp $
 
 # change if needed
 set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
@@ -9,7 +9,7 @@ set photonIDweights_EB = /afs/cern.ch/user/m/meridian/public/photonIDweights/TMV
 set photonIDweights_EE = /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EEpf_BDT.weights.xml
 set diPhotonMVAweights = /afs/cern.ch/user/m/meridian/public/diPhotonMVA_weights/HggBambu_SMDipho_Jun19_BDTG.weights.xml
 
-set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicloosenoeleveto cicmedium cictight cicsuper cicpfloose cicpfloosenoeleveto cicpfmedium cicpftight cicpfsuper cicpfhyper mcass preselection preselectionCS preselectionMVA preselectionMVAnoeleveto)
+set preselections = ( looseeg  tighteg  hggtighteg looseegpu  tightegpu  hggtightegpu isem superloose loose medium cicloose cicloosenoeleveto cicmedium cictight cicsuper cicpfloose cicpfloosenoeleveto cicpfmedium cicpftight cicpfsuper cicpfhyper mcass preselection preselectionCS preselectionMVA preselectionMVAnoeleveto preselectionMVACut preselectionMVACutnoeleveto)
 
 
 if($#argv == 0 || $#argv < 5 || $#argv > 10 ) then
