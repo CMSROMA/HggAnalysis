@@ -368,13 +368,13 @@ public :
    Float_t         vndof[100];   //[nvertex]
    Float_t         vlogsumpt2[100];   //[nvertex]
    Int_t           nPreselPhotonPairs;
-   Float_t         indexPreselPhot1[100];   //[nPreselPhotonPairs]
-   Float_t         indexPreselPhot2[100];   //[nPreselPhotonPairs]
-   Int_t           vrankPhotonPairs[100];   //[nPreselPhotonPairs]
-   Float_t         vevtMvaPhotonPairs[100];   //[nPreselPhotonPairs]
-   Float_t         vevtProbPhotonPairs[100];   //[nPreselPhotonPairs]
-   Float_t         vptbalPhotonPairs[100];   //[nPreselPhotonPairs]
-   Float_t         vptasymPhotonPairs[100];   //[nPreselPhotonPairs]
+   Int_t         indexPreselPhot1[20];   //[nPreselPhotonPairs]
+   Int_t         indexPreselPhot2[20];   //[nPreselPhotonPairs]
+   Int_t           vrankPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vevtMvaPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vevtProbPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vptbalPhotonPairs[20];   //[nPreselPhotonPairs]
+   Float_t         vptasymPhotonPairs[20];   //[nPreselPhotonPairs]
    Int_t           nHLT;
    Int_t           hltNamesLen;
    vector<string>  *HLTNames;

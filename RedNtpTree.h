@@ -253,8 +253,10 @@ private:
    // lepton tag
    bool leptonCutsEle2011(int iEle, electronidcuts const& pid, vector<bool> *vpass);
    bool leptonCutsEle2012(int iEle, electronidcuts2012 const& pid, vector<bool> *vpass);
+   bool leptonCutsEleMva2012(int iEle, electronidcutsMva2012 const& pid, vector<bool> *vpass);
    bool leptonCutsMu2011(int iMu, muonidcuts const& pid, vector<bool> *vpass);
    bool leptonCutsMu2012(int iMu, muonidcuts2012 const& pid, vector<bool> *vpass);
+   bool leptonCutsMuVL2012(int iMu, muonidcuts2012 const& pid, vector<bool> *vpass);
    double eleDzPV(int iele, int iPV);
    double eleDxyPV(int iele, int iPV);
    double muonDzPV(int imu, int iPV);
@@ -266,6 +268,10 @@ private:
    int countLOGenGamma();
    int countISRGenGamma();
    int countFSRGenGamma();
+
+
+   //helper functions
+   int findPhotonPair(int phot1, int phot2);
 
    // vector of pu weights
    std::vector<Double_t> puweights_;
@@ -364,6 +370,10 @@ private:
    Float_t vtxIdEvtProb;
 
    Float_t diPhotMVA;
+   Float_t diPhotMVA_vtx0;
+   Float_t diPhotMVA_vtxPair;
+
+   Int_t preselPairId;
 
    //////////////////////////////////////
    Float_t         sMet_  ;
@@ -612,6 +622,7 @@ private:
    Float_t sIeIeele1, sIeIeele2;
    Float_t dphiele1, dphiele2;
    Float_t detaele1, detaele2;
+   Float_t hoeele1, hoeele2;
    Int_t mhitsele1, mhitsele2;
    Float_t dcotele1, dcotele2;
    Float_t distele1, distele2;
@@ -636,6 +647,7 @@ private:
    Float_t sIeIeeleloose1, sIeIeeleloose2;
    Float_t dphieleloose1, dphieleloose2;
    Float_t detaeleloose1, detaeleloose2;
+   Float_t hoeeleloose1, hoeeleloose2;
    Int_t mhitseleloose1, mhitseleloose2;
    Float_t dcoteleloose1, dcoteleloose2;
    Float_t disteleloose1, disteleloose2;
@@ -651,6 +663,17 @@ private:
    Float_t oEmoPeleloose2, mvanotrigeleloose2, mvatrigeleloose2; 
    Int_t matchconveleloose2;
    Float_t chHadIso03eleloose2, nHadIso03eleloose2, photIso03eleloose2;
+
+   Float_t ptelenontr951, ptelenontr952;
+   Float_t etaelenontr951, etaelenontr952;
+   Float_t phielenontr951, phielenontr952;
+   Float_t eneelenontr951, eneelenontr952;
+   //
+   Float_t ptelenontr901, ptelenontr902;
+   Float_t etaelenontr901, etaelenontr902;
+   Float_t phielenontr901, phielenontr902;
+   Float_t eneelenontr901, eneelenontr902;
+
 
    Float_t ptmu1, ptmu2;
    Float_t etamu1, etamu2;
@@ -682,6 +705,22 @@ private:
    Float_t isomuloose1,isomuloose2;
    Float_t chHadmuloose1, nHadmuloose1, photmuloose1, puptmuloose1;
    Float_t chHadmuloose2, nHadmuloose2, photmuloose2, puptmuloose2;
+
+   // very loose muons
+   Float_t ptmuvloose1, ptmuvloose2;
+   Float_t etamuvloose1, etamuvloose2;
+   Float_t phimuvloose1, phimuvloose2;
+   Float_t enemuvloose1, enemuvloose2;
+   Int_t pixhitsmuvloose1, pixhitsmuvloose2;
+   Int_t trkhitsmuvloose1, trkhitsmuvloose2;
+   Int_t hitsmuvloose1, hitsmuvloose2;
+   Float_t chi2muvloose1, chi2muvloose2;
+   Int_t matchmuvloose1, matchmuvloose2;
+   Float_t d0muvloose1, d0muvloose2;
+   Float_t dzmuvloose1, dzmuvloose2;
+   Float_t isomuvloose1,isomuvloose2;
+   Float_t chHadmuvloose1, nHadmuvloose1, photmuvloose1, puptmuvloose1;
+   Float_t chHadmuvloose2, nHadmuvloose2, photmuvloose2, puptmuvloose2;
 
    
    float weight;
