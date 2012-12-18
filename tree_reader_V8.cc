@@ -318,8 +318,8 @@ void tree_reader_V8::Init(TTree *tree)
    fChain->SetBranchAddress("softElectronByPtBJetTags", softElectronByPtBJetTags, &b_softElectronByPtBJetTags);
    fChain->SetBranchAddress("trackCountingHighPurBJetTags", trackCountingHighPurBJetTags, &b_trackCountingHighPurBJetTags);
    fChain->SetBranchAddress("trackCountingHighEffBJetTags", trackCountingHighEffBJetTags, &b_trackCountingHighEffBJetTags);
-   fChain->SetBranchAddress("nChg_QC_pfakt5", nChg_QC_pfakt5, &b_nChg_QC_pfakt5);
-   fChain->SetBranchAddress("nNeutral_ptCut_pfakt5", nNeutral_ptCut_pfakt5, &b_nNeutral_ptCut_pfakt5);
+   fChain->SetBranchAddress("nChg_QCJet_pfakt5", nChg_QC_pfakt5, &b_nChg_QC_pfakt5);
+   fChain->SetBranchAddress("nNeutral_ptCutJet_pfakt5", nNeutral_ptCut_pfakt5, &b_nNeutral_ptCut_pfakt5);
    fChain->SetBranchAddress("nPhotons_pfakt5", nPhotons_pfakt5, &b_nPhotons_pfakt5);
    fChain->SetBranchAddress("nMuons_pfakt5", nMuons_pfakt5, &b_nMuons_pfakt5);
    fChain->SetBranchAddress("nElectrons_pfakt5", nElectrons_pfakt5, &b_nElectrons_pfakt5);
