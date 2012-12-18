@@ -328,7 +328,11 @@ private:
    Float_t btagtrkjet[10];
    Float_t btagjprobjet[10];
    Float_t ptDjet[10];
+   Float_t ptD_QCjet[10];
+   Float_t axis2_QCjet[10];
    Float_t rmsjet[10];
+   Int_t   nChg_QCjet[10];
+   Int_t   nNeutral_ptCutjet[10];
    Int_t ntrkjet[10];
    Int_t nneutjet[10];
    Float_t jetIdSimple_mvajet[10];
@@ -574,6 +578,8 @@ private:
 
    Bool_t H_event;
    Bool_t V_event;
+   Bool_t WH_event;
+   Bool_t ZH_event;
    Bool_t Zbb_event;
    Bool_t Vqq_event;
 

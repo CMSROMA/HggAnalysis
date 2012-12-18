@@ -203,6 +203,8 @@ public :
    Float_t         etaJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         phiJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         ptDJet_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptD_QCJet_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         axis2_QCJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         rmsCandJet_pfakt5[200];   //[nJet_pfakt5]
    Float_t         jetId_dRMean_pfakt5[100];   //[nJet_pfakt5]
    Float_t         jetId_frac01_pfakt5[100];   //[nJet_pfakt5]
@@ -238,6 +240,8 @@ public :
    Float_t         softElectronByPtBJetTags[200];   //[nJet_pfakt5]
    Float_t         trackCountingHighPurBJetTags[200];   //[nJet_pfakt5]
    Float_t         trackCountingHighEffBJetTags[200];   //[nJet_pfakt5]
+   Int_t           nChg_QC_pfakt5[200];   //[nJet_pfakt5]
+   Int_t           nNeutral_ptCut_pfakt5[200];   //[nJet_pfakt5]
    Int_t           nChargedHadrons_pfakt5[200];   //[nJet_pfakt5]
    Int_t           nPhotons_pfakt5[200];   //[nJet_pfakt5]
    Int_t           nMuons_pfakt5[200];   //[nJet_pfakt5]
@@ -690,6 +694,10 @@ public :
    TBranch        *b_etaJet_pfakt5;   //!
    TBranch        *b_phiJet_pfakt5;   //!
    TBranch        *b_ptDJet_pfakt5;   //!
+   TBranch        *b_ptD_QCJet_pfakt5;   //!
+   TBranch        *b_axis2_QCJet_pfakt5;   //!
+   TBranch        *b_nChg_QCJet_pfakt5;   //!
+   TBranch        *b_nNeutral_ptCutJet_pfakt5;   //!
    TBranch        *b_rmsCandJet_pfakt5;   //!
    TBranch        *b_jetId_dRMean_pfakt5;   //!
    TBranch        *b_jetId_frac01_pfakt5;   //!

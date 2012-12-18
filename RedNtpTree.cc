@@ -368,6 +368,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("lumi",&lumi,"lumi/I");
     ana_tree->Branch("H_event",&H_event,"H_event/O");
     ana_tree->Branch("V_event",&V_event,"V_event/O");
+    ana_tree->Branch("WH_event",&WH_event,"WH_event/O");
+    ana_tree->Branch("ZH_event",&ZH_event,"ZH_event/O");
     ana_tree->Branch("Zbb_event",&Zbb_event,"Zbb_event/O");
     ana_tree->Branch("Vqq_event",&Vqq_event,"Vqq_event/O");
     ana_tree->Branch("rhoPF",&rhoPFRN,"rhoPF/F");
@@ -497,9 +499,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("btagvtxjet", btagvtxjet, "btagvtxjet[njets]/F");
     ana_tree->Branch("btagjprobjet", btagjprobjet, "btagjprobjet[njets]/F");
     ana_tree->Branch("ptDjet", ptDjet, "ptDjet[njets]/F");
+    ana_tree->Branch("ptD_QCjet", ptD_QCjet, "ptD_QCjet[njets]/F");
+    ana_tree->Branch("axis2_QCjet", axis2_QCjet, "axis2_QCjet[njets]/F");
     ana_tree->Branch("rmsjet", rmsjet, "rmsjet[njets]/F");
-    ana_tree->Branch("ntrkjet", ntrkjet, "ntrkjet[njets]/F");
-    ana_tree->Branch("nneutjet", nneutjet, "nneutjet[njets]/F");
+    ana_tree->Branch("ntrkjet", ntrkjet, "ntrkjet[njets]/I");
+    ana_tree->Branch("nneutjet", nneutjet, "nneutjet[njets]/I");
+    ana_tree->Branch("nChg_QCjet", nChg_QCjet, "nChg_QCjet[njets]/I");
+    ana_tree->Branch("nNeutral_ptCutjet", nNeutral_ptCutjet, "nNeutral_ptCutjet[njets]/I");
     ana_tree->Branch("jetIdSimple_mvajet", jetIdSimple_mvajet, "jetIdSimple_mvajet[njets]/F");
     ana_tree->Branch("jetIdFull_mvajet", jetIdFull_mvajet, "jetIdFull_mvajet[njets]/F");
     ana_tree->Branch("jetId_dR2Meanjet", jetId_dR2Meanjet, "jetId_dR2Meanjet[njets]/F");
@@ -1821,8 +1827,13 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         // define what event it is:
         H_event=false;
         V_event=false;
+        WH_event=false;
+        ZH_event=false;
         Vqq_event=false;
         Zbb_event=false;
+
+        bool W_event=false;
+        bool Z_event=false;
 
         for(Int_t iPartMC=0; iPartMC<nMC; ++iPartMC) {
         
@@ -1830,11 +1841,15 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         
           if( pdgIdMC[iPartMC]==25 ) H_event = true; 
           if( pdgIdMC[iPartMC]==23 || abs(pdgIdMC[iPartMC])==24 ) V_event = true; 
+          if( pdgIdMC[iPartMC]==23 ) Z_event = true; 
+          if( abs(pdgIdMC[iPartMC])==24 ) W_event = true; 
           if( abs(pdgIdMC[iPartMC])==5 && pdgIdMC[motherIDMC[iPartMC]]==23 ) Zbb_event = true; 
           if( abs(pdgIdMC[iPartMC])<=5 && (pdgIdMC[motherIDMC[iPartMC]]==23 || abs(pdgIdMC[motherIDMC[iPartMC]])==24) ) Vqq_event = true; 
         
         } //for MC particles
 
+        WH_event = ( H_event && W_event );
+        ZH_event = ( H_event && Z_event );
 
         /// sorting index arrays
         int ptJetGen_akt5_sortingIndex[NGENJETS];
@@ -2552,7 +2567,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             btagtrkjet[njets] = trackCountingHighEffBJetTags[firsttennoisojet.at(ijet)];	  
             btagjprobjet[njets] = jetProbabilityBJetTags[firsttennoisojet.at(ijet)];	  
             ptDjet[njets] = ptDJet_pfakt5[firsttennoisojet.at(ijet)];
+            ptD_QCjet[njets] = ptD_QCJet_pfakt5[firsttennoisojet.at(ijet)];
+            axis2_QCjet[njets] = axis2_QCJet_pfakt5[firsttennoisojet.at(ijet)];
             rmsjet[njets] = rmsCandJet_pfakt5[firsttennoisojet.at(ijet)];
+            nChg_QCjet[njets] = nChg_QC_pfakt5[firsttennoisojet.at(ijet)];
+            nNeutral_ptCutjet[njets] = nNeutral_ptCut_pfakt5[firsttennoisojet.at(ijet)];
             ntrkjet[njets] = nChargedHadrons_pfakt5[firsttennoisojet.at(ijet)];
             nneutjet[njets] = nPhotons_pfakt5[firsttennoisojet.at(ijet)] + nNeutralHadrons_pfakt5[firsttennoisojet.at(ijet)] + nHFHadrons_pfakt5[firsttennoisojet.at(ijet)] + nHFEM_pfakt5[firsttennoisojet.at(ijet)];
             jetIdSimple_mvajet[njets] = jetIdSimple_mva_pfakt5[firsttennoisojet.at(ijet)];
