@@ -733,6 +733,8 @@ public :
    TBranch        *b_softElectronByPtBJetTags;   //!
    TBranch        *b_trackCountingHighPurBJetTags;   //!
    TBranch        *b_trackCountingHighEffBJetTags;   //!
+   TBranch        *b_nChg_QC_pfakt5;   //!
+   TBranch        *b_nNeutral_ptCut_pfakt5;   //!
    TBranch        *b_nChargedHadrons_pfakt5;   //!
    TBranch        *b_nPhotons_pfakt5;   //!
    TBranch        *b_nMuons_pfakt5;   //!
