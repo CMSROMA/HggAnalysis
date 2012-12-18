@@ -281,6 +281,8 @@ void tree_reader_V8::Init(TTree *tree)
    fChain->SetBranchAddress("etaJet_pfakt5", etaJet_pfakt5, &b_etaJet_pfakt5);
    fChain->SetBranchAddress("phiJet_pfakt5", phiJet_pfakt5, &b_phiJet_pfakt5);
    fChain->SetBranchAddress("ptDJet_pfakt5", ptDJet_pfakt5, &b_ptDJet_pfakt5);
+   fChain->SetBranchAddress("ptD_QCJet_pfakt5", ptD_QCJet_pfakt5, &b_ptD_QCJet_pfakt5);
+   fChain->SetBranchAddress("axis2_QCJet_pfakt5", axis2_QCJet_pfakt5, &b_axis2_QCJet_pfakt5);
    fChain->SetBranchAddress("rmsCandJet_pfakt5", rmsCandJet_pfakt5, &b_rmsCandJet_pfakt5);
    fChain->SetBranchAddress("jetId_dRMean_pfakt5", jetId_dRMean_pfakt5, &b_jetId_dRMean_pfakt5);
    fChain->SetBranchAddress("jetId_frac01_pfakt5", jetId_frac01_pfakt5, &b_jetId_frac01_pfakt5);
@@ -316,7 +318,8 @@ void tree_reader_V8::Init(TTree *tree)
    fChain->SetBranchAddress("softElectronByPtBJetTags", softElectronByPtBJetTags, &b_softElectronByPtBJetTags);
    fChain->SetBranchAddress("trackCountingHighPurBJetTags", trackCountingHighPurBJetTags, &b_trackCountingHighPurBJetTags);
    fChain->SetBranchAddress("trackCountingHighEffBJetTags", trackCountingHighEffBJetTags, &b_trackCountingHighEffBJetTags);
-   fChain->SetBranchAddress("nChargedHadrons_pfakt5", nChargedHadrons_pfakt5, &b_nChargedHadrons_pfakt5);
+   fChain->SetBranchAddress("nChg_QC_pfakt5", nChg_QC_pfakt5, &b_nChg_QC_pfakt5);
+   fChain->SetBranchAddress("nNeutral_ptCut_pfakt5", nNeutral_ptCut_pfakt5, &b_nNeutral_ptCut_pfakt5);
    fChain->SetBranchAddress("nPhotons_pfakt5", nPhotons_pfakt5, &b_nPhotons_pfakt5);
    fChain->SetBranchAddress("nMuons_pfakt5", nMuons_pfakt5, &b_nMuons_pfakt5);
    fChain->SetBranchAddress("nElectrons_pfakt5", nElectrons_pfakt5, &b_nElectrons_pfakt5);
