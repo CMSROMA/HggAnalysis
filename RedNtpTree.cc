@@ -9,7 +9,9 @@
 #include <TStopwatch.h>
 #include <iostream>
 #include <vector>
+#include <TString.h>
 #include <TLorentzVector.h>
+#include <TRegexp.h>
 
 #ifdef SMALL_VERTEX_VECTOR
 #define MAX_PU_REWEIGHT 60
@@ -372,6 +374,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("ZH_event",&ZH_event,"ZH_event/O");
     ana_tree->Branch("Zbb_event",&Zbb_event,"Zbb_event/O");
     ana_tree->Branch("Vqq_event",&Vqq_event,"Vqq_event/O");
+    ana_tree->Branch("WH_event",&WH_event,"WH_event/O");
+    ana_tree->Branch("ZH_event",&ZH_event,"ZH_event/O");
     ana_tree->Branch("rhoPF",&rhoPFRN,"rhoPF/F");
     ana_tree->Branch("massgg",&massgg,"massgg/F");
     ana_tree->Branch("ptgg",&ptgg,"ptgg/F");
@@ -497,6 +501,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("betajet", betajet, "betajet[njets]/F");
     ana_tree->Branch("betastarjet", betastarjet, "betastarjet[njets]/F");
     ana_tree->Branch("btagvtxjet", btagvtxjet, "btagvtxjet[njets]/F");
+    ana_tree->Branch("btagcsvjet", btagcsvjet, "btagcsvjet[njets]/F");
     ana_tree->Branch("btagjprobjet", btagjprobjet, "btagjprobjet[njets]/F");
     ana_tree->Branch("ptDjet", ptDjet, "ptDjet[njets]/F");
     ana_tree->Branch("ptD_QCjet", ptD_QCjet, "ptD_QCjet[njets]/F");
@@ -903,6 +908,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     ana_tree->Branch("d0muvloose2",      &d0muvloose2,      "d0muvloose2/F");
     ana_tree->Branch("dzmuvloose1",      &dzmuvloose1,      "dzmuvloose1/F");
     ana_tree->Branch("dzmuvloose2",      &dzmuvloose2,      "dzmuvloose2/F");
+
+    //hlt
+    ana_tree->Branch("hasPassedSinglePhot", &hasPassedSinglePhot,"hasPassedSinglePhot/I");
+    ana_tree->Branch("hasPassedDoublePhot", &hasPassedDoublePhot,"hasPassedDoublePhot/I");
 
     if (LEPTONS_2011) {
       ana_tree->Branch("isomuloose1",     &isomuloose1,     "isomuloose1/F");
@@ -1825,7 +1834,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         ***************************************************/
 
         // define what event it is:
-        H_event=false;
+	H_event=false;
         V_event=false;
         WH_event=false;
         ZH_event=false;
@@ -1836,8 +1845,9 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         bool Z_event=false;
 
         for(Int_t iPartMC=0; iPartMC<nMC; ++iPartMC) {
-        
+
           if( statusMC[iPartMC]!=3 ) continue;
+
         
           if( pdgIdMC[iPartMC]==25 ) H_event = true; 
           if( pdgIdMC[iPartMC]==23 || abs(pdgIdMC[iPartMC])==24 ) V_event = true; 
@@ -1847,6 +1857,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
           if( abs(pdgIdMC[iPartMC])<=5 && (pdgIdMC[motherIDMC[iPartMC]]==23 || abs(pdgIdMC[motherIDMC[iPartMC]])==24) ) Vqq_event = true; 
         
         } //for MC particles
+
 
         WH_event = ( H_event && W_event );
         ZH_event = ( H_event && Z_event );
@@ -2365,7 +2376,10 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             }
 	
             bool goodetajet(1);
-            
+
+	    //PU ID
+	    bool usePUID=false;            
+	    if(usePUID){
 	    if(TMath::Abs(etaJet_pfakt5[i]) > 4.7) goodetajet = 0;  
 
 	    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
@@ -2379,7 +2393,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
  	    } else {
 	      if(rmsCandJet_pfakt5[i] > 0.055) goodetajet = 0;
  	    }
-		            
+	    }		            
             if(!assh && goodetajet) jetnohiggsphot.push_back(1);
             else jetnohiggsphot.push_back(0); 
             
@@ -2564,6 +2578,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             betastarjet[njets] = betaStar_pfakt5[firsttennoisojet.at(ijet)][vrankPhotonPairs[0]];
             assjet[njets] = assoJet(firsttennoisojet.at(ijet));
             btagvtxjet[njets] = simpleSecondaryVertexHighEffBJetTags[firsttennoisojet.at(ijet)];
+            btagcsvjet[njets] = combinedSecondaryVertexBJetTags[firsttennoisojet.at(ijet)];
             btagtrkjet[njets] = trackCountingHighEffBJetTags[firsttennoisojet.at(ijet)];	  
             btagjprobjet[njets] = jetProbabilityBJetTags[firsttennoisojet.at(ijet)];	  
             ptDjet[njets] = ptDJet_pfakt5[firsttennoisojet.at(ijet)];
@@ -4424,7 +4439,35 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 #endif
     
 
-      if(recoPreselection)
+    /********************************************************
+     *                                                      *
+     *           checking HLT on photons                    *
+     *                                                      *
+     ********************************************************/
+	int numberHLT=HLTNames->size();
+	std::string singlePhotonString="HLT_Photon";
+	std::string doublePhotonString="HLT_DoublePhoton";
+
+	TRegexp photonPhoton(".*Photon.*Photon.*");
+	TRegexp doublePhoton(".*DoublePhoton.*");
+	TRegexp photon(".*Photon.*");
+
+	hasPassedSinglePhot=0;
+	hasPassedDoublePhot=0;
+
+	for(int i=0;i<numberHLT;i++){
+	  TString hlt_tstr(HLTNames->at(i));
+	  if(HLTResults->at(i)==1){
+	    if(hlt_tstr.Contains(photonPhoton)|| hlt_tstr.Contains(doublePhoton)){
+	      hasPassedDoublePhot=1;
+	    }else if(hlt_tstr.Contains(photon)){
+	      hasPassedSinglePhot=1;
+	    }
+	  }
+	}
+	
+
+	if(recoPreselection)
 	    ana_tree->Fill();
 
 	
@@ -4707,6 +4750,8 @@ TLorentzVector RedNtpTree::correctMet(TLorentzVector uncormet, bool smearing, bo
     if(!jetnoisophot.at(i)) continue;
     
     bool goodetajet(1);
+    //PU Id removal
+    PUremoval=false;
     if(PUremoval){
       if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
 	if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
@@ -5400,6 +5445,8 @@ idelephot2 = -999;
    LOGamma     = -999;
    ISRGamma    = -999;
    FSRGamma    = -999;
+
+
  
    weight = -999;
 }

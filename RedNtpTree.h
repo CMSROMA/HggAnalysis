@@ -325,6 +325,7 @@ private:
    Float_t betajet[10];
    Float_t betastarjet[10];
    Float_t btagvtxjet[10];
+   Float_t btagcsvjet[10];
    Float_t btagtrkjet[10];
    Float_t btagjprobjet[10];
    Float_t ptDjet[10];
@@ -582,6 +583,8 @@ private:
    Bool_t ZH_event;
    Bool_t Zbb_event;
    Bool_t Vqq_event;
+   Bool_t WH_event,ZH_event;
+
 
    Float_t   rhoPFRN;
    Float_t   pid_hlwTrackNoDzphot1;
@@ -728,7 +731,10 @@ private:
    Float_t chHadmuvloose1, nHadmuvloose1, photmuvloose1, puptmuvloose1;
    Float_t chHadmuvloose2, nHadmuvloose2, photmuvloose2, puptmuvloose2;
 
-   
+   //hlt variables
+   int hasPassedSinglePhot;   
+   int hasPassedDoublePhot;
+
    float weight;
 };
 #endif
