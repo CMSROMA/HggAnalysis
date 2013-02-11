@@ -124,8 +124,6 @@ vector<int>  RedNtpTree::firstones(Float_t *vec, vector<bool> *asso, int number)
 
 
 
-
-
 bool RedNtpTree::mcID(int i) 
 {
     bool assoc(0);
@@ -570,6 +568,35 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     // ana_tree->Branch("met",&met,"met/F");
     // ana_tree->Branch("phimet",&phimet,"phimet/F");
     
+    ana_tree->Branch("ePUMet", &ePUMet_, "ePUMet/F")  ;
+    ana_tree->Branch("ePUMet2", &ePUMet2_, "ePUMet2/F")  ;
+    ana_tree->Branch("ePUMet3", &ePUMet3_, "ePUMet3/F")  ;
+    ana_tree->Branch("ePUMet4", &ePUMet4_, "ePUMet4/F")  ;
+    ana_tree->Branch("ePUMet5", &ePUMet5_, "ePUMet5/F")  ;
+    ana_tree->Branch("ecorrPUMet5", &ecorrPUMet5_, "ecorrPUMet5/F")  ;
+    ana_tree->Branch("phiPUMet", &phiPUMet_, "phiPUMet/F")  ;
+    ana_tree->Branch("phiPUMet2", &phiPUMet2_, "phiPUMet2/F")  ;
+    ana_tree->Branch("phiPUMet3", &phiPUMet3_, "phiPUMet3/F")  ;
+    ana_tree->Branch("phiPUMet4", &phiPUMet4_, "phiPUMet4/F")  ;
+    ana_tree->Branch("phiPUMet5", &phiPUMet5_, "phiPUMet5/F")  ;
+    ana_tree->Branch("phiCorrPUMet5", &phiCorrPUMet5_, "phiCorrPUMet5/F")  ;
+    ana_tree->Branch("phot1Metx", &phot1Metx_, "phot1Metx/F")  ;
+    ana_tree->Branch("phot2Metx", &phot2Metx_, "phot2Metx/F")  ;
+    ana_tree->Branch("leptonsMetx", &leptonsMetx_, "leptonsMetx/F")  ;
+    ana_tree->Branch("part_in_jetsMetx", &part_in_jetsMetx_, "part_in_jetsMetx/F")  ;
+    ana_tree->Branch("chg_vtx_unclMetx", &chg_vtx_unclMetx_, "chg_vtx_unclMetx/F")  ;
+    ana_tree->Branch("chg_novtx_unclMetx", &chg_novtx_unclMetx_, "chg_novtx_unclMetx/F")  ;
+    ana_tree->Branch("neutrals_unclMetx", &neutrals_unclMetx_, "neutrals_unclMetx/F")  ;
+    ana_tree->Branch("part_fail_puidMetx", &part_fail_puidMetx_, "part_fail_puidMetx/F")  ;
+    ana_tree->Branch("phot1Mety", &phot1Mety_, "phot1Mety/F")  ;
+    ana_tree->Branch("phot2Mety", &phot2Mety_, "phot2Mety/F")  ;
+    ana_tree->Branch("leptonsMety", &leptonsMety_, "leptonsMety/F")  ;
+    ana_tree->Branch("part_in_jetsMety", &part_in_jetsMety_, "part_in_jetsMety/F")  ;
+    ana_tree->Branch("chg_vtx_unclMety", &chg_vtx_unclMety_, "chg_vtx_unclMety/F")  ;
+    ana_tree->Branch("chg_novtx_unclMety", &chg_novtx_unclMety_, "chg_novtx_unclMety/F")  ;
+    ana_tree->Branch("neutrals_unclMety", &neutrals_unclMety_, "neutrals_unclMety/F")  ;
+    ana_tree->Branch("part_fail_puidMety", &part_fail_puidMety_, "part_fail_puidMety/F")  ;
+    ana_tree->Branch("scaling", &scaling_, "scaling/F")  ;
     ana_tree->Branch("sMet", &sMet_, "sMet/F")  ;
     ana_tree->Branch("eMet", &eMet_, "eMet/F")  ;
     ana_tree->Branch("phiMet", &phiMet_, "phiMet/F");
@@ -2338,7 +2365,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
        
         vector<int> firstfourhiggsassphot = firstones(ptPhot,&assophothiggs,4);
         vector<int> firstfourassphot = firstones(ptPhot,&assophot,4);
-        vector<int> firstfourisophot = firstones(ptPhot,&isophot,4);      
+	firstfourisophot.clear();
+	firstfourisophot = firstones(ptPhot,&isophot,4);      
         
         vector<bool> jetnohiggsphot;
         vector<bool> jetnoassphot;
@@ -4212,6 +4240,24 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     TLorentzVector theShiftedScaledMetPUcorr = correctMet(theShiftedMet,0,1,1);
     TLorentzVector theSmearedShiftedMet = shiftMet(theSmearedMet);
     TLorentzVector theSmearedShiftedMetPUcorr = shiftMet(theSmearedMetPUcorr);
+    TLorentzVector pum  = PUMet(35, 1, 0.9, 0.7, 0.5, 3);
+    TLorentzVector pum2 = PUMet(40, 1, 0.9, 0.7, 0.5, 3);
+    TLorentzVector pum3 = PUMet(50, 1, 0.9, 0.7, 0.5, 3);
+    TLorentzVector pum4 = PUMet(25, 1, 0.9, 0.7, 0.5, 3);
+    TLorentzVector pum5corr = PUMet(30, 1, 0.9, 0.7, 0.5, 3, 1);
+    TLorentzVector pum5 = PUMet(30, 1, 0.9, 0.7, 0.5, 3);
+    ePUMet_ = pum.Pt();
+    ePUMet2_ = pum2.Pt();
+    ePUMet3_ = pum3.Pt();
+    ePUMet4_ = pum4.Pt();
+    ePUMet5_ = pum5.Pt();
+    ecorrPUMet5_ = pum5corr.Pt();
+    phiPUMet_ = pum.Phi();
+    phiPUMet2_ = pum2.Phi();
+    phiPUMet3_ = pum3.Phi();
+    phiPUMet4_ = pum4.Phi();
+    phiPUMet5_ = pum5.Phi();
+    phiCorrPUMet5_ = pum5corr.Phi();
     eSmearedMet_   = theSmearedMet.Pt();
     phiSmearedMet_ = theSmearedMet.Phi();
     eShiftedMet_   = theShiftedMet.Pt();
@@ -4851,8 +4897,8 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
     py = uncormet.Pt()*sin(uncormet.Phi())+0.004613*spfMet-0.673;
   // MC
   }else{
-    px = uncormet.Pt()*cos(uncormet.Phi())+0.00135*spfMet-0.021;
-    py = uncormet.Pt()*sin(uncormet.Phi())+0.00371*spfMet-0.826;
+    px = uncormet.Pt()*cos(uncormet.Phi());
+    py = uncormet.Pt()*sin(uncormet.Phi())+0.0035*spfMet;
    }
 #else
 // data
@@ -4873,6 +4919,230 @@ TLorentzVector RedNtpTree::shiftMet(TLorentzVector uncormet) {
   return correctedMet;
 }
 
+TLorentzVector RedNtpTree::PUMet(double thr_jet, double alpha, double beta, double gamma, double epsilon, int rescale, bool shiftandcorrect) {
+  
+  // coefficients:
+//   double thr_jet = 30;
+
+//   double alpha = 1.;
+//   double beta = 1;
+//   double gamma = 1.;
+//   double epsilon = 0.7; 
+
+  TLorentzVector leptons, part_in_jets, chg_vtx_uncl;
+  TLorentzVector neutrals_uncl, chg_novtx_uncl, part_fail_puid; 
+  TLorentzVector chgvtxSum;
+
+  double sumpt_chg_vtx_uncl(0), sumpt_chg_novtx_uncl(0);
+
+  for(int i=0; i<nJet_pfakt5; i++){
+    
+    if( rescale == 3){
+      //  identifying good jets
+      double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(0)])*delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(0)]) + 
+		       delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(0)])*delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(0)]) ) ;
+      if( DR < .3 ) continue; 
+      
+      DR = sqrt(delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(1)])*delta_eta(etaJet_pfakt5[i],etaPhot[firstfourisophot.at(1)]) + 
+		delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(1)])*delta_phi(phiJet_pfakt5[i],phiPhot[firstfourisophot.at(1)]) ) ;
+      if( DR < .3 ) continue; 
+
+    }
+
+    bool goodetajet(1);
+    if(TMath::Abs(etaJet_pfakt5[i]) < 2.5) {
+      if(betaStar_pfakt5[i][vrankPhotonPairs[0]] > 0.2 * log( nvertex - 0.67 ) ) goodetajet = 0;
+      if(rmsCandJet_pfakt5[i] > 0.07) goodetajet = 0;
+    } else if(TMath::Abs(etaJet_pfakt5[i]) < 3){
+      if(rmsCandJet_pfakt5[i] > 0.05) goodetajet = 0;
+    } else {
+      if(rmsCandJet_pfakt5[i] > 0.055) goodetajet = 0;
+    }
+    //    if(ptCorrJet_pfakt5[i]<thr_jet) goodetajet = 0;
+
+    // smearing via association with genjets
+    int ass(-999);
+    double DRmin(999.);
+    for(int j=0; j<nJetGen_akt5; j++){
+      double DR = sqrt(delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j])*delta_eta(etaJet_pfakt5[i],etaJetGen_akt5[j]) +
+		       delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j])*delta_phi(phiJet_pfakt5[i],phiJetGen_akt5[j]) ) ;
+      double expres = ErrEt(ptCorrJet_pfakt5[i],etaJet_pfakt5[i]);
+      if(DR < DRmin && (ptCorrJet_pfakt5[i]-ptJetGen_akt5[j])/ptCorrJet_pfakt5[i] < 5. * expres) {
+	ass = j;
+	DRmin = DR;
+      }
+    }
+    
+    if(DRmin > 0.1 + 0.3 * exp(-0.05*(ptJetGen_akt5[ass]-10)))  ass = -999;
+
+//     if(ass>-1) jetDR->Fill(ptJetGen_akt5[ass],DRmin);
+//     if(ass>-1) jetresp->Fill(ptJetGen_akt5[ass],(ptCorrJet_pfakt5[i]-ptJetGen_akt5[ass])/ptJetGen_akt5[ass]);
+    
+    // smearing for non-associated jets, using expected resolutions
+    float smear = -999.;
+    if (fabs(etaJet_pfakt5[i])<=1.1)                               smear = 1.06177;
+    if (fabs(etaJet_pfakt5[i])<=1.7 && fabs(etaJet_pfakt5[i])>1.1) smear = 1.08352;
+    if (fabs(etaJet_pfakt5[i])<=2.3 && fabs(etaJet_pfakt5[i])>1.7) smear = 1.02911;
+    if (fabs(etaJet_pfakt5[i])>2.3)                                smear = 1.15288;
+    
+    double shift(0);
+    if(nMC!=0){
+      if(ass>-1)
+	shift = (smear-1) * (ptCorrJet_pfakt5[i] - ptJetGen_akt5[ass])/ptCorrJet_pfakt5[i];
+      else {
+	double expres = ErrEt(ptJet_pfakt5[i],etaJet_pfakt5[i]);
+	double relsmear = expres * sqrt(smear*smear-1);
+	TRandom3 gen(int(eventRN+ptJet_pfakt5[i]*1000));
+	shift = gen.Gaus(0.,relsmear);
+      }
+
+    }
+    float ptSmeared  = ptCorrJet_pfakt5[i];
+    float eneSmeared = eJet_pfakt5[i]*ptCorrJet_pfakt5[i]/ptJet_pfakt5[i];
+
+    if(shift>-1 && shift < 2) {
+      ptSmeared  *= 1 + shift;
+      eneSmeared *= 1 + shift;
+    }
+
+    // JEC scaling to correct for residual jet corrections
+    if(nMC==0) {
+      double factor(1);
+      if(TMath::Abs(etaJet_pfakt5[i])<1.5) factor = 1.015;
+      else if(TMath::Abs(etaJet_pfakt5[i])<3) factor = 1.04;
+      else factor = 1.15;
+      ptSmeared  *= factor;
+      eneSmeared *= factor;
+    }
+
+    double factor = ptSmeared/ptCorrJet_pfakt5[i];
+
+    TLorentzVector thisJetSmeared;
+    thisJetSmeared.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);   
+  
+    TLorentzVector chg, chgvtx, chgnovtx, pho, neu, ele, mu, hfhad, hfem, pfjetcorr;
+    chg.SetPtEtaPhiE(ptChargedHadrons_pfakt5[i],etaChargedHadrons_pfakt5[i],phiChargedHadrons_pfakt5[i],eChargedHadrons_pfakt5[i]*eJet_pfakt5[i]);
+    chgvtx.SetPtEtaPhiE(ptChargedHadronsgoodvtx_pfakt5[i],etaChargedHadronsgoodvtx_pfakt5[i],phiChargedHadronsgoodvtx_pfakt5[i],eChargedHadronsgoodvtx_pfakt5[i]*eJet_pfakt5[i]);
+    chgnovtx = chg - chgvtx;
+    pho.SetPtEtaPhiE(ptPhotons_pfakt5[i],etaPhotons_pfakt5[i],phiPhotons_pfakt5[i],ePhotons_pfakt5[i]*eJet_pfakt5[i]);
+    neu.SetPtEtaPhiE(ptNeutralHadrons_pfakt5[i],etaNeutralHadrons_pfakt5[i],phiNeutralHadrons_pfakt5[i],eNeutralHadrons_pfakt5[i]*eJet_pfakt5[i]);
+    ele.SetPtEtaPhiE(ptElectrons_pfakt5[i],etaElectrons_pfakt5[i],phiElectrons_pfakt5[i],eElectrons_pfakt5[i]*eJet_pfakt5[i]);
+    mu.SetPtEtaPhiE(ptMuons_pfakt5[i],etaMuons_pfakt5[i],phiMuons_pfakt5[i],eMuons_pfakt5[i]*eJet_pfakt5[i]);
+    hfhad.SetPtEtaPhiE(ptHFHadrons_pfakt5[i],etaHFHadrons_pfakt5[i],phiHFHadrons_pfakt5[i],eHFHadrons_pfakt5[i]*eJet_pfakt5[i]);
+    hfem.SetPtEtaPhiE(ptHFEM_pfakt5[i],etaHFEM_pfakt5[i],phiHFEM_pfakt5[i],eHFEM_pfakt5[i]*eJet_pfakt5[i]);
+    pfjetcorr.SetPtEtaPhiE(ptCorrJet_pfakt5[i],etaJet_pfakt5[i],phiJet_pfakt5[i],eJet_pfakt5[i]*ptCorrJet_pfakt5[i]/ptJet_pfakt5[i]);
+    if(shiftandcorrect && ptJet_pfakt5[i]>10 && TMath::Abs(etaJet_pfakt5[i])<4.7) {
+      double rescalecomp = (factor-1)*1./(1.-eChargedHadrons_pfakt5[i])+1;
+      pfjetcorr.SetPtEtaPhiE(ptSmeared,etaJet_pfakt5[i],phiJet_pfakt5[i],eneSmeared);
+      pho.SetPtEtaPhiE(ptPhotons_pfakt5[i]*rescalecomp,etaPhotons_pfakt5[i],phiPhotons_pfakt5[i],ePhotons_pfakt5[i]*eJet_pfakt5[i]*rescalecomp);
+      neu.SetPtEtaPhiE(ptNeutralHadrons_pfakt5[i]*rescalecomp,etaNeutralHadrons_pfakt5[i],phiNeutralHadrons_pfakt5[i],eNeutralHadrons_pfakt5[i]*eJet_pfakt5[i]*rescalecomp);
+      hfhad.SetPtEtaPhiE(ptHFHadrons_pfakt5[i]*rescalecomp,etaHFHadrons_pfakt5[i],phiHFHadrons_pfakt5[i],eHFHadrons_pfakt5[i]*eJet_pfakt5[i]*rescalecomp);
+      hfem.SetPtEtaPhiE(ptHFEM_pfakt5[i]*rescalecomp,etaHFEM_pfakt5[i],phiHFEM_pfakt5[i],eHFEM_pfakt5[i]*eJet_pfakt5[i]*rescalecomp);
+      //      cout << "PUUUUUUUUUUUUUUUU    " << factor << "   "   << ass << "  " << ptCorrJet_pfakt5[i] << "  "  << etaJet_pfakt5[i] << "  " <<  ErrEt(ptCorrJet_pfakt5[i],etaJet_pfakt5[i]) << "   " << ptJetGen_akt5[ass] << "  " << i << endl;
+    }
+    leptons += ele; leptons += mu;
+    if(ptCorrJet_pfakt5[i]>thr_jet){
+      //     if(goodetajet) part_in_jets += chg + pho + neu + hfhad + hfem;
+      if(goodetajet) part_in_jets += pfjetcorr;
+      //      else part_fail_puid += chg + pho + neu + hfhad + hfem;      
+      else part_fail_puid +=  pfjetcorr;
+    }else{
+      chg_vtx_uncl  += chgvtx;
+      chg_novtx_uncl += chgnovtx;
+      neutrals_uncl += pho + neu + hfhad + hfem;
+      sumpt_chg_vtx_uncl += ptChargedHadronsgoodvtx_pfakt5[i];
+      sumpt_chg_novtx_uncl += ptChargedHadrons_pfakt5[i] - ptChargedHadronsgoodvtx_pfakt5[i];
+    }
+    chgvtxSum += chgvtx;
+
+  }
+
+  TLorentzVector chg_uncl, chggvtx_uncl, chgnovtx_uncl, pho_uncl, neu_uncl, ele_uncl, mu_uncl, hfhad_uncl, hfem_uncl;
+  chg_uncl.SetPtEtaPhiE(ptChargedHadrons_uncl,etaChargedHadrons_uncl,phiChargedHadrons_uncl,eChargedHadrons_uncl);
+  chggvtx_uncl.SetPtEtaPhiE(ptChargedHadronsgoodvtx_uncl,etaChargedHadronsgoodvtx_uncl,phiChargedHadronsgoodvtx_uncl,eChargedHadronsgoodvtx_uncl);
+  chgnovtx_uncl = chg_uncl - chggvtx_uncl;
+  pho_uncl.SetPtEtaPhiE(ptPhotons_uncl,etaPhotons_uncl,phiPhotons_uncl,ePhotons_uncl);
+  neu_uncl.SetPtEtaPhiE(ptNeutralHadrons_uncl,etaNeutralHadrons_uncl,phiNeutralHadrons_uncl,eNeutralHadrons_uncl);
+  ele_uncl.SetPtEtaPhiE(ptElectrons_uncl,etaElectrons_uncl,phiElectrons_uncl,eElectrons_uncl);
+  mu_uncl.SetPtEtaPhiE(ptMuons_uncl,etaMuons_uncl,phiMuons_uncl,eMuons_uncl);
+  hfhad_uncl.SetPtEtaPhiE(ptHFHadrons_uncl,etaHFHadrons_uncl,phiHFHadrons_uncl,eHFHadrons_uncl);
+  hfem_uncl.SetPtEtaPhiE(ptHFEM_uncl,etaHFEM_uncl,phiHFEM_uncl,eHFEM_uncl);
+  
+  TLorentzVector newMET;  newMET.SetXYZT(0.,0.,0.,0);
+  TLorentzVector phot1, phot2;	
+  phot1.SetPtEtaPhiE(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)],ePhot[firstfourisophot.at(0)]);
+  phot2.SetPtEtaPhiE(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)],ePhot[firstfourisophot.at(1)]);
+
+  leptons += ele_uncl; leptons += mu_uncl;
+  chg_vtx_uncl += chggvtx_uncl;
+  chg_novtx_uncl += chgnovtx_uncl;
+  neutrals_uncl += pho_uncl + neu_uncl + hfhad_uncl + hfem_uncl;
+  sumpt_chg_vtx_uncl += ptChargedHadronsgoodvtx_uncl;
+  sumpt_chg_novtx_uncl += ptChargedHadrons_uncl - ptChargedHadronsgoodvtx_uncl;
+
+  double scalingfact = ( sumpt_chg_vtx_uncl ) / ( sumpt_chg_vtx_uncl + sumpt_chg_novtx_uncl );  
+  if( rescale == 1 ){
+    alpha *= scalingfact;
+    beta *= scalingfact;
+    gamma *= scalingfact;
+    epsilon *= scalingfact;
+    newMET = - (leptons + part_in_jets + chg_vtx_uncl + (alpha - epsilon) * chg_novtx_uncl + beta * neutrals_uncl + gamma * part_fail_puid);
+
+  } else if(rescale == 2){
+    beta *= scalingfact;
+    newMET = - (leptons + part_in_jets + chg_vtx_uncl + (alpha - epsilon) * chg_novtx_uncl + beta * neutrals_uncl + gamma * part_fail_puid);
+
+  } else if(rescale == 3){
+    //    alpha *= scalingfact;
+    beta *= scalingfact;
+    //    gamma *= scalingfact;
+    //    epsilon *= scalingfact;
+    newMET = - (phot1 + phot2 + leptons + part_in_jets + chg_vtx_uncl + (alpha - epsilon) * chg_novtx_uncl + beta * neutrals_uncl + gamma * part_fail_puid);
+  
+  }
+
+  phot1Metx_ = phot1.Px();
+  phot2Metx_ = phot2.Px();
+  leptonsMetx_ = leptons.Px();
+  part_in_jetsMetx_ = part_in_jets.Px();   
+  chg_vtx_unclMetx_ = chg_vtx_uncl.Px();   
+  chg_novtx_unclMetx_ = chg_novtx_uncl.Px();   
+  neutrals_unclMetx_ = neutrals_uncl.Px();   
+  part_fail_puidMetx_ = part_fail_puid.Px();   
+  phot1Mety_ = phot1.Py();
+  phot2Mety_ = phot2.Py();
+  leptonsMety_ = leptons.Py();
+  part_in_jetsMety_ = part_in_jets.Py();   
+  chg_vtx_unclMety_ = chg_vtx_uncl.Py();   
+  chg_novtx_unclMety_ = chg_novtx_uncl.Py();   
+  neutrals_unclMety_ = neutrals_uncl.Py();   
+  part_fail_puidMety_ = part_fail_puid.Py();   
+  scaling_ = scalingfact;   
+  
+  double px(0), py(0), e(0);
+
+  if(shiftandcorrect) {
+    
+    double px(0), py(0), e(0);
+    if(nMC==0){
+      px = newMET.Pt()*cos(newMET.Phi())-0.0060*spfMet+0.63;
+      py = newMET.Pt()*sin(newMET.Phi())+0.0043*spfMet-0.63;
+      // MC
+    }else{
+      px = newMET.Pt()*cos(newMET.Phi());
+      //      px = uncormet.Pt()*cos(uncormet.Phi())+0.00135*spfMet-0.021;
+      py = newMET.Pt()*sin(newMET.Phi())+0.0036*spfMet-0.9;
+    }
+
+    e = sqrt(px*px+py*py);
+    
+    newMET.SetPxPyPzE(px,py,0,e);
+  
+  }
+
+  return newMET;
+  
+}
 
 TLorentzVector RedNtpTree::p4Phot(int phot_i,int vtx_i) const
 {
@@ -5053,6 +5323,36 @@ invmass2g2j = -999;
  phiCorrMet_ = -999;
  signifCorrMet_ = -999;
  smuCorrMet_   = -999;
+    ePUMet_   = -999;
+    ePUMet2_   = -999;
+    ePUMet3_   = -999;
+    ePUMet4_   = -999;
+    ePUMet5_   = -999;
+    ecorrPUMet5_   = -999;
+    phiPUMet_   = -999;
+    phiPUMet2_   = -999;
+    phiPUMet3_   = -999;
+    phiPUMet4_   = -999;
+    phiPUMet5_   = -999;
+    phiCorrPUMet5_   = -999;
+    phot1Metx_ = -999;
+    phot2Metx_ = -999;
+    leptonsMetx_ = -999;
+    part_in_jetsMetx_ = -999;   
+    chg_vtx_unclMetx_ = -999;   
+    chg_novtx_unclMetx_ = -999;   
+    neutrals_unclMetx_ = -999;   
+    part_fail_puidMetx_ = -999;   
+    phot1Mety_ = -999;
+    phot2Mety_ = -999;
+    leptonsMety_ = -999;
+    part_in_jetsMety_ = -999;   
+    chg_vtx_unclMety_ = -999;   
+    chg_novtx_unclMety_ = -999;   
+    neutrals_unclMety_ = -999;   
+    part_fail_puidMety_ = -999;   
+    scaling_ = -999;   
+
     emuCorrMet_   = -999;
     phimuCorrMet_ = -999;
     signifmuCorrMet_ = -999;

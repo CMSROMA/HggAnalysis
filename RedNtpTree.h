@@ -101,7 +101,8 @@ private:
    TRandom3* gen_;
 
    vector<bool> jetnoisophot;
-
+   vector<int> firstfourisophot;
+    
    const char* jsonFile;
 
    MassResolution* massResCalc_;
@@ -128,6 +129,7 @@ private:
    void correctJets(int scale, float smear);
    TLorentzVector correctMet(TLorentzVector uncormet, bool smearing = 1, bool scale = 0, bool PUremoval = 0);
    TLorentzVector shiftMet(TLorentzVector uncormet);
+   TLorentzVector PUMet(double thr_jet = 30, double alpha = 1, double beta = 0.7, double gamma = 1, double epsilon = 0.7, int rescale = 0, bool shiftandcorrect = 0);
 
    // defines photon CiC ID cuts for all cut levels
    enum phoCiCIDLevel { phoNOCUTS=0, phoLOOSE, phoMEDIUM, phoTIGHT, phoSUPERTIGHT, phoHYPERTIGHT1, phoHYPERTIGHT2, phoHYPERTIGHT3, phoHYPERTIGHT4, phoHYPERTIGHT5, phoHYPERTIGHT6, phoHYPERTIGHT7, phoHYPERTIGHT8, phoHYPERTIGHT9, phoNCUTLEVELS };
@@ -381,6 +383,35 @@ private:
    Int_t preselPairId;
 
    //////////////////////////////////////
+   Float_t         ePUMet_  ;
+   Float_t         ePUMet2_  ;
+   Float_t         ePUMet3_  ;
+   Float_t         ePUMet4_  ;
+   Float_t         ePUMet5_  ;
+   Float_t         ecorrPUMet5_  ;
+   Float_t         phiPUMet_  ;
+   Float_t         phiPUMet2_  ;
+   Float_t         phiPUMet3_  ;
+   Float_t         phiPUMet4_  ;
+   Float_t         phiPUMet5_  ;
+   Float_t         phiCorrPUMet5_  ;
+   Float_t         phot1Metx_  ;
+   Float_t         phot2Metx_  ;
+   Float_t         leptonsMetx_  ;
+   Float_t         part_in_jetsMetx_  ;   
+   Float_t         chg_vtx_unclMetx_  ;   
+   Float_t         chg_novtx_unclMetx_  ;   
+   Float_t         neutrals_unclMetx_  ;   
+   Float_t         part_fail_puidMetx_  ;   
+   Float_t         phot1Mety_  ;
+   Float_t         phot2Mety_  ;
+   Float_t         leptonsMety_  ;
+   Float_t         part_in_jetsMety_  ;   
+   Float_t         chg_vtx_unclMety_  ;   
+   Float_t         chg_novtx_unclMety_  ;   
+   Float_t         neutrals_unclMety_  ;   
+   Float_t         part_fail_puidMety_  ;   
+   Float_t         scaling_  ;   
    Float_t         sMet_  ;
    Float_t         eMet_  ;
    Float_t         phiMet_;
@@ -583,7 +614,6 @@ private:
    Bool_t ZH_event;
    Bool_t Zbb_event;
    Bool_t Vqq_event;
-   Bool_t WH_event,ZH_event;
 
 
    Float_t   rhoPFRN;

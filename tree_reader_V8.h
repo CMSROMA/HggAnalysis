@@ -256,6 +256,98 @@ public :
    Float_t         eNeutralHadrons_pfakt5[200];   //[nJet_pfakt5]
    Float_t         eHFHadrons_pfakt5[200];   //[nJet_pfakt5]
    Float_t         eHFEM_pfakt5[200];   //[nJet_pfakt5]
+
+   Int_t           nChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         eChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptChargedHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptPhotons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptMuons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptElectrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptNeutralHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptHFHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         ptHFEM_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaChargedHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaPhotons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaMuons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaElectrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaNeutralHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaHFHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         etaHFEM_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiChargedHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiPhotons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiMuons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiElectrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiNeutralHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiHFHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         phiHFEM_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptChargedHadronsgoodvtx_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptChargedHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptPhotons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptMuons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptElectrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptNeutralHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptHFHadrons_pfakt5[200];   //[nJet_pfakt5]
+   Float_t         sumptHFEM_pfakt5[200];   //[nJet_pfakt5]
+
+   Int_t           npfcand_all;   //[nJet_pfakt5]
+   Int_t           nChargedHadrons_uncl;   //[nJet_pfakt5]
+   Int_t           nChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Int_t           nPhotons_uncl;   //[nJet_pfakt5]
+   Int_t           nMuons_uncl;   //[nJet_pfakt5]
+   Int_t           nElectrons_uncl;   //[nJet_pfakt5]
+   Int_t           nNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Int_t           nHFHadrons_uncl;   //[nJet_pfakt5]
+   Int_t           nHFEM_uncl;   //[nJet_pfakt5]
+
+   Float_t         epfcand_all;   //[nJet_pfakt5]
+   Float_t         eChargedHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         eChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Float_t         ePhotons_uncl;   //[nJet_pfakt5]
+   Float_t         eMuons_uncl;   //[nJet_pfakt5]
+   Float_t         eElectrons_uncl;   //[nJet_pfakt5]
+   Float_t         eNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         eHFHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         eHFEM_uncl;   //[nJet_pfakt5]
+   Float_t         ptpfcand_all;   //[nJet_pfakt5]
+   Float_t         ptChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Float_t         ptChargedHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         ptPhotons_uncl;   //[nJet_pfakt5]
+   Float_t         ptMuons_uncl;   //[nJet_pfakt5]
+   Float_t         ptElectrons_uncl;   //[nJet_pfakt5]
+   Float_t         ptNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         ptHFHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         ptHFEM_uncl;   //[nJet_pfakt5]
+   Float_t         etaChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Float_t         etapfcand_all;   //[nJet_pfakt5]
+   Float_t         etaChargedHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         etaPhotons_uncl;   //[nJet_pfakt5]
+   Float_t         etaMuons_uncl;   //[nJet_pfakt5]
+   Float_t         etaElectrons_uncl;   //[nJet_pfakt5]
+   Float_t         etaNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         etaHFHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         etaHFEM_uncl;   //[nJet_pfakt5]
+   Float_t         phipfcand_all;   //[nJet_pfakt5]
+   Float_t         phiChargedHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         phiChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Float_t         phiPhotons_uncl;   //[nJet_pfakt5]
+   Float_t         phiMuons_uncl;   //[nJet_pfakt5]
+   Float_t         phiElectrons_uncl;   //[nJet_pfakt5]
+   Float_t         phiNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         phiHFHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         phiHFEM_uncl;   //[nJet_pfakt5]
+   Float_t         sumptpfcand_all;   //[nJet_pfakt5]
+   Float_t         sumptChargedHadronsgoodvtx_uncl;   //[nJet_pfakt5]
+   Float_t         sumptChargedHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptPhotons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptMuons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptElectrons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptNeutralHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptHFHadrons_uncl;   //[nJet_pfakt5]
+   Float_t         sumptHFEM_uncl;   //[nJet_pfakt5]
+
    Int_t           nJet_pfakt7;
    Float_t         ptJet_pfakt7 [200];   //[nJet_pfakt7]
    Float_t         ptCorrJet_pfakt7 [200];   //[nJet_pfakt7]
@@ -720,6 +812,99 @@ public :
    TBranch        *b_jetIdCutBased_wp_pfakt5;   //!
    TBranch        *b_beta_pfakt5;   //!
    TBranch        *b_betaStar_pfakt5;   //!
+
+
+   TBranch        *b_nChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_eChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_ptChargedHadrons_pfakt5;   //!
+   TBranch        *b_ptChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_ptPhotons_pfakt5;   //!
+   TBranch        *b_ptMuons_pfakt5;   //!
+   TBranch        *b_ptElectrons_pfakt5;   //!
+   TBranch        *b_ptNeutralHadrons_pfakt5;   //!
+   TBranch        *b_ptHFHadrons_pfakt5;   //!
+   TBranch        *b_ptHFEM_pfakt5;   //!
+   TBranch        *b_etaChargedHadrons_pfakt5;   //!
+   TBranch        *b_etaChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_etaPhotons_pfakt5;   //!
+   TBranch        *b_etaMuons_pfakt5;   //!
+   TBranch        *b_etaElectrons_pfakt5;   //!
+   TBranch        *b_etaNeutralHadrons_pfakt5;   //!
+   TBranch        *b_etaHFHadrons_pfakt5;   //!
+   TBranch        *b_etaHFEM_pfakt5;   //!
+   TBranch        *b_phiChargedHadrons_pfakt5;   //!
+   TBranch        *b_phiChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_phiPhotons_pfakt5;   //!
+   TBranch        *b_phiMuons_pfakt5;   //!
+   TBranch        *b_phiElectrons_pfakt5;   //!
+   TBranch        *b_phiNeutralHadrons_pfakt5;   //!
+   TBranch        *b_phiHFHadrons_pfakt5;   //!
+   TBranch        *b_phiHFEM_pfakt5;   //!
+   TBranch        *b_sumptChargedHadrons_pfakt5;   //!
+   TBranch        *b_sumptChargedHadronsgoodvtx_pfakt5;   //!
+   TBranch        *b_sumptPhotons_pfakt5;   //!
+   TBranch        *b_sumptMuons_pfakt5;   //!
+   TBranch        *b_sumptElectrons_pfakt5;   //!
+   TBranch        *b_sumptNeutralHadrons_pfakt5;   //!
+   TBranch        *b_sumptHFHadrons_pfakt5;   //!
+   TBranch        *b_sumptHFEM_pfakt5;   //!
+
+   TBranch        *b_npfcand_all;   //!
+   TBranch        *b_nChargedHadrons_uncl;   //!
+   TBranch        *b_nChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_nPhotons_uncl;   //!
+   TBranch        *b_nMuons_uncl;   //!
+   TBranch        *b_nElectrons_uncl;   //!
+   TBranch        *b_nNeutralHadrons_uncl;   //!
+   TBranch        *b_nHFHadrons_uncl;   //!
+   TBranch        *b_nHFEM_uncl;   //!
+   TBranch        *b_epfcand_all;   //!
+   TBranch        *b_eChargedHadrons_uncl;   //!
+   TBranch        *b_eChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_ePhotons_uncl;   //!
+   TBranch        *b_eMuons_uncl;   //!
+   TBranch        *b_eElectrons_uncl;   //!
+   TBranch        *b_eNeutralHadrons_uncl;   //!
+   TBranch        *b_eHFHadrons_uncl;   //!
+   TBranch        *b_eHFEM_uncl;   //!
+   TBranch        *b_ptpfcand_all;   //!
+   TBranch        *b_ptChargedHadrons_uncl;   //!
+   TBranch        *b_ptChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_ptPhotons_uncl;   //!
+   TBranch        *b_ptMuons_uncl;   //!
+   TBranch        *b_ptElectrons_uncl;   //!
+   TBranch        *b_ptNeutralHadrons_uncl;   //!
+   TBranch        *b_ptHFHadrons_uncl;   //!
+   TBranch        *b_ptHFEM_uncl;   //!
+   TBranch        *b_etapfcand_all;   //!
+   TBranch        *b_etaChargedHadrons_uncl;   //!
+   TBranch        *b_etaChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_etaPhotons_uncl;   //!
+   TBranch        *b_etaMuons_uncl;   //!
+   TBranch        *b_etaElectrons_uncl;   //!
+   TBranch        *b_etaNeutralHadrons_uncl;   //!
+   TBranch        *b_etaHFHadrons_uncl;   //!
+   TBranch        *b_etaHFEM_uncl;   //!
+   TBranch        *b_phipfcand_all;   //!
+   TBranch        *b_phiChargedHadrons_uncl;   //!
+   TBranch        *b_phiChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_phiPhotons_uncl;   //!
+   TBranch        *b_phiMuons_uncl;   //!
+   TBranch        *b_phiElectrons_uncl;   //!
+   TBranch        *b_phiNeutralHadrons_uncl;   //!
+   TBranch        *b_phiHFHadrons_uncl;   //!
+   TBranch        *b_phiHFEM_uncl;   //!
+   TBranch        *b_sumptpfcand_all;   //!
+   TBranch        *b_sumptChargedHadrons_uncl;   //!
+   TBranch        *b_sumptChargedHadronsgoodvtx_uncl;   //!
+   TBranch        *b_sumptPhotons_uncl;   //!
+   TBranch        *b_sumptMuons_uncl;   //!
+   TBranch        *b_sumptElectrons_uncl;   //!
+   TBranch        *b_sumptNeutralHadrons_uncl;   //!
+   TBranch        *b_sumptHFHadrons_uncl;   //!
+   TBranch        *b_sumptHFEM_uncl;   //!
+
+
    TBranch        *b_combinedSecondaryVertexBJetTags;   //!
    TBranch        *b_combinedSecondaryVertexMVABJetTags;   //!
    TBranch        *b_jetBProbabilityBJetTags;   //!
