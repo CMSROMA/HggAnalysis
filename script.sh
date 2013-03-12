@@ -17,7 +17,7 @@ if [ "$domain" == "cern.ch" ]; then
     redirector=pccmsrm27.cern.ch
     castordir=`dirname $3`
     filename=`basename $3`
-    rfmkdir ${castordir}
+    #rfmkdir ${castordir}
  #   XROOTLIB=`scram tool info xrootd | grep LIBDIR | awk -F "=" '{print $2}'`
     xrootdir=/cms/local/`echo $castordir | awk -F '/' '{for (i=NF-3; i<=NF; i++) { printf "%s/",$i};}'`
  #   export LD_PRELOAD=${XROOTLIB}/libXrdPosixPreload.so 

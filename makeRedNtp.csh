@@ -1,8 +1,8 @@
 #!/bin/tcsh
-# $Id: makeRedNtp.csh,v 1.33 2012/09/26 00:20:40 meridian Exp $
+# $Id: makeRedNtp.csh,v 1.34 2012/09/27 15:16:42 meridian Exp $
 
 # change if needed
-set castordir = /castor/cern.ch/user/m/meridian/Higgs/reduced
+set castordir = /castor/cern.ch/user/m/pandolf/Higgs/reduced
 #set castordir = /castor/cern.ch/user/d/delre/Higgs/reduced
 
 set photonIDweights_EB = /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EBpf_BDT.weights.xml
@@ -109,7 +109,7 @@ endif
 
 echo "PDFstudy: ${PDFstudy}"
 
-echo "------   ready ro run at $location ------------------"
+echo "------   ready to run at $location ------------------"
 
 # logfiles always stored locally
 set logdir = "$PWD/log/$outdir"
@@ -117,11 +117,11 @@ if($run == 1) mkdir -p $logdir
 
 # choose queue, location based on location
 if ($location == "cern" ) then
-  set queue = cmscaf1nd
+  set queue = 8nh
   set outdir = $castordir/$outdir
   set prefix = ""
-  if($run == 1) rfmkdir $outdir
-  echo "$outdir created on castor"
+  #if($run == 1) rfmkdir $outdir
+  #echo "$outdir created on castor"
 else if ($location == "roma" ) then
   set queue = "cmsshort"
   set outdir = ./$outdir
