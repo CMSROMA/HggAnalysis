@@ -1,0 +1,454 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset 53xv3
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.53xv3.files.tmp 53xv3_
+# of root files in directory: 2527
+# of uniq files in directory: 336 /tmp/uniq.53xv3.files.tmp
+# of files per list: 20
+new list:   53xv3_00.list
+new list:   53xv3_01.list
+new list:   53xv3_02.list
+new list:   53xv3_03.list
+new list:   53xv3_04.list
+new list:   53xv3_05.list
+new list:   53xv3_06.list
+new list:   53xv3_07.list
+new list:   53xv3_08.list
+new list:   53xv3_09.list
+new list:   53xv3_10.list
+new list:   53xv3_11.list
+new list:   53xv3_12.list
+new list:   53xv3_13.list
+new list:   53xv3_14.list
+new list:   53xv3_15.list
+new list:   53xv3_16.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 74
+# of uniq files in directory: 74 /tmp/uniq.DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   DYJetsToLL_M-10To50filter_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 51
+# of uniq files in directory: 51 /tmp/uniq.DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 14
+# of uniq files in directory: 14 /tmp/uniq.DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBorn_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBorn_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonBorn_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 19
+# of uniq files in directory: 19 /tmp/uniq.DiPhotonBorn_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBorn_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-10To25_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-10To25_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonBox_Pt-10To25_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 19
+# of uniq files in directory: 19 /tmp/uniq.DiPhotonBox_Pt-10To25_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-10To25_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonBox_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 15
+# of uniq files in directory: 15 /tmp/uniq.DiPhotonBox_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-250ToInf_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonBox_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonBox_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonBox_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 14
+# of uniq files in directory: 14 /tmp/uniq.DiPhotonBox_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonBox_Pt-25To250_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 39
+# of uniq files in directory: 39 /tmp/uniq.DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   DiPhotonJets_8TeV-madgraph-tarball-v2_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 140
+# of uniq files in directory: 140 /tmp/uniq.GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   GJet_Pt-20to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 161
+# of uniq files in directory: 161 /tmp/uniq.GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+new list:   GJet_Pt40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_08.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp GluGluToHToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 4
+# of uniq files in directory: 4 /tmp/uniq.GluGluToHToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-123_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-123_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp GluGluToHToGG_M-123_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.GluGluToHToGG_M-123_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-123_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset GluGluToHToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.GluGluToHToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp GluGluToHToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.GluGluToHToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   GluGluToHToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1.files.tmp QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_
+# of root files in directory: 318
+# of uniq files in directory: 318 /tmp/uniq.QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_00.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_01.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_02.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_03.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_04.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_05.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_06.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_07.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_08.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_09.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_10.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_11.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_12.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_13.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_14.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-NoPileup_START53_V7A-v1_15.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 202
+# of uniq files in directory: 202 /tmp/uniq.QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_08.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_09.list
+new list:   QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_10.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 120
+# of uniq files in directory: 120 /tmp/uniq.QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   QCD_Pt-30to40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 184
+# of uniq files in directory: 184 /tmp/uniq.QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_08.list
+new list:   QCD_Pt-40_doubleEMEnriched_TuneZ2star_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_09.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTGJets_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTGJets_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp TTGJets_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 4
+# of uniq files in directory: 4 /tmp/uniq.TTGJets_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   TTGJets_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp TTH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-121_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-121_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp TTH_HToGG_M-121_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 5
+# of uniq files in directory: 5 /tmp/uniq.TTH_HToGG_M-121_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-121_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp TTH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 5
+# of uniq files in directory: 5 /tmp/uniq.TTH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset TTH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.TTH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp TTH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.TTH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   TTH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp VBF_HToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.VBF_HToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-120_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset VBF_HToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.VBF_HToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp VBF_HToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 1
+# of uniq files in directory: 1 /tmp/uniq.VBF_HToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   VBF_HToGG_M-124_8TeV-powheg-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 154
+# of uniq files in directory: 154 /tmp/uniq.WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   WGToLNuG_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WH_ZH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-120_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-123_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-123_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WH_ZH_HToGG_M-123_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-123_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-123_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WH_ZH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 3
+# of uniq files in directory: 3 /tmp/uniq.WH_ZH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-124_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WH_ZH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WH_ZH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WH_ZH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 4
+# of uniq files in directory: 4 /tmp/uniq.WH_ZH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WH_ZH_HToGG_M-125_8TeV-pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 64
+# of uniq files in directory: 64 /tmp/uniq.WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 72
+# of uniq files in directory: 72 /tmp/uniq.WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 54
+# of uniq files in directory: 54 /tmp/uniq.WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 215
+# of uniq files in directory: 215 /tmp/uniq.WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_08.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_09.list
+new list:   WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_10.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 219
+# of uniq files in directory: 219 /tmp/uniq.ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_06.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_07.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_08.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_09.list
+new list:   ZGToLLG_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_10.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 107
+# of uniq files in directory: 107 /tmp/uniq.ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+new list:   ZG_Inclusive_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A-v1_05.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3.files.tmp ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3_
+# of root files in directory: 24
+# of uniq files in directory: 24 /tmp/uniq.ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3.files.tmp
+# of files per list: 20
+new list:   ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3_00.list
+new list:   ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v3_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 61
+# of uniq files in directory: 61 /tmp/uniq.ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 84
+# of uniq files in directory: 84 /tmp/uniq.ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+new list:   ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_04.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_
+# of root files in directory: 62
+# of uniq files in directory: 62 /tmp/uniq.ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1.files.tmp
+# of files per list: 20
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_00.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_01.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_02.list
+new list:   ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_03.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset tHqLeptonic_mH125_8TeV_testtest
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.tHqLeptonic_mH125_8TeV_testtest.files.tmp tHqLeptonic_mH125_8TeV_testtest_
+# of root files in directory: 2
+# of uniq files in directory: 2 /tmp/uniq.tHqLeptonic_mH125_8TeV_testtest.files.tmp
+# of files per list: 20
+new list:   tHqLeptonic_mH125_8TeV_testtest_00.list
