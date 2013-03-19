@@ -1,0 +1,635 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset 53xv2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.53xv2.files.tmp 53xv2_
+# of root files in directory: 9040
+# of uniq files in directory: 1772 /tmp/uniq.53xv2.files.tmp
+# of files per list: 20
+new list:   53xv2_00.list
+new list:   53xv2_01.list
+new list:   53xv2_02.list
+new list:   53xv2_03.list
+new list:   53xv2_04.list
+new list:   53xv2_05.list
+new list:   53xv2_06.list
+new list:   53xv2_07.list
+new list:   53xv2_08.list
+new list:   53xv2_09.list
+new list:   53xv2_10.list
+new list:   53xv2_11.list
+new list:   53xv2_12.list
+new list:   53xv2_13.list
+new list:   53xv2_14.list
+new list:   53xv2_15.list
+new list:   53xv2_16.list
+new list:   53xv2_17.list
+new list:   53xv2_18.list
+new list:   53xv2_19.list
+new list:   53xv2_20.list
+new list:   53xv2_21.list
+new list:   53xv2_22.list
+new list:   53xv2_23.list
+new list:   53xv2_24.list
+new list:   53xv2_25.list
+new list:   53xv2_26.list
+new list:   53xv2_27.list
+new list:   53xv2_28.list
+new list:   53xv2_29.list
+new list:   53xv2_30.list
+new list:   53xv2_31.list
+new list:   53xv2_32.list
+new list:   53xv2_33.list
+new list:   53xv2_34.list
+new list:   53xv2_35.list
+new list:   53xv2_36.list
+new list:   53xv2_37.list
+new list:   53xv2_38.list
+new list:   53xv2_39.list
+new list:   53xv2_40.list
+new list:   53xv2_41.list
+new list:   53xv2_42.list
+new list:   53xv2_43.list
+new list:   53xv2_44.list
+new list:   53xv2_45.list
+new list:   53xv2_46.list
+new list:   53xv2_47.list
+new list:   53xv2_48.list
+new list:   53xv2_49.list
+new list:   53xv2_50.list
+new list:   53xv2_51.list
+new list:   53xv2_52.list
+new list:   53xv2_53.list
+new list:   53xv2_54.list
+new list:   53xv2_55.list
+new list:   53xv2_56.list
+new list:   53xv2_57.list
+new list:   53xv2_58.list
+new list:   53xv2_59.list
+new list:   53xv2_60.list
+new list:   53xv2_61.list
+new list:   53xv2_62.list
+new list:   53xv2_63.list
+new list:   53xv2_64.list
+new list:   53xv2_65.list
+new list:   53xv2_66.list
+new list:   53xv2_67.list
+new list:   53xv2_68.list
+new list:   53xv2_69.list
+new list:   53xv2_70.list
+new list:   53xv2_71.list
+new list:   53xv2_72.list
+new list:   53xv2_73.list
+new list:   53xv2_74.list
+new list:   53xv2_75.list
+new list:   53xv2_76.list
+new list:   53xv2_77.list
+new list:   53xv2_78.list
+new list:   53xv2_79.list
+new list:   53xv2_80.list
+new list:   53xv2_81.list
+new list:   53xv2_82.list
+new list:   53xv2_83.list
+new list:   53xv2_84.list
+new list:   53xv2_85.list
+new list:   53xv2_86.list
+new list:   53xv2_87.list
+new list:   53xv2_88.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DoublePhoton-Run2012B-13Jul2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DoublePhoton-Run2012B-13Jul2012-v1.files.tmp DoublePhoton-Run2012B-13Jul2012-v1_
+# of root files in directory: 903
+# of uniq files in directory: 902 /tmp/uniq.DoublePhoton-Run2012B-13Jul2012-v1.files.tmp
+# of files per list: 20
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_00.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_01.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_02.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_03.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_04.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_05.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_06.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_07.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_08.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_09.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_10.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_11.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_12.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_13.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_14.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_15.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_16.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_17.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_18.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_19.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_20.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_21.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_22.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_23.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_24.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_25.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_26.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_27.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_28.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_29.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_30.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_31.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_32.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_33.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_34.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_35.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_36.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_37.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_38.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_39.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_40.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_41.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_42.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_43.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_44.list
+new list:   DoublePhoton-Run2012B-13Jul2012-v1_45.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DoublePhoton-Run2012C-24Aug2012-v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DoublePhoton-Run2012C-24Aug2012-v2.files.tmp DoublePhoton-Run2012C-24Aug2012-v2_
+# of root files in directory: 131
+# of uniq files in directory: 131 /tmp/uniq.DoublePhoton-Run2012C-24Aug2012-v2.files.tmp
+# of files per list: 20
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_00.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_01.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_02.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_03.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_04.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_05.list
+new list:   DoublePhoton-Run2012C-24Aug2012-v2_06.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DoublePhoton-Run2012C-PromptReco-v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DoublePhoton-Run2012C-PromptReco-v2.files.tmp DoublePhoton-Run2012C-PromptReco-v2_
+# of root files in directory: 1610
+# of uniq files in directory: 1577 /tmp/uniq.DoublePhoton-Run2012C-PromptReco-v2.files.tmp
+# of files per list: 20
+new list:   DoublePhoton-Run2012C-PromptReco-v2_00.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_01.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_02.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_03.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_04.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_05.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_06.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_07.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_08.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_09.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_10.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_11.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_12.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_13.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_14.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_15.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_16.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_17.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_18.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_19.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_20.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_21.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_22.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_23.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_24.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_25.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_26.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_27.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_28.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_29.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_30.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_31.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_32.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_33.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_34.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_35.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_36.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_37.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_38.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_39.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_40.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_41.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_42.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_43.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_44.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_45.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_46.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_47.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_48.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_49.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_50.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_51.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_52.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_53.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_54.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_55.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_56.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_57.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_58.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_59.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_60.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_61.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_62.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_63.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_64.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_65.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_66.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_67.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_68.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_69.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_70.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_71.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_72.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_73.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_74.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_75.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_76.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_77.list
+new list:   DoublePhoton-Run2012C-PromptReco-v2_78.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset DoublePhoton_Run2012D-PromptReco-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.DoublePhoton_Run2012D-PromptReco-v1.files.tmp DoublePhoton_Run2012D-PromptReco-v1_
+# of root files in directory: 1771
+# of uniq files in directory: 1771 /tmp/uniq.DoublePhoton_Run2012D-PromptReco-v1.files.tmp
+# of files per list: 20
+new list:   DoublePhoton_Run2012D-PromptReco-v1_00.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_01.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_02.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_03.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_04.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_05.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_06.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_07.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_08.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_09.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_10.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_11.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_12.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_13.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_14.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_15.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_16.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_17.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_18.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_19.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_20.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_21.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_22.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_23.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_24.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_25.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_26.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_27.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_28.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_29.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_30.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_31.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_32.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_33.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_34.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_35.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_36.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_37.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_38.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_39.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_40.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_41.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_42.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_43.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_44.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_45.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_46.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_47.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_48.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_49.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_50.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_51.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_52.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_53.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_54.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_55.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_56.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_57.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_58.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_59.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_60.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_61.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_62.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_63.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_64.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_65.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_66.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_67.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_68.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_69.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_70.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_71.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_72.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_73.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_74.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_75.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_76.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_77.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_78.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_79.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_80.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_81.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_82.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_83.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_84.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_85.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_86.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_87.list
+new list:   DoublePhoton_Run2012D-PromptReco-v1_88.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon-Run2012A-13Jul2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon-Run2012A-13Jul2012-v1.files.tmp Photon-Run2012A-13Jul2012-v1_
+# of root files in directory: 350
+# of uniq files in directory: 350 /tmp/uniq.Photon-Run2012A-13Jul2012-v1.files.tmp
+# of files per list: 20
+new list:   Photon-Run2012A-13Jul2012-v1_00.list
+new list:   Photon-Run2012A-13Jul2012-v1_01.list
+new list:   Photon-Run2012A-13Jul2012-v1_02.list
+new list:   Photon-Run2012A-13Jul2012-v1_03.list
+new list:   Photon-Run2012A-13Jul2012-v1_04.list
+new list:   Photon-Run2012A-13Jul2012-v1_05.list
+new list:   Photon-Run2012A-13Jul2012-v1_06.list
+new list:   Photon-Run2012A-13Jul2012-v1_07.list
+new list:   Photon-Run2012A-13Jul2012-v1_08.list
+new list:   Photon-Run2012A-13Jul2012-v1_09.list
+new list:   Photon-Run2012A-13Jul2012-v1_10.list
+new list:   Photon-Run2012A-13Jul2012-v1_11.list
+new list:   Photon-Run2012A-13Jul2012-v1_12.list
+new list:   Photon-Run2012A-13Jul2012-v1_13.list
+new list:   Photon-Run2012A-13Jul2012-v1_14.list
+new list:   Photon-Run2012A-13Jul2012-v1_15.list
+new list:   Photon-Run2012A-13Jul2012-v1_16.list
+new list:   Photon-Run2012A-13Jul2012-v1_17.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon-Run2012A-recover-06Aug2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon-Run2012A-recover-06Aug2012-v1.files.tmp Photon-Run2012A-recover-06Aug2012-v1_
+# of root files in directory: 51
+# of uniq files in directory: 51 /tmp/uniq.Photon-Run2012A-recover-06Aug2012-v1.files.tmp
+# of files per list: 20
+new list:   Photon-Run2012A-recover-06Aug2012-v1_00.list
+new list:   Photon-Run2012A-recover-06Aug2012-v1_01.list
+new list:   Photon-Run2012A-recover-06Aug2012-v1_02.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset Photon_Run2012A-13Jul2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.Photon_Run2012A-13Jul2012-v1.files.tmp Photon_Run2012A-13Jul2012-v1_
+# of root files in directory: 384
+# of uniq files in directory: 384 /tmp/uniq.Photon_Run2012A-13Jul2012-v1.files.tmp
+# of files per list: 20
+new list:   Photon_Run2012A-13Jul2012-v1_00.list
+new list:   Photon_Run2012A-13Jul2012-v1_01.list
+new list:   Photon_Run2012A-13Jul2012-v1_02.list
+new list:   Photon_Run2012A-13Jul2012-v1_03.list
+new list:   Photon_Run2012A-13Jul2012-v1_04.list
+new list:   Photon_Run2012A-13Jul2012-v1_05.list
+new list:   Photon_Run2012A-13Jul2012-v1_06.list
+new list:   Photon_Run2012A-13Jul2012-v1_07.list
+new list:   Photon_Run2012A-13Jul2012-v1_08.list
+new list:   Photon_Run2012A-13Jul2012-v1_09.list
+new list:   Photon_Run2012A-13Jul2012-v1_10.list
+new list:   Photon_Run2012A-13Jul2012-v1_11.list
+new list:   Photon_Run2012A-13Jul2012-v1_12.list
+new list:   Photon_Run2012A-13Jul2012-v1_13.list
+new list:   Photon_Run2012A-13Jul2012-v1_14.list
+new list:   Photon_Run2012A-13Jul2012-v1_15.list
+new list:   Photon_Run2012A-13Jul2012-v1_16.list
+new list:   Photon_Run2012A-13Jul2012-v1_17.list
+new list:   Photon_Run2012A-13Jul2012-v1_18.list
+new list:   Photon_Run2012A-13Jul2012-v1_19.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset SinglePhoton_Run2012B-13Jul2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.SinglePhoton_Run2012B-13Jul2012-v1.files.tmp SinglePhoton_Run2012B-13Jul2012-v1_
+# of root files in directory: 790
+# of uniq files in directory: 790 /tmp/uniq.SinglePhoton_Run2012B-13Jul2012-v1.files.tmp
+# of files per list: 20
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_00.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_01.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_02.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_03.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_04.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_05.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_06.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_07.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_08.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_09.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_10.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_11.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_12.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_13.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_14.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_15.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_16.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_17.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_18.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_19.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_20.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_21.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_22.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_23.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_24.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_25.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_26.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_27.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_28.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_29.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_30.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_31.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_32.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_33.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_34.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_35.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_36.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_37.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_38.list
+new list:   SinglePhoton_Run2012B-13Jul2012-v1_39.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset SinglePhoton_Run2012C-24Aug2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.SinglePhoton_Run2012C-24Aug2012-v1.files.tmp SinglePhoton_Run2012C-24Aug2012-v1_
+# of root files in directory: 91
+# of uniq files in directory: 91 /tmp/uniq.SinglePhoton_Run2012C-24Aug2012-v1.files.tmp
+# of files per list: 20
+new list:   SinglePhoton_Run2012C-24Aug2012-v1_00.list
+new list:   SinglePhoton_Run2012C-24Aug2012-v1_01.list
+new list:   SinglePhoton_Run2012C-24Aug2012-v1_02.list
+new list:   SinglePhoton_Run2012C-24Aug2012-v1_03.list
+new list:   SinglePhoton_Run2012C-24Aug2012-v1_04.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1.files.tmp SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1_
+# of root files in directory: 23
+# of uniq files in directory: 23 /tmp/uniq.SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1.files.tmp
+# of files per list: 20
+new list:   SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1_00.list
+new list:   SinglePhoton_Run2012C-EcalRecover_11Dec2012-v1_01.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset SinglePhoton_Run2012C-PromptReco-v2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.SinglePhoton_Run2012C-PromptReco-v2.files.tmp SinglePhoton_Run2012C-PromptReco-v2_
+# of root files in directory: 1361
+# of uniq files in directory: 1360 /tmp/uniq.SinglePhoton_Run2012C-PromptReco-v2.files.tmp
+# of files per list: 20
+new list:   SinglePhoton_Run2012C-PromptReco-v2_00.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_01.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_02.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_03.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_04.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_05.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_06.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_07.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_08.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_09.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_10.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_11.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_12.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_13.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_14.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_15.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_16.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_17.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_18.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_19.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_20.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_21.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_22.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_23.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_24.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_25.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_26.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_27.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_28.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_29.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_30.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_31.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_32.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_33.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_34.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_35.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_36.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_37.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_38.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_39.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_40.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_41.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_42.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_43.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_44.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_45.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_46.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_47.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_48.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_49.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_50.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_51.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_52.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_53.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_54.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_55.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_56.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_57.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_58.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_59.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_60.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_61.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_62.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_63.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_64.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_65.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_66.list
+new list:   SinglePhoton_Run2012C-PromptReco-v2_67.list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Working on dataset SinglePhoton_Run2012D-PromptReco-v1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+split -l 20 -d -a 2 /tmp/uniq.SinglePhoton_Run2012D-PromptReco-v1.files.tmp SinglePhoton_Run2012D-PromptReco-v1_
+# of root files in directory: 1575
+# of uniq files in directory: 1553 /tmp/uniq.SinglePhoton_Run2012D-PromptReco-v1.files.tmp
+# of files per list: 20
+new list:   SinglePhoton_Run2012D-PromptReco-v1_00.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_01.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_02.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_03.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_04.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_05.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_06.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_07.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_08.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_09.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_10.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_11.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_12.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_13.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_14.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_15.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_16.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_17.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_18.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_19.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_20.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_21.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_22.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_23.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_24.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_25.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_26.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_27.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_28.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_29.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_30.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_31.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_32.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_33.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_34.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_35.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_36.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_37.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_38.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_39.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_40.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_41.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_42.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_43.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_44.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_45.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_46.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_47.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_48.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_49.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_50.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_51.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_52.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_53.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_54.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_55.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_56.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_57.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_58.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_59.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_60.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_61.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_62.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_63.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_64.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_65.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_66.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_67.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_68.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_69.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_70.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_71.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_72.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_73.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_74.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_75.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_76.list
+new list:   SinglePhoton_Run2012D-PromptReco-v1_77.list
