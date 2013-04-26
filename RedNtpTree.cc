@@ -168,7 +168,6 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
     Long64_t nbytes = 0, nb = 0;
     
     TStopwatch timer;
-
     if (!tmvaReaderID_Single_Barrel || !tmvaReaderID_Single_Endcap)
       SetAllMVA();
     
@@ -1547,6 +1546,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) 
     {
+
         Long64_t ientry = LoadTree(jentry);
         if (ientry < 0) break;
         nb = fChain->GetEntry(jentry);   nbytes += nb;
@@ -2380,10 +2380,11 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             if (ptPhot[i]>25. && assh)
               FillPhotonCiCSelectionVariable(i,vrankPhotonPairs[0]);
 
+
             // photon id used for preselection
             string finder(selection);
             bool preselection;
-            
+
             if (finder == "superloose") preselection = cutID(i, superlooseid, &idpass);
             else if (finder == "loose") preselection = cutID(i, looseid, &idpass);
             else if (finder == "medium") preselection = cutID(i, mediumid, &idpass);
@@ -2408,7 +2409,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             else if (finder == "cichyper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],0) >= 5;	
             else if (finder == "cicpfloose") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 1;	
             else if (finder == "cicpfloosenoeleveto") preselection = PhotonCiCSelectionLevel(i,0,vrankPhotonPairs[0],1) >= 1;	
-            else if (finder == "cicpfmedium") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 2;	
+	    else if (finder == "cicpfloosenoelevetoOnOnePho") preselection = PhotonCiCSelectionLevel(i,0,vrankPhotonPairs[0],1) >= 1;//first run on photons without eleveto
+	    else if (finder == "cicpfmedium") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 2;	
             else if (finder == "cicpftight") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 3;	
             else if (finder == "cicpfsuper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 4;	
             else if (finder == "cicpfhyper") preselection = PhotonCiCSelectionLevel(i,1,vrankPhotonPairs[0],1) >= 5;	
@@ -2946,11 +2948,25 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	double firstElePt  = -998.;
 	double secondElePt = -999.;
 
+	string sele(selection);
+
         for(int iEle=0; iEle<nEle; iEle++){
 	  
 	  if (LEPTONS_2011 && !leptonCutsEle2011(iEle, eletag2011, &idpasseletag2011)) continue; 
 	  if (LEPTONS_2012 && !leptonCutsEle2012(iEle, eletag2012, &idpasseletag2012)) continue; 
 	  
+	  if(sele=="cicpfloosenoelevetoOnOnePho"){
+            TLorentzVector phot1, phot2;
+            phot1.SetPtEtaPhiE(ptPhot[firstfourisophot.at(0)],etaPhot[firstfourisophot.at(0)],phiPhot[firstfourisophot.at(0)],ePhot[firstfourisophot.at(0)]);
+            phot2.SetPtEtaPhiE(ptPhot[firstfourisophot.at(1)],etaPhot[firstfourisophot.at(1)],phiPhot[firstfourisophot.at(1)],ePhot[firstfourisophot.at(1)]);
+
+	    TLorentzVector ele;
+	    if(electron_pt[iEle]>0){
+	    ele.SetPtEtaPhiE(electron_pt[iEle],electron_sc_eta[iEle],electron_phi[iEle],electron_energy[iEle]);
+	    if(ele.DeltaR(phot1)<0.5 || ele.DeltaR(phot2)<0.5)continue;
+	    }
+	  }
+
 	  if (electron_pt[iEle]>=secondElePt && electron_pt[iEle]<firstElePt) {
 	    secondEle=iEle;
 	    secondElePt=electron_pt[iEle];
@@ -4694,6 +4710,21 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  }
 	}
 	
+    /********************************************************
+     *                                                      *
+     *   checking ele veto on ONLY one photon               *
+     *                                                      *
+     ********************************************************/
+
+
+	string finder(selection);
+	if(finder=="cicpfloosenoelevetoOnOnePho") {
+	  
+	  bool  val_conv_lead = !hasMatchedPromptElePhot[firstfourisophot.at(0)];
+	  bool  val_conv_sublead = !hasMatchedPromptElePhot[firstfourisophot.at(1)];
+	  //	  if(val_conv_lead != val_conv_sublead)cout<<val_conv_lead<< " "<<val_conv_sublead<<endl;
+	  if(!(val_conv_lead != val_conv_sublead))continue;
+	}
 
 	if(recoPreselection)
 	    ana_tree->Fill();

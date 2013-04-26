@@ -610,11 +610,9 @@ private:
 
    Bool_t H_event;
    Bool_t V_event;
-   Bool_t WH_event;
-   Bool_t ZH_event;
    Bool_t Zbb_event;
    Bool_t Vqq_event;
-
+   Bool_t WH_event,ZH_event;
 
    Float_t pt_h;
    Float_t eta_h;
