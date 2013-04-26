@@ -24,6 +24,9 @@
 #define LEPTONS_2011 0
 #define LEPTONS_2012 1
 
+
+
+
 //#define DEBUG
 //#define DEBUG1
 
@@ -720,6 +723,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 
     // tight selected electrons
+    ana_tree->Branch("chargeele1",    &chargeele1,    "chargeele1/I");
+    ana_tree->Branch("chargeele2",    &chargeele2,    "chargeele2/I");
     ana_tree->Branch("ptele1",    &ptele1,    "ptele1/F");
     ana_tree->Branch("ptele2",    &ptele2,    "ptele2/F");
     ana_tree->Branch("etaele1",   &etaele1,   "etaele1/F");
@@ -850,6 +855,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 
     // tight selected muons
+    ana_tree->Branch("chargemu1",      &chargemu1,      "chargemu1/I");
+    ana_tree->Branch("chargemu2",      &chargemu2,      "chargemu2/I");
     ana_tree->Branch("ptmu1",      &ptmu1,      "ptmu1/F");
     ana_tree->Branch("ptmu2",      &ptmu2,      "ptmu2/F");
     ana_tree->Branch("etamu1",     &etamu1,     "etamu1/F");
@@ -987,6 +994,39 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
         ana_tree->Branch("PDFweight10",&PDFweight10,"PDFweight10[nWeightsPDF10]/F");
     }
 
+    //if( SAVEPARTONS_THQ ) {
+
+    //ana_tree->Branch("pt_h",    &pt_h,     "pt_h/F");
+    //ana_tree->Branch("eta_h",   &eta_h,    "eta_h/F");
+    //ana_tree->Branch("phi_h",   &phi_h,    "phi_h/F");
+    //ana_tree->Branch("e_h",     &e_h,      "e_h/F");
+
+    //ana_tree->Branch("pt_t",    &pt_t,     "pt_t/F");
+    //ana_tree->Branch("eta_t",   &eta_t,    "eta_t/F");
+    //ana_tree->Branch("phi_t",   &phi_t,    "phi_t/F");
+    //ana_tree->Branch("e_t",     &e_t,      "e_t/F");
+
+    //ana_tree->Branch("pt_b",    &pt_b,     "pt_b/F");
+    //ana_tree->Branch("eta_b",   &eta_b,    "eta_b/F");
+    //ana_tree->Branch("phi_b",   &phi_b,    "phi_b/F");
+    //ana_tree->Branch("e_b",     &e_b,      "e_b/F");
+
+    //ana_tree->Branch("pt_q",    &pt_q,     "pt_q/F");
+    //ana_tree->Branch("eta_q",   &eta_q,    "eta_q/F");
+    //ana_tree->Branch("phi_q",   &phi_q,    "phi_q/F");
+    //ana_tree->Branch("e_q",     &e_q,      "e_q/F");
+
+    //ana_tree->Branch("pt_Wq",    &pt_Wq,     "pt_Wq/F");
+    //ana_tree->Branch("eta_Wq",   &eta_Wq,    "eta_Wq/F");
+    //ana_tree->Branch("phi_Wq",   &phi_Wq,    "phi_Wq/F");
+    //ana_tree->Branch("e_Wq",     &e_Wq,      "e_Wq/F");
+
+    //ana_tree->Branch("pt_Wqbar",    &pt_Wqbar,     "pt_Wqbar/F");
+    //ana_tree->Branch("eta_Wqbar",   &eta_Wqbar,    "eta_Wqbar/F");
+    //ana_tree->Branch("phi_Wqbar",   &phi_Wqbar,    "phi_Wqbar/F");
+    //ana_tree->Branch("e_Wqbar",     &e_Wqbar,      "e_Wqbar/F");
+
+    //}
 
     /********************************************************
      *                                                      *
@@ -1661,6 +1701,8 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
                 // cout << endl <<"mother id:" << pdgIdMC[motherIDMC[i]] << " pt:" << ptMC[motherIDMC[i]] << " phi:" << phiMC[motherIDMC[i]] << endl;
             }
 
+          
+
             // considering leptons not coming from the higgs
             // if( TMath::Abs(pdgIdMC[i]) <= 16 && TMath::Abs(pdgIdMC[i]) >= 11  && statusMC[i] == 3  &&
             //     TMath::Abs(pdgIdMC[i]) != 15 )
@@ -1675,6 +1717,138 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
             //     iLep++;
             // }
         }
+
+
+        //if( SAVEPARTONS_THQ ) {
+
+        //// first find partons:
+        //int index_h = -1;
+        //int index_hMom = -1;
+
+        //// first look for the higgs:
+        //for( unsigned iMC=0; iMC<nMC; ++iMC ) {
+
+        //  if( statusMC[iMC]!=3 ) continue;
+
+
+        //  if( pdgIdMC[iMC]==25 ) {
+        //    index_h = iMC;
+        //    index_hMom = motherIDMC[iMC];
+        //    break;
+        //  }
+       
+        //} //for mc
+
+        //if( index_h<0 ) {
+        //  std::cout << "there must be something wrong. didnt find the higgs." << std::endl;
+        //  exit(11);
+        //}
+
+
+        //int index_t = -1;
+        //int index_q = -1;
+
+        
+        //// second round: now that i've found the higgs, 
+        //// search for all other particles with same mom (apparently thats how it works):
+        //for( unsigned iMC=0; iMC<nMC; ++iMC ) {
+
+        //  if( statusMC[iMC]!=3 ) continue;
+
+        //  if( motherIDMC[iMC]==index_hMom ) {
+
+        //    if( abs(pdgIdMC[iMC])==6 )
+        //      index_t = iMC;
+        //    else if( abs(pdgIdMC[iMC])<6 ) 
+        //      index_q = iMC;
+
+        //    if( index_t>=0 && index_q>=0 )
+        //      break;
+
+        //  } //if same mom as h
+
+        //} //for mc
+
+
+        //if( index_t<0 ) {
+        //  std::cout << "there must be something wrong. didnt find the top." << std::endl;
+        //  exit(11);
+        //} 
+
+        //if( index_q<0 ) {
+        //  std::cout << "there must be something wrong. didnt find the q." << std::endl;
+        //  exit(11);
+        //} 
+
+
+
+        //int index_b=-1;
+        //int index_Wq=-1;
+        //int index_Wqbar=-1;
+
+        //// third round: get top decay products
+        //for( unsigned iMC=0; iMC<nMC; ++iMC ) {
+
+        //  if( statusMC[iMC]!=3 ) continue;
+
+
+        //  // bottom from top:
+        //  if( motherIDMC[iMC]==index_t && abs(pdgIdMC[iMC])==5 ) 
+        //    index_b = iMC;
+
+
+        //  // W decay products:
+        //  if( (abs(pdgIdMC[motherIDMC[iMC]])==24 && motherIDMC[motherIDMC[iMC]]==index_t) ||  //either thorugh a W
+        //      (motherIDMC[iMC]==index_t  && abs(pdgIdMC[iMC])<20 && abs(pdgIdMC[iMC])!=5 ) ) {  //or directly from top
+
+        //    if( pdgIdMC[iMC]>0 )
+        //      index_Wq = iMC;
+        //    else
+        //      index_Wqbar = iMC;
+
+        //  }
+
+
+        //  if( index_b>=0 && index_Wq>=0 && index_Wqbar>=0 )
+        //    break;
+
+        //} //for mc
+
+ 
+        //pt_h  = ptMC[index_h];
+        //eta_h = etaMC[index_h];
+        //phi_h = phiMC[index_h];
+        //e_h   = eMC[index_h];
+
+        //pt_t  = ptMC[index_t];
+        //eta_t = etaMC[index_t];
+        //phi_t = phiMC[index_t];
+        //e_t   = eMC[index_t];
+
+        //pt_b  = ptMC[index_b];
+        //eta_b = etaMC[index_b];
+        //phi_b = phiMC[index_b];
+        //e_b   = eMC[index_b];
+
+        //pt_q  = ptMC[index_q];
+        //eta_q = etaMC[index_q];
+        //phi_q = phiMC[index_q];
+        //e_q   = eMC[index_q];
+
+        //pt_Wq  = ptMC[index_Wq];
+        //eta_Wq = etaMC[index_Wq];
+        //phi_Wq = phiMC[index_Wq];
+        //e_Wq   = eMC[index_Wq];
+
+        //pt_Wqbar  = ptMC[index_Wqbar];
+        //eta_Wqbar = etaMC[index_Wqbar];
+        //phi_Wqbar = phiMC[index_Wqbar];
+        //e_Wqbar   = eMC[index_Wqbar];
+
+
+
+        //}
+
    
 
        /***************************************************
@@ -2933,6 +3107,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	// tight electron selection
 	if (firstEle>=0) {
+        chargeele1 = electron_charge[firstEle];
 	  ptele1    = electron_pt[firstEle];
 	  etaele1   = electron_sc_eta[firstEle];
 	  phiele1   = electron_phi[firstEle];
@@ -2982,6 +3157,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  }
 	  
 	} else {
+	  chargeele1 = 0;
 	  ptele1    = -500.;
 	  etaele1   = -500.;
 	  phiele1   = -500.;
@@ -3014,6 +3190,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	} 	    
 
 	if (secondEle>=0) {
+        chargeele2 = electron_charge[secondEle];
 	  ptele2    = electron_pt[secondEle];
 	  etaele2   = electron_sc_eta[secondEle];
 	  phiele2   = electron_phi[secondEle];
@@ -3063,6 +3240,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	  }
 	  
 	} else {
+	  chargeele2    = 0.;
 	  ptele2    = -500.;
 	  etaele2   = -500.;
 	  phiele2   = -500.;
@@ -3305,6 +3483,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 
 	// muons: tight selection
 	if (firstMu>=0) {
+        chargemu1  = Muon_charge[firstMu];
 	  ptmu1      = Muon_pt[firstMu];
 	  etamu1     = Muon_eta[firstMu];
 	  phimu1     = Muon_phi[firstMu];
@@ -3327,6 +3506,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    isomu1 = Muon_trackIso[firstMu] + Muon_ecalIso[firstMu] + Muon_hcalIso[firstMu] - rhoPF*TMath::Pi()*0.3*0.3; 
 	  }
 	} else {
+	  chargemu1  = 0;
 	  ptmu1      = -500.;
 	  etamu1     = -500.;
 	  phimu1     = -500.;
@@ -3351,6 +3531,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	}
 
 	if (secondMu>=0) {
+        chargemu2  = Muon_charge[secondMu];
 	  ptmu2      = Muon_pt[secondMu];
 	  etamu2     = Muon_eta[secondMu];
 	  phimu2     = Muon_phi[secondMu];
@@ -3373,6 +3554,7 @@ void RedNtpTree::Loop(int isgjetqcd, char* selection)
 	    isomu2 = Muon_trackIso[secondMu] + Muon_ecalIso[secondMu] + Muon_hcalIso[secondMu] - rhoPF*TMath::Pi()*0.3*0.3;  
 	  }
 	} else {
+	  chargemu2  = 0;
 	  ptmu2      = -500.;
 	  etamu2     = -500.;
 	  phimu2     = -500.;
@@ -5503,6 +5685,8 @@ idelephot2 = -999;
    nWeightsPDF9 = -999;
    nWeightsPDF10 = -999;
 
+   chargeele1    = 0;
+   chargeele2    = 0;
    ptele1    = -999.;
    ptele2    = -999.;
    etaele1   = -999.;
@@ -5629,6 +5813,8 @@ idelephot2 = -999;
    eneelenontr902   = -999.;
    //
 
+   chargemu1     = 0;
+   chargemu2     = 0;
    ptmu1     = -999.;
    ptmu2     = -999.;
    etamu1    = -999.;

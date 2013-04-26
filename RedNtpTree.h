@@ -616,6 +616,38 @@ private:
    Bool_t Vqq_event;
 
 
+   Float_t pt_h;
+   Float_t eta_h;
+   Float_t phi_h;
+   Float_t e_h;
+
+   Float_t pt_t;
+   Float_t eta_t;
+   Float_t phi_t;
+   Float_t e_t;
+
+   Float_t pt_b;
+   Float_t eta_b;
+   Float_t phi_b;
+   Float_t e_b;
+
+   Float_t pt_q;
+   Float_t eta_q;
+   Float_t phi_q;
+   Float_t e_q;
+
+   Float_t pt_Wq;
+   Float_t eta_Wq;
+   Float_t phi_Wq;
+   Float_t e_Wq;
+
+   Float_t pt_Wqbar;
+   Float_t eta_Wqbar;
+   Float_t phi_Wqbar;
+   Float_t e_Wqbar;
+
+
+
    Float_t   rhoPFRN;
    Float_t   pid_hlwTrackNoDzphot1;
    Float_t   pid_hlwTrackNoDzphot2;
@@ -654,6 +686,7 @@ private:
    Float_t PDFweight10[150];
 
    // lepton tag
+   Int_t chargeele1, chargeele2;
    Float_t ptele1, ptele2;
    Float_t etaele1, etaele2;
    Float_t phiele1, phiele2;
@@ -714,6 +747,7 @@ private:
    Float_t eneelenontr901, eneelenontr902;
 
 
+   Int_t chargemu1, chargemu2;
    Float_t ptmu1, ptmu2;
    Float_t etamu1, etamu2;
    Float_t phimu1, phimu2;
