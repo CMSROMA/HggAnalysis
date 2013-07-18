@@ -1,0 +1,6 @@
+example to run the code:
+./runAllAnalysis2011.csh cern ttH_feasibility_v1 1 `pwd`/jsonFiles/ABCD_11DecExcluded.json 1 1 `pwd`/correctionFiles/scales-Moriond-Hgg_2.dat
+
+
+to run locally example:
+/afs/cern.ch/work/m/micheli/pand/CMSSW_5_2_4/src/Analysis/Higgs/tmp/redntpApp /afs/cern.ch/work/m/micheli/pand/CMSSW_5_2_4/src/Analysis/Higgs/list.nomelista//lista.list output.root cicpfloose /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EBpf_BDT.weights.xml /afs/cern.ch/user/m/meridian/public/photonIDweights/TMVA_EEpf_BDT.weights.xml /afs/cern.ch/user/m/meridian/public/diPhotonMVA_weights/HggBambu_SMDipho_Jun19_BDTG.weights.xml -1 /afs/cern.ch/work/m/micheli/pand/CMSSW_5_2_4/src/Analysis/Higgs/Summer12-prompt08Jun.71000.observed.weights.root -1 /afs/cern.ch/work/m/micheli/pand/CMSSW_5_2_4/src/Analysis/Higgs/correctionFiles/scales-Lisbon-Hgg.dat.MC -1 -1
