@@ -6,6 +6,7 @@ if( $#argv<3  ) then
   exit 0
 endif
 
+set thisdir=$PWD
 set prepareListCommand = prepareList.csh
 
 set run = 0
@@ -58,11 +59,11 @@ cd ${listdir}/
 
 if ($location == "xrootd" || $location == "eos") then    
 #    echo "${lsCommand} -d ${srmdir}  | awk -F '/' '{print NF}'" 
-    ${lsCommand} -d "${srmdir}"  | awk -F '/' '{ if (NF>1) {dir=NF-1; print $dir}}' | xargs -I {} ../${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
+    ${lsCommand} -d "${srmdir}"  | awk -F '/' '{ if (NF>1) {dir=NF-1; print $dir}}' | xargs -I {} $thisdir/${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
 else if ($location == "cern") then 
-    ${lsCommand} "${srmdir}" | awk '{print $9}' | xargs -I {} ../${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
+    ${lsCommand} "${srmdir}" | awk '{print $9}' | xargs -I {} $thisdir/${prepareListCommand} allFiles.txt {}  ${location} ${run} >! makeLists.log
 else 
-    ${lsCommand} "${srmdir}" | awk -F '/' '{print $NF}' | xargs -I {} ../${prepareListCommand} allFiles.txt {} ${location} ${run} >! makeLists.log
+    ${lsCommand} "${srmdir}" | awk -F '/' '{print $NF}' | xargs -I {} $thisdir/${prepareListCommand} allFiles.txt {} ${location} ${run} >! makeLists.log
 endif
 
 if( $run != 1 ) then
