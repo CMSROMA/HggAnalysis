@@ -2,9 +2,10 @@
 ROOTLIBS      = $(shell $(ROOTSYS)/bin/root-config --libs)
 ROOTGLIBS     = $(shell $(ROOTSYS)/bin/root-config --glibs)
 
-BINFILES =  analysis.cc redntpApp.cc
+SRCDIR=src/
+BINFILES =  $(SRCDIR)analysis.cc $(SRCDIR)redntpApp.cc
 
-PROGRAMS = $(patsubst %.cc,%,$(BINFILES))
+PROGRAMS = $(patsubst $(SRCDIR)%.cc,%,$(BINFILES))
 
 
 # --- External configuration ---------------------------------
@@ -23,19 +24,20 @@ ROOFIT_LIBS := $(shell cd $(CMSSW_BASE); scram tool info roofitcore | grep LIB= 
 ROOFIT_LIBS += $(shell cd $(CMSSW_BASE); scram tool info roofit | grep LIB= | sed 's|LIB=||') 
 
 
-INCLUDES += -I.  -I.. -I$(ROOTSYS)/include  -I$(ROOFIT_INCLUDE)/
+INCLUDES += -I.  -I.. -I$(ROOTSYS)/include  -I$(ROOFIT_INCLUDE)/ -I$(SRCDIR) 
 ROOTSYS  ?= ERROR_RootSysIsNotDefined
 
 EXTRALIBS  :=  -L$(ROOTSYS)/lib -L$(ROOFIT_LIBDIR)/ -lHtml -lMathCore -lGenVector -lMinuit -lEG -lRooFitCore -lRooFit -lRIO -lTMVA
 
 # CC files excluding the binaries
-CCFILES=$(filter-out $(BINFILES),$(wildcard *.cc))
+CCFILES=$(filter-out $(BINFILES),$(wildcard $(SRCDIR)*.cc))
 
 # List of all object files to build
-OLIST=$(patsubst %.cc,$(OBJDIR)/%.o,$(CCFILES))
+OOLIST=$(patsubst %.cc,%.o,$(CCFILES))
+OLIST=$(patsubst $(SRCDIR)%.o,$(OBJDIR)/%.o,$(OOLIST))
 
 # Implicit rule to compile all classes
-$(OBJDIR)/%.o : %.cc
+$(OBJDIR)/%.o : $(SRCDIR)%.cc
 	@echo "Compiling $<"
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CCFLAGS) -c $< -o $@ $(INCLUDES)
@@ -44,7 +46,7 @@ $(OBJDIR)/%.o : %.cc
 $(PROGRAMS) : $(OLIST)
 	@echo "Linking $@"
 	@$(CC) $(CCFLAGS)  $(INCLUDES) $(OLIST) \
-	$(ROOTLIBS) $(EXTRALIBS) -o $(WORKDIR)/$@   $(patsubst %,%.cc,$@)
+	$(ROOTLIBS) $(EXTRALIBS) -o $(WORKDIR)/$@   $(patsubst %,$(SRCDIR)%.cc,$@)
 
 default : analysis 
 
